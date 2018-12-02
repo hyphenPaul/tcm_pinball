@@ -1,0 +1,17 @@
+2018-11-17 15:18:47,492 : INFO : Machine : Mission Pinball Framework Core Engine v0.50.21
+2018-11-17 15:18:47,492 : INFO : Machine : Command line arguments: {'no_load_cache': False, 'create_config_cache': True, 'bcp': False, 'configfile': ['config.yaml'], 'mpfconfigfile': '/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpf/mpfconfig.yaml', 'force_assets_load': False, 'logfile': 'logs/2018-11-17-15-18-47-mpf-Sean-Pauls-MacBook-Pro.local.log', 'pause': False, 'production': False, 'text_ui': True, 'loglevel': 15, 'consoleloglevel': 20, 'force_platform': None, 'syslog_address': None, 'mc_file_name': None}
+2018-11-17 15:18:47,492 : INFO : Machine : MPF path: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpf
+2018-11-17 15:18:47,492 : INFO : Machine : Machine path: /Users/seanpaulfenton/src/mpf/tutorials
+2018-11-17 15:18:47,492 : INFO : Machine : Platform: darwin
+2018-11-17 15:18:47,492 : INFO : Machine : Python executable location: /Library/Frameworks/Python.framework/Versions/3.6/bin/python3
+2018-11-17 15:18:47,492 : INFO : Machine : Python version: 3.6.5 (64-bit)
+2018-11-17 15:18:47,752 : INFO : Machine : Machine config file #1: config.yaml
+2018-11-17 15:18:47,755 : INFO : ConfigProcessor : Loading config from cache: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/a6640335647e99c19d5eef483964d2ed.mpf_cache
+2018-11-17 15:18:47,757 : INFO : Machine : Initialise MPF.
+2018-11-17 15:18:48,055 : WARNING : ConfigProcessor : Cache file not found: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/32cd8b071fad79ae9a4a259481fe805f.mpf_cache
+2018-11-17 15:18:48,056 : INFO : ConfigProcessor : Loading config from file /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpf/modes/attract/config/attract.yaml.
+2018-11-17 15:18:48,059 : INFO : ConfigProcessor : Loading config: /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpf/modes/attract/config/attract.yaml
+2018-11-17 15:18:48,059 : INFO : ConfigProcessor : Config file cache created: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/32cd8b071fad79ae9a4a259481fe805f.mpf_cache
+2018-11-17 15:18:48,064 : INFO : ConfigProcessor : Loading config from cache: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/f0ad60b4105f886c0dadf14c345dcef3.mpf_cache
+2018-11-17 15:18:48,095 : INFO : Mode.attract : Started. Priority: 10
+2018-11-17 15:18:48,096 : INFO : Machine : Starting the main run loop.

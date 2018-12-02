@@ -1,0 +1,31 @@
+2018-11-15 22:31:38,439 : INFO : Machine : Mission Pinball Framework Core Engine v0.50.21
+2018-11-15 22:31:38,439 : INFO : Machine : Command line arguments: {'syslog_address': None, 'production': False, 'force_assets_load': False, 'pause': False, 'create_config_cache': True, 'consoleloglevel': 20, 'bcp': False, 'configfile': ['config.yaml'], 'loglevel': 15, 'mpfconfigfile': '/Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/site-packages/mpf/mpfconfig.yaml', 'logfile': 'logs/2018-11-15-22-31-38-mpf-Sean-Pauls-MacBook-Pro.local.log', 'no_load_cache': False, 'mc_file_name': None, 'force_platform': None, 'text_ui': True}
+2018-11-15 22:31:38,439 : INFO : Machine : MPF path: /Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/site-packages/mpf
+2018-11-15 22:31:38,439 : INFO : Machine : Machine path: /Users/seanpaulfenton/src/mpf/tutorials
+2018-11-15 22:31:38,439 : INFO : Machine : Platform: darwin
+2018-11-15 22:31:38,439 : INFO : Machine : Python executable location: /Users/seanpaulfenton/.pyenv/versions/3.5.6/bin/python3
+2018-11-15 22:31:38,439 : INFO : Machine : Python version: 3.5.6 (64-bit)
+2018-11-15 22:31:38,717 : INFO : Machine : Machine config file #1: config.yaml
+2018-11-15 22:31:38,720 : WARNING : ConfigProcessor : Cache file not found: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/e1c97d95cec0fe48850ad9cb2714cbe2.mpf_cache
+2018-11-15 22:31:38,720 : INFO : ConfigProcessor : Loading config from file /Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/site-packages/mpf/mpfconfig.yaml.
+2018-11-15 22:31:38,798 : INFO : ConfigProcessor : Loading config: /Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/site-packages/mpf/mpfconfig.yaml
+2018-11-15 22:31:38,799 : INFO : ConfigProcessor : Loading config from file /Users/seanpaulfenton/src/mpf/tutorials/config/config.yaml.
+2018-11-15 22:31:38,801 : INFO : ConfigProcessor : Config file cache created: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/e1c97d95cec0fe48850ad9cb2714cbe2.mpf_cache
+2018-11-15 22:31:38,801 : INFO : Machine : Initialise MPF.
+2018-11-15 22:31:38,943 : ERROR : Machine : ERROR: Failed to initialise MPF: curs_set() returned ERR
+2018-11-15 22:31:38,945 : INFO : Machine : Starting the main run loop.
+2018-11-15 22:31:39,113 : ERROR : root : Event loop is closed
+Traceback (most recent call last):
+  File "/Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/site-packages/mpf/commands/game.py", line 208, in __init__
+    MachineController(mpf_path, machine_path, vars(self.args)).run()
+  File "/Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/site-packages/mpf/core/machine.py", line 664, in run
+    self._run_loop()
+  File "/Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/site-packages/mpf/core/machine.py", line 702, in _run_loop
+    self.clock.run(self.stop_future)
+  File "/Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/site-packages/mpf/core/clock.py", line 82, in run
+    self.loop.run_until_complete(stop_future)
+  File "/Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/asyncio/base_events.py", line 443, in run_until_complete
+    self._check_closed()
+  File "/Users/seanpaulfenton/.pyenv/versions/3.5.6/lib/python3.5/asyncio/base_events.py", line 357, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed

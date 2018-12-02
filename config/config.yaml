@@ -1,0 +1,32 @@
+#config_version=5
+
+hardware:
+   platform: p_roc
+
+switches:
+  s_left_flipper:
+    number: DS-1 #End of stroke DS-2
+    tags: left_flipper
+  s_right_flipper:
+    number: DS-3 #End of stroke DS-4
+    tags: right_flipper
+
+coils:
+  c_flipper_left:
+    number: 15
+    allow_enable: true
+    default_hold_power: 0.125
+  c_flipper_right:
+    number: 16
+    allow_enable: true
+    default_hold_power: 0.125
+
+flippers:
+  left_flipper:
+    main_coil: c_flipper_left
+    activation_switch: s_left_flipper
+    enable_events: machine_reset_phase_3 #TODO: Remove this when you can actually start the game
+  right_flipper:
+    main_coil: c_flipper_right
+    activation_switch: s_right_flipper
+    enable_events: machine_reset_phase_3 #TODO: Remove this when you can actually start the game

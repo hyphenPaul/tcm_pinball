@@ -1,0 +1,24 @@
+2018-11-15 21:48:52,505 : INFO : Machine : Mission Pinball Framework Core Engine v0.50.21
+2018-11-15 21:48:52,505 : INFO : Machine : Command line arguments: {'no_load_cache': False, 'force_platform': None, 'mc_file_name': None, 'consoleloglevel': 20, 'mpfconfigfile': '/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/mpfconfig.yaml', 'pause': False, 'force_assets_load': False, 'logfile': 'logs/2018-11-15-21-48-52-mpf-Sean-Pauls-MacBook-Pro.local.log', 'text_ui': True, 'loglevel': 15, 'production': False, 'syslog_address': None, 'configfile': ['config.yaml'], 'bcp': False, 'create_config_cache': True}
+2018-11-15 21:48:52,505 : INFO : Machine : MPF path: /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf
+2018-11-15 21:48:52,505 : INFO : Machine : Machine path: /Users/seanpaulfenton/src/mpf/tutorials
+2018-11-15 21:48:52,505 : INFO : Machine : Platform: darwin
+2018-11-15 21:48:52,505 : INFO : Machine : Python executable location: /Library/Frameworks/Python.framework/Versions/3.5/bin/python3
+2018-11-15 21:48:52,505 : INFO : Machine : Python version: 3.5.2 (64-bit)
+2018-11-15 21:48:52,795 : INFO : Machine : Machine config file #1: config.yaml
+2018-11-15 21:48:52,798 : WARNING : ConfigProcessor : Cache file not found: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/3ec8cc6c3dd126689f251dcfb87d3ebc.mpf_cache
+2018-11-15 21:48:52,798 : INFO : ConfigProcessor : Loading config from file /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/mpfconfig.yaml.
+2018-11-15 21:48:52,856 : INFO : ConfigProcessor : Loading config: /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/mpfconfig.yaml
+2018-11-15 21:48:52,857 : INFO : ConfigProcessor : Loading config from file /Users/seanpaulfenton/src/mpf/tutorials/config/config.yaml.
+2018-11-15 21:48:52,860 : INFO : ConfigProcessor : Config file cache created: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/3ec8cc6c3dd126689f251dcfb87d3ebc.mpf_cache
+2018-11-15 21:48:52,861 : INFO : Machine : Initialise MPF.
+2018-11-15 21:48:53,163 : WARNING : ConfigProcessor : Cache file not found: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/f95870f3667a37a74e38324a4aade001.mpf_cache
+2018-11-15 21:48:53,164 : INFO : ConfigProcessor : Loading config from file /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/modes/attract/config/attract.yaml.
+2018-11-15 21:48:53,166 : INFO : ConfigProcessor : Loading config: /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/modes/attract/config/attract.yaml
+2018-11-15 21:48:53,166 : INFO : ConfigProcessor : Config file cache created: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/f95870f3667a37a74e38324a4aade001.mpf_cache
+2018-11-15 21:48:53,171 : WARNING : ConfigProcessor : Cache file not found: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/26c63ec3c72d75f0dc9394afbd625513.mpf_cache
+2018-11-15 21:48:53,171 : INFO : ConfigProcessor : Loading config from file /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/modes/game/config/game.yaml.
+2018-11-15 21:48:53,173 : INFO : ConfigProcessor : Loading config: /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/modes/game/config/game.yaml
+2018-11-15 21:48:53,174 : INFO : ConfigProcessor : Config file cache created: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/26c63ec3c72d75f0dc9394afbd625513.mpf_cache
+2018-11-15 21:48:53,203 : INFO : Mode.attract : Started. Priority: 10
+2018-11-15 21:48:53,204 : INFO : Machine : Starting the main run loop.

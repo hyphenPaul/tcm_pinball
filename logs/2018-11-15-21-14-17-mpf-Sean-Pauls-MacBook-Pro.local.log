@@ -1,0 +1,27 @@
+2018-11-15 21:14:17,776 : INFO : Machine : Mission Pinball Framework Core Engine v0.50.17
+2018-11-15 21:14:17,776 : INFO : Machine : Command line arguments: {'pause': False, 'logfile': 'logs/2018-11-15-21-14-17-mpf-Sean-Pauls-MacBook-Pro.local.log', 'loglevel': 15, 'no_load_cache': False, 'production': False, 'create_config_cache': True, 'configfile': ['config.yaml'], 'mc_file_name': None, 'text_ui': True, 'syslog_address': None, 'force_assets_load': False, 'force_platform': None, 'mpfconfigfile': '/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/mpfconfig.yaml', 'consoleloglevel': 20, 'bcp': False}
+2018-11-15 21:14:17,776 : INFO : Machine : MPF path: /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf
+2018-11-15 21:14:17,776 : INFO : Machine : Machine path: /Users/seanpaulfenton/src/mpf/tutorials
+2018-11-15 21:14:17,776 : INFO : Machine : Platform: darwin
+2018-11-15 21:14:17,776 : INFO : Machine : Python executable location: /Library/Frameworks/Python.framework/Versions/3.5/bin/python3
+2018-11-15 21:14:17,776 : INFO : Machine : Python version: 3.5.2 (64-bit)
+2018-11-15 21:14:18,079 : INFO : Machine : Machine config file #1: config.yaml
+2018-11-15 21:14:18,082 : INFO : ConfigProcessor : Loading config from cache: /var/folders/nx/hjkv90px0cg9f03hrdxkbb700000gn/T/3ec8cc6c3dd126689f251dcfb87d3ebc.mpf_cache
+2018-11-15 21:14:18,083 : INFO : Machine : Initialise MPF.
+2018-11-15 21:14:18,240 : ERROR : Machine : ERROR: Failed to initialise MPF: curs_set() returned ERR
+2018-11-15 21:14:18,241 : INFO : Machine : Starting the main run loop.
+2018-11-15 21:14:18,402 : ERROR : root : Event loop is closed
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/commands/game.py", line 208, in __init__
+    MachineController(mpf_path, machine_path, vars(self.args)).run()
+  File "/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/core/machine.py", line 664, in run
+    self._run_loop()
+  File "/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/core/machine.py", line 702, in _run_loop
+    self.clock.run(self.stop_future)
+  File "/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/mpf/core/clock.py", line 82, in run
+    self.loop.run_until_complete(stop_future)
+  File "/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/asyncio/base_events.py", line 364, in run_until_complete
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/asyncio/base_events.py", line 334, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
