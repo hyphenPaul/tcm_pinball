@@ -7,7 +7,7 @@ hardware:
 playfields:
   playfield:
     tags: default
-    default_source_device: bd_plunger  # use None in steps before 8
+    default_source_device: bd_plunger
 
 # --- switches -------------------------------------------------------------------------------------------------
 
@@ -171,12 +171,42 @@ switches:
 # --- coils -------------------------------------------------------------------------------------------------
 
 coils:
+
+  # High Current Coil Group 1
+
   c_trough_eject:
     number: C01
     default_pulse_ms: 20
   c_auto_launch:
     number: C02
     default_pulse_ms: 20
+  c_3_bank_drop_target_reset:
+    number: C03
+  c_jump_ball_top_kicker:
+    number: C04
+  c_jump_ball_right_kicker:
+    number: C05
+  c_jump_ball_vuk:
+    number: C06
+  c_jump_ball_magnet:
+    number: C07
+  c_european_token_dispenser:
+    number: C08
+
+  # High Current Coil Group 2
+
+  c_top_turbo_bumper:
+    number: C09
+  c_left_turbo_bumper:
+    number: C10
+  c_right_turbo_bumper:
+    number: C11
+  c_left_slingshot:
+    number: C12
+  c_right_slingshot:
+    number: C13
+  c_basket_magnet:
+    number: C14
   c_flipper_left:
     number: C15
     allow_enable: true
@@ -187,6 +217,52 @@ coils:
     allow_enable: true
     default_hold_power: 0.2
     default_pulse_ms: 25
+
+  # Low Current Coil Group 1
+
+  c_flash_final_jam:
+    number: C17
+  c_ramp_diverter:
+    number: C18
+  c_flash_jump_ball:
+    number: C19
+  c_wabbit_hole_vuk:
+    number: C20
+  c_flass_skill:
+    number: C21
+  c_flash_basket_ramp:
+    number: C22
+  c_flash_top_lt_top_rt:
+    number: C23
+  c_optional_coin_meter:
+    number: C24
+
+  # Low Current Coil Group 2
+
+  c_flash_l_orbit_arrow:
+    number: C25
+    allow_enable: true
+  c_flash_c_ball_arrow:
+    number: C26
+    allow_enable: true
+  c_flash_b_ramp_arrow:
+    number: C27
+    allow_enable: true
+  c_flash_j_ball_arrow:
+    number: C28
+    allow_enable: true
+  c_flash_r_ramp_arrow:
+    number: C29
+    allow_enable: true
+  c_flash_r_orbit_arrow:
+    number: C30
+    allow_enable: true
+  c_flash_3_bank_drop:
+    number: C31
+    allow_enable: true
+  c_flash_pops:
+    number: C32
+    allow_enable: true
 
 # --- Flippers -----------------------------------------------------------------------------------------------
 
