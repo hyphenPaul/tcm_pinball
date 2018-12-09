@@ -1,0 +1,29 @@
+events:
+  game_ended: 2
+  game_started: 5
+player:
+  score:
+    average: 0.0
+    top:
+    - 0
+    - 0
+    total: 2
+switches:
+  s_ball_trough_1: 14
+  s_ball_trough_2: 9
+  s_ball_trough_3: 8
+  s_ball_trough_4: 7
+  s_ball_vuk_opto: 7
+  s_chain_saw_target_a: 0
+  s_chain_saw_target_c: 0
+  s_chain_saw_target_h: 0
+  s_chain_saw_target_i: 0
+  s_chain_saw_target_n: 0
+  s_left_flipper: 17
+  s_left_inlane: 0
+  s_left_outlane: 0
+  s_right_flipper: 36
+  s_right_inlane: 0
+  s_right_outlane: 0
+  s_shooter_lane: 7
+  s_start: 0
