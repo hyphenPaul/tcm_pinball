@@ -180,7 +180,7 @@ coils:
   c_auto_launch:
     number: C02
     default_pulse_ms: 20
-  c_3_bank_drop_target_reset:
+  c_3_bank_drop_target_reset: #TODO: Need to increase the power here
     number: C03
   c_jump_ball_top_kicker:
     number: C04
@@ -228,6 +228,8 @@ coils:
     number: C19
   c_wabbit_hole_vuk:
     number: C20
+    allow_enable: true
+    default_pulse_ms: 40
   c_flass_skill:
     number: C21
   c_flash_basket_ramp:
@@ -270,27 +272,68 @@ flippers:
   left_flipper:
     main_coil: c_flipper_left
     activation_switch: s_left_flipper
-    #enable_events: machine_reset_phase_3 #TODO: Remove this when you can actually start the game
+    #enable_events: machine_reset_phase_3 # enable to turn on automatically
   right_flipper:
     main_coil: c_flipper_right
     activation_switch: s_right_flipper
-    #enable_events: machine_reset_phase_3 #TODO: Remove this when you can actually start the game
+    #enable_events: machine_reset_phase_3 # enable to turn on automatically
 
 # --- Ball Devices -------------------------------------------------------------------------------------------
 
 ball_devices:
-   bd_trough:
-     ball_switches: s_ball_trough_1, s_ball_trough_2, s_ball_trough_3, s_ball_trough_4, s_ball_vuk_opto
-     eject_coil: c_trough_eject
-     tags: trough, home, drain
-     eject_targets: bd_plunger
+  bd_trough:
+    ball_switches: s_ball_trough_1, s_ball_trough_2, s_ball_trough_3, s_ball_trough_4, s_ball_vuk_opto
+    eject_coil: c_trough_eject
+    tags: trough, home, drain
+    eject_targets: bd_plunger
 
-   # bd_plunger is a placeholder just so the trough's eject_targets are valid
-   bd_plunger:
-     ball_switches: s_shooter_lane
-     mechanical_eject: true
-     eject_coil: c_auto_launch
+  # bd_plunger is a placeholder just so the trough's eject_targets are valid
+  bd_plunger:
+    ball_switches: s_shooter_lane
+    mechanical_eject: true
+    eject_coil: c_auto_launch
 
+  bd_wabbit_hole:
+    ball_switches: s_wabbit_hole_vuk
+    eject_coil: c_wabbit_hole_vuk
+
+# --- Autofire Coils -----------------------------------------------------------------------------------------
+
+autofire_coils:
+  ac_pop_bumper_top:
+    coil: c_top_turbo_bumper
+    switch: s_top_turbo_bumper
+  ac_pop_bumper_left:
+    coil: c_left_turbo_bumper
+    switch: s_left_turbo_bumper
+  ac_pop_bumper_right:
+    coil: c_right_turbo_bumper
+    switch: s_right_turbo_bumper
+  ac_left_slingshot:
+    coil: c_left_slingshot
+    switch: s_left_slingshot
+  ac_right_slingshot:
+    coil: c_right_slingshot
+    switch: s_right_slingshot
+
+# --- Drop Targets -------------------------------------------------------------------------------------------
+
+drop_targets:
+  top:
+    switch: s_3_bank_drop_top
+    reset_coil: c_3_bank_drop_target_reset
+  mid:
+    switch: s_3_bank_drop_mid
+    reset_coil: c_3_bank_drop_target_reset
+  bottom:
+    switch: s_3_bank_drop_mid
+    reset_coil: c_3_bank_drop_target_reset
+
+drop_target_banks:
+  drop: #TODO: needs a rename
+    drop_targets: top, mid, bottom
+    reset_coils: c_3_bank_drop_target_reset
+    reset_on_complete: 0.5s
 
 # --- displays -----------------------------------------------------------------------------------------------
 
