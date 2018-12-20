@@ -1,6 +1,6 @@
 events:
-  game_ended: 4
-  game_started: 16
+  game_ended: 6
+  game_started: 24
 player:
   score:
     average: 0.0
@@ -9,20 +9,22 @@ player:
     - 0
     - 0
     - 0
-    total: 4
+    - 0
+    - 0
+    total: 6
 switches:
-  s_3_bank_drop_bottom: 0
-  s_3_bank_drop_mid: 0
-  s_3_bank_drop_top: 0
+  s_3_bank_drop_bottom: 3
+  s_3_bank_drop_mid: 15
+  s_3_bank_drop_top: 13
   s_4th_coin_slot: 0
   s_6th_coin_slot: 0
-  s_ball_trough_1: 40
-  s_ball_trough_2: 21
-  s_ball_trough_3: 18
-  s_ball_trough_4: 17
-  s_ball_vuk_opto: 17
+  s_ball_trough_1: 53
+  s_ball_trough_2: 35
+  s_ball_trough_3: 27
+  s_ball_trough_4: 26
+  s_ball_vuk_opto: 26
   s_begin_test_black_button: 0
-  s_captive_ball_target: 3
+  s_captive_ball_target: 5
   s_center_coin_slot: 0
   s_chain_saw_target_a: 0
   s_chain_saw_target_c: 0
@@ -31,47 +33,47 @@ switches:
   s_chain_saw_target_n: 0
   s_chain_target_a: 2
   s_chain_target_c: 0
-  s_chain_target_h: 0
-  s_chain_target_i: 1
+  s_chain_target_h: 1
+  s_chain_target_i: 2
   s_chain_target_n: 1
-  s_extra_ball: 1
-  s_jump_ball_vuk: 2
+  s_extra_ball: 2
+  s_jump_ball_vuk: 6
   s_left_coin_slot: 0
-  s_left_flipper: 47
-  s_left_flipper_eos: 30
+  s_left_flipper: 77
+  s_left_flipper_eos: 60
   s_left_inlane: 0
-  s_left_orbit_botton: 4
-  s_left_orbit_top: 4
+  s_left_orbit_botton: 12
+  s_left_orbit_top: 9
   s_left_outlane: 1
-  s_left_return_lane: 1
-  s_left_slingshot: 1
-  s_left_turbo_bumper: 2
+  s_left_return_lane: 3
+  s_left_slingshot: 8
+  s_left_turbo_bumper: 7
   s_plumb_bob_tilt: 0
   s_right_coin_slot: 0
-  s_right_flipper: 79
-  s_right_flipper_eos: 42
+  s_right_flipper: 106
+  s_right_flipper_eos: 70
   s_right_inlane: 0
-  s_right_orbit_botton: 5
+  s_right_orbit_botton: 11
   s_right_orbit_top: 0
   s_right_outlane: 0
-  s_right_ramp_enter: 1
-  s_right_ramp_exit: 1
-  s_right_ramp_s_u_left: 3
-  s_right_ramp_s_u_right: 1
-  s_right_return_lane: 11
-  s_right_slingshot: 1
-  s_right_turbo_bumper: 5
-  s_saw_target_a: 0
-  s_saw_target_s: 0
-  s_saw_target_w: 1
+  s_right_ramp_enter: 3
+  s_right_ramp_exit: 3
+  s_right_ramp_s_u_left: 5
+  s_right_ramp_s_u_right: 4
+  s_right_return_lane: 20
+  s_right_slingshot: 4
+  s_right_turbo_bumper: 14
+  s_saw_target_a: 3
+  s_saw_target_s: 1
+  s_saw_target_w: 2
   s_serve_cred_green_button: 0
-  s_shooter_lane: 18
-  s_skill_shot_basket: 7
+  s_shooter_lane: 27
+  s_skill_shot_basket: 15
   s_slam_tilt: 0
   s_start: 0
   s_super_duper_jackpot: 2
   s_top_basket_enter: 0
-  s_top_basket_made: 1
-  s_top_turbo_bumper: 5
+  s_top_basket_made: 3
+  s_top_turbo_bumper: 14
   s_volume_red_button: 0
-  s_wabbit_hole_vuk: 11
+  s_wabbit_hole_vuk: 15

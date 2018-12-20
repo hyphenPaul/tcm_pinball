@@ -182,6 +182,8 @@ coils:
     default_pulse_ms: 20
   c_3_bank_drop_target_reset: #TODO: Need to increase the power here
     number: C03
+    allow_enable: true
+    default_pulse_ms: 20ms
   c_jump_ball_top_kicker:
     number: C04
   c_jump_ball_right_kicker:
@@ -197,10 +199,13 @@ coils:
 
   c_top_turbo_bumper:
     number: C09
+    default_pulse_ms: 15ms
   c_left_turbo_bumper:
     number: C10
+    default_pulse_ms: 15ms
   c_right_turbo_bumper:
     number: C11
+    default_pulse_ms: 15ms
   c_left_slingshot:
     number: C12
   c_right_slingshot:
@@ -297,6 +302,19 @@ ball_devices:
     ball_switches: s_wabbit_hole_vuk
     eject_coil: c_wabbit_hole_vuk
 
+  #bd
+
+  #c_jump_ball_top_kicker:
+    #number: C04
+  #c_jump_ball_right_kicker:
+    #number: C05
+  #c_jump_ball_vuk:
+    #number: C06
+  #c_jump_ball_magnet:
+    #number: C07
+  #s_jump_ball_vuk:
+    #number: S45
+
 # --- Autofire Coils -----------------------------------------------------------------------------------------
 
 autofire_coils:
@@ -343,10 +361,10 @@ window:
   title: Texas Chainsaw Massacre
 
 displays:
-  window:  # on screen window
+  window:
     width: 600
     height: 150
-  dmd:  # source display for the DMD
+  dmd:
     width: 128
     height: 32
     default: true
@@ -356,6 +374,14 @@ dmds:
     brightness: .5
     fps: 25
     gamma: 2.5
+    source_display: dmd
+
+# --- p_roc -----------------------------------------------------------------------------------------------
 
 p_roc:
   debug: true
+
+# --- Coil Player --------------------------------------------------------------------------------------------
+
+#coil_player:
+
