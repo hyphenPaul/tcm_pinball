@@ -1,0 +1,7 @@
+#config_version=5
+
+#videos:
+  #video_test:
+    #width: 128
+    #height: 32
+    #file: tcm_press_start.mov

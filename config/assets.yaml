@@ -1,0 +1,13 @@
+#config_version=5
+
+assets:
+  sounds:
+    default:
+      load: on_demand
+    music:
+      track: music
+      load: preload
+    sfx:
+      track: sfx
+    voice:
+      track: voice

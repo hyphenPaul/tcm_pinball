@@ -1,0 +1,17 @@
+#config_version=5
+
+ball_devices:
+  bd_trough:
+    ball_switches: s_ball_trough_1, s_ball_trough_2, s_ball_trough_3, s_ball_trough_4, s_ball_vuk_opto
+    eject_coil: c_trough_eject
+    tags: trough, home, drain
+    eject_targets: bd_plunger
+
+  bd_plunger:
+    ball_switches: s_shooter_lane
+    mechanical_eject: true
+    eject_coil: c_auto_launch
+
+  bd_wabbit_hole:
+    ball_switches: s_wabbit_hole_vuk
+    eject_coil: c_wabbit_hole_vuk

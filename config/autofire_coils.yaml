@@ -1,0 +1,23 @@
+#config_version=5
+
+autofire_coils:
+  ac_pop_bumper_top:
+    coil: c_top_turbo_bumper
+    switch: s_top_turbo_bumper
+  ac_pop_bumper_left:
+    coil: c_left_turbo_bumper
+    switch: s_left_turbo_bumper
+  ac_pop_bumper_right:
+    coil: c_right_turbo_bumper
+    switch: s_right_turbo_bumper
+  ac_left_slingshot:
+    coil: c_left_slingshot
+    switch: s_left_slingshot
+  ac_right_slingshot:
+    coil: c_right_slingshot
+    switch: s_right_slingshot
+  #ac_basket_magnet:
+    #coil: c_jump_ball_magnet
+    #coil: c_basket_magnet
+    #switch: s_chain_target_c
+    #debug: true

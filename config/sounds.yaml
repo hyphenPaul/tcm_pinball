@@ -1,0 +1,12 @@
+#config_version=5
+
+sounds:
+  organ:
+    file: organ.wav
+  intro_jazz:
+    file: ffab_loop.wav
+    mode_end_action: stop
+  attract_dark:
+    file: dark_open.wav
+  open_speech:
+    file: open_speech.wav

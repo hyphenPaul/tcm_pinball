@@ -9,351 +9,20 @@ playfields:
     tags: default
     default_source_device: bd_plunger
 
-# --- switches -------------------------------------------------------------------------------------------------
+config:
+ - sound_system.yaml
+ - assets.yaml
+ - sounds.yaml
+ - videos.yaml
+ - images.yaml
+ - switches.yaml
+ - coils.yaml
+ - flippers.yaml
+ - ball_devices.yaml
+ - autofire_coils.yaml
+ - drop_targets.yaml
 
-switches:
-
-  # -- Direct Switches --
-
-  s_left_flipper:
-    number: SD1
-    tags: left_flipper
-  s_left_flipper_eos:
-    number: SD2
-  s_right_flipper:
-    number: SD3
-    tags: right_flipper
-  s_right_flipper_eos:
-    number: SD4
-  s_volume_red_button:
-    number: SD6
-  s_serve_cred_green_button:
-    number: SD7
-  s_begin_test_black_button:
-    number: SD8
-
-  # -- Matrix Switches --
-  
-  s_4th_coin_slot:
-    number: S02
-  s_6th_coin_slot:
-    number: S03
-  s_right_coin_slot:
-    number: S04
-  s_center_coin_slot:
-    number: S05
-  s_left_coin_slot:
-    number: S06
-  s_ball_trough_1:
-    number: S11
-  s_ball_trough_2:
-    number: S12
-  s_ball_trough_3:
-    number: S13
-  s_ball_trough_4:
-    number: S14
-  s_ball_vuk_opto:
-    number: S15
-  s_shooter_lane:
-    number: S16
-  s_3_bank_drop_bottom:
-    number: S17
-  s_3_bank_drop_mid:
-    number: S18
-  s_3_bank_drop_top:
-    number: S19
-  s_right_ramp_enter:
-    number: S22
-  s_right_ramp_exit:
-    number: S23
-  s_captive_ball_target:
-    number: S24
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_top_basket_enter:
-    number: S25
-  s_top_basket_made:
-    number: S27
-  s_right_ramp_s_u_left:
-    number: S28
-  s_right_ramp_s_u_right:
-    number: S29
-  s_skill_shot_basket:
-    number: S30
-  s_chain_target_c:
-    number: S33
-    tags: chain_target_c
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_chain_target_h:
-    number: S34
-    tags: chain_target_h
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_chain_target_a:
-    number: S35
-    tags: chain_target_a
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_chain_target_i:
-    number: S36
-    tags: chain_target_i
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_chain_target_n:
-    number: S37
-    tags: chain_target_n
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_saw_target_s:
-    number: S38
-    tags: saw_target_s
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_saw_target_a:
-    number: S39
-    tags: saw_target_a
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_saw_target_w:
-    number: S40
-    tags: saw_target_w
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_super_duper_jackpot:
-    number: S41
-    tags: super_duper_jackpot
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_extra_ball:
-    number: S42
-    tags: extra_ball
-    debounce: quick
-    ignore_window_ms: 1000ms
-  s_right_orbit_top:
-    number: S43
-  s_right_orbit_botton:
-    number: S44
-  s_jump_ball_vuk:
-    number: S45
-  s_wabbit_hole_vuk:
-    number: S46
-  s_left_orbit_botton:
-    number: S47
-  s_left_orbit_top:
-    number: S48
-  s_top_turbo_bumper:
-    number: S49
-  s_left_turbo_bumper:
-    number: S50
-  s_right_turbo_bumper:
-    number: S51
-  s_start:
-    number: S54
-    tags: start
-  s_slam_tilt:
-    number: S55
-  s_plumb_bob_tilt:
-    number: S56
-  s_left_outlane:
-    number: S57
-  s_left_return_lane:
-    number: S58
-  s_left_slingshot:
-    number: S59
-  s_right_outlane:
-    number: S60
-  s_right_return_lane:
-    number: S61
-  s_right_slingshot:
-    number: S62
-
-# --- coils -------------------------------------------------------------------------------------------------
-
-coils:
-
-  # High Current Coil Group 1
-
-  c_trough_eject:
-    number: C01
-    default_pulse_ms: 20
-  c_auto_launch:
-    number: C02
-    default_pulse_ms: 20
-  c_3_bank_drop_target_reset: #TODO: Need to increase the power here
-    number: C03
-    allow_enable: true
-    default_pulse_ms: 20ms
-  c_jump_ball_top_kicker:
-    number: C04
-  c_jump_ball_right_kicker:
-    number: C05
-  c_jump_ball_vuk:
-    number: C06
-  c_jump_ball_magnet:
-    number: C07
-  c_european_token_dispenser:
-    number: C08
-
-  # High Current Coil Group 2
-
-  c_top_turbo_bumper:
-    number: C09
-    default_pulse_ms: 15ms
-  c_left_turbo_bumper:
-    number: C10
-    default_pulse_ms: 15ms
-  c_right_turbo_bumper:
-    number: C11
-    default_pulse_ms: 15ms
-  c_left_slingshot:
-    number: C12
-  c_right_slingshot:
-    number: C13
-  c_basket_magnet:
-    number: C14
-  c_flipper_left:
-    number: C15
-    allow_enable: true
-    default_hold_power: 0.2
-    default_pulse_ms: 25
-  c_flipper_right:
-    number: C16
-    allow_enable: true
-    default_hold_power: 0.2
-    default_pulse_ms: 25
-
-  # Low Current Coil Group 1
-
-  c_flash_final_jam:
-    number: C17
-  c_ramp_diverter:
-    number: C18
-  c_flash_jump_ball:
-    number: C19
-  c_wabbit_hole_vuk:
-    number: C20
-    allow_enable: true
-    default_pulse_ms: 40
-  c_flass_skill:
-    number: C21
-  c_flash_basket_ramp:
-    number: C22
-  c_flash_top_lt_top_rt:
-    number: C23
-  c_optional_coin_meter:
-    number: C24
-
-  # Low Current Coil Group 2
-
-  c_flash_l_orbit_arrow:
-    number: C25
-    allow_enable: true
-  c_flash_c_ball_arrow:
-    number: C26
-    allow_enable: true
-  c_flash_b_ramp_arrow:
-    number: C27
-    allow_enable: true
-  c_flash_j_ball_arrow:
-    number: C28
-    allow_enable: true
-  c_flash_r_ramp_arrow:
-    number: C29
-    allow_enable: true
-  c_flash_r_orbit_arrow:
-    number: C30
-    allow_enable: true
-  c_flash_3_bank_drop:
-    number: C31
-    allow_enable: true
-  c_flash_pops:
-    number: C32
-    allow_enable: true
-
-# --- Flippers -----------------------------------------------------------------------------------------------
-
-flippers:
-  left_flipper:
-    main_coil: c_flipper_left
-    activation_switch: s_left_flipper
-    #enable_events: machine_reset_phase_3 # enable to turn on automatically
-  right_flipper:
-    main_coil: c_flipper_right
-    activation_switch: s_right_flipper
-    #enable_events: machine_reset_phase_3 # enable to turn on automatically
-
-# --- Ball Devices -------------------------------------------------------------------------------------------
-
-ball_devices:
-  bd_trough:
-    ball_switches: s_ball_trough_1, s_ball_trough_2, s_ball_trough_3, s_ball_trough_4, s_ball_vuk_opto
-    eject_coil: c_trough_eject
-    tags: trough, home, drain
-    eject_targets: bd_plunger
-
-  # bd_plunger is a placeholder just so the trough's eject_targets are valid
-  bd_plunger:
-    ball_switches: s_shooter_lane
-    mechanical_eject: true
-    eject_coil: c_auto_launch
-
-  bd_wabbit_hole:
-    ball_switches: s_wabbit_hole_vuk
-    eject_coil: c_wabbit_hole_vuk
-
-  #bd
-
-  #c_jump_ball_top_kicker:
-    #number: C04
-  #c_jump_ball_right_kicker:
-    #number: C05
-  #c_jump_ball_vuk:
-    #number: C06
-  #c_jump_ball_magnet:
-    #number: C07
-  #s_jump_ball_vuk:
-    #number: S45
-
-# --- Autofire Coils -----------------------------------------------------------------------------------------
-
-autofire_coils:
-  ac_pop_bumper_top:
-    coil: c_top_turbo_bumper
-    switch: s_top_turbo_bumper
-  ac_pop_bumper_left:
-    coil: c_left_turbo_bumper
-    switch: s_left_turbo_bumper
-  ac_pop_bumper_right:
-    coil: c_right_turbo_bumper
-    switch: s_right_turbo_bumper
-  ac_left_slingshot:
-    coil: c_left_slingshot
-    switch: s_left_slingshot
-  ac_right_slingshot:
-    coil: c_right_slingshot
-    switch: s_right_slingshot
-
-# --- Drop Targets -------------------------------------------------------------------------------------------
-
-drop_targets:
-  top:
-    switch: s_3_bank_drop_top
-    reset_coil: c_3_bank_drop_target_reset
-  mid:
-    switch: s_3_bank_drop_mid
-    reset_coil: c_3_bank_drop_target_reset
-  bottom:
-    switch: s_3_bank_drop_mid
-    reset_coil: c_3_bank_drop_target_reset
-
-drop_target_banks:
-  drop: #TODO: needs a rename
-    drop_targets: top, mid, bottom
-    reset_coils: c_3_bank_drop_target_reset
-    reset_on_complete: 0.5s
-
-# --- displays -----------------------------------------------------------------------------------------------
+# --- Displays -------------------------------------------------------------------------------------------
 
 window:
   width: 600
@@ -371,17 +40,31 @@ displays:
 
 dmds:
   my_dmd:
-    brightness: .5
-    fps: 25
-    gamma: 2.5
+    brightness: .75
     source_display: dmd
 
-# --- p_roc -----------------------------------------------------------------------------------------------
+# --- p_roc ----------------------------------------------------------------------------------------------
 
 p_roc:
   debug: true
+  file_log: full
 
-# --- Coil Player --------------------------------------------------------------------------------------------
+# --- Modes ----------------------------------------------------------------------------------------------
 
-#coil_player:
+modes:
+  - base
 
+# --- Custom code ----------------------------------------------------------------------------------------
+
+custom_code:
+  - scriptlets.magnaramp.Magnaramp
+
+# --- Magnets --------------------------------------------------------------------------------------------
+
+#magnets:
+  #basket_magnet:
+    #magnet_coil: c_basket_magnet
+    #grab_switch: s_top_basket_enter
+    #grab_time: 5s
+    #enable_events: machine_reset_phase_3 # enable to turn on automatically
+    #grab_ball_events: switch_s_top_basket_enter_active

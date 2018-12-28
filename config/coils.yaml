@@ -1,0 +1,107 @@
+#config_version=5
+
+coils:
+
+  # High Current Coil Group 1
+
+  c_trough_eject:
+    number: C01
+    default_pulse_ms: 20
+  c_auto_launch:
+    number: C02
+    default_pulse_ms: 20
+  c_3_bank_drop_target_reset: #TODO: Need to increase the power here
+    number: C03
+    allow_enable: true
+    default_pulse_ms: 20ms
+  c_jump_ball_top_kicker:
+    number: C04
+  c_jump_ball_right_kicker:
+    number: C05
+  c_jump_ball_vuk:
+    number: C06
+  c_jump_ball_magnet:
+    number: C07
+  c_european_token_dispenser:
+    number: C08
+
+  # High Current Coil Group 2
+
+  c_top_turbo_bumper:
+    number: C09
+    default_pulse_ms: 15ms
+  c_left_turbo_bumper:
+    number: C10
+    default_pulse_ms: 15ms
+  c_right_turbo_bumper:
+    number: C11
+    default_pulse_ms: 15ms
+  c_left_slingshot:
+    number: C12
+  c_right_slingshot:
+    number: C13
+  c_basket_magnet:
+    number: C14
+    #allow_enable: true
+    #file_log: full
+    #default_pulse_ms: 100
+    #default_hold_power: 0.5
+    #debug: true
+  c_flipper_left:
+    number: C15
+    allow_enable: true
+    default_hold_power: 0.2
+    default_pulse_ms: 25
+  c_flipper_right:
+    number: C16
+    allow_enable: true
+    default_hold_power: 0.2
+    default_pulse_ms: 25
+
+  # Low Current Coil Group 1
+
+  c_flash_final_jam:
+    number: C17
+  c_ramp_diverter:
+    number: C18
+  c_flash_jump_ball:
+    number: C19
+  c_wabbit_hole_vuk:
+    number: C20
+    allow_enable: true
+    default_pulse_ms: 40
+  c_flass_skill:
+    number: C21
+  c_flash_basket_ramp:
+    number: C22
+  c_flash_top_lt_top_rt:
+    number: C23
+  c_optional_coin_meter:
+    number: C24
+
+  # Low Current Coil Group 2
+
+  c_flash_l_orbit_arrow:
+    number: C25
+    allow_enable: true
+  c_flash_c_ball_arrow:
+    number: C26
+    allow_enable: true
+  c_flash_b_ramp_arrow:
+    number: C27
+    allow_enable: true
+  c_flash_j_ball_arrow:
+    number: C28
+    allow_enable: true
+  c_flash_r_ramp_arrow:
+    number: C29
+    allow_enable: true
+  c_flash_r_orbit_arrow:
+    number: C30
+    allow_enable: true
+  c_flash_3_bank_drop:
+    number: C31
+    allow_enable: true
+  c_flash_pops:
+    number: C32
+    allow_enable: true

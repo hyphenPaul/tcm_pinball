@@ -1,0 +1,12 @@
+#config_version=5
+
+mode:
+  start_events: ball_starting
+  priority: 100
+
+sound_player:
+  mode_base_started:
+    intro_jazz:
+      action: play
+      loops: -1
+      volume: 1
