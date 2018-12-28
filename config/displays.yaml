@@ -1,0 +1,20 @@
+#config_version=5
+
+displays:
+  window:
+    width: 600
+    height: 150
+  dmd:
+    width: 128
+    height: 32
+    default: true
+
+window:
+  width: 600
+  height: 150
+  title: Texas Chainsaw Massacre
+
+dmds:
+  my_dmd:
+    brightness: .75
+    source_display: dmd

@@ -4,6 +4,10 @@ hardware:
    platform: p_roc
    driverboards: sternWhitestar
 
+p_roc:
+  debug: true
+  file_log: full
+
 playfields:
   playfield:
     tags: default
@@ -17,49 +21,18 @@ config:
  - images.yaml
  - switches.yaml
  - coils.yaml
+ - displays.yaml
  - flippers.yaml
  - ball_devices.yaml
  - autofire_coils.yaml
  - drop_targets.yaml
-
-# --- Displays -------------------------------------------------------------------------------------------
-
-window:
-  width: 600
-  height: 150
-  title: Texas Chainsaw Massacre
-
-displays:
-  window:
-    width: 600
-    height: 150
-  dmd:
-    width: 128
-    height: 32
-    default: true
-
-dmds:
-  my_dmd:
-    brightness: .75
-    source_display: dmd
-
-# --- p_roc ----------------------------------------------------------------------------------------------
-
-p_roc:
-  debug: true
-  file_log: full
-
-# --- Modes ----------------------------------------------------------------------------------------------
-
-modes:
-  - base
-
-# --- Custom code ----------------------------------------------------------------------------------------
+ - modes.yaml
+ - variables.yaml
 
 custom_code:
   - scriptlets.magnaramp.Magnaramp
 
-# --- Magnets --------------------------------------------------------------------------------------------
+# Magnets 
 
 #magnets:
   #basket_magnet:

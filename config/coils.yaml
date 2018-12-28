@@ -18,10 +18,13 @@ coils:
     number: C04
   c_jump_ball_right_kicker:
     number: C05
+    default_pulse_ms: 20ms
   c_jump_ball_vuk:
     number: C06
+    default_pulse_ms: 35ms
   c_jump_ball_magnet:
     number: C07
+    default_hold_power: 0.6
   c_european_token_dispenser:
     number: C08
 
