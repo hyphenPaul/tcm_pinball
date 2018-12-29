@@ -30,6 +30,7 @@ config:
  - variables.yaml
 
 custom_code:
+  - scriptlets.magnavuk.Magnavuk
   - scriptlets.magnaramp.Magnaramp
 
 # Magnets 

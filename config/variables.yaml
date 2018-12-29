@@ -1,5 +1,5 @@
 #config_version=5
 
 machine_vars:
-  magnaramp_auto_fire:
+  magnavuk_auto_fire:
     initial_value: 1

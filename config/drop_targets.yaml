@@ -8,7 +8,7 @@ drop_targets:
     switch: s_3_bank_drop_mid
     reset_coil: c_3_bank_drop_target_reset
   bottom:
-    switch: s_3_bank_drop_mid
+    switch: s_3_bank_drop_bottom
     reset_coil: c_3_bank_drop_target_reset
 
 drop_target_banks:
