@@ -4,10 +4,12 @@ class Magnavuk(CustomCode):
 
     def on_load(self):
         self.info_log('Enabling')
+
+        self.enabled = False
         self.auto_fire = self.machine.get_machine_var('magnavuk_auto_fire')
 
-        #if self.machine.switch_controller.is_active('s_jump_ball_vuk'):
-            #self.upkick_to_magnet()
+        if self.machine.switch_controller.is_active('s_jump_ball_vuk'):
+            self.delay.add(1000, self.clear_ball)
 
         self.machine.events.add_handler('ball_started', self.enable)
         self.machine.events.add_handler('ball_ended', self.disable)
@@ -15,7 +17,12 @@ class Magnavuk(CustomCode):
     def enable(self, **kwargs):
         del kwargs
 
+        if self.enabled:
+           return
+
         self.info_log('Enabling')
+
+        self.delay.remove('ball_clear')
 
         if self.auto_fire:
             self.add_vuk_handler()
@@ -24,6 +31,8 @@ class Magnavuk(CustomCode):
             'magnavuk_vuk_firing', self.enable_magnet)
         self.machine.events.add_handler(
             'magnavuk_magnet_disabled', self.choose_lane)
+
+        self.enabled = True
 
     def disable(self, **kwargs):
         del kwargs
@@ -37,6 +46,26 @@ class Magnavuk(CustomCode):
             'magnavuk_magnet_disabled', self.choose_lane)
 
         self.disable_magnet()
+
+        self.enabled = False
+
+    def clear_ball(self):
+        self.info_log('Clearing ball')
+
+        self.enable()
+        self.fire_vuk()
+
+        self.delay.add(2000, self.check_if_clear, 'ball_clear')
+
+    def check_if_clear(self, **kwargs):
+        del kwargs
+
+        self.info_log('Check if clear')
+
+        if self.machine.switch_controller.is_active('s_jump_ball_vuk'):
+            self.clear_ball()
+        else:
+            self.disable()
 
     def remove_vuk_handler(self):
         self.info_log('Remove handler')
@@ -54,6 +83,8 @@ class Magnavuk(CustomCode):
 
     def fire_vuk(self, **kwargs):
         del kwargs
+
+        self.info_log('Vuk firing')
 
         self.suspend_vuk_handler()
         self.machine.events.post('magnavuk_vuk_firing')
