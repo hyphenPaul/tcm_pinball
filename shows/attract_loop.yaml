@@ -1,5 +1,21 @@
 #show_version=5
 
+# Score
+#- duration: 10s
+  #slides:
+    #slide_1:
+      #widgets:
+      #- type: image
+        ##image: chainsaw_for_dmd_v1
+        ##image: chainsaw_test_v1
+        ##image: gradient_test
+        #image: leatherface_4_color_test
+        ##image: 80_black
+        #anchor_x: left
+        #anchor_y: bottom
+        #x: 0
+        #y: 0
+
 - duration: 1.5s
   slides:
     slide_1:
@@ -66,7 +82,3 @@
       - type: rectangle
         width: 128
         height: 32
-    #slide_2:
-      #widgets:
-      #- type: video
-        #video: video_test

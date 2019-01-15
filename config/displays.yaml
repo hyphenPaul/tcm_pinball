@@ -16,5 +16,6 @@ window:
 
 dmds:
   my_dmd:
-    brightness: .75
+    brightness: 1.0
+    gamma: 1.1
     source_display: dmd

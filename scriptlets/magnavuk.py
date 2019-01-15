@@ -77,16 +77,11 @@ class Magnavuk(CustomCode):
         self.machine.switch_controller.add_switch_handler(
             's_jump_ball_vuk', self.fire_vuk, 1, 500)
 
-    def suspend_vuk_handler(self):
-        self.remove_vuk_handler()
-        self.delay.add(3000, self.add_vuk_handler)
-
     def fire_vuk(self, **kwargs):
         del kwargs
 
         self.info_log('Vuk firing')
 
-        self.suspend_vuk_handler()
         self.machine.events.post('magnavuk_vuk_firing')
         self.machine.coils['c_jump_ball_vuk'].pulse()
 
@@ -120,8 +115,10 @@ class Magnavuk(CustomCode):
 
     def ramp_left(self):
         self.info_log('ramp_left')
+        self.machine.events.post('magnavuk_shot_left')
         self.machine.coils['c_jump_ball_right_kicker'].pulse()
 
     def ramp_right(self):
         self.info_log('ramp_right')
+        self.machine.events.post('magnavuk_shot_right')
         self.machine.coils['c_jump_ball_top_kicker'].pulse()

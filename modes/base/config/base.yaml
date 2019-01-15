@@ -10,3 +10,63 @@ sound_player:
       action: play
       loops: -1
       volume: 1
+
+slide_player:
+  mode_base_started:
+    widgets:
+      - type: text
+        text: (score)
+        number_grouping: true
+        min_digits: 2
+        font_name: pinball_score
+        font_size: 22
+        round_anchor_x: left
+        anchor_x: middle
+        anchor_y: bottom
+        y: 8
+        x: 50%
+      - type: text
+        text: PLAYER (number)
+        style: dmd_small
+        y: 0
+        x: left+2
+        anchor_x: left
+        anchor_y: bottom
+        font_size: 10
+      - type: text
+        text: BALL (ball)
+        style: dmd_small
+        y: 0
+        x: right-2
+        anchor_x: right
+        anchor_y: bottom
+        font_size: 10
+
+shots:
+  top_turbo_bumper:
+    switch: s_top_turbo_bumper
+  left_turbo_bumper:
+    switch: s_left_turbo_bumper
+  right_turbo_bumper:
+    switch: s_right_turbo_bumper
+  right_slingshot:
+    switch: s_right_slingshot
+  left_slingshot:
+    switch: s_left_slingshot
+
+variable_player:
+  top_turbo_bumper_hit:
+    score: 2510
+  left_turbo_bumper_hit:
+    score: 2510
+  right_turbo_bumper_hit:
+    score: 2510
+  left_slingshot_hit:
+    score: 1100
+  right_slingshot_hit:
+    score: 1100
+  magnavuk_shot_left:
+    score: 100000
+  magnavuk_shot_right:
+    score: 2
+

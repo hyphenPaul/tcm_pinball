@@ -33,12 +33,8 @@ custom_code:
   - scriptlets.magnavuk.Magnavuk
   - scriptlets.magnaramp.Magnaramp
 
-# Magnets 
+# Lights
 
-#magnets:
-  #basket_magnet:
-    #magnet_coil: c_basket_magnet
-    #grab_switch: s_top_basket_enter
-    #grab_time: 5s
-    #enable_events: machine_reset_phase_3 # enable to turn on automatically
-    #grab_ball_events: switch_s_top_basket_enter_active
+lights:
+  shoot_again:
+    number: 44

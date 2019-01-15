@@ -10,7 +10,7 @@ coils:
   c_auto_launch:
     number: C02
     default_pulse_ms: 20
-  c_3_bank_drop_target_reset: #TODO: Need to increase the power here
+  c_3_bank_drop_target_reset:
     number: C03
     allow_enable: true
     default_pulse_ms: 20ms
@@ -24,7 +24,7 @@ coils:
     default_pulse_ms: 35ms
   c_jump_ball_magnet:
     number: C07
-    default_hold_power: 0.6
+    default_hold_power: 0.7
   c_european_token_dispenser:
     number: C08
 
@@ -46,11 +46,6 @@ coils:
   c_basket_magnet:
     number: C14
     default_hold_power: 0.2
-    #allow_enable: true
-    #file_log: full
-    #default_pulse_ms: 100
-    #default_hold_power: 0.5
-    #debug: true
   c_flipper_left:
     number: C15
     allow_enable: true
