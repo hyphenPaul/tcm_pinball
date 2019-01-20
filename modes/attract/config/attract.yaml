@@ -1,12 +1,11 @@
 #config_version=5
 
 show_player:
-  mode_attract_started: attract_loop
+  mode_attract_started: attract_display_loop
+  mode_attract_started.1: attract_light_show
 
 sound_player:
   mode_attract_started:
     attract_dark:
       action: play
       loops: -1
-    #open_speech:
-      #action: play

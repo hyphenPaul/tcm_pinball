@@ -1,0 +1,159 @@
+#config_version=5
+
+lights:
+  shoot_again:
+    number: L01
+  grid_in_yer_face:
+    number: L02
+  grid_fire:
+    number: L03
+  grid_space_jam:
+    number: L04
+  grid_rebound:
+    number: L05
+  grid_slam:
+    number: L06
+  gird_fastbreak:
+    number: L07
+  grid_super_jackpot:
+    number: L08
+  left_orbit_arrow:
+    number: L09
+  captive_ball_arrow:
+    number: L10
+  basket_ramp_arrow:
+    number: L11
+  jump_ball_arrow:
+    number: L12
+  right_ramp_arrow:
+    number: L13
+  right_orbit:
+    number: L14
+  target_2:
+    number: L15
+  target_3:
+    number: L16
+  left_7_seg_a:
+    number: L17
+  left_7_seg_b:
+    number: L18
+  left_7_seg_c:
+    number: L19
+  left_7_seg_d:
+    number: L20
+  left_7_seg_e:
+    number: L21
+  left_7_seg_f:
+    number: L22
+  left_7_seg_g:
+    number: L23
+  left_orbit_beep_1_bottom:
+    number: L25
+  left_orbit_beep_2:
+    number: L26
+  left_orbit_beep_3:
+    number: L27
+  left_orbit_beep_4:
+    number: L28
+  r_orbit_4:
+    number: L29
+  r_orbit_3:
+    number: L30
+  r_orbit_2:
+    number: L31
+  r_orbit_1:
+    number: L32
+  fire_e:
+    number: L33
+  fire_r:
+    number: L34
+  fire_i:
+    number: L35
+  fire_f:
+    number: L36
+  super_jackpot:
+    number: L37
+  double:
+    number: L38
+  jackpot:
+    number: L39
+  wabbit_hole:
+    number: L40
+  right_7_seg_a:
+    number: L41
+  right_7_seg_b:
+    number: L42
+  right_7_seg_c:
+    number: L43
+  right_7_seg_d:
+    number: L44
+  right_7_seg_e:
+    number: L45
+  right_7_seg_f:
+    number: L46
+  right_7_seg_g:
+    number: L47
+  lock_3:
+    number: L48
+  2_points:
+    number: L49
+  3_points:
+    number: L50
+  10_points:
+    number: L51
+  final_jam:
+    number: L52
+  final_jam_2:
+    number: L53
+  lite_lock:
+    number: L54
+  lite_super_duper_jackpot:
+    number: L55
+  top_turbo_bumper:
+    number: L56
+  left_turbo_bumper:
+    number: L58
+  right_turbo_bumper:
+    number: L59
+  lock_1:
+    number: L60
+  moonstar_bottom:
+    number: L61
+  moonstar_top:
+    number: L62
+  super_duper_jackpot:
+    number: L63
+  extra_ball:
+    number: L64
+  space_jam_s:
+    number: L65
+  space_jam_p:
+    number: L66
+  space_jam_a:
+    number: L67
+  space_jam_c:
+    number: L68
+  space_jam_e:
+    number: L69
+  space_jam_j:
+    number: L70
+  space_jam_a2:
+    number: L71
+  space_jam_m:
+    number: L72
+  slam_s:
+    number: L73
+  slam_l:
+    number: L74
+  slam_a:
+    number: L75
+  slam_m:
+    number: L76
+  lock_2:
+    number: L77
+  in_yer_face_face:
+    number: L78
+  in_yer_face_yer:
+    number: L79
+  in_yer_face_in:
+    number: L80

@@ -15,6 +15,16 @@
         #anchor_y: bottom
         #x: 0
         #y: 0
+        #
+
+#- duration: 10s
+  #slides:
+    #slide_1:
+      #widgets:
+      #- type: rectangle
+        #color: black
+        #width: 128
+        #height: 32
 
 - duration: 1.5s
   slides:

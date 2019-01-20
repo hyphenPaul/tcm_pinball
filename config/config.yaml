@@ -26,15 +26,10 @@ config:
  - ball_devices.yaml
  - autofire_coils.yaml
  - drop_targets.yaml
+ - lights.yaml
  - modes.yaml
  - variables.yaml
 
 custom_code:
   - scriptlets.magnavuk.Magnavuk
   - scriptlets.magnaramp.Magnaramp
-
-# Lights
-
-lights:
-  shoot_again:
-    number: 44
