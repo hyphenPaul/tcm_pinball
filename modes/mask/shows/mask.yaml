@@ -1,0 +1,11 @@
+#show_version=5
+
+- duration: 1s
+  slides:
+    slide_1:
+      widgets:
+      - type: text
+        round_anchor_x: left
+        text: (spelled)
+        style: dmd_big
+        font_size: 14

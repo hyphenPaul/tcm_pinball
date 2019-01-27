@@ -4,9 +4,16 @@ hardware:
    platform: p_roc
    driverboards: sternWhitestar
 
-p_roc:
-  debug: true
-  file_log: full
+game:
+  balls_per_game: 3
+  max_players: 4
+
+kivy_config:
+  kivy:
+    log_enable: 1
+    log_level: debug
+    log_name: kivy.log
+    log_dir: /Users/seanpaulfenton/src/mpf/tcm_pinball
 
 playfields:
   playfield:
@@ -14,6 +21,8 @@ playfields:
     default_source_device: bd_plunger
 
 config:
+ - variables.yaml
+ - settings.yaml
  - sound_system.yaml
  - assets.yaml
  - sounds.yaml
@@ -27,8 +36,9 @@ config:
  - autofire_coils.yaml
  - drop_targets.yaml
  - lights.yaml
+ - sequence_shots.yaml
+ - shows.yaml
  - modes.yaml
- - variables.yaml
 
 custom_code:
   - scriptlets.magnavuk.Magnavuk

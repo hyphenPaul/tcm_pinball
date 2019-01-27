@@ -1,0 +1,12 @@
+#config_version=5
+
+sequence_shots:
+  right_ramp:
+    switch_sequence: s_right_ramp_enter, s_right_ramp_exit
+    sequence_timeout: 2s
+  left_orbit:
+    switch_sequence: s_left_orbit_botton, s_left_orbit_top
+    sequence_timeout: 0.25s
+  right_orbit:
+    switch_sequence: s_right_orbit_top, s_right_orbit_botton
+    sequence_timeout: 0.25s

@@ -19,4 +19,3 @@ autofire_coils:
   ac_basket_magnet:
     coil: c_basket_magnet
     switch: s_chain_target_c
-    debug: true

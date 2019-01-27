@@ -1,0 +1,10 @@
+#config_version=5
+
+settings:
+  mask_making_timer_total:
+    label: Mask Making Timer Total
+    values:
+      30: "30"
+    default: 30
+    key_type: int
+    sort: 1

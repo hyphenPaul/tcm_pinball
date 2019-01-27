@@ -61,7 +61,6 @@ switches:
     ignore_window_ms: 1000ms
   s_top_basket_enter:
     number: S25
-    debug: true
     file_log: full
   s_top_basket_made:
     number: S27

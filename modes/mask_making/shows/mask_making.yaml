@@ -1,0 +1,11 @@
+#show_version=5
+
+- duration: -1
+  slides:
+    slide_1:
+      widgets:
+      - type: text
+        round_anchor_x: left
+        text: MASK MAKING (mask_making_countdown_value)
+        style: dmd_big
+        font_size: 10

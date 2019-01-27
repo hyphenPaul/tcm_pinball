@@ -4,10 +4,8 @@ flippers:
   left_flipper:
     main_coil: c_flipper_left
     activation_switch: s_left_flipper
-    debug: true
     #enable_events: machine_reset_phase_3 # enable to turn on automatically
   right_flipper:
     main_coil: c_flipper_right
     activation_switch: s_right_flipper
-    debug: true
     #enable_events: machine_reset_phase_3 # enable to turn on automatically
