@@ -47,21 +47,21 @@ lights:
     number: L22
   left_7_seg_g:
     number: L23
-  left_orbit_beep_1_bottom:
+  left_orbit_1:
     number: L25
-  left_orbit_beep_2:
+  left_orbit_2:
     number: L26
-  left_orbit_beep_3:
+  left_orbit_3:
     number: L27
-  left_orbit_beep_4:
+  left_orbit_4:
     number: L28
-  r_orbit_4:
+  right_orbit_4:
     number: L29
-  r_orbit_3:
+  right_orbit_3:
     number: L30
-  r_orbit_2:
+  right_orbit_2:
     number: L31
-  r_orbit_1:
+  right_orbit_1:
     number: L32
   fire_e:
     number: L33

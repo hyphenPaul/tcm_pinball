@@ -2,7 +2,6 @@
 
 mode:
   start_events: ball_starting, mode_mask_making_stopped
-  #start_events: ball_starting
   stop_events: logicblock_mask_total_counter_complete
   priority: 200
 
@@ -16,7 +15,7 @@ counters:
     disable_on_complete: False
     reset_on_complete: True
     count_events: logicblock_mask_counter_complete
-    count_complete_value: (mask_completion_count_for_mask_making)
+    count_complete_value: (machine.mask_completion_count_for_mask_making)
     persist_state: true
 
 show_player:
@@ -24,26 +23,26 @@ show_player:
     on:
       show_tokens:
         lights: fire_f
-    mask:
+    mask1:
       loops: 0
       show_tokens:
-        spelled: M
+        mask_image: mask_m_v1
   logicblock_mask_counter_hit{count==2}:
     on:
       show_tokens:
         lights: fire_f, fire_i
-    mask:
+    mask1:
       loops: 0
       show_tokens:
-        spelled: MA
+        mask_image: mask_a_v1
   logicblock_mask_counter_hit{count==3}:
     on:
       show_tokens:
         lights: fire_f, fire_i, fire_r
-    mask:
+    mask1:
       loops: 0
       show_tokens:
-        spelled: MAS
+        mask_image: mask_s_v1
   logicblock_mask_total_counter_hit:
     off:
       show_tokens:
@@ -53,11 +52,11 @@ show_player:
       speed: 4
       show_tokens:
         lights: fire_f, fire_i, fire_r, fire_e
-  logicblock_mask_total_counter_hit{count<(mask_completion_count_for_mask_making)}:
-    mask:
+  logicblock_mask_total_counter_hit{count<(machine.mask_completion_count_for_mask_making)}:
+    mask1:
       loops: 0
       show_tokens:
-        spelled: MASK
+        mask_image: mask_k_v1
 
 variable_player:
   logicblock_mask_counter_hit{count==1}:

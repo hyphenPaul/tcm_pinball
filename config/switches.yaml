@@ -122,13 +122,13 @@ switches:
     ignore_window_ms: 1000ms
   s_right_orbit_top:
     number: S43
-  s_right_orbit_botton:
+  s_right_orbit_bottom:
     number: S44
   s_jump_ball_vuk:
     number: S45
   s_wabbit_hole_vuk:
     number: S46
-  s_left_orbit_botton:
+  s_left_orbit_bottom:
     number: S47
   s_left_orbit_top:
     number: S48

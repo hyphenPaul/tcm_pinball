@@ -4,7 +4,7 @@ machine_vars:
   magnavuk_auto_fire:
     initial_value: 1
   mask_completion_count_for_mask_making:
-    initial_value: 1
+    initial_value: 3
 
 player_vars:
   mask_completion_total:

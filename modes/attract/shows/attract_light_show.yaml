@@ -25,14 +25,14 @@
     left_7_seg_e: 0
     left_7_seg_f: 0
     left_7_seg_g: 0
-    left_orbit_beep_1_bottom: 0
-    left_orbit_beep_2: 0
-    left_orbit_beep_3: 0
-    left_orbit_beep_4: 0
-    r_orbit_4: 0
-    r_orbit_3: 0
-    r_orbit_2: 0
-    r_orbit_1: 0
+    left_orbit_1: 0
+    left_orbit_2: 0
+    left_orbit_3: 0
+    left_orbit_4: 0
+    right_orbit_4: 0
+    right_orbit_3: 0
+    right_orbit_2: 0
+    right_orbit_1: 0
     fire_e: 0
     fire_r: 0
     fire_i: 0
@@ -105,14 +105,14 @@
     left_7_seg_e: ff
     left_7_seg_f: ff
     left_7_seg_g: ff
-    left_orbit_beep_1_bottom: ff
-    left_orbit_beep_2: ff
-    left_orbit_beep_3: ff
-    left_orbit_beep_4: ff
-    r_orbit_4: ff
-    r_orbit_3: ff
-    r_orbit_2: ff
-    r_orbit_1: ff
+    left_orbit_1: ff
+    left_orbit_2: ff
+    left_orbit_3: ff
+    left_orbit_4: ff
+    right_orbit_4: ff
+    right_orbit_3: ff
+    right_orbit_2: ff
+    right_orbit_1: ff
     fire_e: ff
     fire_r: ff
     fire_i: ff

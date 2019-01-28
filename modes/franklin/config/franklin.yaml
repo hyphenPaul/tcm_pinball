@@ -1,0 +1,95 @@
+#config_version=5
+
+mode:
+  start_events: ball_starting
+  priority: 200
+
+counters:
+  left_franklin_counter:
+    count_events: left_orbit_hit
+    disable_on_complete: True
+    reset_on_complete: True
+    count_complete_value: 4
+    events_when_hit: franklin_counter_triggered, left_franklin_counter_hit
+  right_franklin_counter:
+    count_events: right_orbit_hit
+    disable_on_complete: True
+    reset_on_complete: True
+    count_complete_value: 4
+    events_when_hit: franklin_counter_triggered, right_franklin_counter_hit
+
+show_player:
+  left_franklin_counter_hit{count==1}:
+    on:
+      show_tokens:
+        lights: left_orbit_1
+    #mask:
+      #loops: 0
+      #show_tokens:
+        #spelled: M
+  left_franklin_counter_hit{count==2}:
+    on:
+      show_tokens:
+        lights: left_orbit_1, left_orbit_2
+    #mask:
+      #loops: 0
+      #show_tokens:
+        #spelled: MA
+  left_franklin_counter_hit{count==3}:
+    on:
+      show_tokens:
+        lights: left_orbit_1, left_orbit_2, left_orbit_3
+    #mask:
+      #loops: 0
+      #show_tokens:
+  left_franklin_counter_hit{count==4}:
+    off:
+      show_tokens:
+        lights: left_orbit_1, left_orbit_2, left_orbit_3, left_orbit_4
+    flash:
+      loops: 1
+      speed: 4
+      show_tokens:
+        lights: left_orbit_1, left_orbit_2, left_orbit_3, left_orbit_4
+  right_franklin_counter_hit{count==1}:
+    on:
+      show_tokens:
+        lights: right_orbit_1
+    #mask:
+      #loops: 0
+      #show_tokens:
+        #spelled: M
+  right_franklin_counter_hit{count==2}:
+    on:
+      show_tokens:
+        lights: right_orbit_1, right_orbit_2
+    #mask:
+      #loops: 0
+      #show_tokens:
+        #spelled: MA
+  right_franklin_counter_hit{count==3}:
+    on:
+      show_tokens:
+        lights: right_orbit_1, right_orbit_2, right_orbit_3
+    #mask:
+      #loops: 0
+      #show_tokens:
+  right_franklin_counter_hit{count==4}:
+    off:
+      show_tokens:
+        lights: right_orbit_1, right_orbit_2, right_orbit_3, right_orbit_4
+    flash:
+      loops: 1
+      speed: 4
+      show_tokens:
+        lights: right_orbit_1, right_orbit_2, right_orbit_3, right_orbit_4
+
+variable_player:
+  franklin_counter_triggered{count==1}:
+    score: 25000
+  franklin_counter_triggered{count==2}:
+    score: 35000
+  franklin_counter_triggered{count==3}:
+    score: 50000
+  franklin_counter_triggered{count==4}:
+    score: 100000
