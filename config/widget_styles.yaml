@@ -1,0 +1,22 @@
+#config_version=5
+
+widget_styles:
+  active_left_letter_style:
+    anchor_x: left
+    anchor_y: bottom
+    x: -126
+    y: 0
+    z: 2
+  active_right_letter_style:
+    anchor_x: left
+    anchor_y: bottom
+    x: 130
+    y: 0
+    z: 2
+  collected_letter_style:
+    anchor_x: left
+    anchor_y: bottom
+    x: 2
+    y: 0
+    z: 2
+    opacity: 0

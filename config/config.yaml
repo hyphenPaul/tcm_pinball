@@ -37,6 +37,7 @@ config:
  - drop_targets.yaml
  - lights.yaml
  - sequence_shots.yaml
+ - widget_styles.yaml
  - shows.yaml
  - modes.yaml
 

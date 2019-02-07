@@ -58,6 +58,12 @@ show_player:
       show_tokens:
         mask_image: mask_k_v1
 
+sound_player:
+  logicblock_mask_counter_hit:
+    mask_slice:
+      action: play
+      loops: 0
+
 variable_player:
   logicblock_mask_counter_hit{count==1}:
     score: 25000

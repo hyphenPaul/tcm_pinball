@@ -9,3 +9,242 @@ sound_player:
     attract_dark:
       action: play
       loops: -1
+
+
+#slides:
+  #franklin_base_slide_left:
+    #widgets:
+    #- type: image
+      #image: franklin_bg
+      #anchor_x: left
+      #anchor_y: bottom
+      #x: -128
+      #y: 0
+      #animations:
+        #show_slide:
+          #- property: x
+            #value: 0
+            #easing: out_quad
+            #duration: 0.9s
+  #franklin_base_slide_right:
+    #widgets:
+    #- type: image
+      #image: franklin_bg
+      #anchor_x: left
+      #anchor_y: bottom
+      #x: 128
+      #y: 0
+      #animations:
+        #show_slide:
+          #- property: x
+            #value: 0
+            #easing: out_quad
+            #duration: 0.9s
+
+#animations:
+  #active_letter:
+    #property: x
+    #value: 2
+    #easing: out_quad
+    #duration: 0.9s
+  #collected_letter:
+    #- property: opacity
+      #value: 0
+      #duration: 0.9s
+    #- property: opacity
+      #value: 1
+      #duration: 0.2s
+    #- property: opacity
+      #value: 0
+      #duration: 0.2s
+    #- property: opacity
+      #value: 1
+      #duration: 0.2s
+
+#widgets:
+  #franklin_f_left_active:
+    #- type: image
+      #image: f_fill
+      #style: active_left_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_r_left_active:
+    #- type: image
+      #image: r_fill
+      #style: active_left_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_a_left_active:
+    #- type: image
+      #image: a_fill
+      #style: active_left_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_n1_left_active:
+    #- type: image
+      #image: n1_fill
+      #style: active_left_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_k_left_active:
+    #- type: image
+      #image: k_fill
+      #style: active_left_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_l_left_active:
+    #- type: image
+      #image: l_fill
+      #style: active_left_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_i_left_active:
+    #- type: image
+      #image: i_fill
+      #style: active_left_letter_style
+      #animations:
+        #show_slide: active_letter
+
+  #franklin_n2_left_active:
+    #- type: image
+      #image: n2_fill
+      #style: active_left_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_f_right_active:
+    #- type: image
+      #image: f_fill
+      #style: active_right_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_r_right_active:
+    #- type: image
+      #image: r_fill
+      #style: active_right_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_a_right_active:
+    #- type: image
+      #image: a_fill
+      #style: active_right_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_n1_right_active:
+    #- type: image
+      #image: n1_fill
+      #style: active_right_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_k_right_active:
+    #- type: image
+      #image: k_fill
+      #style: active_right_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_l_right_active:
+    #- type: image
+      #image: l_fill
+      #style: active_right_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_i_right_active:
+    #- type: image
+      #image: i_fill
+      #style: active_right_letter_style
+      #animations:
+        #show_slide: active_letter
+  #franklin_n2_right_active:
+    #- type: image
+      #image: n2_fill
+      #style: active_right_letter_style
+      #animations:
+        #show_slide: active_letter
+
+  #franklin_f_collected:
+    #- type: image
+      #image: f_fill
+      #style: collected_letter_style
+      #animations:
+        #show_slide: collected_letter
+  #franklin_r_collected:
+    #- type: image
+      #image: r_fill
+      #style: collected_letter_style
+      #animations:
+        #show_slide: collected_letter
+  #franklin_a_collected:
+    #- type: image
+      #image: a_fill
+      #style: collected_letter_style
+      #animations:
+        #show_slide: collected_letter
+  #franklin_n1_collected:
+    #- type: image
+      #image: n1_fill
+      #style: collected_letter_style
+      #animations:
+        #show_slide: collected_letter
+  #franklin_k_collected:
+    #- type: image
+      #image: k_fill
+      #style: collected_letter_style
+      #animations:
+        #show_slide: collected_letter
+  #franklin_l_collected:
+    #- type: image
+      #image: l_fill
+      #style: collected_letter_style
+      #animations:
+        #show_slide: collected_letter
+  #franklin_i_collected:
+    #- type: image
+      #image: i_fill
+      #style: collected_letter_style
+      #animations:
+        #show_slide: collected_letter
+  #franklin_n2_collected:
+    #- type: image
+      #image: n2_fill
+      #style: collected_letter_style
+      #animations:
+        #show_slide: collected_letter
+
+  #franklin_zoom_left:
+    #- type: image
+      #image: franklin_in_wheelchair_left
+      #anchor_x: left
+      #anchor_y: bottom
+      #y: 0
+      #x: 0
+      #z: 10
+      #animations:
+        #show_slide:
+          #- property: x
+            #value: -128
+            #duration: 0.6s
+
+  #franklin_zoom_right:
+    #- type: image
+      #image: franklin_in_wheelchair_right
+      #anchor_x: left
+      #anchor_y: bottom
+      #y: 0
+      #x: 0
+      #z: 10
+      #animations:
+        #show_slide:
+          #- property: x
+            #value: 128
+            #duration: 0.6s
+
+#widget_player:
+  #mode_attract_started:
+    #franklin_i_right_active:
+        #slide: franklin_base_slide
+    #franklin_l_collected:
+        #slide: franklin_base_slide
+    #franklin_zoom_right:
+        #slide: franklin_base_slide
+
+#slide_player:
+  #mode_attract_started.1: franklin_base_slide

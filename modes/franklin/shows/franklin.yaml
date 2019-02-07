@@ -1,0 +1,19 @@
+#show_version=5
+
+- duration: 2s
+  slides:
+    franklin_base_slide_2:
+      widgets:
+      - type: image
+        image: (image)
+        anchor_x: left
+        anchor_y: bottom
+        x: -128
+        y: 0
+        animations:
+          show_slide:
+            - property: x
+              value: 0
+              easing: out_quad
+              duration: 0.9s
+              
