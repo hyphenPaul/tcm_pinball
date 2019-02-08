@@ -119,19 +119,19 @@ slide_player:
 widget_player:
 
   left_franklin_shot_hit.1:
-    franklin_widget_key:
+    franklin_base_slide_right:
       slide: franklin_base_slide
       action: remove
-    #franklin_base_slide_right:
-      #slide: franklin_base_slide
-      #action: remove
-  #right_franklin_shot_hit.1:
-    #franklin_base_slide_left:
-      #slide: franklin_base_slide
-      #action: remove
-    #franklin_base_slide_right:
-      #slide: franklin_base_slide
-      #action: remove
+    franklin_base_slide_right:
+      slide: franklin_base_slide
+      action: remove
+  right_franklin_shot_hit.1:
+    franklin_base_slide_left:
+      slide: franklin_base_slide
+      action: remove
+    franklin_base_slide_right:
+      slide: franklin_base_slide
+      action: remove
 
   left_franklin_shot_hit:
     franklin_base_slide_left:
