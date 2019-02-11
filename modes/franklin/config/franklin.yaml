@@ -62,36 +62,58 @@ shots:
   left_franklin_shot:
     hit_events: left_orbit_hit
     profile: left_franklin_profile
+    reset_events: mode_franklin_started
   right_franklin_shot:
     hit_events: right_orbit_hit
     profile: right_franklin_profile
+    reset_events: mode_franklin_started
 
 sound_player:
-  right_franklin_counter_hit:
+  logicblock_right_franklin_counter_hit.5:
     franklin_whip_cmon:
       action: play
       loops: 0
-  left_franklin_counter_hit:
+  logicblock_left_franklin_counter_hit.5:
     franklin_whip_cmon:
       action: play
       loops: 0
 
 variable_player:
-  left_franklin_counter_hit{count==1}:
+
+  # reset
+
+  mode_franklin_started:
+    v_franklin_left_hit_total:
+      action: set
+      int: 0
+    v_franklin_right_hit_total:
+      action: set
+      int: 0
+
+  # counter hits
+
+  logicblock_left_franklin_counter_hit:
+    v_franklin_left_hit_total: 1
+  logicblock_right_franklin_counter_hit:
+    v_franklin_right_hit_total: 1
+
+  # scoring
+
+  logicblock_left_franklin_counter_hit{count==1}:
     score: 25000
-  left_franklin_counter_hit{count==2}:
+  logicblock_left_franklin_counter_hit{count==2}:
     score: 35000
-  left_franklin_counter_hit{count==3}:
+  logicblock_left_franklin_counter_hit{count==3}:
     score: 50000
-  left_franklin_counter_hit{count==4}:
+  logicblock_left_franklin_counter_hit{count==4}:
     score: 100000
-  right_franklin_counter_hit{count==1}:
+  logicblock_right_franklin_counter_hit{count==1}:
     score: 25000
-  right_franklin_counter_hit{count==2}:
+  logicblock_right_franklin_counter_hit{count==2}:
     score: 35000
-  right_franklin_counter_hit{count==3}:
+  logicblock_right_franklin_counter_hit{count==3}:
     score: 50000
-  right_franklin_counter_hit{count==4}:
+  logicblock_right_franklin_counter_hit{count==4}:
     score: 100000
 
 slides:
@@ -107,58 +129,305 @@ slides:
       height: 32
 
 slide_player:
-  left_franklin_shot_hit:
+  logicblock_left_franklin_counter_hit.100:
     franklin_base_slide:
       priority: 300
-      expire: 2s
-  right_franklin_shot_hit:
+      expire: 2.5s
+  logicblock_right_franklin_counter_hit.100:
     franklin_base_slide:
       priority: 300
-      expire: 2s
+      expire: 2.5s
 
 widget_player:
 
-  left_franklin_shot_hit.1:
-    franklin_base_slide_right:
-      slide: franklin_base_slide
-      action: remove
-    franklin_base_slide_right:
-      slide: franklin_base_slide
-      action: remove
-  right_franklin_shot_hit.1:
+  # right widget reset
+
+  logicblock_left_franklin_counter_hit.2:
+
     franklin_base_slide_left:
       slide: franklin_base_slide
       action: remove
     franklin_base_slide_right:
       slide: franklin_base_slide
       action: remove
+    franklin_zoom_left:
+      slide: franklin_base_slide
+      action: remove
+    franklin_zoom_right:
+      slide: franklin_base_slide
+      action: remove
+    franklin_f_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_r_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_a_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n1_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_k_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_l_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_i_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n2_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_f_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_r_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_a_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n1_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_k_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_l_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_i_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n2_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_f_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_r_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_a_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n1_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_k_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_l_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_i_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n2_collected:
+      slide: franklin_base_slide
+      action: remove
 
-  left_franklin_shot_hit:
+  # left widget reset
+
+  logicblock_right_franklin_counter_hit.2:
+
     franklin_base_slide_left:
       slide: franklin_base_slide
-  right_franklin_shot_hit:
+      action: remove
     franklin_base_slide_right:
       slide: franklin_base_slide
+      action: remove
+    franklin_zoom_left:
+      slide: franklin_base_slide
+      action: remove
+    franklin_zoom_right:
+      slide: franklin_base_slide
+      action: remove
+    franklin_f_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_r_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_a_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n1_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_k_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_l_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_i_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n2_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_f_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_r_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_a_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n1_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_k_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_l_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_i_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n2_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_f_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_r_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_a_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n1_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_k_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_l_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_i_collected:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n2_collected:
+      slide: franklin_base_slide
+      action: remove
 
-#animations:
-  #active_letter:
-    #property: x
-    #value: 2
-    #easing: out_quad
-    #duration: 0.9s
-  #collected_letter:
-    #- property: opacity
-      #value: 0
-      #duration: 0.9s
-    #- property: opacity
-      #value: 1
-      #duration: 0.2s
-    #- property: opacity
-      #value: 0
-      #duration: 0.2s
-    #- property: opacity
-      #value: 1
-      #duration: 0.2s
+  # left lane logic start
+
+  logicblock_left_franklin_counter_hit:
+    franklin_base_slide_left:
+      slide: franklin_base_slide
+    franklin_zoom_left:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{count==1}:
+    franklin_f_collected:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_left_hit_total>1}:
+    franklin_f_left_active:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{count==2}:
+    franklin_r_collected:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_left_hit_total>2}:
+    franklin_r_left_active:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{count==3}:
+    franklin_a_collected:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_left_hit_total>3}:
+    franklin_a_left_active:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{count==4}:
+    franklin_n1_collected:
+      slide: franklin_base_slide
+
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_right_hit_total>0}:
+    franklin_k_left_active:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_right_hit_total>1}:
+    franklin_l_left_active:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_right_hit_total>2}:
+    franklin_i_left_active:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_right_hit_total>3}:
+    franklin_n2_left_active:
+      slide: franklin_base_slide
+
+
+  # right lane logic end
+
+  logicblock_right_franklin_counter_hit:
+    franklin_base_slide_right:
+      slide: franklin_base_slide
+    franklin_zoom_right:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{count==1}:
+    franklin_k_collected:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_right_hit_total>1}:
+    franklin_k_right_active:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{count==2}:
+    franklin_l_collected:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_right_hit_total>2}:
+    franklin_l_right_active:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{count==3}:
+    franklin_i_collected:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_right_hit_total>3}:
+    franklin_i_right_active:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{count==4}:
+    franklin_n2_collected:
+      slide: franklin_base_slide
+
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_left_hit_total>0}:
+    franklin_f_right_active:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_left_hit_total>1}:
+    franklin_r_right_active:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_left_hit_total>2}:
+    franklin_a_right_active:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_left_hit_total>3}:
+    franklin_n1_right_active:
+      slide: franklin_base_slide
+
+animations:
+  active_letter:
+    property: x
+    value: 2
+    easing: out_quad
+    duration: 0.8s
+  collected_letter:
+    - property: opacity
+      value: 0
+      duration: 0.8s
+    - property: opacity
+      value: 1
+      duration: 0.2s
+    - property: opacity
+      value: 0
+      duration: 0.2s
+    - property: opacity
+      value: 1
+      duration: 0.2s
+    - property: opacity
+      value: 0
+      duration: 0.2s
+    - property: opacity
+      value: 1
+      duration: 0.2s
 
 widgets:
   franklin_base_slide_left:
@@ -169,13 +438,13 @@ widgets:
       x: -128
       y: 0
       z: 1
-      key: franklin_widget_key
       animations:
         show_slide:
           - property: x
             value: 0
             easing: out_quad
-            duration: 0.9s
+            duration: 0.8s
+
   franklin_base_slide_right:
     - type: image
       image: franklin_bg
@@ -184,203 +453,184 @@ widgets:
       x: 128
       y: 0
       z: 1
-      key: franklin_widget_key
       animations:
         show_slide:
           - property: x
             value: 0
             easing: out_quad
-            duration: 0.9s
+            duration: 0.8s
 
-  #franklin_f_left_active:
-    #- type: image
-      #image: f_fill
-      #style: active_left_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_r_left_active:
-    #- type: image
-      #image: r_fill
-      #style: active_left_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_a_left_active:
-    #- type: image
-      #image: a_fill
-      #style: active_left_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_n1_left_active:
-    #- type: image
-      #image: n1_fill
-      #style: active_left_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_k_left_active:
-    #- type: image
-      #image: k_fill
-      #style: active_left_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_l_left_active:
-    #- type: image
-      #image: l_fill
-      #style: active_left_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_i_left_active:
-    #- type: image
-      #image: i_fill
-      #style: active_left_letter_style
-      #animations:
-        #show_slide: active_letter
+  franklin_zoom_left:
+    - type: image
+      image: franklin_in_wheelchair_left
+      anchor_x: left
+      anchor_y: bottom
+      y: 0
+      x: 0
+      z: 10
+      animations:
+        show_slide:
+          - property: x
+            value: -128
+            duration: 0.7s
 
-  #franklin_n2_left_active:
-    #- type: image
-      #image: n2_fill
-      #style: active_left_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_f_right_active:
-    #- type: image
-      #image: f_fill
-      #style: active_right_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_r_right_active:
-    #- type: image
-      #image: r_fill
-      #style: active_right_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_a_right_active:
-    #- type: image
-      #image: a_fill
-      #style: active_right_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_n1_right_active:
-    #- type: image
-      #image: n1_fill
-      #style: active_right_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_k_right_active:
-    #- type: image
-      #image: k_fill
-      #style: active_right_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_l_right_active:
-    #- type: image
-      #image: l_fill
-      #style: active_right_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_i_right_active:
-    #- type: image
-      #image: i_fill
-      #style: active_right_letter_style
-      #animations:
-        #show_slide: active_letter
-  #franklin_n2_right_active:
-    #- type: image
-      #image: n2_fill
-      #style: active_right_letter_style
-      #animations:
-        #show_slide: active_letter
+  franklin_zoom_right:
+    - type: image
+      image: franklin_in_wheelchair_right
+      anchor_x: left
+      anchor_y: bottom
+      y: 0
+      x: 0
+      z: 10
+      animations:
+        show_slide:
+          - property: x
+            value: 128
+            duration: 0.7s
 
-  #franklin_f_collected:
-    #- type: image
-      #image: f_fill
-      #style: collected_letter_style
-      #animations:
-        #show_slide: collected_letter
-  #franklin_r_collected:
-    #- type: image
-      #image: r_fill
-      #style: collected_letter_style
-      #animations:
-        #show_slide: collected_letter
-  #franklin_a_collected:
-    #- type: image
-      #image: a_fill
-      #style: collected_letter_style
-      #animations:
-        #show_slide: collected_letter
-  #franklin_n1_collected:
-    #- type: image
-      #image: n1_fill
-      #style: collected_letter_style
-      #animations:
-        #show_slide: collected_letter
-  #franklin_k_collected:
-    #- type: image
-      #image: k_fill
-      #style: collected_letter_style
-      #animations:
-        #show_slide: collected_letter
-  #franklin_l_collected:
-    #- type: image
-      #image: l_fill
-      #style: collected_letter_style
-      #animations:
-        #show_slide: collected_letter
-  #franklin_i_collected:
-    #- type: image
-      #image: i_fill
-      #style: collected_letter_style
-      #animations:
-        #show_slide: collected_letter
-  #franklin_n2_collected:
-    #- type: image
-      #image: n2_fill
-      #style: collected_letter_style
-      #animations:
-        #show_slide: collected_letter
+  franklin_f_left_active:
+    - type: image
+      image: f_fill
+      style: active_left_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_r_left_active:
+    - type: image
+      image: r_fill
+      style: active_left_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_a_left_active:
+    - type: image
+      image: a_fill
+      style: active_left_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_n1_left_active:
+    - type: image
+      image: n1_fill
+      style: active_left_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_k_left_active:
+    - type: image
+      image: k_fill
+      style: active_left_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_l_left_active:
+    - type: image
+      image: l_fill
+      style: active_left_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_i_left_active:
+    - type: image
+      image: i_fill
+      style: active_left_letter_style
+      animations:
+        show_slide: active_letter
 
-  #franklin_zoom_left:
-    #- type: image
-      #image: franklin_in_wheelchair_left
-      #anchor_x: left
-      #anchor_y: bottom
-      #y: 0
-      #x: 0
-      #z: 10
-      #animations:
-        #show_slide:
-          #- property: x
-            #value: -128
-            #duration: 0.6s
+  franklin_n2_left_active:
+    - type: image
+      image: n2_fill
+      style: active_left_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_f_right_active:
+    - type: image
+      image: f_fill
+      style: active_right_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_r_right_active:
+    - type: image
+      image: r_fill
+      style: active_right_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_a_right_active:
+    - type: image
+      image: a_fill
+      style: active_right_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_n1_right_active:
+    - type: image
+      image: n1_fill
+      style: active_right_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_k_right_active:
+    - type: image
+      image: k_fill
+      style: active_right_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_l_right_active:
+    - type: image
+      image: l_fill
+      style: active_right_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_i_right_active:
+    - type: image
+      image: i_fill
+      style: active_right_letter_style
+      animations:
+        show_slide: active_letter
+  franklin_n2_right_active:
+    - type: image
+      image: n2_fill
+      style: active_right_letter_style
+      animations:
+        show_slide: active_letter
 
-  #franklin_zoom_right:
-    #- type: image
-      #image: franklin_in_wheelchair_right
-      #anchor_x: left
-      #anchor_y: bottom
-      #y: 0
-      #x: 0
-      #z: 10
-      #animations:
-        #show_slide:
-          #- property: x
-            #value: 128
-            #duration: 0.6s
-
-#widget_player:
-  #left_franklin_profile_hit:
-    #franklin_base_slide_left:
-        #slide: franklin_base_slide
-  #right_franklin_counter_hit:
-    #franklin_base_slide_right:
-        #slide: franklin_base_slide
-    ##franklin_i_right_active:
-        ##slide: franklin_base_slide
-    ##franklin_l_collected:
-        ##slide: franklin_base_slide
-    ##franklin_zoom_right:
-        ##slide: franklin_base_slide
-
-#slide_player:
-  #left_franklin_profile_hit: franklin_base_slide
-  #right_franklin_counter_hit: franklin_base_slide
+  franklin_f_collected:
+    - type: image
+      image: f_fill
+      style: collected_letter_style
+      animations:
+        show_slide: collected_letter
+  franklin_r_collected:
+    - type: image
+      image: r_fill
+      style: collected_letter_style
+      animations:
+        show_slide: collected_letter
+  franklin_a_collected:
+    - type: image
+      image: a_fill
+      style: collected_letter_style
+      animations:
+        show_slide: collected_letter
+  franklin_n1_collected:
+    - type: image
+      image: n1_fill
+      style: collected_letter_style
+      animations:
+        show_slide: collected_letter
+  franklin_k_collected:
+    - type: image
+      image: k_fill
+      style: collected_letter_style
+      animations:
+        show_slide: collected_letter
+  franklin_l_collected:
+    - type: image
+      image: l_fill
+      style: collected_letter_style
+      animations:
+        show_slide: collected_letter
+  franklin_i_collected:
+    - type: image
+      image: i_fill
+      style: collected_letter_style
+      animations:
+        show_slide: collected_letter
+  franklin_n2_collected:
+    - type: image
+      image: n2_fill
+      style: collected_letter_style
+      animations:
+        show_slide: collected_letter

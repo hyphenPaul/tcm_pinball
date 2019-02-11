@@ -11,35 +11,7 @@ player_vars:
     initial_value: 0
   mask_making_countdown_value:
     initial_value: 10
-  franklin_f_start_opacity:
+  v_franklin_left_hit_total:
     initial_value: 0
-  franklin_f_end_opacity:
-    initial_value: 0
-  franklin_r_start_opacity:
-    initial_value: 0
-  franklin_r_end_opacity:
-    initial_value: 0
-  franklin_a_start_opacity:
-    initial_value: 0
-  franklin_a_end_opacity:
-    initial_value: 0
-  franklin_n_start_opacity:
-    initial_value: 0
-  franklin_n_end_opacity:
-    initial_value: 0
-  franklin_k_start_opacity:
-    initial_value: 0
-  franklin_k_end_opacity:
-    initial_value: 0
-  franklin_l_start_opacity:
-    initial_value: 0
-  franklin_l_end_opacity:
-    initial_value: 0
-  franklin_i_start_opacity:
-    initial_value: 0
-  franklin_i_end_opacity:
-    initial_value: 0
-  franklin_n2_start_opacity:
-    initial_value: 0
-  franklin_n2_end_opacity:
+  v_franklin_right_hit_total:
     initial_value: 0
