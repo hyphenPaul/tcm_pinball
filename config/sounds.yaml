@@ -16,3 +16,11 @@ sounds:
   mask_slice:
     file: mask_slice.wav
     volume: 1.0
+  franklin_hurry_up:
+    file: franklin_in_trouble_v1.wav
+    mode_end_action: stop
+    volume: 1.0
+  franklin_fun:
+    file: franklin_fun.wav
+    mode_end_action: stop
+    volume: 1.0

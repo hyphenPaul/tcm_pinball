@@ -26,7 +26,7 @@ show_player:
     mask1:
       loops: 0
       show_tokens:
-        mask_image: mask_m_v1
+        mask_image: mask_m_v1_1
   logicblock_mask_counter_hit{count==2}:
     on:
       show_tokens:
@@ -34,7 +34,7 @@ show_player:
     mask1:
       loops: 0
       show_tokens:
-        mask_image: mask_a_v1
+        mask_image: mask_a_v1_1
   logicblock_mask_counter_hit{count==3}:
     on:
       show_tokens:
@@ -42,7 +42,7 @@ show_player:
     mask1:
       loops: 0
       show_tokens:
-        mask_image: mask_s_v1
+        mask_image: mask_s_v1_1
   logicblock_mask_total_counter_hit:
     off:
       show_tokens:
@@ -56,7 +56,7 @@ show_player:
     mask1:
       loops: 0
       show_tokens:
-        mask_image: mask_k_v1
+        mask_image: mask_k_v1_1
 
 sound_player:
   logicblock_mask_counter_hit:

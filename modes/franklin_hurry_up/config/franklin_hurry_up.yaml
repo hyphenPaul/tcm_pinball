@@ -1,0 +1,85 @@
+#config_version=5
+
+mode:
+  start_events: franklin_letters_collected
+  stop_events: timer_franklin_hurry_up_timer_complete
+  priority: 250
+
+sound_player:
+  mode_franklin_hurry_up_started:
+    franklin_hurry_up:
+      action: play
+      priority: 100
+      loops: -1
+      volume: 1
+  timer_franklin_hurry_up_timer_complete.1:
+    franklin_hurry_up:
+      action: stop
+      priority: 110
+
+variable_player:
+  mode_franklin_hurry_up_started:
+    franklin_hurry_up_countdown_value:
+      int: 25 * 20000
+      action: set
+  timer_franklin_hurry_up_timer_tick:
+    franklin_hurry_up_countdown_value:
+      int: device.timers.franklin_hurry_up_timer.ticks * 2252
+      action: set
+
+slides:
+  franklin_hurry_up_slide:
+    widgets:
+      - type: text
+        text: SHOOT RIGHT RAMP
+        style: dmd_small
+        color: white
+        anchor_x: left
+        anchor_y: bottom
+        y: 6
+        x: 40
+        animations:
+          show_slide:
+            - property: opacity
+              value: 1
+              duration: 0.5s
+            - property: opacity
+              value: 0
+              duration: 0.5s
+              repeat: true
+      - type: text
+        text: (franklin_hurry_up_countdown_value)
+        number_grouping: true
+        style: dmd_big
+        color: white
+        round_anchor_x: left
+        anchor_y: bottom
+        y: 15
+        x: 78
+      - type: image
+        #image: franklin_hurry_up_v1
+        image: franklin_hurry_up_v7
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+  franklin_hurry_up_collected_slide:
+    widgets:
+
+slide_player:
+  mode_franklin_hurry_up_started:
+    franklin_hurry_up_slide:
+      priority: 300
+      expire: 250
+  #right_ramp_hit:
+    #franklin_hurry_up_collected_slide:
+      #priority: 300
+      #expire: 250
+
+timers:
+  franklin_hurry_up_timer:
+    start_value: 250
+    end_value: 5
+    tick_interval: 100ms
+    direction: down
+    start_running: True

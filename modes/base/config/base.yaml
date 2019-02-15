@@ -10,6 +10,11 @@ sound_player:
       action: play
       loops: -1
       volume: 1
+  mode_franklin_hurry_up_stopped:
+    intro_jazz:
+      action: play
+      loops: -1
+      volume: 1
 
 slide_player:
   mode_base_started:

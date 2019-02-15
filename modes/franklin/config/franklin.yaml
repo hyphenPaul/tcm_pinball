@@ -2,7 +2,7 @@
 
 mode:
   start_events: ball_starting
-  priority: 200
+  priority: 250
 
 counters:
   left_franklin_counter:
@@ -10,11 +10,26 @@ counters:
     disable_on_complete: True
     reset_on_complete: False
     count_complete_value: 4
+    restart_events: franklin_letters_collected
   right_franklin_counter:
     count_events: right_franklin_shot_hit
     disable_on_complete: True
     reset_on_complete: False
     count_complete_value: 4
+    restart_events: franklin_letters_collected
+  total_franklin_counter:
+    count_events: franklin_letters_collected
+    count_complete_value: 3
+    disable_on_complete: False
+    reset_on_complete: True
+
+accruals:
+  franklin_completed_logic_block:
+    events:
+      - logicblock_left_franklin_counter_complete
+      - logicblock_right_franklin_counter_complete
+    events_when_complete: franklin_letters_collected
+    restart_events: franklin_letters_collected
 
 shot_profiles:
   left_franklin_profile:
@@ -62,11 +77,15 @@ shots:
   left_franklin_shot:
     hit_events: left_orbit_hit
     profile: left_franklin_profile
-    reset_events: mode_franklin_started
+    reset_events:
+      - mode_franklin_started
+      - franklin_letters_collected
   right_franklin_shot:
     hit_events: right_orbit_hit
     profile: right_franklin_profile
-    reset_events: mode_franklin_started
+    reset_events:
+      - mode_franklin_started
+      - franklin_letters_collected
 
 sound_player:
   logicblock_right_franklin_counter_hit.5:
@@ -90,11 +109,19 @@ variable_player:
       action: set
       int: 0
 
+  franklin_letters_collected:
+    v_franklin_left_hit_total:
+      action: set
+      int: 0
+    v_franklin_right_hit_total:
+      action: set
+      int: 0
+
   # counter hits
 
-  logicblock_left_franklin_counter_hit:
+  logicblock_left_franklin_counter_hit.25:
     v_franklin_left_hit_total: 1
-  logicblock_right_franklin_counter_hit:
+  logicblock_right_franklin_counter_hit.25:
     v_franklin_right_hit_total: 1
 
   # scoring
@@ -325,26 +352,28 @@ widget_player:
       slide: franklin_base_slide
     franklin_zoom_left:
       slide: franklin_base_slide
+
   logicblock_left_franklin_counter_hit{count==1}:
     franklin_f_collected:
-      slide: franklin_base_slide
-  logicblock_left_franklin_counter_hit{current_player.v_franklin_left_hit_total>1}:
-    franklin_f_left_active:
       slide: franklin_base_slide
   logicblock_left_franklin_counter_hit{count==2}:
     franklin_r_collected:
       slide: franklin_base_slide
-  logicblock_left_franklin_counter_hit{current_player.v_franklin_left_hit_total>2}:
-    franklin_r_left_active:
-      slide: franklin_base_slide
   logicblock_left_franklin_counter_hit{count==3}:
     franklin_a_collected:
       slide: franklin_base_slide
-  logicblock_left_franklin_counter_hit{current_player.v_franklin_left_hit_total>3}:
-    franklin_a_left_active:
-      slide: franklin_base_slide
   logicblock_left_franklin_counter_hit{count==4}:
     franklin_n1_collected:
+      slide: franklin_base_slide
+
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_left_hit_total>1}:
+    franklin_f_left_active:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_left_hit_total>2}:
+    franklin_r_left_active:
+      slide: franklin_base_slide
+  logicblock_left_franklin_counter_hit{current_player.v_franklin_left_hit_total>3}:
+    franklin_a_left_active:
       slide: franklin_base_slide
 
   logicblock_left_franklin_counter_hit{current_player.v_franklin_right_hit_total>0}:
@@ -371,23 +400,24 @@ widget_player:
   logicblock_right_franklin_counter_hit{count==1}:
     franklin_k_collected:
       slide: franklin_base_slide
-  logicblock_right_franklin_counter_hit{current_player.v_franklin_right_hit_total>1}:
-    franklin_k_right_active:
-      slide: franklin_base_slide
   logicblock_right_franklin_counter_hit{count==2}:
     franklin_l_collected:
-      slide: franklin_base_slide
-  logicblock_right_franklin_counter_hit{current_player.v_franklin_right_hit_total>2}:
-    franklin_l_right_active:
       slide: franklin_base_slide
   logicblock_right_franklin_counter_hit{count==3}:
     franklin_i_collected:
       slide: franklin_base_slide
-  logicblock_right_franklin_counter_hit{current_player.v_franklin_right_hit_total>3}:
-    franklin_i_right_active:
-      slide: franklin_base_slide
   logicblock_right_franklin_counter_hit{count==4}:
     franklin_n2_collected:
+      slide: franklin_base_slide
+
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_right_hit_total>1}:
+    franklin_k_right_active:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_right_hit_total>2}:
+    franklin_l_right_active:
+      slide: franklin_base_slide
+  logicblock_right_franklin_counter_hit{current_player.v_franklin_right_hit_total>3}:
+    franklin_i_right_active:
       slide: franklin_base_slide
 
   logicblock_right_franklin_counter_hit{current_player.v_franklin_left_hit_total>0}:
@@ -401,6 +431,72 @@ widget_player:
       slide: franklin_base_slide
   logicblock_right_franklin_counter_hit{current_player.v_franklin_left_hit_total>3}:
     franklin_n1_right_active:
+      slide: franklin_base_slide
+
+  franklin_letters_collected:
+    franklin_f_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_r_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_a_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n1_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_k_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_l_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_i_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n2_left_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_f_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_r_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_a_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n1_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_k_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_l_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_i_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_n2_right_active:
+      slide: franklin_base_slide
+      action: remove
+    franklin_f_collected:
+      slide: franklin_base_slide
+    franklin_r_collected:
+      slide: franklin_base_slide
+    franklin_a_collected:
+      slide: franklin_base_slide
+    franklin_n1_collected:
+      slide: franklin_base_slide
+    franklin_k_collected:
+      slide: franklin_base_slide
+    franklin_l_collected:
+      slide: franklin_base_slide
+    franklin_i_collected:
+      slide: franklin_base_slide
+    franklin_n2_collected:
       slide: franklin_base_slide
 
 animations:

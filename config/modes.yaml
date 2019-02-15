@@ -2,6 +2,8 @@
 
 modes:
   - base
+  - bonus
+  - franklin
+  - franklin_hurry_up
   - mask
   - mask_making
-  - franklin

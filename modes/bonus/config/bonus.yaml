@@ -1,0 +1,7 @@
+#config_version=5
+
+mode_settings:
+  bonus_entries:
+    - event: calculate_some_crap_todo
+      score: 5000
+      player_score_entry: franklin_bonus_completions

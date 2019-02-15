@@ -11,6 +11,8 @@ player_vars:
     initial_value: 0
   mask_making_countdown_value:
     initial_value: 10
+  franklin_hurry_up_countdown_value:
+    initial_value: 10
   v_franklin_left_hit_total:
     initial_value: 0
   v_franklin_right_hit_total:
