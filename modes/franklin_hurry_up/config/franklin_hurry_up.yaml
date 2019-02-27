@@ -1,9 +1,13 @@
 #config_version=5
 
 mode:
-  start_events: franklin_letters_collected
-  stop_events: timer_franklin_hurry_up_timer_complete
-  priority: 250
+  start_events: cmd_start_franklin_hurry_up
+  stop_events: timer_franklin_hurry_up_timer_complete timer_franklin_hurry_up_collected_timer_complete
+  priority: 400
+
+event_player:
+  right_ramp_hit:
+    - cmd_franklin_hurry_up_completed
 
 sound_player:
   mode_franklin_hurry_up_started:
@@ -18,14 +22,32 @@ sound_player:
       priority: 110
 
 variable_player:
+
   mode_franklin_hurry_up_started:
-    franklin_hurry_up_countdown_value:
-      int: 25 * 20000
+    franklin_hurry_up_countdown_add_value:
+      int: 0
       action: set
+    franklin_hurry_up_countdown_value:
+      int: 1000000
+      action: set
+    franklin_hurry_up_countdown_holder_value:
+      int: current_player.franklin_hurry_up_countdown_value
+      action: set
+
+  right_orbit_hit:
+    franklin_hurry_up_countdown_add_value: 250000
+  left_orbit_hit:
+    franklin_hurry_up_countdown_add_value: 250000
+
   timer_franklin_hurry_up_timer_tick:
-    franklin_hurry_up_countdown_value:
-      int: device.timers.franklin_hurry_up_timer.ticks * 2252
+    franklin_hurry_up_countdown_holder_value:
+      int: (device.timers.franklin_hurry_up_timer.ticks * 4000) + current_player.franklin_hurry_up_countdown_add_value
       action: set
+    franklin_hurry_up_countdown_value:
+      int: current_player.franklin_hurry_up_countdown_holder_value
+      action: set
+  cmd_franklin_hurry_up_completed:
+    score: current_player.franklin_hurry_up_countdown_value * 1
 
 slides:
   franklin_hurry_up_slide:
@@ -40,6 +62,8 @@ slides:
         x: 40
         animations:
           show_slide:
+            - property: y
+              value: 6
             - property: opacity
               value: 1
               duration: 0.5s
@@ -47,6 +71,31 @@ slides:
               value: 0
               duration: 0.5s
               repeat: true
+          cmd_franklin_hurry_up_completed:
+            - property: opacity
+              timing: with_previous
+              value: 0
+      #- type: text
+        #text: NICE SHOT
+        #style: dmd_small
+        #color: white
+        #anchor_x: left
+        #anchor_y: bottom
+        #opacity: 0
+        #y: 6
+        #x: 56
+        #animations:
+          #show_slide:
+            #- property: opacity
+              #value: 0
+          #cmd_franklin_hurry_up_completed:
+            #- property: opacity
+              #value: 1
+              #duration: 0.5s
+            #- property: opacity
+              #value: 0
+              #duration: 0.5s
+              #repeat: true
       - type: text
         text: (franklin_hurry_up_countdown_value)
         number_grouping: true
@@ -56,25 +105,29 @@ slides:
         anchor_y: bottom
         y: 15
         x: 78
+        animations:
+          cmd_franklin_hurry_up_completed:
+            - property: y
+              value: 18
+              duration: 0.3s
+              easing: out_sine
+            - property: y
+              value: 15
+              duration: 0.3s
+              easing: in_sine
+              repeat: true
       - type: image
-        #image: franklin_hurry_up_v1
         image: franklin_hurry_up_v7
         anchor_x: left
         anchor_y: bottom
         x: 0
         y: 0
-  franklin_hurry_up_collected_slide:
-    widgets:
 
 slide_player:
   mode_franklin_hurry_up_started:
     franklin_hurry_up_slide:
       priority: 300
       expire: 250
-  #right_ramp_hit:
-    #franklin_hurry_up_collected_slide:
-      #priority: 300
-      #expire: 250
 
 timers:
   franklin_hurry_up_timer:
@@ -83,3 +136,13 @@ timers:
     tick_interval: 100ms
     direction: down
     start_running: True
+    control_events:
+      - action: stop
+        event: cmd_franklin_hurry_up_completed
+  franklin_hurry_up_collected_timer:
+    start_value: 0
+    end_value: 10
+    tick_interval: 0.3s
+    control_events:
+      - action: start
+        event: cmd_franklin_hurry_up_completed

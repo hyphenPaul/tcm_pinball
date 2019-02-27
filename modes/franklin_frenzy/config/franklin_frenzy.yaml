@@ -1,0 +1,150 @@
+#config_version=5
+
+mode:
+  start_events: cmd_start_franklin_frenzy
+  stop_events: timer_franklin_frenzy_timer_complete
+  priority: 300
+
+variable_player:
+  mode_franklin_frenzy_started:
+    franklin_total_completions:
+      action: set
+      int: 0
+
+timers:
+  franklin_frenzy_timer:
+    start_value: 0
+    end_value: 30
+    tick_interval: 1s
+    start_running: True
+
+slides:
+  franklin_frenzy_slide:
+    widgets:
+      - type: image
+        image: franklin_frenzy_text_v2
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 32
+        z: 100
+        animations:
+          show_slide:
+            - property: y
+              value: 0
+              duration: 1s
+              easing: out_bounce
+      - type: image
+        image: franklin_bg
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+        z: 1
+      - type: image
+        image: f_fill
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 0
+        z: 10
+      - type: image
+        image: r_fill
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 0
+        z: 10
+      - type: image
+        image: a_fill
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 0
+        z: 10
+      - type: image
+        image: n1_fill
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 0
+        z: 10
+      - type: image
+        image: k_fill
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 0
+        z: 10
+      - type: image
+        image: l_fill
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 0
+        z: 10
+      - type: image
+        image: i_fill
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 0
+        z: 10
+      - type: image
+        image: n2_fill
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 0
+        z: 10
+
+
+slide_player:
+  mode_franklin_frenzy_started:
+    franklin_frenzy_slide:
+      priority: 300
+      expire: 4s
+
+sound_player:
+  mode_franklin_frenzy_started.2:
+    frenzy_bg_music:
+      action: play
+      priority: 100
+      loops: -1
+      volume: 1
+  mode_franklin_frenzy_started: frenzy
+  left_slingshot_hit: franklin_tantrum_ahh
+  right_slingshot_hit: franklin_tantrum_doh
+  s_chain_target_c_active: franklin_tantrum_fartsound
+  s_chain_target_h_active: franklin_tantrum_fartsound2
+  s_chain_target_a_active: franklin_tantrum_fartsound3
+  s_chain_target_i_active: franklin_tantrum_fartsound4
+  s_chain_target_n_active: franklin_tantrum_fartsound
+  s_3_bank_drop_bottom_active: franklin_tantrum_laugh
+  s_3_bank_drop_mid_active: franklin_tantrum_laugh2
+  s_3_bank_drop_top_active: franklin_tantrum_laugh3
+  s_right_ramp_enter_active: franklin_tantrum_laugh4
+  s_right_ramp_exit_active:  franklin_tantrum_laugh5
+  s_captive_ball_target_active: franklin_tantrum_oww
+  s_top_basket_enter_active: franklin_arguement_cmon_push
+  s_top_basket_made_active: franklin_boom_airgun
+  s_right_ramp_s_u_left_active: franklin_crying
+  s_right_ramp_s_u_right_active: franklin_crying2
+  s_saw_target_s_active: franklin_tantrum_fartsound
+  s_saw_target_a_active: franklin_tantrum_fartsound2
+  s_saw_target_w_active: franklin_tantrum_fartsound3
+  s_super_duper_jackpot_active: franklin_arguement_cmon_push
+  s_extra_ball_active: franklin_tantrum_oww
+  s_right_orbit_top_active: franklin_tantrum_fartsound
+  s_right_orbit_bottom_active: franklin_jerry
+  s_jump_ball_vuk_active: franklin_boom_airgun
+  s_wabbit_hole_vuk_active: franklin_arguement_sally_stop
+  s_left_orbit_bottom_active: franklin_tantrum_fartsound
+  s_left_orbit_top_active: franklin_arguement_sally
+  s_top_turbo_bumper_active: franklin_tantrum_oww
+  s_left_turbo_bumper_active: franklin_tantrum_uhh
+  s_right_turbo_bumper_active: franklin_hey
+  s_left_outlane_active: franklin_tantrum_fun_trip
+  s_left_return_lane_active: franklin_hey
+  s_right_outlane_active: franklin_tantrum_fun_trip
+  s_right_return_lane_active: franklin_tantrum_oww

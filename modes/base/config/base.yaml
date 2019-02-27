@@ -9,12 +9,17 @@ sound_player:
     intro_jazz:
       action: play
       loops: -1
-      volume: 1
+      volume: 0.75
   mode_franklin_hurry_up_stopped:
     intro_jazz:
       action: play
       loops: -1
-      volume: 1
+      volume: 0.75
+  mode_franklin_frenzy_stopped:
+    intro_jazz:
+      action: play
+      loops: -1
+      volume: 0.75
 
 slide_player:
   mode_base_started:
@@ -75,3 +80,8 @@ variable_player:
   magnavuk_shot_right:
     score: 2
 
+#timers:
+  #my_test_timer:
+    #start_value: 0
+    #end_value: 1
+    #start_running: true

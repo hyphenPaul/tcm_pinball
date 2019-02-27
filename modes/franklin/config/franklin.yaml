@@ -1,7 +1,8 @@
 #config_version=5
 
 mode:
-  start_events: ball_starting
+  start_events: ball_starting mode_franklin_hurry_up_stopped mode_franklin_frenzy_stopped
+  stop_events: mode_franklin_hurry_up_started mode_franklin_frenzy_started
   priority: 250
 
 counters:
@@ -17,17 +18,21 @@ counters:
     reset_on_complete: False
     count_complete_value: 4
     restart_events: franklin_letters_collected
-  total_franklin_counter:
-    count_events: franklin_letters_collected
-    count_complete_value: 3
-    disable_on_complete: False
-    reset_on_complete: True
+
+event_player:
+  player_franklin_total_completions{value>0 and value<3}:
+    cmd_start_franklin_hurry_up
+  player_franklin_total_completions{value==3}:
+    cmd_start_franklin_frenzy
 
 accruals:
   franklin_completed_logic_block:
     events:
       - logicblock_left_franklin_counter_complete
       - logicblock_right_franklin_counter_complete
+      # TODO: Remove me - for testing
+      #- left_franklin_shot_hit
+      #- right_franklin_shot_hit
     events_when_complete: franklin_letters_collected
     restart_events: franklin_letters_collected
 
@@ -98,7 +103,6 @@ sound_player:
       loops: 0
 
 variable_player:
-
   # reset
 
   mode_franklin_started:
@@ -109,7 +113,8 @@ variable_player:
       action: set
       int: 0
 
-  franklin_letters_collected:
+  franklin_letters_collected.100:
+    franklin_total_completions: 1
     v_franklin_left_hit_total:
       action: set
       int: 0

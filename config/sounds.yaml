@@ -6,6 +6,7 @@ sounds:
   intro_jazz:
     file: ffab_loop.wav
     mode_end_action: stop
+    volume: 0.5
   attract_dark:
     file: dark_open.wav
   open_speech:
@@ -17,10 +18,116 @@ sounds:
     file: mask_slice.wav
     volume: 1.0
   franklin_hurry_up:
-    file: franklin_in_trouble_v1.wav
+    file: franklin_hurry_up_v1.wav
     mode_end_action: stop
     volume: 1.0
   franklin_fun:
     file: franklin_fun.wav
     mode_end_action: stop
     volume: 1.0
+  franklin_tantrum_ahh:
+    file: franklin_tantrum_ahh.wav
+    volume: 1.5
+  franklin_tantrum_doh:
+    file: franklin_tantrum_doh.wav
+    volume: 1.5
+  franklin_tantrum_fartsound:
+    file: franklin_tantrum_fartsound.wav
+    volume: 1.5
+  franklin_tantrum_fartsound2:
+    file: franklin_tantrum_fartsound2.wav
+    volume: 1.5
+  franklin_tantrum_fartsound3:
+    file: franklin_tantrum_fartsound3.wav
+    volume: 1.5
+  franklin_tantrum_fartsound4:
+    file: franklin_tantrum_fartsound4.wav
+    volume: 1.5
+  franklin_tantrum_fartsound5_double:
+    file: franklin_tantrum_fartsound5_double.wav
+    volume: 1.5
+  franklin_tantrum_fartsound6:
+    file: franklin_tantrum_fartsound6.wav
+    volume: 1.5
+  franklin_tantrum_fartsound7:
+    file: franklin_tantrum_fartsound7.wav
+    volume: 1.5
+  franklin_tantrum_fun_trip:
+    file: franklin_tantrum_fun_trip.wav
+    volume: 1.5
+  franklin_tantrum_laugh:
+    file: franklin_tantrum_laugh.wav
+    volume: 1.5
+  franklin_tantrum_laugh2:
+    file: franklin_tantrum_laugh2.wav
+    volume: 1.5
+  franklin_tantrum_laugh3:
+    file: franklin_tantrum_laugh3.wav
+    volume: 1.5
+  franklin_tantrum_laugh4:
+    file: franklin_tantrum_laugh4.wav
+    volume: 1.5
+  franklin_tantrum_laugh5:
+    file: franklin_tantrum_laugh5.wav
+    volume: 1.5
+  franklin_tantrum_oww:
+    file: franklin_tantrum_oww.wav
+    volume: 1.5
+  franklin_tantrum_uhh:
+    file: franklin_tantrum_uhh.wav
+    volume: 1.5
+  franklin_arguement_cmon_push:
+    file: franklin_arguement_cmon_push.wav
+    volume: 1.5
+  franklin_arguement_im_coming:
+    file: franklin_arguement_im_coming.wav
+    volume: 1.5
+  franklin_arguement_sally:
+    file: franklin_arguement_sally.wav
+    volume: 1.5
+  franklin_arguement_sally_stop:
+    file: franklin_arguement_sally_stop.wav
+    volume: 1.5
+  franklin_boom_airgun:
+    file: franklin_boom_airgun.wav
+    volume: 1.5
+  franklin_boom_airgun2:
+    file: franklin_boom_airgun2.wav
+    volume: 1.5
+  franklin_crying:
+    file: franklin_crying.wav
+    volume: 1.5
+  franklin_crying2:
+    file: franklin_crying2.wav
+    volume: 1.5
+  franklin_frenzy4_better:
+    file: franklin_frenzy4_better.wav
+    volume: 1.5
+  franklin_hey:
+    file: franklin_hey.wav
+    volume: 1.5
+  franklin_jerry:
+    file: franklin_jerry.wav
+    volume: 1.5
+  franklin_jerry2:
+    file: franklin_jerry2.wav
+    volume: 1.5
+  franklin_sally:
+    file: franklin_sally.wav
+    volume: 1.5
+  franklin_sallyyy_good:
+    file: franklin_sallyyy_good.wav
+    volume: 1.5
+  franklin_shh_airgun:
+    file: franklin_shh_airgun.wav
+    volume: 1.5
+  franklin_spit:
+    file: franklin_spit.wav
+    volume: 1.5
+  frenzy:
+    file: frenzy____LEGACY.wav
+    volume: 1.5
+  frenzy_bg_music:
+    file: franklin_frenzy_v2.wav
+    volume: 1
+    mode_end_action: stop
