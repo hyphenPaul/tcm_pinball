@@ -2,11 +2,22 @@
 
 sequence_shots:
   right_ramp:
-    switch_sequence: s_right_ramp_enter, s_right_ramp_exit
+    switch_sequence:
+      s_right_ramp_enter,
+      s_right_ramp_exit
     sequence_timeout: 2s
+  left_ramp:
+    switch_sequence:
+      s_top_basket_enter,
+      s_top_basket_made
+    sequence_timeout: 1s
   left_orbit:
-    switch_sequence: s_left_orbit_bottom, s_left_orbit_top
+    switch_sequence:
+      s_left_orbit_bottom,
+      s_left_orbit_top
     sequence_timeout: 1s
   right_orbit:
-    switch_sequence: s_right_orbit_bottom, s_right_orbit_top
+    switch_sequence:
+      s_right_orbit_bottom,
+      s_right_orbit_top
     sequence_timeout: 1s

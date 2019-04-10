@@ -1,8 +1,15 @@
 #config_version=5
 
 mode:
-  start_events: ball_starting mode_mask_making_stopped mode_franklin_hurry_up_stopped
-  stop_events: logicblock_mask_total_counter_complete mode_franklin_hurry_up_started
+  start_events:
+    ball_starting
+    cmd_enable_progressive_passive_modes
+    mode_mask_making_stopped
+    mode_franklin_hurry_up_stopped
+  stop_events:
+    cmd_disable_progressive_passive_modes__chainsaw_mode
+    logicblock_mask_total_counter_complete
+    mode_franklin_hurry_up_started
   priority: 200
 
 counters:

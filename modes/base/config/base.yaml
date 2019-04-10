@@ -20,9 +20,17 @@ sound_player:
       action: play
       loops: -1
       volume: 0.75
+  cmd_start_base_music:
+    intro_jazz:
+      action: play
+      loops: -1
+      volume: 0.75
+  cmd_stop_music:
+    intro_jazz:
+      action: stop
 
-slide_player:
-  mode_base_started:
+slides:
+  base_score_slide:
     widgets:
       - type: text
         text: (score)
@@ -52,6 +60,9 @@ slide_player:
         anchor_y: bottom
         font_size: 10
 
+slide_player:
+  mode_base_started: base_score_slide
+
 shots:
   top_turbo_bumper:
     switch: s_top_turbo_bumper
@@ -80,8 +91,14 @@ variable_player:
   magnavuk_shot_right:
     score: 2
 
-#timers:
-  #my_test_timer:
-    #start_value: 0
-    #end_value: 1
-    #start_running: true
+event_player:
+  cmd_start_chainsaw_multiball:
+    - cmd_disable_progressive_passive_modes__chainsaw_mode
+  cmd_chainsaw_multiball_ended:
+    - cmd_enable_progressive_passive_modes
+
+timers:
+  my_test_timer:
+    start_value: 0
+    end_value: 1
+    start_running: true

@@ -23,11 +23,11 @@ lights:
     number: L10
   basket_ramp_arrow:
     number: L11
-  jump_ball_arrow:
+  gas_station_arrow:
     number: L12
   right_ramp_arrow:
     number: L13
-  right_orbit:
+  right_orbit_arrow:
     number: L14
   target_2:
     number: L15
@@ -77,7 +77,7 @@ lights:
     number: L38
   jackpot:
     number: L39
-  wabbit_hole:
+  sawyer_house:
     number: L40
   right_7_seg_a:
     number: L41
@@ -125,21 +125,21 @@ lights:
     number: L63
   extra_ball:
     number: L64
-  space_jam_s:
+  chain_target_c:
     number: L65
-  space_jam_p:
+  chain_target_h:
     number: L66
-  space_jam_a:
+  chain_target_a:
     number: L67
-  space_jam_c:
+  chain_target_i:
     number: L68
-  space_jam_e:
+  chain_target_n:
     number: L69
-  space_jam_j:
+  saw_target_s:
     number: L70
-  space_jam_a2:
+  saw_target_a:
     number: L71
-  space_jam_m:
+  saw_target_w:
     number: L72
   slam_s:
     number: L73

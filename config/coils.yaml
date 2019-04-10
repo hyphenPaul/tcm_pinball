@@ -65,7 +65,7 @@ coils:
     number: C18
   c_flash_jump_ball:
     number: C19
-  c_wabbit_hole_vuk:
+  c_sawyer_house_vuk:
     number: C20
     allow_enable: true
     default_pulse_ms: 40

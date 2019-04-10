@@ -124,10 +124,40 @@ sounds:
   franklin_spit:
     file: franklin_spit.wav
     volume: 1.5
+  franklin_gave_him_your_name:
+    file: franklin_gave_him_your_name.wav
+    volume: 1
+  franklin_hes_gonna_kill_you:
+    file: franklin_hes_gonna_kill_you.wav
+    volume: 1
   frenzy:
     file: frenzy____LEGACY.wav
     volume: 1.5
   frenzy_bg_music:
     file: franklin_frenzy_v2.wav
+    volume: 1
+    mode_end_action: stop
+  franklin_frenzy_bonus_v1:
+    file: franklin_frenzy_bonus_v1.wav
+    volume: 1
+    mode_end_action: stop
+  franklin_hurry_up_finish:
+    file: franklin_hurry_up_finish.wav
+    volume: 1
+    mode_end_action: stop
+  chainsaw_multiball_audio_v2:
+    file: chainsaw_multiball_audio_v2.wav
+    volume: 1
+    mode_end_action: stop
+  chainsaw_false_start:
+    file: chainsaw_false_start.wav
+    volume: 1
+    mode_end_action: stop
+  three_bells:
+    file: three_bells.wav
+    volume: 1
+    mode_end_action: stop
+  chainsaw_multiball_start:
+    file: chainsaw_multiball_audio_with_drone_v3.wav
     volume: 1
     mode_end_action: stop

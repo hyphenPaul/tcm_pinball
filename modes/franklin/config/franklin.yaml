@@ -1,8 +1,15 @@
 #config_version=5
 
 mode:
-  start_events: ball_starting mode_franklin_hurry_up_stopped mode_franklin_frenzy_stopped
-  stop_events: mode_franklin_hurry_up_started mode_franklin_frenzy_started
+  start_events:
+    ball_starting
+    cmd_enable_progressive_passive_modes
+    mode_franklin_hurry_up_stopped
+    mode_franklin_frenzy_stopped
+  stop_events:
+    cmd_disable_progressive_passive_modes__chainsaw_mode
+    mode_franklin_hurry_up_started
+    mode_franklin_frenzy_started
   priority: 250
 
 counters:

@@ -1,30 +1,29 @@
 #show_version=5
 
-# Score
-#- duration: 10s
+#- duration: 100s
   #slides:
     #slide_1:
       #widgets:
+      #- type: text
+        #text: SHOOT
+        #style: dmd_big
+        #anchor_x: 0
+        #anchor_y: 0
+        #x: 73
+        #y: 17
+      #- type: text
+        #text: THE HOUSE
+        #style: dmd_big
+        #anchor_x: 0
+        #anchor_y: 0
+        #x: 60
+        #y: 5
       #- type: image
-        ##image: chainsaw_for_dmd_v1
-        ##image: chainsaw_test_v1
-        ##image: gradient_test
-        #image: leatherface_4_color_test
-        ##image: 80_black
-        #anchor_x: left
-        #anchor_y: bottom
+        #image: shoot_the_house_bg
+        #anchor_x: 0
+        #anchor_y: 0
         #x: 0
         #y: 0
-        #
-
-#- duration: 10s
-  #slides:
-    #slide_1:
-      #widgets:
-      #- type: rectangle
-        #color: black
-        #width: 128
-        #height: 32
 
 - duration: 1.5s
   slides:

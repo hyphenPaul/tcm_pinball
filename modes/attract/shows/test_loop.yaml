@@ -1,0 +1,45 @@
+#show_version=5
+
+#- duration: 20s
+  #slides:
+   #slide_1:
+      #widgets:
+      #- type: text
+        #text: JACKPOT
+        ##style: dmd_big
+        #color: 404040
+        #font_name: DoubleFeature20
+        #font_size: 22
+        #round_anchor_x: left
+      ##- type: image
+        ##image: test_bg
+        ##anchor_x: left
+        ##anchor_y: bottom
+        ##x: 0
+        ##y: 0
+        ##animations:
+          ##show_slide:
+            ##- property: y
+              ##value: -32
+              ##duration: 1s
+
+- duration: 30s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: franklin-millions-v2
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+        #animations:
+          #show_slide:
+            #- property: y
+              #value: 0
+              #easing: out_quad
+              #duration: 0.5s
+            #- property: y
+              #value: -32
+              #easing: in_quad
+              #duration: 0.5s

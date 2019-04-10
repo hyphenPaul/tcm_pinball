@@ -12,6 +12,6 @@ ball_devices:
     mechanical_eject: true
     eject_coil: c_auto_launch
 
-  bd_wabbit_hole:
-    ball_switches: s_wabbit_hole_vuk
-    eject_coil: c_wabbit_hole_vuk
+  bd_sawyer_house:
+    ball_switches: s_sawyer_house_vuk
+    eject_coil: c_sawyer_house_vuk

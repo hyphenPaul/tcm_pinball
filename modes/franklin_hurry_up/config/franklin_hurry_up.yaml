@@ -1,6 +1,7 @@
 #config_version=5
 
 mode:
+  #start_events: timer_my_test_timer_complete
   start_events: cmd_start_franklin_hurry_up
   stop_events: timer_franklin_hurry_up_timer_complete timer_franklin_hurry_up_collected_timer_complete
   priority: 400
@@ -15,11 +16,20 @@ sound_player:
       action: play
       priority: 100
       loops: -1
-      volume: 1
+      volume: 0.45
   timer_franklin_hurry_up_timer_complete.1:
     franklin_hurry_up:
       action: stop
       priority: 110
+  cmd_franklin_hurry_up_completed:
+    franklin_hurry_up:
+      action: stop
+      priority: 120
+  cmd_franklin_hurry_up_completed.1:
+    franklin_hurry_up_finish:
+      action: play
+      priority: 130
+      volume: 0.45
 
 variable_player:
 

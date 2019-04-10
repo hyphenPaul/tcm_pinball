@@ -23,3 +23,5 @@ player_vars:
     initial_value: 0
   v_franklin_right_hit_total:
     initial_value: 0
+  v_chainsaw_multiball_active:
+    initial_value: 0

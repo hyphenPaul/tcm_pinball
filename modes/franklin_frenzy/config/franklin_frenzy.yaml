@@ -1,6 +1,7 @@
 #config_version=5
 
 mode:
+  #start_events: timer_my_test_timer_complete
   start_events: cmd_start_franklin_frenzy
   stop_events: timer_franklin_frenzy_timer_complete
   priority: 300
@@ -11,10 +12,60 @@ variable_player:
       action: set
       int: 0
 
+widgets:
+  jumping_franklin_widget_left:
+    - type: image
+      image: franklin_frenzy_popup_face_test_left
+      anchor_x: left
+      anchor_y: bottom
+      x: 0
+      y: -32
+      z: 50
+      animations:
+        add_to_slide:
+          - property: y
+            value: -2 
+            easing: out_quad
+            duration: 0.5s
+          - property: y
+            value: -32
+            easing: in_quad
+            duration: 0.5s
+  jumping_franklin_widget_right:
+    - type: image
+      image: franklin_frenzy_popup_face_test
+      anchor_x: left
+      anchor_y: bottom
+      x: 0
+      y: -32
+      z: 50
+      animations:
+        add_to_slide:
+          - property: y
+            value: -2
+            easing: out_quad
+            duration: 0.5s
+          - property: y
+            value: -32
+            easing: in_quad
+            duration: 0.5s
+
+widget_player:
+  left_slingshot_hit:
+    jumping_franklin_widget_left:
+      slide: base_score_slide
+      widget_settings:
+        expire: 1s
+  right_slingshot_hit:
+    jumping_franklin_widget_right:
+      slide: base_score_slide
+      widget_settings:
+        expire: 1s
+
 timers:
   franklin_frenzy_timer:
     start_value: 0
-    end_value: 30
+    end_value: 45
     tick_interval: 1s
     start_running: True
 
@@ -97,13 +148,28 @@ slides:
         x: 2
         y: 0
         z: 10
-
+  franklin_bonus_slide:
+    widgets:
+    - type: image
+      image: franklin-millions-v2
+      anchor_x: left
+      anchor_y: bottom
+      x: 0
+      y: 0
 
 slide_player:
   mode_franklin_frenzy_started:
     franklin_frenzy_slide:
       priority: 300
       expire: 4s
+  left_orbit_hit:
+    franklin_bonus_slide:
+      priority: 300
+      expire: 3s
+  right_orbit_hit:
+    franklin_bonus_slide:
+      priority: 300
+      expire: 3s
 
 sound_player:
   mode_franklin_frenzy_started.2:
@@ -111,7 +177,9 @@ sound_player:
       action: play
       priority: 100
       loops: -1
-      volume: 1
+      volume: 0.75
+  left_orbit_hit: franklin_frenzy_bonus_v1
+  right_orbit_hit: franklin_frenzy_bonus_v1
   mode_franklin_frenzy_started: frenzy
   left_slingshot_hit: franklin_tantrum_ahh
   right_slingshot_hit: franklin_tantrum_doh
@@ -135,16 +203,12 @@ sound_player:
   s_saw_target_w_active: franklin_tantrum_fartsound3
   s_super_duper_jackpot_active: franklin_arguement_cmon_push
   s_extra_ball_active: franklin_tantrum_oww
-  s_right_orbit_top_active: franklin_tantrum_fartsound
-  s_right_orbit_bottom_active: franklin_jerry
   s_jump_ball_vuk_active: franklin_boom_airgun
-  s_wabbit_hole_vuk_active: franklin_arguement_sally_stop
-  s_left_orbit_bottom_active: franklin_tantrum_fartsound
-  s_left_orbit_top_active: franklin_arguement_sally
+  s_sawyer_house_vuk: franklin_arguement_sally_stop
   s_top_turbo_bumper_active: franklin_tantrum_oww
   s_left_turbo_bumper_active: franklin_tantrum_uhh
   s_right_turbo_bumper_active: franklin_hey
   s_left_outlane_active: franklin_tantrum_fun_trip
-  s_left_return_lane_active: franklin_hey
+  s_left_return_lane_active: franklin_hes_gonna_kill_you
   s_right_outlane_active: franklin_tantrum_fun_trip
-  s_right_return_lane_active: franklin_tantrum_oww
+  s_right_return_lane_active: franklin_gave_him_your_name

@@ -13,9 +13,9 @@
     left_orbit_arrow: 0
     captive_ball_arrow: 0
     basket_ramp_arrow: 0
-    jump_ball_arrow: 0
+    gas_station_arrow: 0
     right_ramp_arrow: 0
-    right_orbit: 0
+    right_orbit_arrow: 0
     target_2: 0
     target_3: 0
     left_7_seg_a: 0
@@ -40,7 +40,7 @@
     super_jackpot: 0
     double: 0
     jackpot: 0
-    wabbit_hole: 0
+    sawyer_house: 0
     right_7_seg_a: 0
     right_7_seg_b: 0
     right_7_seg_c: 0
@@ -64,14 +64,14 @@
     moonstar_top: 0
     super_duper_jackpot: 0
     extra_ball: 0
-    space_jam_s: 0
-    space_jam_p: 0
-    space_jam_a: 0
-    space_jam_c: 0
-    space_jam_e: 0
-    space_jam_j: 0
-    space_jam_a2: 0
-    space_jam_m: 0
+    chain_target_c: 0
+    chain_target_h: 0
+    chain_target_a: 0
+    chain_target_i: 0
+    chain_target_n: 0
+    saw_target_s: 0
+    saw_target_a: 0
+    saw_target_w: 0
     slam_s: 0
     slam_l: 0
     slam_a: 0
@@ -93,9 +93,9 @@
     left_orbit_arrow: ff
     captive_ball_arrow: ff
     basket_ramp_arrow: ff
-    jump_ball_arrow: ff
+    gas_station_arrow: ff
     right_ramp_arrow: ff
-    right_orbit: ff
+    right_orbit_arrow: ff
     target_2: ff
     target_3: ff
     left_7_seg_a: ff
@@ -120,7 +120,7 @@
     super_jackpot: ff
     double: ff
     jackpot: ff
-    wabbit_hole: ff
+    sawyer_house: ff
     right_7_seg_a: ff
     right_7_seg_b: ff
     right_7_seg_c: ff
@@ -144,14 +144,14 @@
     moonstar_top: ff
     super_duper_jackpot: ff
     extra_ball: ff
-    space_jam_s: ff
-    space_jam_p: ff
-    space_jam_a: ff
-    space_jam_c: ff
-    space_jam_e: ff
-    space_jam_j: ff
-    space_jam_a2: ff
-    space_jam_m: ff
+    chain_target_c: ff
+    chain_target_h: ff
+    chain_target_a: ff
+    chain_target_i: ff
+    chain_target_n: ff
+    saw_target_s: ff
+    saw_target_a: ff
+    saw_target_w: ff
     slam_s: ff
     slam_l: ff
     slam_a: ff

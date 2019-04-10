@@ -20,3 +20,15 @@ widget_styles:
     y: 0
     z: 2
     opacity: 0
+  chainsaw_background_letter_style:
+    anchor_x: left
+    anchor_y: bottom
+    x: 0
+    y: 0
+    z: 10
+  chainsaw_active_letter_style:
+    anchor_x: left
+    anchor_y: bottom
+    x: 0
+    y: 0
+    z: 20
