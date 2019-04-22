@@ -1,5 +1,7 @@
 #config_version=5
 
+# TODO:
+# If you light everything but drain the thing gets into a weird state
 # the chainsaw targets rev full when in multiball
 
 mode:
@@ -7,40 +9,76 @@ mode:
   #stop_events: mode_franklin_hurry_up_started mode_franklin_frenzy_started
   priority: 500
 
+counters:
+  pinball_completion_counter:
+    count_events: cmd_add_to_multiball_counter
+
 shots:
   # target shots
   chain_c_shot:
     switch: s_chain_target_c
     show_tokens:
       light: chain_target_c
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_c_shot
   chain_h_shot:
     switch: s_chain_target_h
     show_tokens:
       light: chain_target_h
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_h_shot
   chain_a_shot:
     switch: s_chain_target_a
     show_tokens:
       light: chain_target_a
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_a_shot
   chain_i_shot:
     switch: s_chain_target_i
     show_tokens:
       light: chain_target_i
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_i_shot
   chain_n_shot:
     switch: s_chain_target_n
     show_tokens:
       light: chain_target_n
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_n_shot
   saw_s_shot:
     switch: s_saw_target_s
     show_tokens:
       light: saw_target_s
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_s_shot
   saw_a_shot:
     switch: s_saw_target_a
     show_tokens:
       light: saw_target_a
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_a2_shot
   saw_w_shot:
     switch: s_saw_target_w
     show_tokens:
       light: saw_target_w
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_w_shot
 
   # multiball shots
   gas_station_shot:
@@ -87,6 +125,32 @@ shot_groups:
 event_player:
   mode_chainsaw_started:
     - cmd_reset_chainsaw_progression_slide
+    - cmd_reset_letter_animation_timer
+  mode_chainsaw_started{current_player.v_pinball_completion_counter_count==0}:
+    - cmd_enable_c_shot
+    - cmd_enable_h_shot
+    - cmd_enable_a_shot
+    - cmd_enable_i_shot
+    - cmd_enable_n_shot
+    - cmd_enable_s_shot
+    - cmd_enable_a2_shot
+    - cmd_enable_w_shot
+  cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_c_collected==1}:
+    - cmd_play_chain_c_activated
+  cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_h_collected==1}:
+    - cmd_play_chain_h_activated
+  cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_a_collected==1}:
+    - cmd_play_chain_a_activated
+  cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_i_collected==1}:
+    - cmd_play_chain_i_activated
+  cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_n_collected==1}:
+    - cmd_play_chain_n_activated
+  cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_s_collected==1}:
+    - cmd_play_saw_s_activated
+  cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_a2_collected==1}:
+    - cmd_play_saw_a_activated
+  cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_w_collected==1}:
+    - cmd_play_saw_w_activated
   chainsaw_shot_group_complete:
     - cmd_light_multiball
   ball_hold_bh_sawyer_house_full:
@@ -107,8 +171,14 @@ event_player:
     - cmd_start_base_music
     - cmd_stop_chainsaw_multiball_music
     - cmd_set_chainsaw_variable_off
-  cmd_chainsaw_multiball_ended:
+    - cmd_reset_letter_animation_timer
+    - cmd_reset_collected_letter_variables
+    - cmd_reset_chainsaw_progression_slide
+    - cmd_add_to_multiball_counter
     - cmd_reset_chainsaw_shot_group
+    - cmd_disable_chainsaw_shots
+    - cmd_enable_c_shot
+    - cmd_enable_s_shot
   multiball_mb_chainsaw_multiball_shoot_again_ended:
     - cmd_stop_shoot_again_flash
   timer_shoot_the_house_timer_complete:
@@ -131,34 +201,55 @@ event_player:
     - cmd_play_rumble_sound
     - cmd_display_chainsaw_progression
     - cmd_play_chain_c_activated
+    - cmd_set_chain_c_variable
+  chain_c_shot_hit{current_player.v_pinball_completion_counter_count>0}:
+    - cmd_enable_h_shot
   chain_h_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
     - cmd_display_chainsaw_progression
     - cmd_play_chain_h_activated
+    - cmd_set_chain_h_variable
+  chain_h_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+    - cmd_enable_a_shot
   chain_a_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
     - cmd_display_chainsaw_progression
     - cmd_play_chain_a_activated
+    - cmd_set_chain_a_variable
+  chain_a_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+    - cmd_enable_i_shot
   chain_i_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
     - cmd_display_chainsaw_progression
     - cmd_play_chain_i_activated
+    - cmd_set_chain_i_variable
+  chain_i_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+    - cmd_enable_n_shot
   chain_n_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
     - cmd_display_chainsaw_progression
     - cmd_play_chain_n_activated
+    - cmd_set_chain_n_variable
   saw_s_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
     - cmd_display_chainsaw_progression
     - cmd_play_saw_s_activated
+    - cmd_set_saw_s_variable
+  saw_s_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+    - cmd_enable_a2_shot
   saw_a_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
     - cmd_display_chainsaw_progression
     - cmd_play_saw_a_activated
+    - cmd_set_saw_a_variable
+  saw_a_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+    - cmd_enable_w_shot
   saw_w_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
     - cmd_display_chainsaw_progression
     - cmd_play_saw_w_activated
+    - cmd_set_saw_w_variable
+
   left_orbit{advancing==True}:
     - cmd_turn_off_light__left_orbit
   left_ramp{advancing==True}:
@@ -171,6 +262,7 @@ event_player:
     - cmd_turn_off_light__gas_station
 
 variable_player:
+
   cmd_set_chainsaw_variable_off:
     v_chainsaw_multiball_active:
       action: set
@@ -179,6 +271,67 @@ variable_player:
     v_chainsaw_multiball_active:
       action: set
       int: 1
+
+  cmd_set_chain_c_variable:
+    v_chainsaw_c_collected:
+      action: set
+      int: 1
+  cmd_set_chain_h_variable:
+    v_chainsaw_h_collected:
+      action: set
+      int: 1
+  cmd_set_chain_a_variable:
+    v_chainsaw_a_collected:
+      action: set
+      int: 1
+  cmd_set_chain_i_variable:
+    v_chainsaw_i_collected:
+      action: set
+      int: 1
+  cmd_set_chain_n_variable:
+    v_chainsaw_n_collected:
+      action: set
+      int: 1
+  cmd_set_saw_s_variable:
+    v_chainsaw_s_collected:
+      action: set
+      int: 1
+  cmd_set_saw_a_variable:
+    v_chainsaw_a2_collected:
+      action: set
+      int: 1
+  cmd_set_saw_w_variable:
+    v_chainsaw_w_collected:
+      action: set
+      int: 1
+  cmd_reset_collected_letter_variables:
+    v_chainsaw_c_collected:
+      action: set
+      int: 0
+    v_chainsaw_h_collected:
+      action: set
+      int: 0
+    v_chainsaw_a_collected:
+      action: set
+      int: 0
+    v_chainsaw_i_collected:
+      action: set
+      int: 0
+    v_chainsaw_n_collected:
+      action: set
+      int: 0
+    v_chainsaw_s_collected:
+      action: set
+      int: 0
+    v_chainsaw_a2_collected:
+      action: set
+      int: 0
+    v_chainsaw_w_collected:
+      action: set
+      int: 0
+
+  logicblock_pinball_completion_counter_hit:
+    v_pinball_completion_counter_count: 1
 
 ball_holds:
   bh_sawyer_house:
@@ -232,7 +385,9 @@ slides:
   chainsaw_multiball_started_slide:
     - type: image
       image: chainsaw_multiball_start
-      fps: 12
+  space_jam_take_over_start_slide:
+    - type: image
+      image: space_jam_take_over_start
   chainsaw_progression_base_slide:
     widgets:
     - type: rectangle
@@ -272,11 +427,13 @@ slides:
   chainsaw_multiball_jackpot_slide:
     widgets:
       - type: image
-        image: jackpot_v1_2drip
-        fps: 12
+        image: chainsaw_multiball_jackpot
 
 slide_player:
   cmd_start_chainsaw_multiball_intro:
+    #space_jam_take_over_start_slide:
+      #priority: 400
+      #expire: 20
     chainsaw_multiball_started_slide:
       priority: 400
       expire: 13.41
@@ -291,11 +448,13 @@ slide_player:
   cmd_start_jackpot_slide:
     chainsaw_multiball_jackpot_slide:
       priority: 1000
-      expire: 2.14s
+      expire: 2.8s
 
 sound_player:
   cmd_play_rumble_sound: chainsaw_false_start
   cmd_start_chainsaw_multiball_intro: chainsaw_multiball_start
+  #cmd_start_chainsaw_multiball_intro: space_jam_take_over_start
+  cmd_start_jackpot_slide: chainsaw_multiball_jackpot
   cmd_start_shoot_the_house:
     three_bells:
       action: play
@@ -364,6 +523,8 @@ timers:
     control_events:
       - action: start
         event: cmd_play_chain_c_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
   chain_h_animation_timer:
     start_value: 0
     end_value: 1
@@ -371,6 +532,8 @@ timers:
     control_events:
       - action: start
         event: cmd_play_chain_h_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
   chain_a_animation_timer:
     start_value: 0
     end_value: 1
@@ -378,6 +541,8 @@ timers:
     control_events:
       - action: start
         event: cmd_play_chain_a_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
   chain_i_animation_timer:
     start_value: 0
     end_value: 1
@@ -385,6 +550,8 @@ timers:
     control_events:
       - action: start
         event: cmd_play_chain_i_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
   chain_n_animation_timer:
     start_value: 0
     end_value: 1
@@ -392,6 +559,8 @@ timers:
     control_events:
       - action: start
         event: cmd_play_chain_n_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
   saw_s_animation_timer:
     start_value: 0
     end_value: 1
@@ -399,6 +568,8 @@ timers:
     control_events:
       - action: start
         event: cmd_play_saw_s_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
   saw_a_animation_timer:
     start_value: 0
     end_value: 1
@@ -406,6 +577,8 @@ timers:
     control_events:
       - action: start
         event: cmd_play_saw_a_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
   saw_w_animation_timer:
     start_value: 0
     end_value: 1
@@ -413,6 +586,8 @@ timers:
     control_events:
       - action: start
         event: cmd_play_saw_w_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
   shoot_the_house_timer:
     start_value: 0
     end_value: 1
@@ -424,6 +599,7 @@ timers:
     start_value: 0
     end_value: 1
     tick_interval: 11s
+    #tick_interval: 18s
     control_events:
       - event: cmd_start_chainsaw_multiball_start_timer
         action: start
@@ -512,6 +688,30 @@ widgets:
 
 widget_player:
   cmd_reset_chainsaw_progression_slide:
+    chain_c_active:
+      slide: chainsaw_progression_base_slide
+      action: remove
+    chain_h_active:
+      slide: chainsaw_progression_base_slide
+      action: remove
+    chain_a_active:
+      slide: chainsaw_progression_base_slide
+      action: remove
+    chain_i_active:
+      slide: chainsaw_progression_base_slide
+      action: remove
+    chain_n_active:
+      slide: chainsaw_progression_base_slide
+      action: remove
+    saw_s_active:
+      slide: chainsaw_progression_base_slide
+      action: remove
+    saw_a_active:
+      slide: chainsaw_progression_base_slide
+      action: remove
+    saw_w_active:
+      slide: chainsaw_progression_base_slide
+      action: remove
     chain_c_background:
       slide: chainsaw_progression_base_slide
     chain_h_background:
@@ -584,64 +784,3 @@ widget_player:
     saw_w_active:
       slide: chainsaw_progression_base_slide
       action: add
-
-#slides:
-  #chainsaw_progression_base_slide:
-    #widgets:
-    #- type: rectangle
-      #color: black
-      #anchor_x: 0
-      #anchor_y: 0
-      #x: 0
-      #y: 0
-      #width: 128
-      #height: 32
-    #widgets:
-      #- type: image
-        #image: chainsaw_c_fill
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 0
-        #y: 0
-      #- type: image
-        #image: chainsaw_h_fill
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 0
-        #y: 0
-      #- type: image
-        #image: chainsaw_a_fill
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 0
-        #y: 0
-      #- type: image
-        #image: chainsaw_i_fill
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 0
-        #y: 0
-      #- type: image
-        #image: chainsaw_n_fill
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 0
-        #y: 0
-      #- type: image
-        #image: chainsaw_s_fill
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 0
-        #y: 0
-      #- type: image
-        #image: chainsaw_a2_fill
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 0
-        #y: 0
-      #- type: image
-        #image: chainsaw_w_fill
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 0
-        #y: 0

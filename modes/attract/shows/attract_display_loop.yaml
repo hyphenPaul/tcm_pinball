@@ -1,93 +1,99 @@
 #show_version=5
 
-#- duration: 100s
+- duration: 100s
+  slides:
+    slide_1:
+      widgets:
+      - type: text
+        text: SHOOT THE
+        style: dmd_big
+        anchor_x: 0
+        anchor_y: 0
+        x: 63
+        y: 16
+        animations:
+          show_slide: sawyer_flash
+      - type: text
+        text: GAS STATION
+        style: dmd_med
+        anchor_x: 0
+        anchor_y: 0
+        x: 60
+        y: 7
+        animations:
+          show_slide: sawyer_flash
+      - type: image
+        image: shoot_the_gas_station_v7
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
+
+# ------------ attract mode start --------------
+
+#- duration: 1.5s
   #slides:
     #slide_1:
       #widgets:
       #- type: text
-        #text: SHOOT
+        #text: TEXAS
         #style: dmd_big
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 73
-        #y: 17
+        #font_size: 14
+
+#- duration: 1.5s
+  #slides:
+    #slide_1:
+      #widgets:
       #- type: text
-        #text: THE HOUSE
+        #text: CHAINSAW
         #style: dmd_big
-        #anchor_x: 0
-        #anchor_y: 0
-        #x: 60
-        #y: 5
+        #font_size: 15
+
+#- duration: 1.5s
+  #slides:
+    #slide_1:
+      #widgets:
+      #- type: text
+        #text: MASSACRE
+        #style: dmd_big
+        #font_size: 15
+
+#- duration: 1s
+  #slides:
+    #slide_1:
+      #widgets:
       #- type: image
-        #image: shoot_the_house_bg
-        #anchor_x: 0
-        #anchor_y: 0
+        #image: leatherface
+        #anchor_x: left
+        #anchor_y: bottom
         #x: 0
-        #y: 0
+        #y: -20
 
-- duration: 1.5s
-  slides:
-    slide_1:
-      widgets:
-      - type: text
-        text: TEXAS
-        style: dmd_big
-        font_size: 14
-
-- duration: 1.5s
-  slides:
-    slide_1:
-      widgets:
-      - type: text
-        text: CHAINSAW
-        style: dmd_big
-        font_size: 15
-
-- duration: 1.5s
-  slides:
-    slide_1:
-      widgets:
-      - type: text
-        text: MASSACRE
-        style: dmd_big
-        font_size: 15
-
-- duration: 1s
-  slides:
-    slide_1:
-      widgets:
-      - type: image
-        image: leatherface
-        anchor_x: left
-        anchor_y: bottom
-        x: 0
-        y: -20
-
-- duration: 6s
-  slides:
-    slide_1:
-      widgets:
-      - type: text
-        text: PRESS START
-        font_size: 15
-        color: black
-        style: dmd_big
-        animations:
-          show_slide:
-          - property: opacity
-            value: 1
-            duration: 0
-          - property: opacity
-            value: 1
-            duration: .5s
-          - property: opacity
-            value: 0
-            duration: 0
-          - property: opacity
-            value: 0
-            duration: .5s
-            repeat: true
+#- duration: 6s
+  #slides:
+    #slide_1:
+      #widgets:
+      #- type: text
+        #text: PRESS START
+        #font_size: 15
+        #color: black
+        #style: dmd_big
+        #animations:
+          #show_slide:
+          #- property: opacity
+            #value: 1
+            #duration: 0
+          #- property: opacity
+            #value: 1
+            #duration: .5s
+          #- property: opacity
+            #value: 0
+            #duration: 0
+          #- property: opacity
+            #value: 0
+            #duration: .5s
+            #repeat: true
             
-      - type: rectangle
-        width: 128
-        height: 32
+      #- type: rectangle
+        #width: 128
+        #height: 32

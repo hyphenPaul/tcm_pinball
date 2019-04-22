@@ -158,6 +158,14 @@ sounds:
     volume: 1
     mode_end_action: stop
   chainsaw_multiball_start:
-    file: chainsaw_multiball_audio_with_drone_v3.wav
+    file: chainsaw_multiball_3_10frame.wav
+    volume: 1
+    mode_end_action: stop
+  chainsaw_multiball_jackpot:
+    file: jackpot_v1_2drip10fr v1.wav
+    volume: 1
+    mode_end_action: stop
+  space_jam_take_over_start:
+    file: space_jam_takeover_v2audio.wav
     volume: 1
     mode_end_action: stop

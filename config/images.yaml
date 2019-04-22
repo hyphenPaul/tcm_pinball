@@ -4,4 +4,8 @@ images:
   leatherface:
     file: leatherface.gif
   chainsaw_multiball_start:
-    file: chainsaw_multiball_v3.gif
+    file: chainsaw_multiball_3_10frame.gif
+  space_jam_take_over_start:
+    file: space-jam-take-over-v2.gif
+  chainsaw_multiball_jackpot:
+    file: jackpot_v1_2drip10fr.gif
