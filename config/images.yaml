@@ -9,5 +9,7 @@ images:
     file: space_jam_takeover_3.gif
   chainsaw_multiball_jackpot:
     file: cs_jackpot_v1.gif
+  chainsaw_multiball_super_jackpot:
+    file: cs_super_jackpot_v1.gif
   chainsaw_multiball_space_jam_takeover_jackpot:
     file: sj_jackpot_v1.gif

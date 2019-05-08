@@ -128,8 +128,8 @@ event_player:
     - cmd_jackpot_variable_right_orbit
     - cmd_turn_off_light_right_orbit
   s_super_duper_jackpot_active{current_player.v_chainsaw_super_jackpot_lit==1}:
-    #- cmd_play_super_jackpot_slide
     #- cmd_play_super_jackpot_sound
+    - cmd_start_super_jackpot_slide
     - cmd_stop_flash_super_jackpot_light
     - cmd_set_super_jackpot_variable_off
     - cmd_turn_on_jackpot_lights
@@ -343,6 +343,11 @@ variable_player:
       action: set
       int: 1
 
+  logicblock_pinball_completion_counter_complete:
+    v_space_jam_takeover_ready:
+      action: set
+      int: 1
+
 accruals:
   collect_jackpots_accrual:
     events:
@@ -360,7 +365,7 @@ accruals:
 counters:
   pinball_completion_counter:
     count_events: cmd_add_to_multiball_counter
-    count_complete_value: 2
+    count_complete_value: 1
     disable_on_complete: True
     enable_events: cmd_enable_pinball_completion_counter
 
@@ -614,6 +619,10 @@ slides:
     widgets:
       - type: image
         image: chainsaw_multiball_jackpot
+  chainsaw_multiball_super_jackpot_slide:
+    widgets:
+      - type: image
+        image: chainsaw_multiball_super_jackpot
   chainsaw_multiball_space_jam_takeover_jackpot_slide:
     widgets:
       - type: image
@@ -639,6 +648,10 @@ slide_player:
   cmd_start_jackpot_slide:
     chainsaw_multiball_jackpot_slide:
       priority: 1000
+      expire: 2.8s
+  cmd_start_super_jackpot_slide:
+    chainsaw_multiball_super_jackpot_slide:
+      priority: 2000
       expire: 2.8s
   cmd_start_space_jam_takeover_jackpot_slide:
     chainsaw_multiball_space_jam_takeover_jackpot_slide:
