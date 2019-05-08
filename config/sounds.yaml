@@ -166,6 +166,7 @@ sounds:
     volume: 1
     mode_end_action: stop
   space_jam_take_over_start:
-    file: space_jam_takeover_v2audio.wav
-    volume: 1
+    file: space_jam_takeover_v3_audio.wav
+  space_jam_take_over_bg_music:
+    file: space_jam_music_2.wav
     mode_end_action: stop

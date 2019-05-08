@@ -115,7 +115,7 @@ switches:
     tags: super_duper_jackpot
     debounce: quick
     ignore_window_ms: 1000ms
-  s_extra_ball:
+  s_slaughter_house_target:
     number: S42
     tags: extra_ball
     debounce: quick

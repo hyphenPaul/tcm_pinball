@@ -1,131 +1,28 @@
 #config_version=5
 
 # TODO:
-# If you light everything but drain the thing gets into a weird state
-# the chainsaw targets rev full when in multiball
+# Wire up the captive ball and back target for multiball - test
+# Light super jackpot
+# Wire up space jam
+# Spits out multiball right away on second run - bug
+# Targets should rev when you hit them
+# 3rd ball takes time to eject for multiball
+#
+# Sound effects for the ramps
+# rev
+# v_space_jam_takeover_ready
 
 mode:
   start_events: ball_starting
   #stop_events: mode_franklin_hurry_up_started mode_franklin_frenzy_started
   priority: 500
 
-counters:
-  pinball_completion_counter:
-    count_events: cmd_add_to_multiball_counter
-
-shots:
-  # target shots
-  chain_c_shot:
-    switch: s_chain_target_c
-    show_tokens:
-      light: chain_target_c
-    disable_events:
-      - cmd_disable_chainsaw_shots
-    enable_events:
-      - cmd_enable_c_shot
-  chain_h_shot:
-    switch: s_chain_target_h
-    show_tokens:
-      light: chain_target_h
-    disable_events:
-      - cmd_disable_chainsaw_shots
-    enable_events:
-      - cmd_enable_h_shot
-  chain_a_shot:
-    switch: s_chain_target_a
-    show_tokens:
-      light: chain_target_a
-    disable_events:
-      - cmd_disable_chainsaw_shots
-    enable_events:
-      - cmd_enable_a_shot
-  chain_i_shot:
-    switch: s_chain_target_i
-    show_tokens:
-      light: chain_target_i
-    disable_events:
-      - cmd_disable_chainsaw_shots
-    enable_events:
-      - cmd_enable_i_shot
-  chain_n_shot:
-    switch: s_chain_target_n
-    show_tokens:
-      light: chain_target_n
-    disable_events:
-      - cmd_disable_chainsaw_shots
-    enable_events:
-      - cmd_enable_n_shot
-  saw_s_shot:
-    switch: s_saw_target_s
-    show_tokens:
-      light: saw_target_s
-    disable_events:
-      - cmd_disable_chainsaw_shots
-    enable_events:
-      - cmd_enable_s_shot
-  saw_a_shot:
-    switch: s_saw_target_a
-    show_tokens:
-      light: saw_target_a
-    disable_events:
-      - cmd_disable_chainsaw_shots
-    enable_events:
-      - cmd_enable_a2_shot
-  saw_w_shot:
-    switch: s_saw_target_w
-    show_tokens:
-      light: saw_target_w
-    disable_events:
-      - cmd_disable_chainsaw_shots
-    enable_events:
-      - cmd_enable_w_shot
-
-  # multiball shots
-  gas_station_shot:
-    switch: s_jump_ball_vuk
-
-multiballs:
-  mb_chainsaw_multiball:
-    ball_count: 2
-    ball_count_type: add
-    shoot_again: 10s
-    start_events: cmd_start_chainsaw_multiball
-
-light_player:
-  cmd_start_chainsaw_multiball:
-    left_orbit_arrow: ff
-    captive_ball_arrow: ff
-    basket_ramp_arrow: ff
-    gas_station_arrow: ff
-    right_ramp_arrow: ff
-    right_orbit_arrow: ff
-  cmd_turn_off_light_left_orbit:
-    left_orbit_arrow: 0
-  cmd_turn_off_light_left_ramp:
-    basket_ramp_arrow: 0
-  cmd_turn_off_light_right_ramp:
-    right_ramp_arrow: 0
-  cmd_turn_off_light_right_orbit:
-    right_orbit_arrow: 0
-
-shot_groups:
-  chainsaw_shot_group:
-    shots:
-      chain_c_shot,
-      chain_h_shot,
-      chain_a_shot,
-      chain_i_shot,
-      chain_n_shot,
-      saw_s_shot,
-      saw_a_shot,
-      saw_w_shot
-    reset_events:
-      cmd_reset_chainsaw_shot_group
-
 event_player:
   mode_chainsaw_started:
     - cmd_reset_chainsaw_progression_slide
     - cmd_reset_letter_animation_timer
+  mode_chainsaw_started{current_player.v_chainsaw_all_collected==1}:
+    - cmd_light_multiball
   mode_chainsaw_started{current_player.v_pinball_completion_counter_count==0}:
     - cmd_enable_c_shot
     - cmd_enable_h_shot
@@ -135,6 +32,8 @@ event_player:
     - cmd_enable_s_shot
     - cmd_enable_a2_shot
     - cmd_enable_w_shot
+  mode_chainsaw_started{current_player.v_space_jam_takeover_ready==0}:
+    - cmd_enable_pinball_completion_counter
   cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_c_collected==1}:
     - cmd_play_chain_c_activated
   cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_h_collected==1}:
@@ -152,12 +51,21 @@ event_player:
   cmd_reset_chainsaw_progression_slide{current_player.v_chainsaw_w_collected==1}:
     - cmd_play_saw_w_activated
   chainsaw_shot_group_complete:
+    - cmd_set_chainsaw_all_collected
     - cmd_light_multiball
+    - cmd_start_shoot_the_gas_station_timer
   ball_hold_bh_sawyer_house_full:
+    - cmd_unset_chainsaw_all_collected
+    - cmd_stop_music
+  ball_hold_bh_sawyer_house_full{current_player.v_space_jam_takeover_ready==0}:
     - cmd_start_chainsaw_multiball_intro
     - cmd_start_chainsaw_multiball_start_timer
-    - cmd_stop_music
+  ball_hold_bh_sawyer_house_full{current_player.v_space_jam_takeover_ready==1}:
+    - cmd_start_space_jam_takeover_multiball_intro
+    - cmd_start_space_jam_takeover_multiball_start_timer
   timer_chainsaw_multiball_start_timer_complete:
+    - cmd_start_chainsaw_multiball
+  timer_space_jam_takeover_start_timer_complete:
     - cmd_start_chainsaw_multiball
   cmd_start_chainsaw_multiball:
     - cmd_disable_sawyer_ball_hold
@@ -166,6 +74,8 @@ event_player:
     - cmd_start_shoot_again_flash
     - cmd_start_chainsaw_multiball_music
     - cmd_set_chainsaw_variable_on
+    - cmd_turn_on_jackpot_lights
+    #- cmd_start_space_jam_takeover_music
   multiball_mb_chainsaw_multiball_ended:
     - cmd_chainsaw_multiball_ended
     - cmd_start_base_music
@@ -177,24 +87,60 @@ event_player:
     - cmd_add_to_multiball_counter
     - cmd_reset_chainsaw_shot_group
     - cmd_disable_chainsaw_shots
+    - cmd_turn_off_all_lights
     - cmd_enable_c_shot
     - cmd_enable_s_shot
+    - cmd_set_super_jackpot_variable_off
+    - cmd_reset_jackpot_variables
   multiball_mb_chainsaw_multiball_shoot_again_ended:
     - cmd_stop_shoot_again_flash
-  timer_shoot_the_house_timer_complete:
-    - cmd_start_shoot_the_house
-  left_orbit_hit{current_player.v_chainsaw_multiball_active==1}:
-    - cmd_start_jackpot_slide
+  timer_shoot_the_gas_station_timer_complete:
+    - cmd_start_shoot_the_gas_station
+
+  s_slaughter_house_target_active{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_slaughter_house_collected==0}:
+    - cmd_jackpot
+    - cmd_jackpot_accrual_slaughter_house
+    - cmd_jackpot_variable_slaughter_house
+    - cmd_turn_off_light_slaughter_house
+  s_captive_ball_target_active{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_captive_ball_collected==0}:
+    - cmd_jackpot
+    - cmd_jackpot_accrual_captive_ball
+    - cmd_jackpot_variable_captive_ball
+    - cmd_turn_off_light_captive_ball
+  left_orbit_hit{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_left_orbit_collected==0}:
+    - cmd_jackpot
+    - cmd_jackpot_accrual_left_orbit
+    - cmd_jackpot_variable_left_orbit
     - cmd_turn_off_light_left_orbit
-  left_ramp_hit{current_player.v_chainsaw_multiball_active==1}:
-    - cmd_start_jackpot_slide
+  left_ramp_hit{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_left_ramp_collected==0}:
+    - cmd_jackpot
+    - cmd_jackpot_accrual_left_ramp
+    - cmd_jackpot_variable_left_ramp
     - cmd_turn_off_light_left_ramp
-  right_ramp_hit{current_player.v_chainsaw_multiball_active==1}:
-    - cmd_start_jackpot_slide
+  right_ramp_hit{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_right_ramp_collected==0}:
+    - cmd_jackpot
+    - cmd_jackpot_accrual_right_ramp
+    - cmd_jackpot_variable_right_ramp
     - cmd_turn_off_light_right_ramp
-  right_orbit_hit{current_player.v_chainsaw_multiball_active==1}:
-    - cmd_start_jackpot_slide
+  right_orbit_hit{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_right_orbit_collected==0}:
+    - cmd_jackpot
+    - cmd_jackpot_accrual_right_orbit
+    - cmd_jackpot_variable_right_orbit
     - cmd_turn_off_light_right_orbit
+  s_super_duper_jackpot_active{current_player.v_chainsaw_super_jackpot_lit==1}:
+    #- cmd_play_super_jackpot_slide
+    #- cmd_play_super_jackpot_sound
+    - cmd_stop_flash_super_jackpot_light
+    - cmd_set_super_jackpot_variable_off
+    - cmd_turn_on_jackpot_lights
+    - cmd_reset_jackpot_variables
+  cmd_jackpot{current_player.v_space_jam_takeover_ready==0}:
+    - cmd_start_jackpot_slide
+  cmd_jackpot{current_player.v_space_jam_takeover_ready==1}:
+    - cmd_start_space_jam_takeover_jackpot_slide
+  cmd_light_super_jackpot:
+    - cmd_set_super_jackpot_variable_on
+    - cmd_flash_super_jackpot_light
 
   # animation shots
   chain_c_shot_hit{advancing==True}:
@@ -272,6 +218,8 @@ variable_player:
       action: set
       int: 1
 
+  # variable_player - chainsaw letters  
+
   cmd_set_chain_c_variable:
     v_chainsaw_c_collected:
       action: set
@@ -304,6 +252,14 @@ variable_player:
     v_chainsaw_w_collected:
       action: set
       int: 1
+  cmd_set_chainsaw_all_collected:
+    v_chainsaw_all_collected:
+      action: set
+      int: 1
+  cmd_unset_chainsaw_all_collected:
+    v_chainsaw_all_collected:
+      action: set
+      int: 0
   cmd_reset_collected_letter_variables:
     v_chainsaw_c_collected:
       action: set
@@ -330,8 +286,175 @@ variable_player:
       action: set
       int: 0
 
+  cmd_set_super_jackpot_variable_on:
+    v_chainsaw_super_jackpot_lit:
+      action: set
+      int: 1
+  cmd_set_super_jackpot_variable_off:
+    v_chainsaw_super_jackpot_lit:
+      action: set
+      int: 0
+
   logicblock_pinball_completion_counter_hit:
     v_pinball_completion_counter_count: 1
+
+  cmd_reset_jackpot_variables:
+    v_chainsaw_jackpot_captive_ball_collected:
+      action: set
+      int: 0
+    v_chainsaw_jackpot_left_ramp_collected:
+      action: set
+      int: 0
+    v_chainsaw_jackpot_left_orbit_collected:
+      action: set
+      int: 0
+    v_chainsaw_jackpot_right_ramp_collected:
+      action: set
+      int: 0
+    v_chainsaw_jackpot_slaughter_house_collected:
+      action: set
+      int: 0
+    v_chainsaw_jackpot_right_orbit_collected:
+      action: set
+      int: 0
+
+  cmd_jackpot_variable_captive_ball:
+    v_chainsaw_jackpot_captive_ball_collected:
+      action: set
+      int: 1
+  cmd_jackpot_variable_left_ramp:
+    v_chainsaw_jackpot_left_ramp_collected:
+      action: set
+      int: 1
+  cmd_jackpot_variable_left_orbit:
+    v_chainsaw_jackpot_left_orbit_collected:
+      action: set
+      int: 1
+  cmd_jackpot_variable_right_ramp:
+    v_chainsaw_jackpot_right_ramp_collected:
+      action: set
+      int: 1
+  cmd_jackpot_variable_slaughter_house:
+    v_chainsaw_jackpot_slaughter_house_collected:
+      action: set
+      int: 1
+  cmd_jackpot_variable_right_orbit:
+    v_chainsaw_jackpot_right_orbit_collected:
+      action: set
+      int: 1
+
+accruals:
+  collect_jackpots_accrual:
+    events:
+      - cmd_jackpot_accrual_slaughter_house
+      - cmd_jackpot_accrual_captive_ball
+      - cmd_jackpot_accrual_left_orbit
+      - cmd_jackpot_accrual_left_ramp
+      - cmd_jackpot_accrual_right_ramp
+      - cmd_jackpot_accrual_right_orbit
+    events_when_complete:
+      - cmd_light_super_jackpot
+    reset_on_complete: True
+    disable_on_complete: False
+
+counters:
+  pinball_completion_counter:
+    count_events: cmd_add_to_multiball_counter
+    count_complete_value: 2
+    disable_on_complete: True
+    enable_events: cmd_enable_pinball_completion_counter
+
+shots:
+  # target shots
+  chain_c_shot:
+    switch: s_chain_target_c
+    show_tokens:
+      light: chain_target_c
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_c_shot
+  chain_h_shot:
+    switch: s_chain_target_h
+    show_tokens:
+      light: chain_target_h
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_h_shot
+  chain_a_shot:
+    switch: s_chain_target_a
+    show_tokens:
+      light: chain_target_a
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_a_shot
+  chain_i_shot:
+    switch: s_chain_target_i
+    show_tokens:
+      light: chain_target_i
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_i_shot
+  chain_n_shot:
+    switch: s_chain_target_n
+    show_tokens:
+      light: chain_target_n
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_n_shot
+  saw_s_shot:
+    switch: s_saw_target_s
+    show_tokens:
+      light: saw_target_s
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_s_shot
+  saw_a_shot:
+    switch: s_saw_target_a
+    show_tokens:
+      light: saw_target_a
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_a2_shot
+  saw_w_shot:
+    switch: s_saw_target_w
+    show_tokens:
+      light: saw_target_w
+    disable_events:
+      - cmd_disable_chainsaw_shots
+    enable_events:
+      - cmd_enable_w_shot
+
+  # multiball shots
+  gas_station_shot:
+    switch: s_jump_ball_vuk
+
+shot_groups:
+  chainsaw_shot_group:
+    shots:
+      chain_c_shot,
+      chain_h_shot,
+      chain_a_shot,
+      chain_i_shot,
+      chain_n_shot,
+      saw_s_shot,
+      saw_a_shot,
+      saw_w_shot
+    reset_events:
+      cmd_reset_chainsaw_shot_group
+
+multiballs:
+  mb_chainsaw_multiball:
+    ball_count: 2
+    ball_count_type: add
+    shoot_again: 5s
+    start_events: cmd_start_chainsaw_multiball
 
 ball_holds:
   bh_sawyer_house:
@@ -340,6 +463,59 @@ ball_holds:
     enable_events: cmd_light_multiball
     disable_events: cmd_disable_sawyer_ball_hold
     release_all_events: cmd_release_sawyer_ball
+
+sound_player:
+  cmd_play_rumble_sound: chainsaw_false_start
+  cmd_start_chainsaw_multiball_intro: chainsaw_multiball_start
+  cmd_start_space_jam_takeover_multiball_intro: space_jam_take_over_start
+  cmd_start_jackpot_slide: chainsaw_multiball_jackpot
+  # TODO: cmd_start_space_jam_takeover_jackpot_slide
+  cmd_start_shoot_the_gas_station:
+    three_bells:
+      action: play
+      loops: 0
+      volume: 0.8
+  cmd_start_chainsaw_multiball_music:
+    frenzy_bg_music:
+      action: play
+      loops: -1
+  cmd_start_space_jam_takeover_music:
+    space_jam_take_over_bg_music:
+      action: play
+      loops: -1
+  cmd_stop_chainsaw_multiball_music:
+    space_jam_take_over_bg_music:
+      action: stop
+    frenzy_bg_music:
+      action: stop
+
+light_player:
+  cmd_turn_on_jackpot_lights:
+    left_orbit_arrow: ff
+    captive_ball_arrow: ff
+    basket_ramp_arrow: ff
+    slaughter_house_arrow: ff
+    right_ramp_arrow: ff
+    right_orbit_arrow: ff
+  cmd_turn_off_all_lights:
+    left_orbit_arrow: 0
+    captive_ball_arrow: 0
+    basket_ramp_arrow: 0
+    slaughter_house_arrow: 0
+    right_ramp_arrow: 0
+    right_orbit_arrow: 0
+  cmd_turn_off_light_slaughter_house:
+    slaughter_house_arrow: 0
+  cmd_turn_off_light_captive_ball:
+    captive_ball_arrow: 0
+  cmd_turn_off_light_left_orbit:
+    left_orbit_arrow: 0
+  cmd_turn_off_light_left_ramp:
+    basket_ramp_arrow: 0
+  cmd_turn_off_light_right_ramp:
+    right_ramp_arrow: 0
+  cmd_turn_off_light_right_orbit:
+    right_orbit_arrow: 0
 
 show_player:
   cmd_light_multiball:
@@ -380,6 +556,16 @@ show_player:
       action: stop
       show_tokens:
         light: shoot_again
+  cmd_stop_flash_super_jackpot_light:
+    fast_flash:
+      action: stop
+      show_tokens:
+        light: super_duper_jackpot
+  cmd_flash_super_jackpot_light:
+    fast_flash:
+      action: play
+      show_tokens:
+        light: super_duper_jackpot
 
 slides:
   chainsaw_multiball_started_slide:
@@ -398,28 +584,28 @@ slides:
       y: 0
       width: 128
       height: 32
-  chainsaw_shoot_the_house_slide:
+  chainsaw_shoot_the_gas_station_slide:
     widgets:
     - type: text
-      text: SHOOT
+      text: SHOOT THE
       style: dmd_big
       anchor_x: 0
       anchor_y: 0
-      x: 73
-      y: 17
+      x: 63
+      y: 16
       animations:
         show_slide: sawyer_flash
     - type: text
-      text: THE HOUSE
-      style: dmd_big
+      text: GAS STATION
+      style: dmd_med
       anchor_x: 0
       anchor_y: 0
       x: 60
-      y: 5
+      y: 7
       animations:
         show_slide: sawyer_flash
     - type: image
-      image: shoot_the_house_bg
+      image: shoot_the_gas_station_v7
       anchor_x: 0
       anchor_y: 0
       x: 0
@@ -428,45 +614,36 @@ slides:
     widgets:
       - type: image
         image: chainsaw_multiball_jackpot
+  chainsaw_multiball_space_jam_takeover_jackpot_slide:
+    widgets:
+      - type: image
+        image: chainsaw_multiball_space_jam_takeover_jackpot
 
 slide_player:
   cmd_start_chainsaw_multiball_intro:
-    #space_jam_take_over_start_slide:
-      #priority: 400
-      #expire: 20
     chainsaw_multiball_started_slide:
       priority: 400
       expire: 13.41
+  cmd_start_space_jam_takeover_multiball_intro:
+    space_jam_take_over_start_slide:
+      priority: 400
+      expire: 19
   cmd_display_chainsaw_progression:
     chainsaw_progression_base_slide:
       priority: 200
       expire: 2s
-  cmd_start_shoot_the_house:
-    chainsaw_shoot_the_house_slide:
+  cmd_start_shoot_the_gas_station:
+    chainsaw_shoot_the_gas_station_slide:
       priority: 500
       expire: 2s
   cmd_start_jackpot_slide:
     chainsaw_multiball_jackpot_slide:
       priority: 1000
       expire: 2.8s
-
-sound_player:
-  cmd_play_rumble_sound: chainsaw_false_start
-  cmd_start_chainsaw_multiball_intro: chainsaw_multiball_start
-  #cmd_start_chainsaw_multiball_intro: space_jam_take_over_start
-  cmd_start_jackpot_slide: chainsaw_multiball_jackpot
-  cmd_start_shoot_the_house:
-    three_bells:
-      action: play
-      loops: 0
-      volume: 0.8
-  cmd_start_chainsaw_multiball_music:
-    frenzy_bg_music:
-      action: play
-      loops: -1
-  cmd_stop_chainsaw_multiball_music:
-    frenzy_bg_music:
-      action: stop
+  cmd_start_space_jam_takeover_jackpot_slide:
+    chainsaw_multiball_space_jam_takeover_jackpot_slide:
+      priority: 1000
+      expire: 2.8s
 
 animations:
   chainsaw_letter_collected:
@@ -588,21 +765,31 @@ timers:
         event: cmd_play_saw_w_activated
       - action: reset
         event: cmd_reset_letter_animation_timer
-  shoot_the_house_timer:
+  shoot_the_gas_station_timer:
     start_value: 0
     end_value: 1
     tick_interval: 0.5s
     control_events:
-      - event: cmd_light_multiball
+      - event: cmd_start_shoot_the_gas_station_timer
         action: start
   chainsaw_multiball_start_timer:
     start_value: 0
     end_value: 1
     tick_interval: 11s
-    #tick_interval: 18s
     control_events:
       - event: cmd_start_chainsaw_multiball_start_timer
         action: start
+      - event: timer_chainsaw_multiball_start_timer_complete
+        action: reset_tick_interval
+  space_jam_takeover_start_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 16s
+    control_events:
+      - event: cmd_start_space_jam_takeover_multiball_start_timer
+        action: start
+      - event: timer_space_jam_takeover_start_timer_complete
+        action: reset_tick_interval
 
 widgets:
   chain_c_background:

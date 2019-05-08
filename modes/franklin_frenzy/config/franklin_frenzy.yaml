@@ -202,7 +202,7 @@ sound_player:
   s_saw_target_a_active: franklin_tantrum_fartsound2
   s_saw_target_w_active: franklin_tantrum_fartsound3
   s_super_duper_jackpot_active: franklin_arguement_cmon_push
-  s_extra_ball_active: franklin_tantrum_oww
+  s_slaughter_house_target_active: franklin_tantrum_oww
   s_jump_ball_vuk_active: franklin_boom_airgun
   s_sawyer_house_vuk: franklin_arguement_sally_stop
   s_top_turbo_bumper_active: franklin_tantrum_oww

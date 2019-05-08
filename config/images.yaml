@@ -6,6 +6,8 @@ images:
   chainsaw_multiball_start:
     file: chainsaw_multiball_3_10frame.gif
   space_jam_take_over_start:
-    file: space-jam-take-over-v2.gif
+    file: space_jam_takeover_3.gif
   chainsaw_multiball_jackpot:
-    file: jackpot_v1_2drip10fr.gif
+    file: cs_jackpot_v1.gif
+  chainsaw_multiball_space_jam_takeover_jackpot:
+    file: sj_jackpot_v1.gif

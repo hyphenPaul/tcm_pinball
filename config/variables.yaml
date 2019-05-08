@@ -41,5 +41,23 @@ player_vars:
     initial_value: 0
   v_chainsaw_w_collected:
     initial_value: 0
+  v_chainsaw_all_collected:
+    initial_value: 0
+  v_chainsaw_jackpot_captive_ball_collected:
+    initial_value: 0
+  v_chainsaw_jackpot_left_ramp_collected:
+    initial_value: 0
+  v_chainsaw_jackpot_left_orbit_collected:
+    initial_value: 0
+  v_chainsaw_jackpot_right_ramp_collected:
+    initial_value: 0
+  v_chainsaw_jackpot_slaughter_house_collected:
+    initial_value: 0
+  v_chainsaw_jackpot_right_orbit_collected:
+    initial_value: 0
+  v_chainsaw_super_jackpot_lit:
+    initial_value: 0
   v_pinball_completion_counter_count:
+    initial_value: 0
+  v_space_jam_takeover_ready:
     initial_value: 0

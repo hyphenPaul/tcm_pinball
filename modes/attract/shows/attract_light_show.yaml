@@ -13,7 +13,7 @@
     left_orbit_arrow: 0
     captive_ball_arrow: 0
     basket_ramp_arrow: 0
-    gas_station_arrow: 0
+    slaughter_house_arrow: 0
     right_ramp_arrow: 0
     right_orbit_arrow: 0
     target_2: 0
@@ -93,7 +93,7 @@
     left_orbit_arrow: ff
     captive_ball_arrow: ff
     basket_ramp_arrow: ff
-    gas_station_arrow: ff
+    slaughter_house_arrow: ff
     right_ramp_arrow: ff
     right_orbit_arrow: ff
     target_2: ff
