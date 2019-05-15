@@ -1,5 +1,7 @@
 #config_version=5
 
+# mode restarting after multiball stops and starts
+
 mode:
   start_events:
     ball_starting
@@ -101,11 +103,11 @@ shots:
 
 sound_player:
   logicblock_right_franklin_counter_hit.5:
-    franklin_whip_cmon:
+    franklin_cmon:
       action: play
       loops: 0
   logicblock_left_franklin_counter_hit.5:
-    franklin_whip_cmon:
+    franklin_cmon:
       action: play
       loops: 0
 

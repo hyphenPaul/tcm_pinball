@@ -11,7 +11,7 @@ ball_devices:
     ball_switches: s_shooter_lane
     mechanical_eject: true
     eject_coil: c_auto_launch
-    eject_timeouts: 1.5s
+    eject_timeouts: 3s
 
   bd_sawyer_house:
     ball_switches: s_sawyer_house_vuk

@@ -82,6 +82,7 @@ class Magnavuk(CustomCode):
 
         self.info_log('Vuk firing')
 
+        self.machine.events.post('cmd_magnavuk_firing')
         self.machine.events.post('magnavuk_vuk_firing')
         self.machine.coils['c_jump_ball_vuk'].pulse()
 

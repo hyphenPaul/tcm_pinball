@@ -11,9 +11,9 @@ sounds:
     file: dark_open.wav
   open_speech:
     file: open_speech.wav
-  franklin_whip_cmon:
-    file: franklin_whip_cmon.wav
-    volume: 1.0
+  franklin_cmon:
+    file: franklin_cmon_franklin.wav
+    volume: 0.9
   mask_slice:
     file: mask_slice.wav
     volume: 1.0
@@ -153,6 +153,14 @@ sounds:
     file: chainsaw_false_start.wav
     volume: 1
     mode_end_action: stop
+  chainsaw_rev:
+    file: chainsaw_rev_2.wav
+    volume: 0.8
+    mode_end_action: stop
+  chainsaw_rev_2:
+    file: chainsaw_rev_1.wav
+    volume: 0.8
+    mode_end_action: stop
   three_bells:
     file: three_bells.wav
     volume: 1
@@ -165,8 +173,27 @@ sounds:
     file: jackpot_v1_2drip10fr v1.wav
     volume: 1
     mode_end_action: stop
+  chainsaw_super_jackpot:
+    file: csmb_super_jackpot_voice.wav
+    volume: 1
+    mode_end_action: stop
   space_jam_take_over_start:
-    file: space_jam_takeover_v3_audio.wav
+    file: space_jam_takeover_v3_mbalt.wav
   space_jam_take_over_bg_music:
     file: space_jam_music_2.wav
     mode_end_action: stop
+  space_jam_take_over_jackpot:
+    file: space_jam_jackpot_rip1.wav
+    mode_end_action: stop
+  space_jam_take_over_super_jackpot:
+    file: space_jam_super_jackpot_score_v3_2.wav
+    mode_end_action: stop
+  cow_moo:
+    file: cow_1.wav
+  slaugherhouse_gun:
+    file: slaughtergun_v3.wav
+  shovel_dig:
+    file: shovel_sound.wav
+    volume: 1
+  swoosh_1:
+    file: swoosh_4.wav

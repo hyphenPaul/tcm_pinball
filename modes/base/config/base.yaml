@@ -9,25 +9,32 @@ sound_player:
     intro_jazz:
       action: play
       loops: -1
-      volume: 0.75
+      volume: 0.65
   mode_franklin_hurry_up_stopped:
     intro_jazz:
       action: play
       loops: -1
-      volume: 0.75
+      volume: 0.65
   mode_franklin_frenzy_stopped:
     intro_jazz:
       action: play
       loops: -1
-      volume: 0.75
+      volume: 0.65
   cmd_start_base_music:
     intro_jazz:
       action: play
       loops: -1
-      volume: 0.75
+      volume: 0.65
   cmd_stop_music:
     intro_jazz:
       action: stop
+  s_slaughter_house_target_active: cow_moo
+  s_captive_ball_target_active: shovel_dig
+  cmd_magnavuk_firing: slaugherhouse_gun
+  left_franklin_shot_hit: swoosh_1
+  right_franklin_shot_hit: swoosh_1
+  s_right_ramp_enter_active: swoosh_1
+  s_top_basket_enter_active: swoosh_1
 
 slides:
   base_score_slide:

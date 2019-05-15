@@ -72,10 +72,12 @@ event_player:
     - cmd_release_sawyer_ball
     - cmd_stop_sawyer_light_flashing
     - cmd_start_shoot_again_flash
-    - cmd_start_chainsaw_multiball_music
     - cmd_set_chainsaw_variable_on
     - cmd_turn_on_jackpot_lights
-    #- cmd_start_space_jam_takeover_music
+  cmd_start_chainsaw_multiball{current_player.v_space_jam_takeover_ready==0}:
+    - cmd_start_chainsaw_multiball_music
+  cmd_start_chainsaw_multiball{current_player.v_space_jam_takeover_ready==1}:
+    - cmd_start_space_jam_takeover_music
   multiball_mb_chainsaw_multiball_ended:
     - cmd_chainsaw_multiball_ended
     - cmd_start_base_music
@@ -84,6 +86,7 @@ event_player:
     - cmd_reset_letter_animation_timer
     - cmd_reset_collected_letter_variables
     - cmd_reset_chainsaw_progression_slide
+    - cmd_turn_off_space_jam_takeover
     - cmd_add_to_multiball_counter
     - cmd_reset_chainsaw_shot_group
     - cmd_disable_chainsaw_shots
@@ -128,12 +131,16 @@ event_player:
     - cmd_jackpot_variable_right_orbit
     - cmd_turn_off_light_right_orbit
   s_super_duper_jackpot_active{current_player.v_chainsaw_super_jackpot_lit==1}:
-    #- cmd_play_super_jackpot_sound
-    - cmd_start_super_jackpot_slide
     - cmd_stop_flash_super_jackpot_light
     - cmd_set_super_jackpot_variable_off
     - cmd_turn_on_jackpot_lights
     - cmd_reset_jackpot_variables
+  s_super_duper_jackpot_active{current_player.v_chainsaw_super_jackpot_lit==1 and current_player.v_space_jam_takeover_ready==0}:
+    - cmd_play_super_jackpot_sound
+    - cmd_start_super_jackpot_slide
+  s_super_duper_jackpot_active{current_player.v_chainsaw_super_jackpot_lit==1 and current_player.v_space_jam_takeover_ready==1}:
+    - cmd_play_take_over_super_jackpot_sound
+    - cmd_start_take_over_super_jackpot_slide
   cmd_jackpot{current_player.v_space_jam_takeover_ready==0}:
     - cmd_start_jackpot_slide
   cmd_jackpot{current_player.v_space_jam_takeover_ready==1}:
@@ -148,6 +155,8 @@ event_player:
     - cmd_display_chainsaw_progression
     - cmd_play_chain_c_activated
     - cmd_set_chain_c_variable
+  chain_c_shot_hit{current_player.v_chainsaw_multiball_active>0  and current_player.v_space_jam_takeover_ready==0}:
+    - cmd_play_chainsaw_rev
   chain_c_shot_hit{current_player.v_pinball_completion_counter_count>0}:
     - cmd_enable_h_shot
   chain_h_shot_hit{advancing==True}:
@@ -155,6 +164,8 @@ event_player:
     - cmd_display_chainsaw_progression
     - cmd_play_chain_h_activated
     - cmd_set_chain_h_variable
+  chain_h_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    - cmd_play_chainsaw_rev_2
   chain_h_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
     - cmd_enable_a_shot
   chain_a_shot_hit{advancing==True}:
@@ -162,6 +173,8 @@ event_player:
     - cmd_display_chainsaw_progression
     - cmd_play_chain_a_activated
     - cmd_set_chain_a_variable
+  chain_a_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    - cmd_play_chainsaw_rev
   chain_a_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
     - cmd_enable_i_shot
   chain_i_shot_hit{advancing==True}:
@@ -169,6 +182,8 @@ event_player:
     - cmd_display_chainsaw_progression
     - cmd_play_chain_i_activated
     - cmd_set_chain_i_variable
+  chain_i_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    - cmd_play_chainsaw_rev_2
   chain_i_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
     - cmd_enable_n_shot
   chain_n_shot_hit{advancing==True}:
@@ -176,11 +191,15 @@ event_player:
     - cmd_display_chainsaw_progression
     - cmd_play_chain_n_activated
     - cmd_set_chain_n_variable
+  chain_n_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    - cmd_play_chainsaw_rev
   saw_s_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
     - cmd_display_chainsaw_progression
     - cmd_play_saw_s_activated
     - cmd_set_saw_s_variable
+  saw_s_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    - cmd_play_chainsaw_rev_2
   saw_s_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
     - cmd_enable_a2_shot
   saw_a_shot_hit{advancing==True}:
@@ -188,6 +207,8 @@ event_player:
     - cmd_display_chainsaw_progression
     - cmd_play_saw_a_activated
     - cmd_set_saw_a_variable
+  saw_a_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    - cmd_play_chainsaw_rev
   saw_a_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
     - cmd_enable_w_shot
   saw_w_shot_hit{advancing==True}:
@@ -195,6 +216,8 @@ event_player:
     - cmd_display_chainsaw_progression
     - cmd_play_saw_w_activated
     - cmd_set_saw_w_variable
+  saw_w_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    - cmd_play_chainsaw_rev_2
 
   left_orbit{advancing==True}:
     - cmd_turn_off_light__left_orbit
@@ -342,11 +365,14 @@ variable_player:
     v_chainsaw_jackpot_right_orbit_collected:
       action: set
       int: 1
-
   logicblock_pinball_completion_counter_complete:
     v_space_jam_takeover_ready:
       action: set
       int: 1
+  cmd_turn_off_space_jam_takeover:
+    v_space_jam_takeover_ready:
+      action: set
+      int: 0
 
 accruals:
   collect_jackpots_accrual:
@@ -365,7 +391,7 @@ accruals:
 counters:
   pinball_completion_counter:
     count_events: cmd_add_to_multiball_counter
-    count_complete_value: 1
+    count_complete_value: 2
     disable_on_complete: True
     enable_events: cmd_enable_pinball_completion_counter
 
@@ -471,10 +497,22 @@ ball_holds:
 
 sound_player:
   cmd_play_rumble_sound: chainsaw_false_start
+  cmd_play_super_jackpot_sound: chainsaw_super_jackpot
+  cmd_play_take_over_super_jackpot_sound: space_jam_take_over_super_jackpot
+  cmd_play_chainsaw_rev: chainsaw_rev
+  cmd_play_chainsaw_rev_2: chainsaw_rev_2
   cmd_start_chainsaw_multiball_intro: chainsaw_multiball_start
   cmd_start_space_jam_takeover_multiball_intro: space_jam_take_over_start
-  cmd_start_jackpot_slide: chainsaw_multiball_jackpot
-  # TODO: cmd_start_space_jam_takeover_jackpot_slide
+  cmd_start_jackpot_slide:
+    chainsaw_multiball_jackpot:
+      action: play
+      loops: 0
+      volume: 0.8
+  cmd_start_space_jam_takeover_jackpot_slide:
+    space_jam_take_over_jackpot:
+      action: play
+      loops: 0
+      volume: 0.8
   cmd_start_shoot_the_gas_station:
     three_bells:
       action: play
@@ -484,6 +522,7 @@ sound_player:
     frenzy_bg_music:
       action: play
       loops: -1
+      volume: 0.8
   cmd_start_space_jam_takeover_music:
     space_jam_take_over_bg_music:
       action: play
@@ -623,6 +662,10 @@ slides:
     widgets:
       - type: image
         image: chainsaw_multiball_super_jackpot
+  space_jam_takeover_super_jackpot_slide:
+    widgets:
+      - type: image
+        image: sj_super_jackpot_v3
   chainsaw_multiball_space_jam_takeover_jackpot_slide:
     widgets:
       - type: image
@@ -636,7 +679,7 @@ slide_player:
   cmd_start_space_jam_takeover_multiball_intro:
     space_jam_take_over_start_slide:
       priority: 400
-      expire: 19
+      expire: 18.2
   cmd_display_chainsaw_progression:
     chainsaw_progression_base_slide:
       priority: 200
@@ -653,6 +696,10 @@ slide_player:
     chainsaw_multiball_super_jackpot_slide:
       priority: 2000
       expire: 2.8s
+  cmd_start_take_over_super_jackpot_slide:
+    space_jam_takeover_super_jackpot_slide:
+      priority: 2000
+      expire: 6.0s
   cmd_start_space_jam_takeover_jackpot_slide:
     chainsaw_multiball_space_jam_takeover_jackpot_slide:
       priority: 1000
@@ -794,6 +841,8 @@ timers:
         action: start
       - event: timer_chainsaw_multiball_start_timer_complete
         action: reset_tick_interval
+      - event: timer_space_jam_takeover_start_timer_complete
+        action: reset_tick_interval
   space_jam_takeover_start_timer:
     start_value: 0
     end_value: 1
@@ -801,6 +850,8 @@ timers:
     control_events:
       - event: cmd_start_space_jam_takeover_multiball_start_timer
         action: start
+      - event: timer_chainsaw_multiball_start_timer_complete
+        action: reset_tick_interval
       - event: timer_space_jam_takeover_start_timer_complete
         action: reset_tick_interval
 
