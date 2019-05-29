@@ -1,27 +1,82 @@
 #show_version=5
 
-# - duration: 100s
+#- duration: 100s
+#  slides:
+#    slide_1:
+#      widgets:
+#      - type: image
+#        image: drawing_test_hitchhiker
+#        anchor_x: left
+#        anchor_y: bottom
+#        x: 0
+#        y: 0
+#        animations:
+#          show_slide:
+#            - property: y
+#              value: -40
+#              duration: 4s
+#            - property: y
+#              value: 0
+#              duration: 4s
+#            - property: y
+#              value: -40
+#              duration: 4s
+#            - property: y
+#              value: 0
+#              duration: 4s
+#            - property: y
+#              value: -40
+#              duration: 4s
+
+#- duration: 100s
 #   slides:
 #     slide_1:
 #       widgets:
 #       - type: text
 #         text: SHOOT THE
-#         style: dmd_big
-#         anchor_x: 0
+#         style: dmd_med
 #         anchor_y: 0
-#         x: 63
-#         y: 16
+#         round_anchor_x: left
+#         y: 20
 #         animations:
 #           show_slide: sawyer_flash
 #       - type: text
-#         text: GAS STATION
-#         style: dmd_med
-#         anchor_x: 0
+#         text: SUPER JACKPOT
+#         style: dmd_big
 #         anchor_y: 0
-#         x: 60
-#         y: 7
+#         y: 8
 #         animations:
 #           show_slide: sawyer_flash
+#       - type: rectangle
+#         color: black
+#         anchor_x: 0
+#         anchor_y: 0
+#         x: 3
+#         y: 6
+#         width: 122
+#         height: 23
+#       - type: rectangle
+#         color: white
+#         anchor_x: 0
+#         anchor_y: 0
+#         x: 2
+#         y: 5
+#         width: 124
+#         height: 25
+#       - type: triangle
+#         color: white
+#         points: 56, 4, 72, 4, 64, 0
+#         animations:
+#           show_slide: sawyer_flash
+#       - type: rectangle
+#         color: black
+#         anchor_x: 0
+#         anchor_y: 0
+#         x: 0
+#         y: 0
+#         width: 128
+#         height: 32
+
 #       - type: image
 #         image: shoot_the_gas_station_v7
 #         anchor_x: 0

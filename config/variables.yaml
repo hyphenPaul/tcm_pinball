@@ -61,3 +61,6 @@ player_vars:
     initial_value: 0
   v_space_jam_takeover_ready:
     initial_value: 0
+  v_mystery_meater_count:
+    initial_value: 50.0
+    value_type: float

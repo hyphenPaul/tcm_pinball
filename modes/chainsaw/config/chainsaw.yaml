@@ -1,12 +1,7 @@
 #config_version=5
 
 # TODO:
-# Wire up the captive ball and back target for multiball - test
-# Light super jackpot
-# Wire up space jam
 # Spits out multiball right away on second run - bug
-# Targets should rev when you hit them
-# 3rd ball takes time to eject for multiball
 #
 # Sound effects for the ramps
 # rev
@@ -145,7 +140,8 @@ event_player:
     - cmd_start_jackpot_slide
   cmd_jackpot{current_player.v_space_jam_takeover_ready==1}:
     - cmd_start_space_jam_takeover_jackpot_slide
-  cmd_light_super_jackpot:
+  timer_start_super_jackpot_timer_complete:
+    - cmd_show_super_jackpot_lit_slide
     - cmd_set_super_jackpot_variable_on
     - cmd_flash_super_jackpot_light
 
@@ -384,7 +380,7 @@ accruals:
       - cmd_jackpot_accrual_right_ramp
       - cmd_jackpot_accrual_right_orbit
     events_when_complete:
-      - cmd_light_super_jackpot
+      - cmd_start_super_jackpot_timer
     reset_on_complete: True
     disable_on_complete: False
 
@@ -514,6 +510,11 @@ sound_player:
       loops: 0
       volume: 0.8
   cmd_start_shoot_the_gas_station:
+    three_bells:
+      action: play
+      loops: 0
+      volume: 0.8
+  cmd_show_super_jackpot_lit_slide:
     three_bells:
       action: play
       loops: 0
@@ -670,6 +671,52 @@ slides:
     widgets:
       - type: image
         image: chainsaw_multiball_space_jam_takeover_jackpot
+  shoot_the_super_jackpot_slide:
+    widgets:
+    - type: text
+      text: SHOOT THE
+      style: dmd_med
+      anchor_y: 0
+      round_anchor_x: left
+      y: 20
+      animations:
+        show_slide: sawyer_flash
+    - type: text
+      text: SUPER JACKPOT
+      style: dmd_big
+      anchor_y: 0
+      y: 8
+      animations:
+        show_slide: sawyer_flash
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 3
+      y: 6
+      width: 122
+      height: 23
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 2
+      y: 5
+      width: 124
+      height: 25
+    - type: triangle
+      color: white
+      points: 56, 4, 72, 4, 64, 0
+      animations:
+        show_slide: sawyer_flash
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
 
 slide_player:
   cmd_start_chainsaw_multiball_intro:
@@ -704,6 +751,10 @@ slide_player:
     chainsaw_multiball_space_jam_takeover_jackpot_slide:
       priority: 1000
       expire: 2.8s
+  cmd_show_super_jackpot_lit_slide:
+    shoot_the_super_jackpot_slide:
+      priority: 500
+      expire: 2s
 
 animations:
   chainsaw_letter_collected:
@@ -840,9 +891,9 @@ timers:
       - event: cmd_start_chainsaw_multiball_start_timer
         action: start
       - event: timer_chainsaw_multiball_start_timer_complete
-        action: reset_tick_interval
+        action: reset
       - event: timer_space_jam_takeover_start_timer_complete
-        action: reset_tick_interval
+        action: reset
   space_jam_takeover_start_timer:
     start_value: 0
     end_value: 1
@@ -851,9 +902,18 @@ timers:
       - event: cmd_start_space_jam_takeover_multiball_start_timer
         action: start
       - event: timer_chainsaw_multiball_start_timer_complete
-        action: reset_tick_interval
+        action: reset
       - event: timer_space_jam_takeover_start_timer_complete
-        action: reset_tick_interval
+        action: reset
+  start_super_jackpot_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 3s
+    control_events:
+      - event: cmd_start_super_jackpot_timer
+        action: start
+      - event: timer_start_super_jackpot_timer_complete
+        action: reset
 
 widgets:
   chain_c_background:
