@@ -57,10 +57,12 @@ player_vars:
     initial_value: 0
   v_chainsaw_super_jackpot_lit:
     initial_value: 0
-  v_pinball_completion_counter_count:
+  v_cs_multiball_completion_counter_count:
     initial_value: 0
   v_space_jam_takeover_ready:
     initial_value: 0
   v_mystery_meater_count:
-    initial_value: 50.0
+    initial_value: 0
+  v_mystery_meater_width:
+    initial_value: 0.0
     value_type: float

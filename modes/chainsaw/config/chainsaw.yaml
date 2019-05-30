@@ -18,7 +18,7 @@ event_player:
     - cmd_reset_letter_animation_timer
   mode_chainsaw_started{current_player.v_chainsaw_all_collected==1}:
     - cmd_light_multiball
-  mode_chainsaw_started{current_player.v_pinball_completion_counter_count==0}:
+  mode_chainsaw_started{current_player.v_cs_multiball_completion_counter_count==0}:
     - cmd_enable_c_shot
     - cmd_enable_h_shot
     - cmd_enable_a_shot
@@ -81,7 +81,6 @@ event_player:
     - cmd_reset_letter_animation_timer
     - cmd_reset_collected_letter_variables
     - cmd_reset_chainsaw_progression_slide
-    - cmd_turn_off_space_jam_takeover
     - cmd_add_to_multiball_counter
     - cmd_reset_chainsaw_shot_group
     - cmd_disable_chainsaw_shots
@@ -90,6 +89,7 @@ event_player:
     - cmd_enable_s_shot
     - cmd_set_super_jackpot_variable_off
     - cmd_reset_jackpot_variables
+    - cmd_stop_flash_super_jackpot_light
   multiball_mb_chainsaw_multiball_shoot_again_ended:
     - cmd_stop_shoot_again_flash
   timer_shoot_the_gas_station_timer_complete:
@@ -153,7 +153,7 @@ event_player:
     - cmd_set_chain_c_variable
   chain_c_shot_hit{current_player.v_chainsaw_multiball_active>0  and current_player.v_space_jam_takeover_ready==0}:
     - cmd_play_chainsaw_rev
-  chain_c_shot_hit{current_player.v_pinball_completion_counter_count>0}:
+  chain_c_shot_hit{current_player.v_cs_multiball_completion_counter_count>0}:
     - cmd_enable_h_shot
   chain_h_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
@@ -162,7 +162,7 @@ event_player:
     - cmd_set_chain_h_variable
   chain_h_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
     - cmd_play_chainsaw_rev_2
-  chain_h_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+  chain_h_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     - cmd_enable_a_shot
   chain_a_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
@@ -171,7 +171,7 @@ event_player:
     - cmd_set_chain_a_variable
   chain_a_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
     - cmd_play_chainsaw_rev
-  chain_a_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+  chain_a_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     - cmd_enable_i_shot
   chain_i_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
@@ -180,7 +180,7 @@ event_player:
     - cmd_set_chain_i_variable
   chain_i_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
     - cmd_play_chainsaw_rev_2
-  chain_i_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+  chain_i_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     - cmd_enable_n_shot
   chain_n_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
@@ -196,7 +196,7 @@ event_player:
     - cmd_set_saw_s_variable
   saw_s_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
     - cmd_play_chainsaw_rev_2
-  saw_s_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+  saw_s_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     - cmd_enable_a2_shot
   saw_a_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
@@ -205,7 +205,7 @@ event_player:
     - cmd_set_saw_a_variable
   saw_a_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
     - cmd_play_chainsaw_rev
-  saw_a_shot_hit{advancing==True and current_player.v_pinball_completion_counter_count>0}:
+  saw_a_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     - cmd_enable_w_shot
   saw_w_shot_hit{advancing==True}:
     - cmd_play_rumble_sound
@@ -314,8 +314,8 @@ variable_player:
       action: set
       int: 0
 
-  logicblock_pinball_completion_counter_hit:
-    v_pinball_completion_counter_count: 1
+  cmd_add_to_multiball_counter:
+    v_cs_multiball_completion_counter_count: 1
 
   cmd_reset_jackpot_variables:
     v_chainsaw_jackpot_captive_ball_collected:
@@ -361,11 +361,11 @@ variable_player:
     v_chainsaw_jackpot_right_orbit_collected:
       action: set
       int: 1
-  logicblock_pinball_completion_counter_complete:
+  player_v_cs_multiball_completion_counter_count{value==2}:
     v_space_jam_takeover_ready:
       action: set
       int: 1
-  cmd_turn_off_space_jam_takeover:
+  player_v_cs_multiball_completion_counter_count{value!=2}:
     v_space_jam_takeover_ready:
       action: set
       int: 0
@@ -383,13 +383,6 @@ accruals:
       - cmd_start_super_jackpot_timer
     reset_on_complete: True
     disable_on_complete: False
-
-counters:
-  pinball_completion_counter:
-    count_events: cmd_add_to_multiball_counter
-    count_complete_value: 2
-    disable_on_complete: True
-    enable_events: cmd_enable_pinball_completion_counter
 
 shots:
   # target shots

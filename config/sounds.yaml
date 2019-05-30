@@ -174,7 +174,7 @@ sounds:
     volume: 1
     mode_end_action: stop
   chainsaw_super_jackpot:
-    file: csmb_super_jackpot_voice.wav
+    file: super_jackpot_score_v1.wav
     volume: 1
     mode_end_action: stop
   space_jam_take_over_start:

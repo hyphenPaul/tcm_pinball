@@ -18,6 +18,11 @@ event_player:
   cmd_show_pop_bumper_slide:
     - cmd_increase_mystery_meater_count
     - cmd_animate_progress_bar
+  player_v_mystery_meater_count:
+    cmd_update_progress_bar_width:
+      new_width:
+        value: 57.0 * current_player.v_mystery_meater_count / 50.0
+        type: float
 
 counters:
   mystery_meater_progress_counter:
@@ -29,9 +34,7 @@ counters:
 
 variable_player:
   logicblock_mystery_meater_progress_counter_hit:
-    v_mystery_meater_count:
-      action: set
-      float: 57.0 * (current_player.v_mystery_meater_count + 1) / 50.0
+    v_mystery_meater_count: 1
 
 animations:
   character_hit:
@@ -44,6 +47,28 @@ animations:
     - property: opacity
       duration: 0
       value: 0
+
+widgets:
+  progress_bar_widget:
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 71
+      y: 0
+      z: 500
+      width: 0
+      height: 5
+
+widget_player:
+  pop_bumpers_mode_started:
+    progress_bar_widget:
+      slide: pop_bumper_slide
+
+  cmd_update_progress_bar_width:
+    progress_bar_widget:
+      widget_settings:
+        width: (new_width)
 
 slides:
   pop_bumper_slide:
@@ -88,18 +113,6 @@ slides:
       anchor_y: 0
       x: 0
       y: 6
-    - type: rectangle
-      color: white
-      anchor_x: 0
-      anchor_y: 0
-      x: 71
-      y: 0
-      width: 0
-      height: 5
-      animations:
-        cmd_animate_progress_bar:
-        - property: width
-          value: current_player.v_mystery_meater_count
     - type: rectangle
       color: black
       anchor_x: 0
