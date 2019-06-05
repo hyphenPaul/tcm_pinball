@@ -18,11 +18,6 @@ event_player:
   cmd_show_pop_bumper_slide:
     - cmd_increase_mystery_meater_count
     - cmd_animate_progress_bar
-  player_v_mystery_meater_count:
-    cmd_update_progress_bar_width:
-      new_width:
-        value: 57.0 * current_player.v_mystery_meater_count / 50.0
-        type: float
 
 counters:
   mystery_meater_progress_counter:
@@ -31,10 +26,13 @@ counters:
     disable_on_complete: True
     enable_events: mode_pop_bumpers_started
 
-
 variable_player:
   logicblock_mystery_meater_progress_counter_hit:
     v_mystery_meater_count: 1
+  player_v_mystery_meater_count:
+    v_mystery_meater_width:
+      action: set
+      float: 57.0 * current_player.v_mystery_meater_count / 50.0
 
 animations:
   character_hit:
@@ -48,32 +46,15 @@ animations:
       duration: 0
       value: 0
 
-widgets:
-
-widget_player:
-  pop_bumpers_mode_started:
-    progress_bar_widget:
-      slide: pop_bumper_slide
-
-      #  cmd_update_progress_bar_width:
-      #    progress_bar_widget:
-      #      widget_settings:
-      #        width: (new_width)
-
 show_player:
-  cmd_update_progress_bar_width:
+  player_v_mystery_meater_width:
     family_bumper_show:
       action: play
       events_when_completed: cmd_hide_family_bumpers
       loops: 0
-      show_tokens:
-        new_width: (current_player.v_mystery_meater_count)
-  cmd_hide_family_bumpers:
-    family_bumper_show:
-      action: stop
-
-
-  
+        #  cmd_hide_family_bumpers:
+        #    family_bumper_show:
+        #      action: stop
 
       #slide_player:
       #  cmd_show_pop_bumper_slide:

@@ -51,8 +51,13 @@
         x: 71
         y: 0
         z: 500
-        width: (new_width)
+        width: 0
         height: 5
+        animations:
+          player_v_mystery_meater_width:
+            - property: width
+              value: (value)
+              duration: 0
       - type: rectangle
         color: black
         anchor_x: 0
