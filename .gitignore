@@ -1,5 +1,7 @@
 .DS_Store
 logs/*
 data/*
+scriptlets/__pycache__/*
 logs
 data
+scriptlets/__pycache__
