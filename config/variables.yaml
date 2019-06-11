@@ -66,3 +66,5 @@ player_vars:
   v_mystery_meater_width:
     initial_value: 0.0
     value_type: float
+  v_mystery_meater_complete:
+    initial_value: 0

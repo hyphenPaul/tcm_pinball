@@ -6,35 +6,28 @@ mode:
   priority: 500
 
 event_player:
-  top_turbo_bumper_hit:
+  top_turbo_bumper_hit{current_player.v_mystery_meater_complete==0}:
     - cmd_show_pop_bumper_slide
     - cmd_show_old_man
-  left_turbo_bumper_hit:
+  left_turbo_bumper_hit{current_player.v_mystery_meater_complete==0}:
     - cmd_show_pop_bumper_slide
     - cmd_show_hitchhiker
-  right_turbo_bumper_hit:
+  right_turbo_bumper_hit{current_player.v_mystery_meater_complete==0}:
     - cmd_show_pop_bumper_slide
     - cmd_show_leatherface
-  cmd_show_pop_bumper_slide:
+  cmd_show_pop_bumper_slide{current_player.v_mystery_meater_complete==0}:
+    - cmd_make_family_slide_visible
     - cmd_increase_mystery_meater_count
-    - cmd_animate_progress_bar
-  player_v_mystery_meater_count:
-    cmd_update_progress_bar_width:
-      new_width:
-        value: 57.0 * current_player.v_mystery_meater_count / 50.0
-        type: float
-
-counters:
-  mystery_meater_progress_counter:
-    count_events: cmd_increase_mystery_meater_count
-    count_complete_value: 50
-    disable_on_complete: True
-    enable_events: mode_pop_bumpers_started
-
 
 variable_player:
-  logicblock_mystery_meater_progress_counter_hit:
+  cmd_increase_mystery_meater_count:
     v_mystery_meater_count: 1
+  player_v_mystery_meater_count{value<50}:
+    v_mystery_meater_width:
+      float: 57.0 * current_player.v_mystery_meater_count / 50.0
+      action: set
+  player_v_mystery_meater_count{value>=50}:
+    v_mystery_meater_complete: 1
 
 animations:
   character_hit:
@@ -47,28 +40,6 @@ animations:
     - property: opacity
       duration: 0
       value: 0
-
-widgets:
-  progress_bar_widget:
-    - type: rectangle
-      color: white
-      anchor_x: 0
-      anchor_y: 0
-      x: 71
-      y: 0
-      z: 500
-      width: 0
-      height: 5
-
-widget_player:
-  pop_bumpers_mode_started:
-    progress_bar_widget:
-      slide: pop_bumper_slide
-
-  cmd_update_progress_bar_width:
-    progress_bar_widget:
-      widget_settings:
-        width: (new_width)
 
 slides:
   pop_bumper_slide:
@@ -107,6 +78,20 @@ slides:
       opacity: 0
       animations:
         cmd_show_old_man: character_hit
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 71
+      y: 0
+      z: 500
+      width: 1
+      height: 5
+      animations:
+        player_v_mystery_meater_width:
+          - property: width
+            value: (value)
+            duration: 0
     - type: image
       image: pops_base_v3
       anchor_x: 0
@@ -129,9 +114,23 @@ slides:
       y: 0
       width: 57
       height: 5
+  shoot_the_slaughter_house_for_mystery_slide:
+    widgets:
+    - type: text
+      text: SHOOT THE SLAUGHTER HOUSE
+      style: dmd_big
+      anchor_x: 0
+      anchor_y: 0
+      x: 1
+      y: 0
 
 slide_player:
-  cmd_show_pop_bumper_slide:
+  cmd_make_family_slide_visible:
     pop_bumper_slide:
       priority: 300
       expire: 2s
+  player_v_mystery_meater_complete:
+    shoot_the_slaughter_house_for_mystery_slide:
+      priority: 300
+      expire: 2s
+
