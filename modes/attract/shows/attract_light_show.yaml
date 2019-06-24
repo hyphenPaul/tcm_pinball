@@ -54,7 +54,7 @@
     10_points: 0
     final_jam: 0
     final_jam_2: 0
-    lite_lock: 0
+    slaughter_house: 0
     lite_super_duper_jackpot: 0
     top_turbo_bumper: 0
     left_turbo_bumper: 0
@@ -134,7 +134,7 @@
     10_points: ff
     final_jam: ff
     final_jam_2: ff
-    lite_lock: ff
+    slaughter_house: ff
     lite_super_duper_jackpot: ff
     top_turbo_bumper: ff
     left_turbo_bumper: ff

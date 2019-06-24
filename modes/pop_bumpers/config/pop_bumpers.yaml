@@ -18,6 +18,14 @@ event_player:
   cmd_show_pop_bumper_slide{current_player.v_mystery_meater_complete==0}:
     - cmd_make_family_slide_visible
     - cmd_increase_mystery_meater_count
+  player_v_mystery_meater_count{value==50}:
+    - cmd_mystery_meater_completed
+  #cmd_mystery_meater_completed:
+  timer_my_test_timer_complete:
+    cmd_custom_magna_vuk_handler:
+      switch_hit_evnt: cmd_play_mystery_animation
+      fire_vuk_evnt: cmd_mystery_animation_complete
+      coil_direction: left
 
 variable_player:
   cmd_increase_mystery_meater_count:
@@ -26,8 +34,10 @@ variable_player:
     v_mystery_meater_width:
       float: 57.0 * current_player.v_mystery_meater_count / 50.0
       action: set
-  player_v_mystery_meater_count{value>=50}:
+  cmd_mystery_meater_completed:
     v_mystery_meater_complete: 1
+  cmd_reset_mystery_meater:
+    v_mystery_meater_complete: 0
 
 animations:
   character_hit:
@@ -129,8 +139,15 @@ slide_player:
     pop_bumper_slide:
       priority: 300
       expire: 2s
-  player_v_mystery_meater_complete:
+  cmd_mystery_meater_completed:
     shoot_the_slaughter_house_for_mystery_slide:
-      priority: 300
+      priority: 400
       expire: 2s
 
+show_player:
+  cmd_mystery_meater_completed:
+    fast_flash:
+      action: play
+      show_tokens:
+        lights:
+          slaughter_house
