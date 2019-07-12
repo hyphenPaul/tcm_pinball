@@ -44,3 +44,4 @@ config:
 custom_code:
   - scriptlets.magnavuk.Magnavuk
   - scriptlets.magnaramp.Magnaramp
+  - scriptlets.mystery.Mystery

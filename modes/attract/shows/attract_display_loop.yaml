@@ -1,43 +1,44 @@
 #show_version=5
 
+#- duration: 100s
+#  slides:
+#    slide_1:
+#      widgets:
+#      - type: text
+#        text: SHOOT THE
+#        style: dmd_big
+#        anchor_x: 0
+#        anchor_y: 0
+#        x: 57
+#        y: 16
+#        animations:
+#          show_slide: sawyer_flash
+#      - type: text
+#        text: SLAUGHTERHOUSE
+#        style: dmd_small
+#        anchor_x: 0
+#        anchor_y: 0
+#        x: 53
+#        y: 8
+#        animations:
+#          show_slide: sawyer_flash
+#      - type: image
+#        image: shoot_the_slaughterhouse_v1
+#        anchor_x: left
+#        anchor_y: bottom
+#        x: 0
+#        y: 0
+
 - duration: 100s
   slides:
     slide_1:
       widgets:
       - type: image
-        image: mystery_meat_v3
+        image: saved_from_the_grave_ball
         anchor_x: left
         anchor_y: bottom
         x: 0
         y: 0
-
-#- duration: 100s
-#  slides:
-#    slide_1:
-#      widgets:
-#      - type: image
-#        image: drawing_test_hitchhiker
-#        anchor_x: left
-#        anchor_y: bottom
-#        x: 0
-#        y: 0
-#        animations:
-#          show_slide:
-#            - property: y
-#              value: -40
-#              duration: 4s
-#            - property: y
-#              value: 0
-#              duration: 4s
-#            - property: y
-#              value: -40
-#              duration: 4s
-#            - property: y
-#              value: 0
-#              duration: 4s
-#            - property: y
-#              value: -40
-#              duration: 4s
 
 #- duration: 100s
 #   slides:

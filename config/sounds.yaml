@@ -197,3 +197,9 @@ sounds:
     volume: 1
   swoosh_1:
     file: swoosh_4.wav
+  mystery_sound:
+    file: mystery_meat_6_score_v1.wav
+  ding_1:
+    file: sj_hit_2.wav
+  ding_2:
+    file: sj_hit.wav

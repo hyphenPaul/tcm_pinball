@@ -28,6 +28,12 @@ sound_player:
   cmd_stop_music:
     intro_jazz:
       action: stop
+  cmd_main_music_volume_down:
+    intro_jazz:
+      volume: 0.10
+  cmd_main_music_volume_up:
+    intro_jazz:
+      volume: 0.65
   s_slaughter_house_target_active: cow_moo
   s_captive_ball_target_active: shovel_dig
   cmd_magnavuk_firing: slaugherhouse_gun
@@ -35,6 +41,8 @@ sound_player:
   right_franklin_shot_hit: swoosh_1
   s_right_ramp_enter_active: swoosh_1
   s_top_basket_enter_active: swoosh_1
+  s_right_ramp_s_u_left_active: ding_1
+  s_right_ramp_s_u_right_active: ding_1
 
 slides:
   base_score_slide:
@@ -103,6 +111,8 @@ event_player:
     - cmd_disable_progressive_passive_modes__chainsaw_mode
   cmd_chainsaw_multiball_ended:
     - cmd_enable_progressive_passive_modes
+  s_right_flipper_active:
+    - cmd_get_mystery
 
 timers:
   my_test_timer:

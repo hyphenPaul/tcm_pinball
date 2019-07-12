@@ -13,6 +13,7 @@ class Magnavuk(CustomCode):
 
         self.machine.events.add_handler('ball_started', self.enable)
         self.machine.events.add_handler('ball_ended', self.disable)
+        self.machine.events.add_handler('cmd_custom_magna_vuk_handler', self.add_custom_vuk_handler)
 
     def enable(self, **kwargs):
         del kwargs
@@ -25,7 +26,7 @@ class Magnavuk(CustomCode):
         self.delay.remove('ball_clear')
 
         if self.auto_fire:
-            self.add_vuk_handler()
+            self.add_auto_vuk_handler()
 
         self.machine.events.add_handler(
             'magnavuk_vuk_firing', self.enable_magnet)
@@ -39,7 +40,7 @@ class Magnavuk(CustomCode):
 
         self.info_log('Disabling')
 
-        self.remove_vuk_handler()
+        self.remove_auto_vuk_handler()
         self.machine.events.remove_handler_by_event(
             'magnavuk_vuk_firing', self.enable_magnet)
         self.machine.events.remove_handler_by_event(
@@ -67,18 +68,35 @@ class Magnavuk(CustomCode):
         else:
             self.disable()
 
-    def remove_vuk_handler(self):
+    def remove_auto_vuk_handler(self):
         self.info_log('Remove handler')
         self.machine.switch_controller.remove_switch_handler(
             's_jump_ball_vuk', self.fire_vuk, 1, 500)
 
-    def add_vuk_handler(self, **kwargs):
+    def add_auto_vuk_handler(self, **kwargs):
         self.info_log('Add handler')
         self.machine.switch_controller.add_switch_handler(
             's_jump_ball_vuk', self.fire_vuk, 1, 500)
 
+    def add_custom_vuk_handler(self, **kwargs):
+        self.info_log('add_custom_vuk_handler')
+        self.info_log(kwargs)
+
+        self.remove_auto_vuk_handler()
+        self.machine.switch_controller.add_switch_handler(
+            's_jump_ball_vuk', self.handle_custom_vuk_event, 1, 500, False, kwargs)
+
+    def handle_custom_vuk_event(self, **kwargs):
+        self.machine.events.post(kwargs['switch_hit_evnt'])
+        self.machine.events.add_handler(
+            kwargs['fire_vuk_evnt'], self.fire_vuk, 1, kwargs)
+
     def fire_vuk(self, **kwargs):
-        del kwargs
+        self.info_log('**************************************************')
+        self.info_log('**************************************************')
+        self.info_log(kwargs.get('coil_direction')) # not working
+        self.info_log('**************************************************')
+        self.info_log('**************************************************')
 
         self.info_log('Vuk firing')
 

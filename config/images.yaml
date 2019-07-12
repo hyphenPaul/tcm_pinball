@@ -13,3 +13,7 @@ images:
     file: cs_super_jackpot_v1.gif
   chainsaw_multiball_space_jam_takeover_jackpot:
     file: sj_jackpot_v1.gif
+  saved_from_the_grave:
+    file: save_from_the_grave_v3noball.png
+  saved_from_the_grave_ball:
+    file: save_from_the_grave_v3ball.png
