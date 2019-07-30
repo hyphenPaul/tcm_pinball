@@ -17,13 +17,13 @@ class Mystery(CustomCode):
         self.info_log(choices)
 
         choice = random.choice(choices)
+        self.machine.game.player["v_current_mystery_value"] = choice
         self.save_acquired_mysteries(choice)
-
-        #self.trace("player_acquired_mysteries")
-        #self.info_log(self.get_player_acquired_mysteries())
 
         self.trace("choice")
         self.info_log(choice)
+
+        self.machine.events.post('cmd_mystery_choice', choice=choice)
 
     def fetch_choices(self):
         choices = []

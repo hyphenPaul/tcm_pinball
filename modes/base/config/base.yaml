@@ -35,7 +35,6 @@ sound_player:
     intro_jazz:
       volume: 0.65
   s_slaughter_house_target_active: cow_moo
-  s_captive_ball_target_active: shovel_dig
   cmd_magnavuk_firing: slaugherhouse_gun
   left_franklin_shot_hit: swoosh_1
   right_franklin_shot_hit: swoosh_1
@@ -111,8 +110,8 @@ event_player:
     - cmd_disable_progressive_passive_modes__chainsaw_mode
   cmd_chainsaw_multiball_ended:
     - cmd_enable_progressive_passive_modes
-  s_right_flipper_active:
-    - cmd_get_mystery
+      #  s_right_flipper_active:
+      #    - cmd_get_mystery
 
 timers:
   my_test_timer:

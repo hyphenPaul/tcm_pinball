@@ -7,14 +7,14 @@ mode:
 
 event_player:
   top_turbo_bumper_hit{current_player.v_mystery_meater_complete==0}:
-    - cmd_show_pop_bumper_slide
     - cmd_show_old_man
+    - cmd_show_pop_bumper_slide
   left_turbo_bumper_hit{current_player.v_mystery_meater_complete==0}:
-    - cmd_show_pop_bumper_slide
     - cmd_show_hitchhiker
-  right_turbo_bumper_hit{current_player.v_mystery_meater_complete==0}:
     - cmd_show_pop_bumper_slide
+  right_turbo_bumper_hit{current_player.v_mystery_meater_complete==0}:
     - cmd_show_leatherface
+    - cmd_show_pop_bumper_slide
   cmd_show_pop_bumper_slide{current_player.v_mystery_meater_complete==0}:
     - cmd_increase_mystery_meater_count
     - cmd_make_family_slide_visible
@@ -22,13 +22,16 @@ event_player:
     - cmd_mystery_meater_completed
   cmd_mystery_meater_completed:
     cmd_custom_magna_vuk_handler:
-      switch_hit_evnt: cmd_play_mystery_show
+      switch_hit_evnt: cmd_get_mystery
       fire_vuk_evnt: cmd_mystery_show_complete
       coil_direction: left
+  cmd_mystery_choice:
+    - cmd_play_mystery_show
   cmd_play_mystery_show:
     - cmd_main_music_volume_down
   cmd_mystery_show_complete:
     - cmd_main_music_volume_up
+
 variable_player:
   cmd_increase_mystery_meater_count:
     v_mystery_meater_count: 1
@@ -40,6 +43,28 @@ variable_player:
     v_mystery_meater_complete: 1
   cmd_reset_mystery_meater:
     v_mystery_meater_complete: 0
+  cmd_show_old_man:
+    v_pop_bumper_show_old_man:
+      int: 0
+      action: set
+  cmd_show_leatherface:
+    v_pop_bumper_show_leatherface:
+      int: 0
+      action: set
+  cmd_show_hitchhiker:
+    v_pop_bumper_show_hitchhiker:
+      int: 0
+      action: set
+  cmd_clear_family_members:
+    v_pop_bumper_show_hitchhiker:
+      int: -1
+      action: set
+    v_pop_bumper_show_leatherface:
+      int: -1
+      action: set
+    v_pop_bumper_show_old_man:
+      int: -1
+      action: set
 
 animations:
   character_hit:
@@ -87,6 +112,111 @@ slide_player:
       priority: 400
       expire: 2s
 
+shows:
+  family_show:
+    - duration: 2s
+      slides:
+        pop_bumper_slide:
+          widgets:
+          - type: text
+            text: MYSTERY MEATER
+            style: dmd_small
+            anchor_x: 0
+            anchor_y: 0
+            x: 1
+            y: 0
+          - type: image
+            image: pops_hitchhiker_up_v2
+            anchor_x: 0
+            anchor_y: 0
+            x: 0
+            y: 6
+            opacity: (hitchhiker_opacity)
+            animations:
+              show_slide:
+              - property: opacity
+                value: 1
+                relative: true
+                duration: 0
+              - property: opacity
+                relative: true
+                value: 0
+                duration: 0.30
+              - property: opacity
+                duration: 0
+                value: 0
+          - type: image
+            image: pops_leatherface_up_v2
+            opacity: (leatherface_opacity)
+            anchor_x: 0
+            anchor_y: 0
+            x: 0
+            y: 6
+            animations:
+              show_slide:
+              - property: opacity
+                value: 1
+                relative: true
+                duration: 0
+              - property: opacity
+                relative: true
+                value: 0
+                duration: 0.30
+              - property: opacity
+                duration: 0
+                value: 0
+          - type: image
+            image: pops_oldman_up_v2
+            anchor_x: 0
+            anchor_y: 0
+            x: 0
+            y: 6
+            opacity: (old_man_opacity)
+            animations:
+              show_slide:
+              - property: opacity
+                value: 1
+                relative: true
+                duration: 0
+              - property: opacity
+                relative: true
+                value: 0
+                duration: 0.30
+              - property: opacity
+                duration: 0
+                value: 0
+          - type: image
+            image: pops_base_v3
+            anchor_x: 0
+            anchor_y: 0
+            x: 0
+            y: 6
+          - type: rectangle
+            color: white
+            anchor_x: 0
+            anchor_y: 0
+            x: 71
+            y: 0
+            z: 500
+            width: (new_width)
+            height: 5
+          - type: rectangle
+            color: black
+            anchor_x: 0
+            anchor_y: 0
+            x: 72
+            y: 1
+            width: 55
+            height: 3
+          - type: rectangle
+            color: white
+            anchor_x: 0
+            anchor_y: 0
+            x: 71
+            y: 0
+            width: 57
+            height: 5
+
 show_player:
   cmd_mystery_meater_completed:
     fast_flash:
@@ -98,22 +228,31 @@ show_player:
     fast_flash:
       action: stop
   cmd_make_family_slide_visible:
-    family_bumper_show:
+    family_show:
       action: play
-      events_when_completed: cmd_hide_family_bumpers
+      events_when_played:
+        - cmd_clear_family_members
+      events_when_completed:
+        - cmd_hide_family_bumpers
       loops: 0
       show_tokens:
         new_width: (current_player.v_mystery_meater_width)
+        hitchhiker_opacity: (current_player.v_pop_bumper_show_hitchhiker)
+        old_man_opacity: (current_player.v_pop_bumper_show_old_man)
+        leatherface_opacity: (current_player.v_pop_bumper_show_leatherface)
   cmd_hide_family_bumpers:
-    family_bumper_show:
+    family_show:
       action: stop
   cmd_play_mystery_show:
     mystery_show:
       action: play
       events_when_completed: cmd_mystery_show_complete
+      show_tokens:
+        mystery_award: (current_player.v_current_mystery_value)
       loops: 0
 
 sound_player:
+  cmd_mystery_meater_completed: shoot_the_slaugherhouse
   cmd_play_mystery_show:
     mystery_sound:
       action: play

@@ -70,3 +70,14 @@ player_vars:
     value_type: float
   v_mystery_meater_complete:
     initial_value: 0
+  v_pop_bumper_show_hitchhiker:
+    initial_value: -1
+  v_pop_bumper_show_leatherface:
+    initial_value: -1
+  v_pop_bumper_show_old_man:
+    initial_value: -1
+  v_current_mystery_value:
+    initial_value: nothing
+    value_type: str
+  v_sftg_enabled:
+    initial_value: 0

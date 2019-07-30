@@ -29,16 +29,16 @@
 #        x: 0
 #        y: 0
 
-- duration: 100s
-  slides:
-    slide_1:
-      widgets:
-      - type: image
-        image: saved_from_the_grave_ball
-        anchor_x: left
-        anchor_y: bottom
-        x: 0
-        y: 0
+#- duration: 100s
+#  slides:
+#    slide_1:
+#      widgets:
+#      - type: image
+#        image: save_from_the_grave_save_v2
+#        anchor_x: left
+#        anchor_y: bottom
+#        x: 0
+#        y: 0
 
 #- duration: 100s
 #   slides:

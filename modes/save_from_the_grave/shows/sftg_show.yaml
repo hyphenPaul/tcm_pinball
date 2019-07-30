@@ -1,0 +1,12 @@
+#show_version=5
+
+- duration: 4.1s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: save_from_the_grave_save_v3
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0

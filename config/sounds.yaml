@@ -192,6 +192,15 @@ sounds:
     file: cow_1.wav
   slaugherhouse_gun:
     file: slaughtergun_v3.wav
+  sftg_bump:
+    file: sftg_bump_audio_v1_with_rise.wav
+    volume: 1
+  sftg_save:
+    file: sftg_save_audio_v3_with_rise.wav
+    volume: 1
+  shoot_the_slaugherhouse:
+    file: franklin_slaughter_room.wav
+    volume: 1
   shovel_dig:
     file: shovel_sound.wav
     volume: 1

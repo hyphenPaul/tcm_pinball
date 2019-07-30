@@ -95,7 +95,7 @@ lights:
     number: L47
   lock_3:
     number: L48
-  2_points:
+  l_sftg_enabled:
     number: L49
   3_points:
     number: L50
@@ -151,9 +151,9 @@ lights:
     number: L76
   lock_2:
     number: L77
-  in_yer_face_face:
+  sftg_grave:
     number: L78
-  in_yer_face_yer:
+  sftg_for_the:
     number: L79
-  in_yer_face_in:
+  sftg_save:
     number: L80

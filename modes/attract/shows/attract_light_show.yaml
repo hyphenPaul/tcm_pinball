@@ -49,7 +49,7 @@
     right_7_seg_f: 0
     right_7_seg_g: 0
     lock_3: 0
-    2_points: 0
+    l_sftg_enabled: 0
     3_points: 0
     10_points: 0
     final_jam: 0
@@ -77,9 +77,9 @@
     slam_a: 0
     slam_m: 0
     lock_2: 0
-    in_yer_face_face: 0
-    in_yer_face_yer: 0
-    in_yer_face_in: 0
+    sftg_grave: 0
+    sftg_for_the: 0
+    sftg_save: 0
 - duration: .5
   lights:
     shoot_again: ff
@@ -129,7 +129,7 @@
     right_7_seg_f: ff
     right_7_seg_g: ff
     lock_3: ff
-    2_points: ff
+    l_sftg_enabled: ff
     3_points: ff
     10_points: ff
     final_jam: ff
@@ -157,6 +157,6 @@
     slam_a: ff
     slam_m: ff
     lock_2: ff
-    in_yer_face_face: ff
-    in_yer_face_yer: ff
-    in_yer_face_in: ff
+    sftg_grave: ff
+    sftg_for_the: ff
+    sftg_save: ff
