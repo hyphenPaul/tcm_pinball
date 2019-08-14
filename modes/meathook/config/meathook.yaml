@@ -1,0 +1,23 @@
+#config_version=5
+
+mode:
+  start_events: ball_starting
+  #stop_events: mode_franklin_hurry_up_started mode_franklin_frenzy_started
+  priority: 500
+
+event_player:
+  left_ramp_hit:
+    - cmd_show_meathook_hang
+    - cmd_play_meathook_hang_audio
+
+sound_player:
+  cmd_play_meathook_hang_audio:
+    meathook_hang:
+      action: play
+      loops: 0
+
+show_player:
+  cmd_show_meathook_hang:
+    girl_on_a_hook:
+      action: play
+      loops: 0

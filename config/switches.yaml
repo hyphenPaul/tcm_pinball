@@ -126,6 +126,7 @@ switches:
     number: S44
   s_jump_ball_vuk:
     number: S45
+    debug: true
   s_sawyer_house_vuk:
     number: S46
   s_left_orbit_bottom:

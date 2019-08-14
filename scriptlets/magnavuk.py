@@ -3,9 +3,10 @@ from mpf.core.custom_code import CustomCode
 class Magnavuk(CustomCode):
 
     def on_load(self):
-        self.info_log('Enabling')
+        self.info_log('Loading')
 
         self.enabled = False
+        self.current_custom_switch_handler = None
         self.auto_fire = self.machine.get_machine_var('magnavuk_auto_fire')
 
         if self.machine.switch_controller.is_active('s_jump_ball_vuk'):
@@ -29,7 +30,7 @@ class Magnavuk(CustomCode):
             self.add_auto_vuk_handler()
 
         self.machine.events.add_handler(
-            'magnavuk_vuk_firing', self.enable_magnet)
+            'cmd_magnavuk_firing', self.enable_magnet)
         self.machine.events.add_handler(
             'magnavuk_magnet_disabled', self.choose_lane)
 
@@ -42,7 +43,7 @@ class Magnavuk(CustomCode):
 
         self.remove_auto_vuk_handler()
         self.machine.events.remove_handler_by_event(
-            'magnavuk_vuk_firing', self.enable_magnet)
+            'cmd_magnavuk_firing', self.enable_magnet)
         self.machine.events.remove_handler_by_event(
             'magnavuk_magnet_disabled', self.choose_lane)
 
@@ -69,7 +70,7 @@ class Magnavuk(CustomCode):
             self.disable()
 
     def remove_auto_vuk_handler(self):
-        self.info_log('Remove handler')
+        self.info_log('remove_auto_vuk_handler')
         self.machine.switch_controller.remove_switch_handler(
             's_jump_ball_vuk', self.fire_vuk, 1, 500)
 
@@ -80,28 +81,52 @@ class Magnavuk(CustomCode):
 
     def add_custom_vuk_handler(self, **kwargs):
         self.info_log('add_custom_vuk_handler')
-        self.info_log(kwargs)
 
         self.remove_auto_vuk_handler()
-        self.machine.switch_controller.add_switch_handler(
+        self.remove_current_switch_handler() 
+
+        self.current_custom_switch_handler = self.machine.switch_controller.add_switch_handler(
             's_jump_ball_vuk', self.handle_custom_vuk_event, 1, 500, False, kwargs)
 
     def handle_custom_vuk_event(self, **kwargs):
-        self.machine.events.post(kwargs['switch_hit_evnt'])
+        self.info_log('handle_custom_vuk_event')
+
+        self.info_log('try to remove this handler')
+        self.remove_current_switch_handler()
+
         self.machine.events.add_handler(
-            kwargs['fire_vuk_evnt'], self.fire_vuk, 1, kwargs)
+            kwargs['fire_vuk_evnt'],
+            self.fire_vuk,
+            priority=1,
+            blocking_facility=None,
+            kwargs=kwargs
+        )
+
+        self.machine.events.post(kwargs['switch_hit_evnt'])
+
+    def remove_current_switch_handler(self):
+        if self.current_custom_switch_handler:
+            self.machine.switch_controller.remove_switch_handler_by_key(self.current_custom_switch_handler)
+            self.current_custom_switch_handler = None
 
     def fire_vuk(self, **kwargs):
-        self.info_log('**************************************************')
-        self.info_log('**************************************************')
-        self.info_log(kwargs.get('coil_direction')) # not working
-        self.info_log('**************************************************')
-        self.info_log('**************************************************')
+        if 'kwargs' in kwargs:
+
+            args = kwargs['kwargs']
+
+            if 'fire_vuk_evnt' in args:
+                self.machine.events.remove_handler(self.fire_vuk)
+
+                if self.auto_fire:
+                    self.add_auto_vuk_handler()
+
+            if 'coil_direction' in args:
+                self.set_direction(args['coil_direction'])
+
 
         self.info_log('Vuk firing')
 
         self.machine.events.post('cmd_magnavuk_firing')
-        self.machine.events.post('magnavuk_vuk_firing')
         self.machine.coils['c_jump_ball_vuk'].pulse()
 
     def disable_magnet(self, **kwargs):
@@ -127,6 +152,9 @@ class Magnavuk(CustomCode):
         self.info_log('magnet enabled')
         self.machine.coils['c_jump_ball_magnet'].enable()
         self.delay.add(500, self.disable_magnet)
+
+    def set_direction(self, direction):
+        self.machine.set_machine_var('magnavuk_left', direction == 'left')
 
     def toggle_direction(self):
         self.machine.set_machine_var(

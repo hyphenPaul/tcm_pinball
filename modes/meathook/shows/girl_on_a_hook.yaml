@@ -1,0 +1,42 @@
+#show_version=5
+
+- duration: 3.5s
+  slides:
+    slide_1:
+      widgets:
+      - type: text
+        text: 10 LIGHTS EXTRA BALL
+        style: dmd_small
+        round_anchor_x: left
+        anchor_y: 0
+        y: 1
+        opacity: 0
+        animations:
+          show_slide:
+          - property: opacity
+            value: 0
+            duration: 2.1s
+          - property: opacity
+            value: 1
+            duration: .3s
+      - type: text
+        text: 5 ON A
+        style: dmd_small
+        round_anchor_x: left
+        anchor_y: 0
+        opacity: 0
+        y: 26
+        animations:
+          show_slide:
+          - property: opacity
+            value: 0
+            duration: 2.1s
+          - property: opacity
+            value: 1
+            duration: .3s
+      - type: image
+        image: meathook_hang_v4
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0

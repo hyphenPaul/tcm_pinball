@@ -31,6 +31,7 @@ event_player:
     - cmd_main_music_volume_down
   cmd_mystery_show_complete:
     - cmd_main_music_volume_up
+    - cmd_reset_mystery_meater
 
 variable_player:
   cmd_increase_mystery_meater_count:

@@ -1,8 +1,7 @@
-- get the popup boys animating
-- finish the mystery activating bonuses
-- disable mystery after complete
-- mystery meater gets harder
 - magnavuk coils firing at the same time - after mystery meat was set up
+- disable mystery after complete
+- finish the mystery activating bonuses
+- mystery meater gets harder
 - if you're in a multiball, mystery should be add a ball (50%)
 
 Nice to have

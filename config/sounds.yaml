@@ -212,3 +212,5 @@ sounds:
     file: sj_hit_2.wav
   ding_2:
     file: sj_hit.wav
+  meathook_hang:
+    file: meathook_hang_v1audio.wav
