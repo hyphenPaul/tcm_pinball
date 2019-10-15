@@ -1,7 +1,346 @@
 #config_version=5
 
 mode_settings:
+  display_delay_ms: 1s
+  hurry_up_delay_ms: 500
+  #end_bonus_event: bonus_last_slide_timer_complete
   bonus_entries:
-    - event: calculate_some_crap_todo
-      score: 5000
-      player_score_entry: franklin_bonus_completions
+    - event: cmd_franklin_bonus
+      score: machine.franklin_bonus_value
+      skip_if_zero: False
+      player_score_entry: franklin_bonus
+    - event: cmd_meathook_bonus
+      score: machine.meathook_bonus_value
+      skip_if_zero: False
+      player_score_entry: meathook_bonus
+    - event: cmd_combo_bonus
+      score: machine.combo_bonus_value
+      skip_if_zero: False
+      player_score_entry: combo_bonus
+    - event: cmd_mode_bonus
+      score: machine.mode_bonus_value
+      skip_if_zero: False
+      player_score_entry: mode_bonus
+
+event_player:
+  mode_bonus_started:
+    - cmd_stop_music
+    - cmd_start_bg_music
+  bonus_subtotal:
+    - cmd_do_something_with_bonus
+
+slide_player:
+  mode_bonus_started: bonus_start_slide
+  cmd_franklin_bonus: bonus_franklin_slide
+  cmd_meathook_bonus: bonus_meathook_slide
+  cmd_combo_bonus: bonus_combo_slide
+  cmd_mode_bonus: bonus_mode_slide
+  bonus_subtotal: bonus_subtotal_slide
+  bonus_multiplier: bonus_multiplier_slide
+  bonus_total: bonus_total_slide
+
+sound_player:
+  cmd_franklin_bonus: bonus_sound
+  cmd_meathook_bonus: bonus_sound
+  cmd_combo_bonus: bonus_sound
+  cmd_mode_bonus: bonus_sound
+  bonus_subtotal: bonus_sound
+  bonus_multiplier: bonus_sound
+  bonus_total: bonus_end
+  cmd_start_bg_music: bonus_bg
+
+timers:
+  bonus_last_slide_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 3s
+    control_events:
+      - action: start
+        event: bonus_total
+
+slides:
+  bonus_start_slide:
+    widgets:
+      - type: image
+        image: bonus_letters_smaller3
+  bonus_franklin_slide:
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+      animations:
+        show_slide:
+          - property: opacity
+            value: 0
+            easing: out_quad
+            duration: 0.5s
+    - type: text
+      text: "FRANKLIN: (player|franklin_bonus)"
+      style: dmd_big
+      round_anchor_x: left
+      anchor_y: bottom
+      y: 20
+    - type: text
+      text: (score)
+      style: bonus_bottom_style
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 1
+      y: 1
+      width: 126
+      height: 30
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+  bonus_meathook_slide:
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+      animations:
+        show_slide:
+          - property: opacity
+            value: 0
+            easing: out_quad
+            duration: 0.5s
+    - type: text
+      text: "MEATHOOKS: (player|meathook_bonus)"
+      style: dmd_big
+      round_anchor_x: left
+      anchor_y: bottom
+      y: 20
+    - type: text
+      text: (score)
+      style: bonus_bottom_style
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 1
+      y: 1
+      width: 126
+      height: 30
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+  bonus_combo_slide:
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+      animations:
+        show_slide:
+          - property: opacity
+            value: 0
+            easing: out_quad
+            duration: 0.5s
+    - type: text
+      text: "COMBOS: (player|combo_bonus)"
+      style: dmd_big
+      round_anchor_x: left
+      anchor_y: bottom
+      y: 20
+    - type: text
+      text: (score)
+      style: bonus_bottom_style
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 1
+      y: 1
+      width: 126
+      height: 30
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+  bonus_mode_slide:
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+      animations:
+        show_slide:
+          - property: opacity
+            value: 0
+            easing: out_quad
+            duration: 0.5s
+    - type: text
+      text: "MODES: (player|mode_bonus)"
+      style: dmd_big
+      round_anchor_x: left
+      anchor_y: bottom
+      y: 20
+    - type: text
+      text: (score)
+      style: bonus_bottom_style
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 1
+      y: 1
+      width: 126
+      height: 30
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+  bonus_subtotal_slide:
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+      animations:
+        show_slide:
+          - property: opacity
+            value: 0
+            easing: out_quad
+            duration: 0.5s
+    - type: text
+      text: BONUS
+      style: dmd_big
+      round_anchor_x: left
+      anchor_y: bottom
+      y: 20
+    - type: text
+      text: (score)
+      style: bonus_bottom_style
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 1
+      y: 1
+      width: 126
+      height: 30
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+  bonus_multiplier_slide:
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+      animations:
+        show_slide:
+          - property: opacity
+            value: 0
+            easing: out_quad
+            duration: 0.5s
+    - type: text
+      text: MULTIPLIER
+      style: dmd_big
+      round_anchor_x: left
+      anchor_y: bottom
+      y: 20
+    - type: text
+      text: (multiplier)X
+      style: bonus_bottom_style
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 1
+      y: 1
+      width: 126
+      height: 30
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
+  bonus_total_slide:
+    widgets:
+      - type: rectangle
+        color: white
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
+        width: 128
+        height: 32
+        animations:
+          show_slide:
+            - property: opacity
+              value: 0
+              easing: out_quad
+              duration: 0.5s
+      - type: text
+        text: TOTAL BONUS
+        style: dmd_big
+        round_anchor_x: left
+        anchor_y: bottom
+        y: 20
+      - type: text
+        text: (score)
+        style: bonus_bottom_style
+      - type: rectangle
+        color: black
+        anchor_x: 0
+        anchor_y: 0
+        x: 1
+        y: 1
+        width: 126
+        height: 30
+      - type: rectangle
+        color: white
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
+        width: 128
+        height: 32

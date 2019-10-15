@@ -7,6 +7,15 @@ machine_vars:
     initial_value: 3
   pop_bumper_mystery_complete_count:
     initial_value: 20
+  franklin_bonus_value:
+    initial_value: 100_000
+  meathook_bonus_value:
+    initial_value: 100_000
+  combo_bonus_value:
+    initial_value: 100_000
+  mode_bonus_value:
+    initial_value: 100_000
+
 
 player_vars:
   mask_completion_total:
@@ -81,3 +90,19 @@ player_vars:
     value_type: str
   v_sftg_enabled:
     initial_value: 0
+
+  #####################################
+  # Bonus
+  #####################################
+
+  bonus_multiplier:
+    initial_value: 2
+  franklin_bonus:
+    initial_value: 0
+  meathook_bonus:
+    initial_value: 0
+  combo_bonus:
+    initial_value: 0
+  mode_bonus:
+    initial_value: 0
+

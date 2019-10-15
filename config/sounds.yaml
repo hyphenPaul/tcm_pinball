@@ -6,7 +6,7 @@ sounds:
   intro_jazz:
     file: ffab_loop.wav
     mode_end_action: stop
-    volume: 0.5
+    volume: 0.35
   attract_dark:
     file: dark_open.wav
   open_speech:
@@ -214,3 +214,12 @@ sounds:
     file: sj_hit.wav
   meathook_hang:
     file: meathook_hang_v1audio.wav
+  bonus_sound:
+    file: bonus_short.wav
+    mode_end_action: stop
+  bonus_end:
+    file: bonus_medium.wav
+    mode_end_action: stop
+  bonus_bg:
+    file: bonus_dark_bg_v1.wav
+    mode_end_action: stop

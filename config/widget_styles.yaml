@@ -32,3 +32,11 @@ widget_styles:
     x: 0
     y: 0
     z: 20
+  bonus_bottom_style:
+    anchor_y: botton
+    y: 1
+    font_name: pinball_score
+    font_size: 22
+    number_grouping: true
+    round_anchor_x: left
+

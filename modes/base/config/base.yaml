@@ -9,7 +9,7 @@ sound_player:
     intro_jazz:
       action: play
       loops: -1
-      volume: 0.65
+      volume: 0.5
   mode_franklin_hurry_up_stopped:
     intro_jazz:
       action: play
@@ -104,6 +104,19 @@ variable_player:
     score: 100000
   magnavuk_shot_right:
     score: 2
+
+  ########################################
+  # Bonus
+  ########################################
+
+  cmd_add_meathook_bonus:
+    meathook_bonus: 1
+  cmd_add_franklin_bonus:
+    franklin_bonus: 1
+  cmd_add_combo_bonus:
+    combo_bonus: 1
+  cmd_add_mode_bonus:
+    mode_bonus: 1
 
 event_player:
   cmd_start_chainsaw_multiball:

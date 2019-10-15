@@ -9,6 +9,7 @@ event_player:
   left_ramp_hit:
     - cmd_show_meathook_hang
     - cmd_play_meathook_hang_audio
+    - cmd_add_meathook_bonus
 
 sound_player:
   cmd_play_meathook_hang_audio:

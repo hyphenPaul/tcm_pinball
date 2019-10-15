@@ -1,3 +1,15 @@
+combo_bonus_value:
+  expire: !!null 'null'
+  value: 100000
+franklin_bonus_value:
+  expire: !!null 'null'
+  value: 100000
+meathook_bonus_value:
+  expire: !!null 'null'
+  value: 100000
+mode_bonus_value:
+  expire: !!null 'null'
+  value: 100000
 player1_score:
   expire: !!null 'null'
-  value: 0
+  value: 138032

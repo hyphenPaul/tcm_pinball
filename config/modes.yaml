@@ -3,12 +3,12 @@
 modes:
   - base
   - bonus
+  - chainsaw
   - franklin
   - franklin_frenzy
   - franklin_hurry_up
   - mask
   - mask_making
-  - chainsaw
+  - meathook
   - pop_bumpers
   - save_from_the_grave
-  - meathook

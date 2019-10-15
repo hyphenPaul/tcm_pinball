@@ -33,6 +33,9 @@ event_player:
     cmd_start_franklin_hurry_up
   player_franklin_total_completions{value==3}:
     cmd_start_franklin_frenzy
+  franklin_letters_collected:
+    cmd_add_franklin_bonus
+
 
 accruals:
   franklin_completed_logic_block:
