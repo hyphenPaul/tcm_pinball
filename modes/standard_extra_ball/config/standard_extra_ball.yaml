@@ -1,0 +1,50 @@
+#config_version=5
+
+mode:
+  start_events: ball_starting
+  priority: 600
+
+event_player:
+  mode_standard_extra_ball_started{current_player.v_lit_extra_balls>0}:
+    - cmd_turn_on_extra_ball_light
+  player_v_lit_extra_balls{value>0}:
+    - cmd_turn_on_extra_ball_light
+  s_captive_ball_target_active{current_player.v_lit_extra_balls>0}:
+    - cmd_award_extra_ball
+    - cmd_play_extra_ball_award_show
+    - cmd_unlight_extra_ball
+    - cmd_turn_off_extra_ball_light
+  ball_started{is_extra_ball}:
+    - cmd_play_shoot_again_show
+
+variable_player:
+  cmd_light_extra_ball:
+    v_lit_extra_balls: 1
+  cmd_unlight_extra_ball:
+    v_lit_extra_balls:
+      int: 0
+      action: set
+  cmd_award_extra_ball:
+    extra_balls: current_player.v_lit_extra_balls
+
+show_player:
+  cmd_turn_on_extra_ball_light:
+    on:
+      show_tokens:
+        lights: super_jackpot
+  cmd_turn_off_extra_ball_light:
+    off:
+      show_tokens:
+        lights: super_jackpot
+  cmd_play_light_extra_ball_show:
+    light_extra_ball_show:
+      action: play
+      loops: 5
+  cmd_play_extra_ball_award_show:
+    award_extra_ball_show:
+      action: play
+      loops: 5
+  cmd_play_shoot_again_show:
+    shoot_again_show:
+      action: play
+      loops: 5

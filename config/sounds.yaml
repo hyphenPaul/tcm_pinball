@@ -212,6 +212,12 @@ sounds:
     file: sj_hit_2.wav
   ding_2:
     file: sj_hit.wav
+  hit1:
+    file: hit_1.wav
+  hit2:
+    file: hit_2.wav
+  hit_w_fade:
+    file: hit_w_fade.wav
   meathook_hang:
     file: meathook_hang_v1audio.wav
   bonus_sound:
@@ -221,5 +227,6 @@ sounds:
     file: bonus_medium.wav
     mode_end_action: stop
   bonus_bg:
-    file: bonus_dark_bg_v1.wav
+    file: bonus_dark_bg_v2.wav
     mode_end_action: stop
+    volume: 0.2

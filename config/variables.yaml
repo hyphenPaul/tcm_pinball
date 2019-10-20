@@ -1,14 +1,50 @@
 #config_version=5
 
 machine_vars:
+
+  #####################################
+  # Magnavuk
+  #####################################
+  
   magnavuk_auto_fire:
     initial_value: 1
+
+  #####################################
+  # Mask Making
+  #####################################
+  
   mask_completion_count_for_mask_making:
     initial_value: 3
+
+  #####################################
+  # Pop Bumpers
+  #####################################
+  
   pop_bumper_mystery_complete_count:
     initial_value: 20
+
+  #####################################
+  # Franklin
+  #####################################
+  
   franklin_bonus_value:
     initial_value: 100_000
+
+  #####################################
+  # Meathook
+  #####################################
+  
+  meathook_total_for_reward_1:
+    initial_value: 2
+  meathook_total_for_reward_2:
+    initial_value: 4
+  meathook_total_for_reward_3:
+    initial_value: 6
+
+  #####################################
+  # Bonus
+  #####################################
+  
   meathook_bonus_value:
     initial_value: 100_000
   combo_bonus_value:
@@ -18,10 +54,27 @@ machine_vars:
 
 
 player_vars:
+
+  #####################################
+  # Extra Balls
+  #####################################
+
+  v_lit_extra_balls:
+    initial_value: 0
+
+  #####################################
+  # Mask Making
+  #####################################
+
   mask_completion_total:
     initial_value: 0
   mask_making_countdown_value:
     initial_value: 10
+
+  #####################################
+  # Franklin
+  #####################################
+
   franklin_hurry_up_countdown_add_value:
     initial_value: 0
   franklin_hurry_up_countdown_value:
@@ -34,6 +87,11 @@ player_vars:
     initial_value: 0
   v_franklin_right_hit_total:
     initial_value: 0
+
+  #####################################
+  # Chainsaw Multiball
+  #####################################
+
   v_chainsaw_multiball_active:
     initial_value: 0
   v_chainsaw_c_collected:
@@ -72,6 +130,22 @@ player_vars:
     initial_value: 0
   v_space_jam_takeover_ready:
     initial_value: 0
+
+  #####################################
+  # Pop Bumpers
+  #####################################
+
+  v_pop_bumper_show_hitchhiker:
+    initial_value: -1
+  v_pop_bumper_show_leatherface:
+    initial_value: -1
+  v_pop_bumper_show_old_man:
+    initial_value: -1
+
+  #####################################
+  # Mystery
+  #####################################
+
   v_mystery_meater_count:
     initial_value: 0
   v_mystery_meater_width:
@@ -79,17 +153,26 @@ player_vars:
     value_type: float
   v_mystery_meater_complete:
     initial_value: 0
-  v_pop_bumper_show_hitchhiker:
-    initial_value: -1
-  v_pop_bumper_show_leatherface:
-    initial_value: -1
-  v_pop_bumper_show_old_man:
-    initial_value: -1
   v_current_mystery_value:
     initial_value: nothing
     value_type: str
+
+  #####################################
+  # Save From the Grave
+  #####################################
+
   v_sftg_enabled:
     initial_value: 0
+
+  #####################################
+  # Methook
+  #####################################
+  
+  v_meathook_total:
+    initial_value: 0
+  v_meathook_message:
+    initial_value: "10 LIGHTS EXTRA BALL"
+    value_type: str
 
   #####################################
   # Bonus

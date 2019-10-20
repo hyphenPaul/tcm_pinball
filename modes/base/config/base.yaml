@@ -40,8 +40,10 @@ sound_player:
   right_franklin_shot_hit: swoosh_1
   s_right_ramp_enter_active: swoosh_1
   s_top_basket_enter_active: swoosh_1
-  s_right_ramp_s_u_left_active: ding_1
-  s_right_ramp_s_u_right_active: ding_1
+  s_right_ramp_s_u_left_active: hit1
+  s_right_ramp_s_u_right_active: hit2
+  s_left_slingshot_active: hit_w_fade
+  s_right_slingshot_active: hit_w_fade
 
 slides:
   base_score_slide:

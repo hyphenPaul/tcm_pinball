@@ -3,23 +3,23 @@
 mode_settings:
   display_delay_ms: 1s
   hurry_up_delay_ms: 500
-  #end_bonus_event: bonus_last_slide_timer_complete
+  end_bonus_event: cmd_end_bonus
   bonus_entries:
     - event: cmd_franklin_bonus
       score: machine.franklin_bonus_value
-      skip_if_zero: False
+      skip_if_zero: True
       player_score_entry: franklin_bonus
     - event: cmd_meathook_bonus
       score: machine.meathook_bonus_value
-      skip_if_zero: False
+      skip_if_zero: True
       player_score_entry: meathook_bonus
     - event: cmd_combo_bonus
       score: machine.combo_bonus_value
-      skip_if_zero: False
+      skip_if_zero: True
       player_score_entry: combo_bonus
     - event: cmd_mode_bonus
       score: machine.mode_bonus_value
-      skip_if_zero: False
+      skip_if_zero: True
       player_score_entry: mode_bonus
 
 event_player:
@@ -28,6 +28,8 @@ event_player:
     - cmd_start_bg_music
   bonus_subtotal:
     - cmd_do_something_with_bonus
+  timer_bonus_last_slide_timer_complete:
+    - cmd_end_bonus
 
 slide_player:
   mode_bonus_started: bonus_start_slide
@@ -53,7 +55,7 @@ timers:
   bonus_last_slide_timer:
     start_value: 0
     end_value: 1
-    tick_interval: 3s
+    tick_interval: 3.5s
     control_events:
       - action: start
         event: bonus_total

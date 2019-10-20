@@ -1,6 +1,6 @@
 - magnavuk coils firing at the same time - after mystery meat was set up
 - disable mystery after complete
-- deactivate hook
+- deactivate hook during multiball
 - finish hook counter
 - finish the mystery activating bonuses
 - mystery meater gets harder

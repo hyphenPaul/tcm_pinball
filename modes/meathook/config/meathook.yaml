@@ -7,9 +7,21 @@ mode:
 
 event_player:
   left_ramp_hit:
-    - cmd_show_meathook_hang
     - cmd_play_meathook_hang_audio
     - cmd_add_meathook_bonus
+    - cmd_add_meathook_total
+    - cmd_give_player_award
+    - cmd_update_meathook_message
+    - cmd_show_meathook_hang
+    - cmd_check_extra_ball
+  cmd_give_player_award{current_player.v_meathook_total==machine.meathook_total_for_reward_1}:
+    - cmd_light_extra_ball
+  cmd_give_player_award{current_player.v_meathook_total==machine.meathook_total_for_reward_2}:
+    - cmd_something_else_cool
+  cmd_give_player_award{current_player.v_meathook_total==machine.meathook_total_for_reward_3}:
+    - cmd_another_thing_cool
+  slide_girl_on_a_hook_slide_removed{current_player.v_meathook_total==machine.meathook_total_for_reward_1}:
+    - cmd_play_light_extra_ball_show
 
 sound_player:
   cmd_play_meathook_hang_audio:
@@ -22,3 +34,34 @@ show_player:
     girl_on_a_hook:
       action: play
       loops: 0
+      show_tokens:
+        hook_count: (current_player.v_meathook_total)
+        message: (current_player.v_meathook_message)
+
+variable_player:
+  cmd_add_meathook_total:
+    v_meathook_total: 1
+  cmd_update_meathook_message{current_player.v_meathook_total<machine.meathook_total_for_reward_1}:
+    v_meathook_message:
+      string: 5 LIGHTS EXTRA BALL
+      action: set
+  cmd_update_meathook_message{current_player.v_meathook_total==machine.meathook_total_for_reward_1}:
+    v_meathook_message:
+      string: EXTRA BALL IS LIT!!
+      action: set
+  cmd_update_meathook_message{current_player.v_meathook_total>machine.meathook_total_for_reward_1 and current_player.v_meathook_total<machine.meathook_total_for_reward_2}:
+    v_meathook_message:
+      string: 10 DOES SOMETHING ELSE
+      action: set
+  cmd_update_meathook_message{current_player.v_meathook_total==machine.meathook_total_for_reward_2}:
+    v_meathook_message:
+      string: SOMETHING ELSE!!
+      action: set
+  cmd_update_meathook_message{current_player.v_meathook_total>machine.meathook_total_for_reward_2 and current_player.v_meathook_total<machine.meathook_total_for_reward_3}:
+    v_meathook_message:
+      string: 15 DOES ANOTHER THING
+      action: set
+  cmd_update_meathook_message{current_player.v_meathook_total==machine.meathook_total_for_reward_3}:
+    v_meathook_message:
+      string: ANOTHER THING!!
+      action: set

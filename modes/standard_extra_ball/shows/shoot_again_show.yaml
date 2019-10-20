@@ -1,0 +1,30 @@
+#show_version=5
+
+- duration: 0.1s
+  slides:
+    slide_1:
+      widgets:
+      - type: text
+        text: SHOOT AGAIN!!
+        round_anchor_x: left
+        round_anchor_y: bottom
+        style: dmd_med
+
+- duration: 0.1s
+  slides:
+    slide_1:
+      widgets:
+      - type: text
+        text: SHOOT AGAIN!!
+        round_anchor_x: left
+        round_anchor_y: bottom
+        color: black
+        style: dmd_med
+      - type: rectangle
+        color: white
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
+        width: 128
+        height: 32

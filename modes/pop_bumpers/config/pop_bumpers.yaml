@@ -258,6 +258,6 @@ sound_player:
     mystery_sound:
       action: play
       loops: 0
-  top_turbo_bumper_hit: ding_2
-  left_turbo_bumper_hit: ding_2
-  right_turbo_bumper_hit: ding_2
+  top_turbo_bumper_hit: hit_w_fade
+  left_turbo_bumper_hit: hit_w_fade
+  right_turbo_bumper_hit: hit_w_fade
