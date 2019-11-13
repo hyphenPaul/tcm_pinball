@@ -17,3 +17,11 @@ images:
     file: save_from_the_grave_v3noball.png
   saved_from_the_grave_ball:
     file: save_from_the_grave_v3ball.png
+  extra_ball_award:
+    file: extra_ball_v1.gif
+  extra_ball_lit:
+    file: extra_ball_is_lit_v3.gif
+  shoot_again:
+    file: shoot_again_v1.gif
+  help:
+    file: help_v2.gif

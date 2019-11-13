@@ -1,0 +1,54 @@
+#config_version=5
+
+mode:
+  start_events:
+    ball_starting
+  priority: 200
+
+
+shots:
+  outer_left_lane:
+    switch: s_left_outlane
+    show_tokens:
+      light: help_h
+  left_return_lane:
+    switch: s_left_return_lane
+    show_tokens:
+      light: help_e
+  right_return_lane:
+    switch: s_right_return_lane
+    show_tokens:
+      light: help_l
+  outer_right_lane:
+    switch: s_right_outlane
+    show_tokens:
+      light: help_p
+
+event_player:
+  help_lit_complete:
+    - cmd_add_multiplier
+    - cmd_play_help_show
+
+shot_groups:
+  help:
+    shots: outer_left_lane, left_return_lane, right_return_lane, outer_right_lane
+    rotate_left_events: s_left_flipper_active
+    rotate_right_events: s_right_flipper_active
+    enable_events: ball_started
+    disable_events: ball_ending
+    restart_events:
+      - mode_help_started
+      - help_lit_complete
+
+variable_player:
+  cmd_add_multiplier:
+    bonus_multiplier: 1
+
+show_player:
+  cmd_play_help_show:
+    help_show:
+      action: play
+      loops: 0
+      show_tokens:
+        multiplier: (current_player.bonus_multiplier)
+        

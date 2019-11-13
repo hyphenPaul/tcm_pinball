@@ -1,41 +1,28 @@
 #show_version=5
 
-#- duration: 3.5s
+#- duration: 100s
 #  slides:
 #    slide_1:
 #      widgets:
 #      - type: text
-#        text: 10 LIGHTS EXTRA BALL
-#        style: dmd_small
-#        round_anchor_x: left
-#        anchor_y: 0
-#        y: 1
+#        text: X
+#        font_name: pinball_score_v2
+#        font_size: 22
+#        anchor_x: left
+#        anchor_y: bottom
+#        x: 93
+#        y: 7
 #        opacity: 0
 #        animations:
 #          show_slide:
 #          - property: opacity
 #            value: 0
-#            duration: 2.1s
+#            duration: 1.2s
 #          - property: opacity
 #            value: 1
-#            duration: .3s
-#      - type: text
-#        text: 5 ON A
-#        style: dmd_small
-#        round_anchor_x: left
-#        anchor_y: 0
-#        opacity: 0
-#        y: 26
-#        animations:
-#          show_slide:
-#          - property: opacity
-#            value: 0
-#            duration: 2.1s
-#          - property: opacity
-#            value: 1
-#            duration: .3s
-#      - type: image
-#        image: meathook_hang_v4
+#            duration: 0.1s
+#      - type: image 
+#        image: help
 #        anchor_x: left
 #        anchor_y: bottom
 #        x: 0

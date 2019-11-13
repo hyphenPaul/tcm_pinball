@@ -141,13 +141,13 @@ lights:
     number: L71
   saw_target_w:
     number: L72
-  slam_s:
+  help_h:
     number: L73
-  slam_l:
+  help_e:
     number: L74
-  slam_a:
+  help_l:
     number: L75
-  slam_m:
+  help_p:
     number: L76
   lock_2:
     number: L77

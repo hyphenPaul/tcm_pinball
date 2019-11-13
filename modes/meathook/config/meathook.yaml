@@ -43,7 +43,7 @@ variable_player:
     v_meathook_total: 1
   cmd_update_meathook_message{current_player.v_meathook_total<machine.meathook_total_for_reward_1}:
     v_meathook_message:
-      string: 5 LIGHTS EXTRA BALL
+      string: 7 LIGHTS EXTRA BALL
       action: set
   cmd_update_meathook_message{current_player.v_meathook_total==machine.meathook_total_for_reward_1}:
     v_meathook_message:
@@ -51,7 +51,7 @@ variable_player:
       action: set
   cmd_update_meathook_message{current_player.v_meathook_total>machine.meathook_total_for_reward_1 and current_player.v_meathook_total<machine.meathook_total_for_reward_2}:
     v_meathook_message:
-      string: 10 DOES SOMETHING ELSE
+      string: 14 DOES SOMETHING ELSE
       action: set
   cmd_update_meathook_message{current_player.v_meathook_total==machine.meathook_total_for_reward_2}:
     v_meathook_message:
@@ -59,7 +59,7 @@ variable_player:
       action: set
   cmd_update_meathook_message{current_player.v_meathook_total>machine.meathook_total_for_reward_2 and current_player.v_meathook_total<machine.meathook_total_for_reward_3}:
     v_meathook_message:
-      string: 15 DOES ANOTHER THING
+      string: 25 DOES ANOTHER THING
       action: set
   cmd_update_meathook_message{current_player.v_meathook_total==machine.meathook_total_for_reward_3}:
     v_meathook_message:

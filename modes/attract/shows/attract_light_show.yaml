@@ -72,10 +72,10 @@
     saw_target_s: 0
     saw_target_a: 0
     saw_target_w: 0
-    slam_s: 0
-    slam_l: 0
-    slam_a: 0
-    slam_m: 0
+    help_h: 0
+    help_e: 0
+    help_l: 0
+    help_p: 0
     lock_2: 0
     sftg_grave: 0
     sftg_for_the: 0
@@ -152,10 +152,10 @@
     saw_target_s: ff
     saw_target_a: ff
     saw_target_w: ff
-    slam_s: ff
-    slam_l: ff
-    slam_a: ff
-    slam_m: ff
+    help_h: ff
+    help_e: ff
+    help_l: ff
+    help_p: ff
     lock_2: ff
     sftg_grave: ff
     sftg_for_the: ff

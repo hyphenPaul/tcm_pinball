@@ -14,7 +14,8 @@ event_player:
   logicblock_grave_save_counter_hit:
     - cmd_play_bump_show
     - cmd_play_bump_audio
-  ball_save_sftg_ball_save_saving_ball:
+  # Don't show the animation if the extra ball animation is about to play
+  ball_save_sftg_ball_save_saving_ball{current_player.v_extra_ball_animation_playing<1}:
     - cmd_play_save_show
     - cmd_play_save_audio
 

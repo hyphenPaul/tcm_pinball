@@ -230,3 +230,10 @@ sounds:
     file: bonus_dark_bg_v2.wav
     mode_end_action: stop
     volume: 0.2
+  extra_ball_award:
+    file: extra_ball_score_v1.wav
+    mode_end_action: stop
+  extra_ball_lit_sound:
+    file: extra_ball_is_lit_score_v1.wav
+  shoot_again_sound:
+    file: shoot_again_audio_v1.wav

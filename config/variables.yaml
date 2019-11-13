@@ -61,6 +61,8 @@ player_vars:
 
   v_lit_extra_balls:
     initial_value: 0
+  v_extra_ball_animation_playing:
+    initial_value: 0
 
   #####################################
   # Mask Making
@@ -179,7 +181,7 @@ player_vars:
   #####################################
 
   bonus_multiplier:
-    initial_value: 2
+    initial_value: 1
   franklin_bonus:
     initial_value: 0
   meathook_bonus:

@@ -1,4 +1,4 @@
-- magnavuk coils firing at the same time - after mystery meat was set up
+- Make sure SFTG and extra ball don't fire at the same time
 - disable mystery after complete
 - deactivate hook during multiball
 - finish hook counter
