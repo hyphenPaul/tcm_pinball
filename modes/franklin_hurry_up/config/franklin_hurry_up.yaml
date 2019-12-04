@@ -85,27 +85,6 @@ slides:
             - property: opacity
               timing: with_previous
               value: 0
-      #- type: text
-        #text: NICE SHOT
-        #style: dmd_small
-        #color: white
-        #anchor_x: left
-        #anchor_y: bottom
-        #opacity: 0
-        #y: 6
-        #x: 56
-        #animations:
-          #show_slide:
-            #- property: opacity
-              #value: 0
-          #cmd_franklin_hurry_up_completed:
-            #- property: opacity
-              #value: 1
-              #duration: 0.5s
-            #- property: opacity
-              #value: 0
-              #duration: 0.5s
-              #repeat: true
       - type: text
         text: (franklin_hurry_up_countdown_value)
         number_grouping: true

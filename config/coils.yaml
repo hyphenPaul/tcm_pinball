@@ -63,6 +63,7 @@ coils:
     number: C17
   c_ramp_diverter:
     number: C18
+    default_hold_power: 0.7
   c_flash_jump_ball:
     number: C19
   c_sawyer_house_vuk:

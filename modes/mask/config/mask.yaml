@@ -2,74 +2,92 @@
 
 mode:
   start_events:
-    ball_starting
-    cmd_enable_progressive_passive_modes
-    mode_mask_making_stopped
-    mode_franklin_hurry_up_stopped
+    - ball_starting
+    - cmd_enable_progressive_passive_modes
+    - mode_franklin_hurry_up_stopped
   stop_events:
-    cmd_disable_progressive_passive_modes__chainsaw_mode
-    logicblock_mask_total_counter_complete
-    mode_franklin_hurry_up_started
+    - cmd_disable_progressive_passive_modes__chainsaw_mode
+    - cmd_disable_mask_mode
+    - mode_franklin_hurry_up_started
   priority: 200
 
 counters:
+
+  ##################################################
+  # Mask
+  ##################################################
+
   mask_counter:
-    count_events: right_ramp_hit
+    count_events: cmd_add_mask_counter
     disable_on_complete: False
     reset_on_complete: True
     count_complete_value: 4
-  mask_total_counter:
+
+  ##################################################
+  # Mask Making
+  ##################################################
+
+  mask_making:
+    count_events: cmd_increase_mask_making_counter
     disable_on_complete: False
     reset_on_complete: True
-    count_events: logicblock_mask_counter_complete
-    count_complete_value: (machine.mask_completion_count_for_mask_making)
-    persist_state: true
+    count_complete_value: 4
 
-show_player:
-  logicblock_mask_counter_hit{count==1}:
-    on:
-      show_tokens:
-        lights: fire_f
-    mask1:
-      loops: 0
-      show_tokens:
-        mask_image: mask_m_v1_1
-  logicblock_mask_counter_hit{count==2}:
-    on:
-      show_tokens:
-        lights: fire_f, fire_i
-    mask1:
-      loops: 0
-      show_tokens:
-        mask_image: mask_a_v1_1
-  logicblock_mask_counter_hit{count==3}:
-    on:
-      show_tokens:
-        lights: fire_f, fire_i, fire_r
-    mask1:
-      loops: 0
-      show_tokens:
-        mask_image: mask_s_v1_1
-  logicblock_mask_total_counter_hit:
-    off:
-      show_tokens:
-        lights: fire_f, fire_i, fire_r, fire_e
-    flash:
-      loops: 1
-      speed: 4
-      show_tokens:
-        lights: fire_f, fire_i, fire_r, fire_e
-  logicblock_mask_total_counter_hit{count<(machine.mask_completion_count_for_mask_making)}:
-    mask1:
-      loops: 0
-      show_tokens:
-        mask_image: mask_k_v1_1
+event_player:
 
-sound_player:
-  logicblock_mask_counter_hit:
-    mask_slice:
-      action: play
-      loops: 0
+  right_ramp_hit{current_player.v_enable_mask_mania==0}:
+    - cmd_add_mask_counter
+  right_ramp_hit{current_player.v_enable_mask_mania==1}:
+    - cmd_mask_mania_hit
+
+  ##################################################
+  # Mask
+  ##################################################
+
+  counter_mask_counter_hit{count==1}:
+    - cmd_set_mask_variable_off
+    - cmd_play_mask_show_1
+    - cmd_play_slice_sound
+  counter_mask_counter_hit{count==2}:
+    - cmd_set_mask_variable_off
+    - cmd_play_mask_show_2
+    - cmd_play_slice_sound
+  counter_mask_counter_hit{count==3}:
+    - cmd_set_mask_variable_off
+    - cmd_play_mask_show_3
+    - cmd_play_slice_sound
+  logicblock_mask_counter_complete:
+    - cmd_set_mask_variable_on
+    - cmd_flash_mask_lights
+    - cmd_play_mask_show_4
+    - cmd_play_slice_sound
+  slide_mask_letter_slide_removed{current_player.v_enable_mask_making==1}:
+    - cmd_increase_mask_making_counter
+
+  ##################################################
+  # Mask Making
+  ##################################################
+
+  counter_mask_making_hit{count==1}:
+    - cmd_set_mask_mania_variable_off
+    - cmd_play_mask_making_show_1
+  counter_mask_making_hit{count==2}:
+    - cmd_set_mask_mania_variable_off
+    - cmd_play_mask_making_show_2
+  counter_mask_making_hit{count==3}:
+    - cmd_set_mask_mania_variable_off
+    - cmd_play_mask_making_show_3
+  logicblock_mask_making_complete:
+    - cmd_set_mask_mania_variable_on
+    - cmd_play_mask_making_show_4
+
+  ##################################################
+  # Mask Mania
+  ##################################################
+  
+  slide_placeholder_slide_removed{current_player.v_enable_mask_mania==1}:
+    - cmd_play_mask_mania
+    - cmd_start_mask_mania_timer
 
 variable_player:
   logicblock_mask_counter_hit{count==1}:
@@ -81,3 +99,117 @@ variable_player:
   logicblock_mask_total_counter_hit:
     score: 100000
     mask_completion_total: 1
+  cmd_set_mask_variable_off:
+    v_enable_mask_making:
+      action: set
+      int: 0
+  cmd_set_mask_variable_on:
+    v_enable_mask_making:
+      action: set
+      int: 1
+  cmd_set_mask_mania_variable_off:
+    v_enable_mask_mania:
+      action: set
+      int: 0
+  cmd_set_mask_mania_variable_on:
+    v_enable_mask_mania:
+      action: set
+      int: 1
+  timer_mask_mania_tick:
+    v_mask_mania_countdown:
+      action: set
+      int: (device.timers.mask_mania.ticks)
+
+timers:
+  mask_mania:
+    start_value: 45
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    control_events:
+      - action: start
+        event: cmd_start_mask_mania_timer
+
+show_player:
+
+  ##################################################
+  # Mask
+  ##################################################
+
+  cmd_play_mask_show_1:
+    on:
+      show_tokens:
+        lights: fire_f
+    mask1:
+      loops: 0
+      show_tokens:
+        mask_image: mask_m_v1_1
+  cmd_play_mask_show_2:
+    on:
+      show_tokens:
+        lights: fire_f, fire_i
+    mask1:
+      loops: 0
+      show_tokens:
+        mask_image: mask_a_v1_1
+  cmd_play_mask_show_3:
+    on:
+      show_tokens:
+        lights: fire_f, fire_i, fire_r
+    mask1:
+      loops: 0
+      show_tokens:
+        mask_image: mask_s_v1_1
+  cmd_play_mask_show_4:
+    mask1:
+      loops: 0
+      show_tokens:
+        mask_image: mask_k_v1_1
+  cmd_flash_mask_lights:
+    off:
+      show_tokens:
+        lights: fire_f, fire_i, fire_r, fire_e
+    flash:
+      loops: 3
+      speed: 4
+      show_tokens:
+        lights: fire_f, fire_i, fire_r, fire_e
+
+  ##################################################
+  # Mask Making
+  ##################################################
+  
+  cmd_play_mask_making_show_1:
+    mask_making:
+      loops: 0
+      show_tokens:
+        mask_image: get_a_head_v1
+  cmd_play_mask_making_show_2:
+    mask_making:
+      loops: 0
+      show_tokens:
+        mask_image: boil_it_up_v1
+  cmd_play_mask_making_show_3:
+    placeholder:
+      loops: 0
+      show_tokens:
+        copy: Mask Making 3
+  cmd_play_mask_making_show_4:
+    placeholder:
+      loops: 0
+      show_tokens:
+        copy: Mask Making 4
+
+  ##################################################
+  # Mask Mania
+  ##################################################
+
+  cmd_play_mask_mania:
+    mask_mania:
+      loops: 0
+
+sound_player:
+  cmd_play_slice_sound:
+    mask_slice:
+      action: play
+      loops: 0

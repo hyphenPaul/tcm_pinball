@@ -1,8 +1,12 @@
 #config_version=5
 
 mode:
-  start_events: ball_starting
-  #stop_events: mode_franklin_hurry_up_started mode_franklin_frenzy_started
+  start_events:
+    - ball_starting
+    - cmd_enable_meathook
+  stop_events:
+    #mode_franklin_hurry_up_started mode_franklin_frenzy_started
+    - cmd_disable_meathook
   priority: 500
 
 event_player:

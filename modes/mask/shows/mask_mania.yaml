@@ -1,11 +1,11 @@
 #show_version=5
 
-- duration: 1s
+- duration: 45s
   slides:
-    slide_1:
+    mask_mania_slide:
       widgets:
       - type: text
         round_anchor_x: left
-        text: (spelled)
+        text: (v_mask_mania_countdown)
         style: dmd_big
         font_size: 14

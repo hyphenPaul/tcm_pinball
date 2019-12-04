@@ -4,25 +4,8 @@
 #  slides:
 #    slide_1:
 #      widgets:
-#      - type: text
-#        text: X
-#        font_name: pinball_score_v2
-#        font_size: 22
-#        anchor_x: left
-#        anchor_y: bottom
-#        x: 93
-#        y: 7
-#        opacity: 0
-#        animations:
-#          show_slide:
-#          - property: opacity
-#            value: 0
-#            duration: 1.2s
-#          - property: opacity
-#            value: 1
-#            duration: 0.1s
 #      - type: image 
-#        image: help
+#        image: extra_ball_award
 #        anchor_x: left
 #        anchor_y: bottom
 #        x: 0

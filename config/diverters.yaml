@@ -1,0 +1,11 @@
+#config_version=5
+
+diverters:
+  primary_diverter:
+    activation_coil: c_ramp_diverter
+    type: hold
+    enable_events: ball_starting
+    disable_events: ball_ending
+    activate_events: cmd_activate_diverter
+    deactivate_events: cmd_deactivate_diverter
+    activation_time: 2s

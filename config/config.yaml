@@ -35,6 +35,7 @@ config:
  - ball_devices.yaml
  - autofire_coils.yaml
  - drop_targets.yaml
+ - diverters.yaml
  - lights.yaml
  - sequence_shots.yaml
  - widget_styles.yaml

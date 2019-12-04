@@ -120,7 +120,38 @@ variable_player:
   cmd_add_mode_bonus:
     mode_bonus: 1
 
+  ########################################
+  # Diverter
+  ########################################
+
+  cmd_enable_diverter:
+    v_diverter_is_active:
+      action: set
+      int: 1
+  cmd_disable_diverter:
+    v_diverter_is_active:
+      action: set
+      int: 0
+
+  ########################################
+  # Testing
+  ########################################
+  
+      #  s_left_flipper_active:
+      #    v_diverter_is_active:
+      #      action: set
+      #      int: 0
+      #  s_right_flipper_active:
+      #    v_diverter_is_active:
+      #      action: set
+      #      int: 1
+
 event_player:
+
+  ########################################
+  # Chainsaw Multiball
+  ########################################
+
   cmd_start_chainsaw_multiball:
     - cmd_disable_progressive_passive_modes__chainsaw_mode
   cmd_chainsaw_multiball_ended:
@@ -128,7 +159,21 @@ event_player:
       #  s_right_flipper_active:
       #    - cmd_get_mystery
 
+  ########################################
+  # Diverter
+  ########################################
+ 
+  s_right_ramp_exit_active{current_player.v_diverter_is_active==1}:
+    - cmd_activate_diverter
+  s_right_ramp_exit_active{current_player.v_diverter_is_active==0}:
+    - cmd_deactivate_diverter
+
 timers:
+
+  ########################################
+  # Testing
+  ########################################
+  
   my_test_timer:
     start_value: 0
     end_value: 1
