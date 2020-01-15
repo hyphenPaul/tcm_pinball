@@ -26,6 +26,10 @@ machine_vars:
     initial_value: 1
   v_mask_mania_countdown:
     initial_value: 30
+  v_mask_mania_value:
+    initial_value: 250000
+  v_mask_mania_level:
+    initial_value: 1
 
   #####################################
   # Pop Bumpers

@@ -2,10 +2,30 @@
 
 - duration: 45s
   slides:
-    mask_mania_slide:
+    mask_mania_bg:
       widgets:
       - type: text
+        text: (player|v_mask_mania_value)
+        style: dmd_small
         round_anchor_x: left
-        text: (v_mask_mania_countdown)
-        style: dmd_big
-        font_size: 14
+        anchor_y: bottom
+        y: 27
+        opacity: 0
+        animations:
+          show_slide:
+            - property: opacity
+              value: 0
+              duration: 0.2s
+            - property: opacity
+              value: 1
+              duration: 0.2s
+            - property: opacity
+              value: 1
+              duration: 0.2s
+              repeat: True
+      - type: image 
+        image: leatherface_dance_v2
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0

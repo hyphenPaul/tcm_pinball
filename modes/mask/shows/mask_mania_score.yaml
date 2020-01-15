@@ -1,0 +1,68 @@
+#show_version=5
+
+- duration: 1s
+  slides:
+    mask_mania_score_slide:
+      widgets:
+      - type: text
+        text: (player|v_mask_mania_value)
+        number_grouping: true
+        min_digits: 2
+        font_name: pinball_score
+        font_size: 22
+        round_anchor_x: left
+        anchor_x: middle
+        anchor_y: bottom
+        y: 8
+        x: 50%
+        color: white
+        animations:
+          show_slide:
+            - property: opacity
+              value: 1
+              duration: 0s
+            - property: opacity
+              value: 1
+              duration: 0.05s
+            - property: opacity
+              value: 0
+              duration: 0s
+            - property: opacity
+              value: 0
+              duration: 0.05s
+              repeat: True
+      - type: text
+        text: (player|v_mask_mania_value)
+        number_grouping: true
+        min_digits: 2
+        font_name: pinball_score
+        font_size: 22
+        round_anchor_x: left
+        anchor_x: middle
+        anchor_y: bottom
+        y: 8
+        x: 50%
+        color: black
+      - type: rectangle
+        color: white
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
+        width: 128
+        height: 32
+        animations:
+          show_slide:
+          - property: opacity
+            value: 0
+            duration: 0s
+          - property: opacity
+            value: 0
+            duration: 0.05s
+          - property: opacity
+            value: 1
+            duration: 0s
+          - property: opacity
+            value: 1
+            duration: 0.05s
+            repeat: True
