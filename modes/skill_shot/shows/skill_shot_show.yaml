@@ -1,0 +1,40 @@
+#show_version=5
+
+- duration: -1
+  slides:
+    skill_shot_big_points:
+      widgets:
+      - type: text
+        text: big_points
+        style: dmd_med
+    skill_shot_little_points:
+      widgets:
+      - type: text
+        text: little_points
+        style: dmd_med
+    skill_shot_extended_ball_save:
+      widgets:
+      - type: text
+        text: extended_ball_save
+        style: dmd_med
+    skill_shot_help:
+      widgets:
+      - type: text
+        text: help
+        style: dmd_med
+    skill_shot_light_gas_station:
+      widgets:
+      - type: text
+        text: light_gas_station
+        style: dmd_med
+    skill_shot_background:
+      widgets:
+      - type: rectangle
+        color: black
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
+        width: 128
+        height: 32
+

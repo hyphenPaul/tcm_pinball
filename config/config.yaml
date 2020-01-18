@@ -46,3 +46,4 @@ custom_code:
   - scriptlets.magnavuk.Magnavuk
   - scriptlets.magnaramp.Magnaramp
   - scriptlets.mystery.Mystery
+  - scriptlets.skill_shot.SkillShot

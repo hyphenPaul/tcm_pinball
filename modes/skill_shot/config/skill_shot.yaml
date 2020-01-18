@@ -1,0 +1,96 @@
+#config_version=5 
+
+mode:
+  start_events: ball_starting
+  stop_events: cmd_stop_skill_shot_mode
+  priority: 500
+
+event_player:
+  mode_skill_shot_started:
+    - cmd_clear_slides
+    - cmd_play_skillshot_show
+    - cmd_start_skillshot
+
+timers:
+  skill_shot_timer:
+    start_value: 0
+  skill_shot_success_timer:
+    start_value: 0
+
+show_player:
+  cmd_play_skillshot_show:
+    skill_shot_show:
+      action: play
+      loops: 0
+  cmd_stop_skillshot_show:
+    skill_shot_show:
+      action: stop
+
+slide_player:
+  cmd_clear_skill_shot_slides:
+    skill_shot_big_points:
+      action: remove
+      transition_out:
+        type: push
+        duration: 0.3s
+        direction: down
+    skill_shot_little_points:
+      action: remove
+      transition_out:
+        type: push
+        duration: 0.3s
+        direction: down
+    skill_shot_extended_ball_save:
+      action: remove
+      transition_out:
+        type: push
+        duration: 0.3s
+        direction: down
+    skill_shot_help:
+      action: remove
+      transition_out:
+        type: push
+        duration: 0.3s
+        direction: down
+    skill_shot_light_gas_station:
+      action: remove
+      transition_out:
+        type: push
+        duration: 0.3s
+        direction: down
+
+  cmd_play_skill_shot_slide_big_points:
+    skill_shot_big_points:
+      action: play
+      transition:
+        type: push
+        duration: 0.3s
+        direction: down
+  cmd_play_skill_shot_slide_little_points:
+    skill_shot_little_points:
+      action: play
+      transition:
+        type: push
+        duration: 0.3s
+        direction: down
+  cmd_play_skill_shot_slide_extended_ball_save:
+    skill_shot_extended_ball_save:
+      action: play
+      transition:
+        type: push
+        duration: 0.3s
+        direction: down
+  cmd_play_skill_shot_slide_help:
+    skill_shot_help:
+      action: play
+      transition:
+        type: push
+        duration: 0.3s
+        direction: down
+  cmd_play_skill_shot_slide_light_gas_station:
+    skill_shot_light_gas_station:
+      action: play
+      transition:
+        type: push
+        duration: 0.3s
+        direction: down
