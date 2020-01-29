@@ -18,6 +18,8 @@ event_player:
     - cmd_turn_off_extra_ball_light
   ball_started{is_extra_ball}:
     - cmd_play_shoot_again_show
+  cmd_super_skill_shot_award_extra_ball:
+    - cmd_light_extra_ball
 
 variable_player:
   cmd_light_extra_ball:

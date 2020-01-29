@@ -28,6 +28,8 @@ event_player:
   help_lit_complete:
     - cmd_add_multiplier
     - cmd_play_help_show
+  cmd_super_skill_shot_award_add_help:
+    - cmd_add_multiplier
 
 shot_groups:
   help:

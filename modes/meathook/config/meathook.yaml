@@ -2,7 +2,7 @@
 
 mode:
   start_events:
-    - ball_starting
+    - cmd_stop_skill_shot_mode
     - cmd_enable_meathook
   stop_events:
     #mode_franklin_hurry_up_started mode_franklin_frenzy_started

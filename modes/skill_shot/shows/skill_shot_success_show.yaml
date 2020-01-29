@@ -1,49 +1,7 @@
 #show_version=5
 
-- duration: -1
+- duration: 3s
   slides:
-    skill_shot_light_lock:
-      widgets:
-      - type: image
-        image: ss_light_lock_v3
-
-    skill_shot_extra_ball:
-      widgets:
-      - type: image
-        image: ss_extra_ball_v3
-
-    skill_shot_mystery_meat:
-      widgets:
-      - type: image
-        image: ss_mystery_meat_v2
-
-    skill_shot_one_million:
-      widgets:
-      - type: image
-        image: ss_1million_v3
-
-    skill_shot_ball_save:
-      widgets:
-      - type: image
-        image: ss_ball_save_v3
-
-    skill_shot_add_help:
-      widgets:
-      - type: image
-        image: ss_help_v2
-
-    skill_shot_gas_station:
-      widgets:
-      - type: image
-        image: ss_gas_station_v2
-
-    skill_shot_five_million:
-      widgets:
-      - type: image
-        image: ss_5million_v3
-
-    #--------------------------------------------------
-
     skill_shot_success_light_lock:
       widgets:
       - type: image 
@@ -91,5 +49,6 @@
         anchor_y: 0
         x: 0
         y: 0
+        opacity: 0
         width: 128
         height: 32

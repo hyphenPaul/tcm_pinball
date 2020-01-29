@@ -168,6 +168,81 @@ event_player:
   s_right_ramp_exit_active{current_player.v_diverter_is_active==0}:
     - cmd_deactivate_diverter
 
+  ########################################
+  # Playfield
+  ########################################
+
+  s_3_bank_drop_bottom_active:
+    - cmd_playfield_active
+  s_3_bank_drop_mid_active:
+    - cmd_playfield_active
+  s_3_bank_drop_top_active:
+    - cmd_playfield_active
+  s_right_ramp_enter_active:
+    - cmd_playfield_active
+  s_right_ramp_exit_active:
+    - cmd_playfield_active
+  s_captive_ball_target_active:
+    - cmd_playfield_active
+  s_top_basket_enter_active:
+    - cmd_playfield_active
+  s_top_basket_made_active:
+    - cmd_playfield_active
+  s_right_ramp_s_u_left_active:
+    - cmd_playfield_active
+  s_right_ramp_s_u_right_active:
+    - cmd_playfield_active
+  s_chain_target_c_active:
+    - cmd_playfield_active
+  s_chain_target_h_active:
+    - cmd_playfield_active
+  s_chain_target_a_active:
+    - cmd_playfield_active
+  s_chain_target_i_active:
+    - cmd_playfield_active
+  s_chain_target_n_active:
+    - cmd_playfield_active
+  s_saw_target_s_active:
+    - cmd_playfield_active
+  s_saw_target_a_active:
+    - cmd_playfield_active
+  s_saw_target_w_active:
+    - cmd_playfield_active
+  s_super_duper_jackpot_active:
+    - cmd_playfield_active
+  s_slaughter_house_target_active:
+    - cmd_playfield_active
+  s_right_orbit_top_active:
+    - cmd_playfield_active
+  s_right_orbit_bottom_active:
+    - cmd_playfield_active
+  s_jump_ball_vuk_active:
+    - cmd_playfield_active
+  s_sawyer_house_vuk_active:
+    - cmd_playfield_active
+  s_left_orbit_bottom_active:
+    - cmd_playfield_active
+  s_left_orbit_top_active:
+    - cmd_playfield_active
+  s_top_turbo_bumper_active:
+    - cmd_playfield_active
+  s_left_turbo_bumper_active:
+    - cmd_playfield_active
+  s_right_turbo_bumper_active:
+    - cmd_playfield_active
+  s_left_outlane_active:
+    - cmd_playfield_active
+  s_left_return_lane_active:
+    - cmd_playfield_active
+  s_left_slingshot_active:
+    - cmd_playfield_active
+  s_right_outlane_active:
+    - cmd_playfield_active
+  s_right_return_lane_active:
+    - cmd_playfield_active
+  s_right_slingshot_active:
+    - cmd_playfield_active
+
 timers:
 
   ########################################

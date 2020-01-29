@@ -237,3 +237,6 @@ sounds:
     file: extra_ball_is_lit_score_v1.wav
   shoot_again_sound:
     file: shoot_again_audio_v1.wav
+  skill_shot_projector_loop_sound:
+    file: projector_loop.wav
+
