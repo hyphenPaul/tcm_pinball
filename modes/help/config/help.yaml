@@ -24,10 +24,17 @@ shots:
     show_tokens:
       light: help_p
 
+sound_player:
+  cmd_play_help_background_sound:
+    help_success:
+      action: play
+      loops: 0
+
 event_player:
   help_lit_complete:
     - cmd_add_multiplier
     - cmd_play_help_show
+    - cmd_play_help_background_sound
   cmd_super_skill_shot_award_add_help:
     - cmd_add_multiplier
 

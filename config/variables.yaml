@@ -50,11 +50,11 @@ machine_vars:
   #####################################
   
   meathook_total_for_reward_1:
-    initial_value: 2
+    initial_value: 7
   meathook_total_for_reward_2:
-    initial_value: 4
+    initial_value: 14
   meathook_total_for_reward_3:
-    initial_value: 6
+    initial_value: 25
 
   #####################################
   # Bonus
@@ -206,3 +206,9 @@ player_vars:
   mode_bonus:
     initial_value: 0
 
+  #####################################
+  # Ball Save
+  #####################################
+  
+  v_initial_playfield_active_fired:
+    initial_value: 0

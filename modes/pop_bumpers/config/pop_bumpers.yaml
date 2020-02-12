@@ -21,6 +21,10 @@ event_player:
   player_v_mystery_meater_count{value==machine.pop_bumper_mystery_complete_count}:
     - cmd_mystery_meater_completed
   cmd_mystery_meater_completed:
+    - cmd_light_mystery_meat
+  cmd_super_skill_shot_award_mystery_meat:
+    - cmd_light_mystery_meat
+  cmd_light_mystery_meat:
     cmd_custom_magna_vuk_handler:
       switch_hit_evnt: cmd_get_mystery
       fire_vuk_evnt: cmd_mystery_show_complete
@@ -219,7 +223,7 @@ shows:
             height: 5
 
 show_player:
-  cmd_mystery_meater_completed:
+  cmd_light_mystery_meat:
     fast_flash:
       action: play
       show_tokens:
@@ -228,6 +232,9 @@ show_player:
   cmd_mystery_show_complete:
     fast_flash:
       action: stop
+      show_tokens:
+        lights:
+          slaughter_house
   cmd_make_family_slide_visible:
     family_show:
       action: play

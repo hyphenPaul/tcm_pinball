@@ -5,34 +5,30 @@ mode:
   priority: 100
 
 sound_player:
-  mode_base_started:
-    intro_jazz:
+  cmd_start_base_music_intro:
+    post_skillshot_sound:
       action: play
-      loops: -1
-      volume: 0.5
+      loops: 0
   mode_franklin_hurry_up_stopped:
-    intro_jazz:
+    base_bg_music:
       action: play
       loops: -1
-      volume: 0.65
   mode_franklin_frenzy_stopped:
-    intro_jazz:
+    base_bg_music:
       action: play
       loops: -1
-      volume: 0.65
   cmd_start_base_music:
-    intro_jazz:
+    base_bg_music:
       action: play
       loops: -1
-      volume: 0.65
   cmd_stop_music:
-    intro_jazz:
+    base_bg_music:
       action: stop
   cmd_main_music_volume_down:
-    intro_jazz:
+    base_bg_music:
       volume: 0.10
   cmd_main_music_volume_up:
-    intro_jazz:
+    base_bg_music:
       volume: 0.65
   s_slaughter_house_target_active: cow_moo
   cmd_magnavuk_firing: slaugherhouse_gun
@@ -44,6 +40,36 @@ sound_player:
   s_right_ramp_s_u_right_active: hit2
   s_left_slingshot_active: hit_w_fade
   s_right_slingshot_active: hit_w_fade
+  s_left_return_lane_active: inner_flipper_lane
+  s_right_return_lane_active: inner_flipper_lane
+  s_right_outlane_active: outer_flipper_lane
+  s_left_outlane_active: outer_flipper_lane
+
+show_player:
+  ball_save_player_start_saving_ball:
+    standard_ball_save:
+      loops: 0
+  ball_save_player_start_enabled:
+    on:
+      show_tokens:
+        lights: shoot_again
+  ball_save_player_start_disabled:
+    off:
+      show_tokens:
+        lights: shoot_again
+  ball_save_player_start_grace_period:
+    off:
+      show_tokens:
+        lights: shoot_again
+
+ball_saves:
+  player_start:
+    active_time: 10s
+    enable_events: cmd_playfield_initiated
+    auto_launch: yes
+    balls_to_save: 1
+    grace_period: 2s
+    eject_delay: 3s
 
 slides:
   base_score_slide:
@@ -134,6 +160,19 @@ variable_player:
       int: 0
 
   ########################################
+  # Ball Save
+  ########################################
+  
+  mode_base_started:
+    v_initial_playfield_active_fired:
+      action: set
+      int: 0
+  cmd_playfield_initiated:
+    v_initial_playfield_active_fired:
+      action: set
+      int: 1
+
+  ########################################
   # Testing
   ########################################
   
@@ -171,6 +210,9 @@ event_player:
   ########################################
   # Playfield
   ########################################
+  
+  cmd_playfield_active{current_player.v_initial_playfield_active_fired==0}:
+    - cmd_playfield_initiated
 
   s_3_bank_drop_bottom_active:
     - cmd_playfield_active

@@ -1,0 +1,10 @@
+#show_version=5
+
+- duration: 3s
+  slides:
+    standard_balls_save_slide:
+      widgets:
+      - type: text
+        round_anchor_x: left
+        text: BALL SAVED
+        style: dmd_big

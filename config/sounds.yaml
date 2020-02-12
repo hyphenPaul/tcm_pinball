@@ -6,6 +6,13 @@ sounds:
   intro_jazz:
     file: ffab_loop.wav
     mode_end_action: stop
+    volume: 0.45
+  post_skillshot_sound:
+    file: projector_stop.wav
+    volume: 0.2
+  base_bg_music:
+    file: dark_general_theme_v2.wav
+    mode_end_action: stop
     volume: 0.35
   attract_dark:
     file: dark_open.wav
@@ -239,4 +246,12 @@ sounds:
     file: shoot_again_audio_v1.wav
   skill_shot_projector_loop_sound:
     file: projector_loop.wav
+  help_success:
+    file: help_sfx_v1.wav
+  super_skill_shot_reward_sound:
+    file: ss_reward_v4.wav
+  outer_flipper_lane:
+    file: outer_drain_v1.wav
+  inner_flipper_lane:
+    file: inner_flipper_lane_v1.wav
 

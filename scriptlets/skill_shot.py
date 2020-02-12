@@ -23,17 +23,23 @@ class SkillShot(CustomCode):
         self.machine.events.add_handler('timer_skill_shot_timer_tick', self.on_skill_shot_timer_tick)
         self.machine.events.add_handler('s_skill_shot_basket_active', self.on_skill_shot_basket_active)
         self.machine.events.add_handler('cmd_playfield_active', self.on_playfield_active)
-        self.machine.events.add_handler('timer_skill_shot_success_timer_complete', self.on_skill_shot_success_timer_complete)
-        self.machine.events.add_handler('timer_skill_shot_deactivation_timer_complete', self.on_skill_shot_deactivation_timer_complete)
+        self.machine.events.add_handler(
+                'timer_skill_shot_success_timer_complete', self.on_skill_shot_success_timer_complete)
+        self.machine.events.add_handler(
+                'timer_skill_shot_deactivation_timer_complete', self.on_skill_shot_deactivation_timer_complete)
         self.machine.events.add_handler('left_ramp_hit', self.on_super_skill_shot_made)
         self.machine.events.add_handler('cmd_cancel_skill_shot', self.on_cancel_skill_shot)
 
-        # shp - remove me
-        #self.machine.events.add_handler('s_right_flipper_active', self.on_tester)
-
- #   def on_tester(self, **kwargs):
- #       self.machine.events.post('cmd_play_super_skill_shot_success')
- #       self.machine.events.post('cmd_skill_shot_show_award_extra_ball')
+    def remove_event_handlers(self):
+        self.machine.events.remove_handler_by_event('timer_skill_shot_timer_tick', self.on_skill_shot_timer_tick)
+        self.machine.events.remove_handler_by_event('s_skill_shot_basket_active', self.on_skill_shot_basket_active)
+        self.machine.events.remove_handler_by_event('cmd_playfield_active', self.on_playfield_active)
+        self.machine.events.remove_handler_by_event(
+                'timer_skill_shot_success_timer_complete', self.on_skill_shot_success_timer_complete)
+        self.machine.events.remove_handler_by_event(
+                'timer_skill_shot_deactivation_timer_complete', self.on_skill_shot_deactivation_timer_complete)
+        self.machine.events.remove_handler_by_event('left_ramp_hit', self.on_super_skill_shot_made)
+        self.machine.events.remove_handler_by_event('cmd_cancel_skill_shot', self.on_cancel_skill_shot)
 
     def on_skill_shot_timer_tick(self, **kwargs):
         self.current_choice = list(self.skill_shot_choices)[kwargs['ticks']]
@@ -42,6 +48,7 @@ class SkillShot(CustomCode):
     def on_skill_shot_basket_active(self, **kwargs):
         if self.is_shooting():
             self.machine.events.post('cmd_stop_projector_loop')
+            self.machine.events.post('cmd_light_super_skill_shot')
             self.state = self.BASKET_MADE
             self.timer.stop()
 
@@ -82,6 +89,7 @@ class SkillShot(CustomCode):
             self.machine.events.post('cmd_play_super_skill_shot_success', award=self.current_choice)
             self.machine.events.post('cmd_skill_shot_show_award_' + self.current_choice)
             self.machine.events.post('cmd_super_skill_shot_award_' + self.current_choice)
+            self.machine.events.post('cmd_play_super_skill_shot_slide_background_sound')
             self.begin_deactivation_timer()
 
     def reset(self):
@@ -107,6 +115,7 @@ class SkillShot(CustomCode):
 
     def deactivate(self):
         self.reset()
+        self.remove_event_handlers()
         self.machine.events.post('cmd_stop_projector_loop')
         self.machine.events.post('cmd_stop_skill_shot_mode')
 
@@ -117,7 +126,7 @@ class SkillShot(CustomCode):
         choices = {
             "light_lock": "Light Lock",
             "extra_ball": "Extra Ball", # written
-            "mystery_meat": "Light Mystery Meat",
+            "mystery_meat": "Light Mystery Meat", # written
             "one_million": "One Million Points", # written
             "ball_save": "+20 second Ballsave",
             "add_help": "Add Help Letter", # written

@@ -2,7 +2,7 @@
 
 mode:
   start_events: ball_starting
-  stop_events: cmd_stop_skill_shot_mode
+  stop_events: cmd_stop_skill_shot_mode ball_save_player_start_saving_ball
   priority: 500
 
 event_player:
@@ -10,6 +10,13 @@ event_player:
     - cmd_clear_slides
     - cmd_play_skillshot_show
     - cmd_start_skillshot
+    - cmd_start_skillshot_music
+
+  mode_skill_shot_stopping:
+    - cmd_stop_skillshot_music
+    - cmd_start_base_music_intro
+    - cmd_start_base_music
+    - cmd_unlight_super_skill_shot
 
   ########################################
   # Cancel Skillshot
@@ -101,6 +108,18 @@ show_player:
     skill_shot_show:
       action: play
       loops: 0
+  cmd_light_super_skill_shot:
+    fast_flash:
+      action: play
+      show_tokens:
+        lights:
+          basket_ramp_arrow
+  cmd_unlight_super_skill_shot:
+    fast_flash:
+      action: stop
+      show_tokens:
+        lights:
+          basket_ramp_arrow
 
 sound_player:
   mode_skill_shot_started:
@@ -111,6 +130,17 @@ sound_player:
   cmd_stop_projector_loop:
     skill_shot_projector_loop_sound:
       action: stop
+  cmd_start_skillshot_music:
+    intro_jazz:
+      action: play
+      loops: -1
+  cmd_stop_skillshot_music:
+    intro_jazz:
+      action: stop
+  cmd_play_super_skill_shot_slide_background_sound:
+    super_skill_shot_reward_sound:
+      action: play
+      loops: 0
 
 slide_player:
 
