@@ -1,0 +1,174 @@
+#config_version=5
+
+mode:
+  start_events: ball_starting, cmd_enable_escape_mode
+  stop_events: cmd_disable_escape_mode
+  priority: 500
+
+multiballs:
+  escape_multiball:
+    ball_count: 2
+    ball_count_type: add
+    shoot_again: 5s
+    start_events: cmd_start_escape_multiball
+
+variable_player:
+  left_light_lock_target_hit{advancing==True}:
+    v_light_lock_light_complete:
+      action: set
+      int: 1
+  right_light_lock_target_hit{advancing==True}:
+    v_light_lock_lock_complete:
+      action: set
+      int: 1
+
+event_player:
+  mode_escape_started:
+    - cmd_enable_light_lock
+    - cmd_enable_light_lock_target_group
+  light_lock_target_group_hit{current_player.v_light_lock_light_complete==1 and current_player.v_light_lock_lock_complete==0}:
+    - cmd_add_light_lock_light_widget
+    - cmd_show_light_lock_slide
+  light_lock_target_group_hit{current_player.v_light_lock_light_complete==0 and current_player.v_light_lock_lock_complete==1}:
+    - cmd_add_light_lock_lock_widget
+    - cmd_show_light_lock_slide
+  light_lock_target_group_complete:
+    # show slide
+    - cmd_add_light_lock_light_widget
+    - cmd_add_light_lock_lock_widget
+    - cmd_show_light_lock_slide
+
+    # disable targets
+    - cmd_disable_light_lock_targets
+    - cmd_disable_light_lock_target_group
+    - cmd_reset_light_lock_targets
+    - cmd_reset_light_lock_target_group
+
+    # light lock
+    - cmd_light_lock
+  cmd_light_lock:
+    cmd_custom_magna_vuk_handler:
+      switch_hit_evnt: cmd_play_ball_lock
+      fire_vuk_evnt: cmd_fire_ball_from_vuk
+      coil_direction: left
+
+  cmd_ball_locked_1_show_complete:
+    - cmd_fire_ball_from_vuk
+  cmd_play_ball_lock:
+    - cmd_play_ball_lock_show
+    - cmd_play_ball_lock_audio
+    
+sound_player:
+  cmd_play_ball_lock_audio: ball_lock_audio
+
+
+shot_profiles:
+  light_lock_target:
+    states:
+      - name: unlit
+        show: off
+      - name: lit
+        show: on
+
+shots:
+  left_light_lock_target:
+    switches: s_right_ramp_s_u_left
+    profile: light_lock_target
+    show_tokens:
+      lights: target_2
+    reset_events: cmd_reset_light_lock_targets
+    disable_events: cmd_disable_light_lock_targets
+    enable_events: cmd_enable_light_lock
+  right_light_lock_target:
+    switches: s_right_ramp_s_u_right
+    profile: light_lock_target
+    show_tokens:
+      lights: target_3
+    reset_events: cmd_reset_light_lock_targets
+    disable_events: cmd_disable_light_lock_targets
+    enable_events: cmd_enable_light_lock
+
+
+shot_groups:
+  light_lock_target_group:
+    shots: left_light_lock_target, right_light_lock_target
+    enable_events: cmd_enable_light_lock_target_group
+    reset_events: cmd_reset_light_lock_target_group
+    disable_events: cmd_disable_light_lock_target_group
+
+###################################################
+# Graphics
+###################################################
+
+animations:
+  flicker_lock:
+    - property: opacity
+      value: 0
+      duration: 0.2s
+    - property: opacity
+      value: 1
+      duration: 0.2s
+    - property: opacity
+      value: 0
+      duration: 0.2s
+    - property: opacity
+      value: 1
+      duration: 0.2s
+    - property: opacity
+      value: 0
+      duration: 0.2s
+    - property: opacity
+      value: 1
+      duration: 0.2s
+
+slide_player:
+  cmd_show_light_lock_slide:
+    light_lock_base_slide:
+      expire: 2s
+
+slides:
+  light_lock_base_slide:
+    widgets:
+    - type: image
+      image: light_lock_bg_v1
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+
+widgets:
+  light_lock_light_widget:
+    - type: image
+      image: light_v1
+      anchor_x: left
+      anchor_y: bottom
+      y: 0
+      x: 0
+      z: 10
+      animations:
+        show_slide: flicker_lock
+  light_lock_lock_widget:
+    - type: image
+      image: lock_v1
+      anchor_x: left
+      anchor_y: bottom
+      y: 0
+      x: 0
+      z: 10
+      animations:
+        show_slide: flicker_lock
+
+widget_player:
+  cmd_add_light_lock_light_widget:
+    light_lock_light_widget:
+      slide: light_lock_base_slide
+  cmd_add_light_lock_lock_widget:
+    light_lock_lock_widget:
+      slide: light_lock_base_slide
+
+show_player:
+  cmd_play_ball_lock_show:
+    ball_locked_1_show:
+      action: play
+      loops: 0
+      events_when_completed: cmd_ball_locked_1_show_complete

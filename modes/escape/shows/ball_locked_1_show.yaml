@@ -1,0 +1,12 @@
+#show_version=5
+
+- duration: 3.6s
+  slides:
+    ball_locked_slide:
+      widgets:
+      - type: image
+        image: ball_1_locked_v1
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0

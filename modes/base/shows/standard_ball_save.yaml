@@ -1,10 +1,12 @@
 #show_version=5
 
-- duration: 3s
+- duration: 3.1s
   slides:
     standard_balls_save_slide:
       widgets:
-      - type: text
-        round_anchor_x: left
-        text: BALL SAVED
-        style: dmd_big
+      - type: image
+        image: keep_shooting_v3
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0

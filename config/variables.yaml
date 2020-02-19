@@ -212,3 +212,16 @@ player_vars:
   
   v_initial_playfield_active_fired:
     initial_value: 0
+
+  #####################################
+  # Escape Multiball
+  #####################################
+
+  v_escape_left_is_lit:
+    initial_value: 0
+  v_escape_right_is_lit:
+    initial_value: 0
+  v_light_lock_light_complete:
+    initial_value: 0
+  v_light_lock_lock_complete:
+    initial_value: 0

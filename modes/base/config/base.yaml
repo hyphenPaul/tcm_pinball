@@ -44,6 +44,7 @@ sound_player:
   s_right_return_lane_active: inner_flipper_lane
   s_right_outlane_active: outer_flipper_lane
   s_left_outlane_active: outer_flipper_lane
+  ball_save_player_start_saving_ball: keep_shooting_v3_audio
 
 show_player:
   ball_save_player_start_saving_ball:
@@ -69,7 +70,7 @@ ball_saves:
     auto_launch: yes
     balls_to_save: 1
     grace_period: 2s
-    eject_delay: 3s
+    eject_delay: 3.2s
 
 slides:
   base_score_slide:
