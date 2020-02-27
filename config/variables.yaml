@@ -225,3 +225,5 @@ player_vars:
     initial_value: 0
   v_light_lock_lock_complete:
     initial_value: 0
+  v_balls_locked_count:
+    initial_value: 0
