@@ -227,3 +227,17 @@ player_vars:
     initial_value: 0
   v_balls_locked_count:
     initial_value: 0
+  v_escape_multiball_active:
+    initial_value: 0
+  v_escape_jackpot_captive_ball_collected:
+    initial_value: 0
+  v_escape_jackpot_left_ramp_collected:
+    initial_value: 0
+  v_escape_jackpot_left_orbit_collected:
+    initial_value: 0
+  v_escape_jackpot_right_ramp_collected:
+    initial_value: 0
+  v_escape_jackpot_slaughter_house_collected:
+    initial_value: 0
+  v_escape_jackpot_right_orbit_collected:
+    initial_value: 0
