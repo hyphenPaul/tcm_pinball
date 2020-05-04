@@ -1,35 +1,19 @@
 #config_version=5
 
 mode:
-  #start_events: timer_my_test_timer_complete
-  start_events: cmd_start_franklin_hurry_up
-  stop_events: timer_franklin_hurry_up_timer_complete timer_franklin_hurry_up_collected_timer_complete
+  start_events:
+    - cmd_start_mode_franklin_hurry_up
+  stop_events:
+    - cmd_stop_mode_franklin_hurry_up
   priority: 400
+
+##################################################
+# Events and Variables
+##################################################
 
 event_player:
   right_ramp_hit:
     - cmd_franklin_hurry_up_completed
-
-sound_player:
-  mode_franklin_hurry_up_started:
-    franklin_hurry_up:
-      action: play
-      priority: 100
-      loops: -1
-      volume: 0.45
-  timer_franklin_hurry_up_timer_complete.1:
-    franklin_hurry_up:
-      action: stop
-      priority: 110
-  cmd_franklin_hurry_up_completed:
-    franklin_hurry_up:
-      action: stop
-      priority: 120
-  cmd_franklin_hurry_up_completed.1:
-    franklin_hurry_up_finish:
-      action: play
-      priority: 130
-      volume: 0.45
 
 variable_player:
 
@@ -59,6 +43,52 @@ variable_player:
   cmd_franklin_hurry_up_completed:
     score: current_player.franklin_hurry_up_countdown_value * 1
 
+##################################################
+# Logicblocks
+##################################################
+
+timers:
+  franklin_hurry_up_timer:
+    start_value: 250
+    end_value: 5
+    tick_interval: 100ms
+    direction: down
+    start_running: True
+    control_events:
+      - action: stop
+        event: cmd_franklin_hurry_up_completed
+  franklin_hurry_up_collected_timer:
+    start_value: 0
+    end_value: 10
+    tick_interval: 0.3s
+    control_events:
+      - action: start
+        event: cmd_franklin_hurry_up_completed
+
+##################################################
+# Sound / Visual
+##################################################
+
+sound_player:
+  mode_franklin_hurry_up_started:
+    franklin_hurry_up:
+      action: play
+      priority: 100
+      loops: -1
+      volume: 0.45
+  timer_franklin_hurry_up_timer_complete.1:
+    franklin_hurry_up:
+      action: stop
+      priority: 110
+  cmd_franklin_hurry_up_completed:
+    franklin_hurry_up:
+      action: stop
+      priority: 120
+  cmd_franklin_hurry_up_completed.1:
+    franklin_hurry_up_finish:
+      action: play
+      priority: 130
+      volume: 0.45
 slides:
   franklin_hurry_up_slide:
     widgets:
@@ -117,21 +147,3 @@ slide_player:
     franklin_hurry_up_slide:
       priority: 300
       expire: 250
-
-timers:
-  franklin_hurry_up_timer:
-    start_value: 250
-    end_value: 5
-    tick_interval: 100ms
-    direction: down
-    start_running: True
-    control_events:
-      - action: stop
-        event: cmd_franklin_hurry_up_completed
-  franklin_hurry_up_collected_timer:
-    start_value: 0
-    end_value: 10
-    tick_interval: 0.3s
-    control_events:
-      - action: start
-        event: cmd_franklin_hurry_up_completed

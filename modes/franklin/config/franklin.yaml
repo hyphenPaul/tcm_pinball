@@ -4,38 +4,66 @@
 
 mode:
   start_events:
-    ball_starting
-    cmd_enable_progressive_passive_modes
-    mode_franklin_hurry_up_stopped
-    mode_franklin_frenzy_stopped
+    - cmd_start_mode_franklin
   stop_events:
-    cmd_disable_progressive_passive_modes__chainsaw_mode
-    mode_franklin_hurry_up_started
-    mode_franklin_frenzy_started
+    - cmd_stop_mode_franklin
   priority: 250
 
-counters:
-  left_franklin_counter:
-    count_events: left_franklin_shot_hit
-    disable_on_complete: True
-    reset_on_complete: False
-    count_complete_value: 4
-    restart_events: franklin_letters_collected
-  right_franklin_counter:
-    count_events: right_franklin_shot_hit
-    disable_on_complete: True
-    reset_on_complete: False
-    count_complete_value: 4
-    restart_events: franklin_letters_collected
+##################################################
+# Events and Variables
+##################################################
 
 event_player:
   player_franklin_total_completions{value>0 and value<3}:
-    cmd_start_franklin_hurry_up
+    - cmd_start_franklin_hurry_up
   player_franklin_total_completions{value==3}:
-    cmd_start_franklin_frenzy
+    - cmd_start_franklin_frenzy
   franklin_letters_collected:
-    cmd_add_franklin_bonus
+    - cmd_add_franklin_bonus
+  mode_franklin_started:
+    - cmd_update_shots
 
+variable_player:
+  # reset
+
+  franklin_letters_collected.100:
+    franklin_total_completions: 1
+    v_franklin_left_hit_total:
+      action: set
+      int: 0
+    v_franklin_right_hit_total:
+      action: set
+      int: 0
+
+  # counter hits
+
+  logicblock_left_franklin_counter_hit.25:
+    v_franklin_left_hit_total: 1
+  logicblock_right_franklin_counter_hit.25:
+    v_franklin_right_hit_total: 1
+
+  # scoring
+
+  logicblock_left_franklin_counter_hit{count==1}:
+    score: 25000
+  logicblock_left_franklin_counter_hit{count==2}:
+    score: 35000
+  logicblock_left_franklin_counter_hit{count==3}:
+    score: 50000
+  logicblock_left_franklin_counter_hit{count==4}:
+    score: 100000
+  logicblock_right_franklin_counter_hit{count==1}:
+    score: 25000
+  logicblock_right_franklin_counter_hit{count==2}:
+    score: 35000
+  logicblock_right_franklin_counter_hit{count==3}:
+    score: 50000
+  logicblock_right_franklin_counter_hit{count==4}:
+    score: 100000
+
+##################################################
+# Logicblocks
+##################################################
 
 accruals:
   franklin_completed_logic_block:
@@ -47,6 +75,27 @@ accruals:
       #- right_franklin_shot_hit
     events_when_complete: franklin_letters_collected
     restart_events: franklin_letters_collected
+    persist_state: True
+
+counters:
+  left_franklin_counter:
+    count_events: left_franklin_shot_hit
+    disable_on_complete: True
+    reset_on_complete: False
+    count_complete_value: 4
+    restart_events: franklin_letters_collected
+    persist_state: True
+  right_franklin_counter:
+    count_events: right_franklin_shot_hit
+    disable_on_complete: True
+    reset_on_complete: False
+    count_complete_value: 4
+    restart_events: franklin_letters_collected
+    persist_state: True
+
+##################################################
+# Shots
+##################################################
 
 shot_profiles:
   left_franklin_profile:
@@ -95,14 +144,16 @@ shots:
     hit_events: left_orbit_hit
     profile: left_franklin_profile
     reset_events:
-      - mode_franklin_started
       - franklin_letters_collected
   right_franklin_shot:
     hit_events: right_orbit_hit
     profile: right_franklin_profile
     reset_events:
-      - mode_franklin_started
       - franklin_letters_collected
+
+##################################################
+# Sound / Visual
+##################################################
 
 sound_player:
   logicblock_right_franklin_counter_hit.5:
@@ -113,52 +164,6 @@ sound_player:
     franklin_cmon:
       action: play
       loops: 0
-
-variable_player:
-  # reset
-
-  mode_franklin_started:
-    v_franklin_left_hit_total:
-      action: set
-      int: 0
-    v_franklin_right_hit_total:
-      action: set
-      int: 0
-
-  franklin_letters_collected.100:
-    franklin_total_completions: 1
-    v_franklin_left_hit_total:
-      action: set
-      int: 0
-    v_franklin_right_hit_total:
-      action: set
-      int: 0
-
-  # counter hits
-
-  logicblock_left_franklin_counter_hit.25:
-    v_franklin_left_hit_total: 1
-  logicblock_right_franklin_counter_hit.25:
-    v_franklin_right_hit_total: 1
-
-  # scoring
-
-  logicblock_left_franklin_counter_hit{count==1}:
-    score: 25000
-  logicblock_left_franklin_counter_hit{count==2}:
-    score: 35000
-  logicblock_left_franklin_counter_hit{count==3}:
-    score: 50000
-  logicblock_left_franklin_counter_hit{count==4}:
-    score: 100000
-  logicblock_right_franklin_counter_hit{count==1}:
-    score: 25000
-  logicblock_right_franklin_counter_hit{count==2}:
-    score: 35000
-  logicblock_right_franklin_counter_hit{count==3}:
-    score: 50000
-  logicblock_right_franklin_counter_hit{count==4}:
-    score: 100000
 
 slides:
   franklin_base_slide:

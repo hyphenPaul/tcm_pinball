@@ -4,9 +4,3 @@ show_player:
   #mode_attract_started: test_loop
   mode_attract_started: attract_display_loop
   mode_attract_started.1: attract_light_show
-
-sound_player:
-  mode_attract_started:
-    attract_dark:
-      action: play
-      loops: -1

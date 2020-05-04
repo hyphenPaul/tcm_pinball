@@ -1,50 +1,11 @@
 #config_version=5
 
 mode:
-  start_events: ball_starting
+  start_events:
+    - cmd_start_mode_base
+  stop_events:
+    - cmd_stop_mode_base
   priority: 100
-
-sound_player:
-  cmd_start_base_music_intro:
-    post_skillshot_sound:
-      action: play
-      loops: 0
-  mode_franklin_hurry_up_stopped:
-    base_bg_music:
-      action: play
-      loops: -1
-  mode_franklin_frenzy_stopped:
-    base_bg_music:
-      action: play
-      loops: -1
-  cmd_start_base_music:
-    base_bg_music:
-      action: play
-      loops: -1
-  cmd_stop_music:
-    base_bg_music:
-      action: stop
-  cmd_main_music_volume_down:
-    base_bg_music:
-      volume: 0.10
-  cmd_main_music_volume_up:
-    base_bg_music:
-      volume: 0.65
-  s_slaughter_house_target_active: cow_moo
-  cmd_magnavuk_firing: slaugherhouse_gun
-  left_franklin_shot_hit: swoosh_1
-  right_franklin_shot_hit: swoosh_1
-  s_right_ramp_enter_active: swoosh_1
-  s_top_basket_enter_active: swoosh_1
-  s_right_ramp_s_u_left_active: hit1
-  s_right_ramp_s_u_right_active: hit2
-  s_left_slingshot_active: hit_w_fade
-  s_right_slingshot_active: hit_w_fade
-  s_left_return_lane_active: inner_flipper_lane
-  s_right_return_lane_active: inner_flipper_lane
-  s_right_outlane_active: outer_flipper_lane
-  s_left_outlane_active: outer_flipper_lane
-  ball_save_player_start_saving_ball: keep_shooting_v3_audio
 
 show_player:
   ball_save_player_start_saving_ball:
@@ -196,8 +157,6 @@ event_player:
     - cmd_disable_progressive_passive_modes__chainsaw_mode
   cmd_chainsaw_multiball_ended:
     - cmd_enable_progressive_passive_modes
-      #  s_right_flipper_active:
-      #    - cmd_get_mystery
 
   ########################################
   # Diverter
@@ -286,12 +245,21 @@ event_player:
   s_right_slingshot_active:
     - cmd_playfield_active
 
+
+  ########################################
+  # Testing
+  ########################################
+  s_right_flipper_active:
+    - cmd_test_flipper_right
+  s_left_flipper_active:
+    - cmd_test_flipper_left
+
 timers:
 
   ########################################
   # Testing
   ########################################
-  
+
   my_test_timer:
     start_value: 0
     end_value: 1

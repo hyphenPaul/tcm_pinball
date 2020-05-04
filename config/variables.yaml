@@ -180,6 +180,8 @@ player_vars:
 
   v_sftg_enabled:
     initial_value: 0
+  v_grave_save_counter_count:
+    initial_value: 0
 
   #####################################
   # Methook

@@ -117,7 +117,7 @@ class SkillShot(CustomCode):
         self.reset()
         self.remove_event_handlers()
         self.machine.events.post('cmd_stop_projector_loop')
-        self.machine.events.post('cmd_stop_skill_shot_mode')
+        self.machine.events.post('cmd_skill_shot_complete')
 
     def show_slide(self):
         self.machine.events.post('cmd_play_skill_shot_slide_' + self.current_choice)

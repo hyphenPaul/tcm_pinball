@@ -1,8 +1,10 @@
 #config_version=5 
 
 mode:
-  start_events: ball_starting
-  stop_events: cmd_stop_skill_shot_mode ball_save_player_start_saving_ball
+  start_events:
+    - cmd_start_mode_skill_shot
+  stop_events:
+    - cmd_stop_mode_skill_shot
   priority: 500
 
 event_player:
@@ -10,12 +12,8 @@ event_player:
     - cmd_clear_slides
     - cmd_play_skillshot_show
     - cmd_start_skillshot
-    - cmd_start_skillshot_music
 
   mode_skill_shot_stopping:
-    - cmd_stop_skillshot_music
-    - cmd_start_base_music_intro
-    - cmd_start_base_music
     - cmd_unlight_super_skill_shot
 
   ########################################
@@ -122,21 +120,6 @@ show_player:
           basket_ramp_arrow
 
 sound_player:
-  mode_skill_shot_started:
-    skill_shot_projector_loop_sound:
-      action: play
-      loops: -1
-      volume: 0.2
-  cmd_stop_projector_loop:
-    skill_shot_projector_loop_sound:
-      action: stop
-  cmd_start_skillshot_music:
-    intro_jazz:
-      action: play
-      loops: -1
-  cmd_stop_skillshot_music:
-    intro_jazz:
-      action: stop
   cmd_play_super_skill_shot_slide_background_sound:
     super_skill_shot_reward_sound:
       action: play

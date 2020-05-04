@@ -1,15 +1,23 @@
 #config_version=5
+#check if it's enabled
 
 mode:
-  start_events: ball_starting
-  #stop_events: mode_franklin_hurry_up_started mode_franklin_frenzy_started
+  start_events:
+    - cmd_start_mode_chainsaw
+  stop_events:
+    - cmd_stop_mode_chainsaw
   priority: 500
+
+##################################################
+# Events and Variables
+##################################################
 
 event_player:
   mode_chainsaw_started:
     - cmd_reset_chainsaw_progression_slide
     - cmd_reset_letter_animation_timer
   mode_chainsaw_started{current_player.v_chainsaw_all_collected==1}:
+    - cmd_reset_bh_sawyer_house
     - cmd_light_multiball
   mode_chainsaw_started{current_player.v_cs_multiball_completion_counter_count==0}:
     - cmd_enable_c_shot
@@ -45,10 +53,12 @@ event_player:
   ball_hold_bh_sawyer_house_full:
     - cmd_unset_chainsaw_all_collected
     - cmd_stop_music
-  ball_hold_bh_sawyer_house_full{current_player.v_space_jam_takeover_ready==0}:
+  ball_hold_bh_sawyer_house_full.1{current_player.v_space_jam_takeover_ready==0}:
+    - cmd_chainsaw_multi_ball_triggered
     - cmd_start_chainsaw_multiball_intro
     - cmd_start_chainsaw_multiball_start_timer
-  ball_hold_bh_sawyer_house_full{current_player.v_space_jam_takeover_ready==1}:
+  ball_hold_bh_sawyer_house_full.2{current_player.v_space_jam_takeover_ready==1}:
+    - cmd_chainsaw_multi_ball_triggered
     - cmd_start_space_jam_takeover_multiball_intro
     - cmd_start_space_jam_takeover_multiball_start_timer
   timer_chainsaw_multiball_start_timer_complete:
@@ -363,6 +373,10 @@ variable_player:
       action: set
       int: 0
 
+##################################################
+# Logicblocks
+##################################################
+
 accruals:
   collect_jackpots_accrual:
     events:
@@ -376,6 +390,143 @@ accruals:
       - cmd_start_super_jackpot_timer
     reset_on_complete: True
     disable_on_complete: False
+
+# animation hack
+timers:
+  chain_c_animation_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 0.1s
+    control_events:
+      - action: start
+        event: cmd_play_chain_c_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
+  chain_h_animation_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 0.1s
+    control_events:
+      - action: start
+        event: cmd_play_chain_h_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
+  chain_a_animation_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 0.1s
+    control_events:
+      - action: start
+        event: cmd_play_chain_a_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
+  chain_i_animation_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 0.1s
+    control_events:
+      - action: start
+        event: cmd_play_chain_i_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
+  chain_n_animation_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 0.1s
+    control_events:
+      - action: start
+        event: cmd_play_chain_n_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
+  saw_s_animation_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 0.1s
+    control_events:
+      - action: start
+        event: cmd_play_saw_s_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
+  saw_a_animation_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 0.1s
+    control_events:
+      - action: start
+        event: cmd_play_saw_a_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
+  saw_w_animation_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 0.1s
+    control_events:
+      - action: start
+        event: cmd_play_saw_w_activated
+      - action: reset
+        event: cmd_reset_letter_animation_timer
+  shoot_the_gas_station_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 0.5s
+    control_events:
+      - event: cmd_start_shoot_the_gas_station_timer
+        action: start
+  chainsaw_multiball_start_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 11s
+    control_events:
+      - event: cmd_start_chainsaw_multiball_start_timer
+        action: start
+      - event: timer_chainsaw_multiball_start_timer_complete
+        action: reset
+      - event: timer_space_jam_takeover_start_timer_complete
+        action: reset
+  space_jam_takeover_start_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 16s
+    control_events:
+      - event: cmd_start_space_jam_takeover_multiball_start_timer
+        action: start
+      - event: timer_chainsaw_multiball_start_timer_complete
+        action: reset
+      - event: timer_space_jam_takeover_start_timer_complete
+        action: reset
+  start_super_jackpot_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 3s
+    control_events:
+      - event: cmd_start_super_jackpot_timer
+        action: start
+      - event: timer_start_super_jackpot_timer_complete
+        action: reset
+
+##################################################
+# Devices
+##################################################
+
+multiballs:
+  mb_chainsaw_multiball:
+    ball_count: 2
+    ball_count_type: add
+    shoot_again: 5s
+    start_events: cmd_start_chainsaw_multiball
+
+ball_holds:
+  bh_sawyer_house:
+    balls_to_hold: 1
+    hold_devices: bd_sawyer_house
+    reset_events: cmd_reset_bh_sawyer_house
+    enable_events: cmd_light_multiball
+    disable_events: cmd_disable_sawyer_ball_hold
+    release_all_events: cmd_release_sawyer_ball
+
+##################################################
+# Shots
+##################################################
 
 shots:
   # target shots
@@ -462,20 +613,9 @@ shot_groups:
     reset_events:
       cmd_reset_chainsaw_shot_group
 
-multiballs:
-  mb_chainsaw_multiball:
-    ball_count: 2
-    ball_count_type: add
-    shoot_again: 5s
-    start_events: cmd_start_chainsaw_multiball
-
-ball_holds:
-  bh_sawyer_house:
-    balls_to_hold: 1
-    hold_devices: bd_sawyer_house
-    enable_events: cmd_light_multiball
-    disable_events: cmd_disable_sawyer_ball_hold
-    release_all_events: cmd_release_sawyer_ball
+##################################################
+# Sound / Visual
+##################################################
 
 sound_player:
   cmd_play_rumble_sound: chainsaw_false_start
@@ -549,7 +689,7 @@ light_player:
     right_orbit_arrow: 0
 
 show_player:
-  cmd_light_multiball:
+  cmd_light_multiball.100:
     fast_flash:
       action: play
       show_tokens:
@@ -788,118 +928,6 @@ animations:
       value: 1
       duration: 0.1
 
-# animation hack
-timers:
-  chain_c_animation_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 0.1s
-    control_events:
-      - action: start
-        event: cmd_play_chain_c_activated
-      - action: reset
-        event: cmd_reset_letter_animation_timer
-  chain_h_animation_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 0.1s
-    control_events:
-      - action: start
-        event: cmd_play_chain_h_activated
-      - action: reset
-        event: cmd_reset_letter_animation_timer
-  chain_a_animation_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 0.1s
-    control_events:
-      - action: start
-        event: cmd_play_chain_a_activated
-      - action: reset
-        event: cmd_reset_letter_animation_timer
-  chain_i_animation_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 0.1s
-    control_events:
-      - action: start
-        event: cmd_play_chain_i_activated
-      - action: reset
-        event: cmd_reset_letter_animation_timer
-  chain_n_animation_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 0.1s
-    control_events:
-      - action: start
-        event: cmd_play_chain_n_activated
-      - action: reset
-        event: cmd_reset_letter_animation_timer
-  saw_s_animation_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 0.1s
-    control_events:
-      - action: start
-        event: cmd_play_saw_s_activated
-      - action: reset
-        event: cmd_reset_letter_animation_timer
-  saw_a_animation_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 0.1s
-    control_events:
-      - action: start
-        event: cmd_play_saw_a_activated
-      - action: reset
-        event: cmd_reset_letter_animation_timer
-  saw_w_animation_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 0.1s
-    control_events:
-      - action: start
-        event: cmd_play_saw_w_activated
-      - action: reset
-        event: cmd_reset_letter_animation_timer
-  shoot_the_gas_station_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 0.5s
-    control_events:
-      - event: cmd_start_shoot_the_gas_station_timer
-        action: start
-  chainsaw_multiball_start_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 11s
-    control_events:
-      - event: cmd_start_chainsaw_multiball_start_timer
-        action: start
-      - event: timer_chainsaw_multiball_start_timer_complete
-        action: reset
-      - event: timer_space_jam_takeover_start_timer_complete
-        action: reset
-  space_jam_takeover_start_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 16s
-    control_events:
-      - event: cmd_start_space_jam_takeover_multiball_start_timer
-        action: start
-      - event: timer_chainsaw_multiball_start_timer_complete
-        action: reset
-      - event: timer_space_jam_takeover_start_timer_complete
-        action: reset
-  start_super_jackpot_timer:
-    start_value: 0
-    end_value: 1
-    tick_interval: 3s
-    control_events:
-      - event: cmd_start_super_jackpot_timer
-        action: start
-      - event: timer_start_super_jackpot_timer_complete
-        action: reset
 
 widgets:
   chain_c_background:

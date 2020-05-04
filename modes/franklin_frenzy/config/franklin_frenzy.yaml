@@ -1,16 +1,36 @@
 #config_version=5
 
 mode:
-  #start_events: timer_my_test_timer_complete
-  start_events: cmd_start_franklin_frenzy
-  stop_events: timer_franklin_frenzy_timer_complete
+  start_events:
+    - cmd_start_mode_franklin_frenzy
+  stop_events:
+    - cmd_stop_mode_franklin_frenzy
   priority: 300
+
+##################################################
+# Events and Variables
+##################################################
 
 variable_player:
   mode_franklin_frenzy_started:
     franklin_total_completions:
       action: set
       int: 0
+
+##################################################
+# Logicblocks
+##################################################
+
+timers:
+  franklin_frenzy_timer:
+    start_value: 0
+    end_value: 45
+    tick_interval: 1s
+    start_running: True
+
+##################################################
+# Sound / Visual
+##################################################
 
 widgets:
   jumping_franklin_widget_left:
@@ -61,13 +81,6 @@ widget_player:
       slide: base_score_slide
       widget_settings:
         expire: 1s
-
-timers:
-  franklin_frenzy_timer:
-    start_value: 0
-    end_value: 45
-    tick_interval: 1s
-    start_running: True
 
 slides:
   franklin_frenzy_slide:

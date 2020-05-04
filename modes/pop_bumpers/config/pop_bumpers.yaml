@@ -1,7 +1,10 @@
 #config_version=5 
 
 mode:
-  start_events: ball_starting
+  start_events:
+    - cmd_start_mode_pop_bumpers
+  stop_events:
+    - cmd_stop_mode_pop_bumpers
   #stop_events: mode_franklin_hurry_up_started mode_franklin_frenzy_started
   priority: 500
 

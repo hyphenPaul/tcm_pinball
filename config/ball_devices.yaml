@@ -16,3 +16,5 @@ ball_devices:
   bd_sawyer_house:
     ball_switches: s_sawyer_house_vuk
     eject_coil: c_sawyer_house_vuk
+    eject_targets: playfield
+    eject_timeouts: 500ms

@@ -2,11 +2,9 @@
 
 mode:
   start_events:
-    - cmd_stop_skill_shot_mode
-    - cmd_enable_meathook
+    - cmd_start_mode_meathook
   stop_events:
-    #mode_franklin_hurry_up_started mode_franklin_frenzy_started
-    - cmd_disable_meathook
+    - cmd_stop_mode_meathook
   priority: 500
 
 event_player:

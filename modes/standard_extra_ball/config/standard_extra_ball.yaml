@@ -1,7 +1,10 @@
 #config_version=5
 
 mode:
-  start_events: ball_starting
+  start_events:
+    - cmd_start_mode_standard_extra_ball
+  stop_events:
+    - cmd_stop_mode_standard_extra_ball
   priority: 1000
 
 event_player:

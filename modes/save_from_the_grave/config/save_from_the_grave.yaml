@@ -1,23 +1,124 @@
-#config_version=5 
+#config_version=5
 
 mode:
-  start_events: ball_starting
+  start_events:
+    - cmd_start_mode_save_from_the_grave
+  stop_events:
+    - cmd_stop_mode_save_from_the_grave
   priority: 500
 
+##################################################
+# Events and Variables
+##################################################
+
 event_player:
-  s_captive_ball_target_active:
+  mode_save_from_the_grave_started:
+    - cmd_refresh_mode_save_from_the_grave
+
+  cmd_clean_up_modes:
+    - cmd_reset_save_from_the_grave
+
+  cmd_reset_save_from_the_grave:
+    - cmd_sftg_disable
+    - cmd_set_grave_save_counter_0
+    - cmd_sftg_restart_counter
+    - cmd_refresh_save_for_the_grave_lights
+
+  cmd_refresh_mode_save_from_the_grave:
+    - cmd_refresh_save_for_the_grave_lights
+
+  player_v_grave_save_counter_count:
+    - cmd_refresh_save_for_the_grave_lights
+  player_v_grave_save_counter_count.10{value==3}:
+    - cmd_sftg_enable
+
+  # light control
+  cmd_refresh_save_for_the_grave_lights{current_player.v_grave_save_counter_count==0}:
+    - cmd_show_lights_sftg_stage_0
+  cmd_refresh_save_for_the_grave_lights.1{current_player.v_grave_save_counter_count==1}:
+    - cmd_show_lights_sftg_stage_1
+  cmd_refresh_save_for_the_grave_lights.2{current_player.v_grave_save_counter_count==2}:
+    - cmd_show_lights_sftg_stage_2
+  cmd_refresh_save_for_the_grave_lights.3{current_player.v_grave_save_counter_count==3}:
+    - cmd_show_lights_sftg_stage_3
+
+  # counter variable control
+  logicblock_grave_save_counter_updated{value==1}:
+    - cmd_set_grave_save_counter_1
+  logicblock_grave_save_counter_updated{value==2}:
+    - cmd_set_grave_save_counter_2
+  logicblock_grave_save_counter_updated{value==3}:
+    - cmd_set_grave_save_counter_3
+
+  s_captive_ball_target_active{current_player.v_sftg_enabled==0}:
     - cmd_count_sftg
-  logicblock_grave_save_counter_complete:
-    - cmd_sftg_enabled
+
   s_left_outlane_active{current_player.v_sftg_enabled==1}:
     - cmd_sftg_start_ball_save
+
   logicblock_grave_save_counter_hit:
     - cmd_play_bump_show
     - cmd_play_bump_audio
+
   # Don't show the animation if the extra ball animation is about to play
   ball_save_sftg_ball_save_saving_ball{current_player.v_extra_ball_animation_playing<1}:
+    - cmd_reset_save_from_the_grave
     - cmd_play_save_show
     - cmd_play_save_audio
+
+variable_player:
+  cmd_sftg_enable:
+    v_sftg_enabled:
+      int: 1
+      action: set
+  cmd_sftg_disable:
+    v_sftg_enabled:
+      int: 0
+      action: set
+  cmd_set_grave_save_counter_0:
+    v_grave_save_counter_count:
+      int: 0
+      action: set
+  cmd_set_grave_save_counter_1:
+    v_grave_save_counter_count:
+      int: 1
+      action: set
+  cmd_set_grave_save_counter_2:
+    v_grave_save_counter_count:
+      int: 2
+      action: set
+  cmd_set_grave_save_counter_3:
+    v_grave_save_counter_count:
+      int: 3
+      action: set
+
+##################################################
+# Logicblocks
+##################################################
+
+counters:
+  grave_save_counter:
+    count_events: cmd_count_sftg
+    disable_on_complete: True
+    persist_state: True # Not used for in between balls but when activating and deactivating
+    count_complete_value: 3
+    restart_events: cmd_sftg_restart_counter
+
+##################################################
+# Devices
+##################################################
+
+ball_saves:
+  sftg_ball_save:
+    active_time: 3s
+    enable_events: cmd_sftg_start_ball_save
+    auto_launch: yes
+    balls_to_save: 1
+    eject_delay: 4.2s
+
+##################################################
+# Sound / Visual
+##################################################
 
 sound_player:
   cmd_play_bump_audio: sftg_bump
@@ -28,47 +129,33 @@ show_player:
     grave_bump_show:
       action: play
       loops: 0
-  logicblock_grave_save_counter_hit{count==1}:
-    on:
-      show_tokens:
-        lights: sftg_save
-  logicblock_grave_save_counter_hit{count==2}:
-    on:
-      show_tokens:
-        lights: sftg_save, sftg_for_the
-  logicblock_grave_save_counter_complete:
-    on:
-      show_tokens:
-        lights: sftg_save, sftg_for_the, sftg_grave, l_sftg_enabled
+
   cmd_play_save_show:
     sftg_show:
       action: play
       loops: 0
-      events_when_completed:
-        - cmd_sftg_clear_the_lights
-        - cmd_sftg_restart_counter
-  cmd_sftg_clear_the_lights:
-    off:
-      show_tokens:
-        lights: sftg_save, sftg_for_the, sftg_grave, l_sftg_enabled
 
-variable_player:
-  cmd_sftg_enabled:
-    v_sftg_enabled:
-      int: 1
-      action: set
+light_player:
+  cmd_show_lights_sftg_stage_0:
+    sftg_save: 0
+    sftg_for_the: 0
+    sftg_grave: 0
+    l_sftg_enabled: 0
 
-counters:
-  grave_save_counter:
-    count_events: cmd_count_sftg
-    disable_on_complete: True
-    count_complete_value: 3
-    restart_events: cmd_sftg_restart_counter
+  cmd_show_lights_sftg_stage_1:
+    sftg_save: ff
+    sftg_for_the: 0
+    sftg_grave: 0
+    l_sftg_enabled: 0
 
-ball_saves:
-  sftg_ball_save:
-    active_time: 3s
-    enable_events: cmd_sftg_start_ball_save
-    auto_launch: yes
-    balls_to_save: 1
-    eject_delay: 4.2s
+  cmd_show_lights_sftg_stage_2:
+    sftg_save: ff
+    sftg_for_the: ff
+    sftg_grave: 0
+    l_sftg_enabled: 0
+
+  cmd_show_lights_sftg_stage_3:
+    sftg_save: ff
+    sftg_for_the: ff
+    sftg_grave: ff
+    l_sftg_enabled: ff

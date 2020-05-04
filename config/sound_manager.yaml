@@ -1,0 +1,100 @@
+#config_version=5 
+
+event_player:
+  mode_attract_started:
+    - cmd_stop_music
+    - cmd_start_music_attract_dark
+
+  mode_skill_shot_started:
+    - cmd_stop_music
+    - cmd_start_intro_jazz_music
+    - cmd_play_sound_projector
+
+  mode_skill_shot_stopping:
+    - cmd_stop_music
+    - cmd_start_post_skillshot_sound
+    - cmd_start_base_music
+
+sound_player:
+
+  ##################################################
+  # Background Music
+  ##################################################
+
+  cmd_stop_music:
+    base_bg_music:
+      action: stop
+    intro_jazz:
+      action: stop
+    attract_dark:
+      action: stop
+    skill_shot_projector_loop_sound:
+      action: stop
+
+  cmd_stop_projector_loop:
+    skill_shot_projector_loop_sound:
+      action: stop
+
+  cmd_start_music_attract_dark:
+    attract_dark:
+      action: play
+      loops: -1
+
+  cmd_start_intro_jazz_music:
+    intro_jazz:
+      action: play
+      loops: -1
+
+  cmd_start_post_skillshot_sound:
+    post_skillshot_sound:
+      action: play
+      loops: 0
+
+  cmd_start_base_music:
+    base_bg_music:
+      action: play
+      loops: -1
+
+  cmd_play_sound_projector:
+    skill_shot_projector_loop_sound:
+      action: play
+      loops: -1
+      volume: 0.2
+
+  mode_franklin_hurry_up_stopped:
+    base_bg_music:
+      action: play
+      loops: -1
+
+  mode_franklin_frenzy_stopped:
+    base_bg_music:
+      action: play
+      loops: -1
+
+  cmd_main_music_volume_down:
+    base_bg_music:
+      volume: 0.10
+
+  cmd_main_music_volume_up:
+    base_bg_music:
+      volume: 0.65
+
+  ##################################################
+  # Switch sounds
+  ##################################################
+
+  s_slaughter_house_target_active: cow_moo
+  cmd_magnavuk_firing: slaugherhouse_gun
+  left_franklin_shot_hit: swoosh_1
+  right_franklin_shot_hit: swoosh_1
+  s_right_ramp_enter_active: swoosh_1
+  s_top_basket_enter_active: swoosh_1
+  s_right_ramp_s_u_left_active: hit1
+  s_right_ramp_s_u_right_active: hit2
+  s_left_slingshot_active: hit_w_fade
+  s_right_slingshot_active: hit_w_fade
+  s_left_return_lane_active: inner_flipper_lane
+  s_right_return_lane_active: inner_flipper_lane
+  s_right_outlane_active: outer_flipper_lane
+  s_left_outlane_active: outer_flipper_lane
+  ball_save_player_start_saving_ball: keep_shooting_v3_audio

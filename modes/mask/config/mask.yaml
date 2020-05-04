@@ -7,13 +7,15 @@
 
 mode:
   start_events:
-    - ball_starting
-    - cmd_enable_progressive_passive_modes
-    - mode_franklin_hurry_up_stopped
+    - cmd_start_mode_mask
+    #    - ball_starting
+    #    - cmd_enable_progressive_passive_modes
+    #    - mode_franklin_hurry_up_stopped
   stop_events:
-    - cmd_disable_progressive_passive_modes__chainsaw_mode
-    - cmd_disable_mask_mode
-    - mode_franklin_hurry_up_started
+    - cmd_stop_mode_mask
+    #    - cmd_disable_progressive_passive_modes__chainsaw_mode
+    #    - cmd_disable_mask_mode
+    #    - mode_franklin_hurry_up_started
   priority: 200
 
 counters:

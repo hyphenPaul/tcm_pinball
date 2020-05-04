@@ -24,6 +24,7 @@ config:
  - variables.yaml
  - settings.yaml
  - sound_system.yaml
+ - sound_manager.yaml
  - assets.yaml
  - sounds.yaml
  - videos.yaml
@@ -41,6 +42,7 @@ config:
  - widget_styles.yaml
  - shows.yaml
  - modes.yaml
+ - mode_manager.yaml
 
 custom_code:
   - scriptlets.magnavuk.Magnavuk
