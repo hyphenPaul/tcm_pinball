@@ -16,15 +16,16 @@ RUN apt install -y python3.6
 
 ADD /etc/sudoers.txt /etc/sudoers
 RUN chmod 440 /etc/sudoers
-RUN useradd mpf -m -g sudo -u 1000
+RUN useradd mpf -m -G sudo -u 1000
 USER mpf
 WORKDIR /home/mpf
 
 # install mpf
 
-RUN curl -L https://github.com/missionpinball/mpf-debian-installer/archive/dev.zip --output mpf.zip
-RUN unzip mpf.zip
-RUN cd mpf-debian-installer-dev && chmod +x install && sudo ./install
-RUN cd mpf-debian-installer-dev && chmod +x install-proc && sudo ./install-proc
+RUN bash -c "curl -L https://github.com/missionpinball/mpf-debian-installer/archive/dev.zip --output mpf.zip && \
+unzip mpf.zip && \
+cd mpf-debian-installer-dev && \
+chmod +x install && sudo ./install && \
+chmod +x install-proc && sudo ./install-proc"
 
 COPY . /mpf/home
