@@ -1,11 +1,12 @@
 #show_version=5
 
-- duration: 100s
+- duration: 200s
   slides:
     slide_1:
       widgets:
       - type: image
-        image: shoot_the_van_v2
+        #        image: shoot_the_van_v5
+        image: leatherface_hammer_v2
         anchor_x: 0
         anchor_y: 0
         x: 0

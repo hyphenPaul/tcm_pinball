@@ -1,9 +1,12 @@
 #show_version=5
 
-- duration: 3s
+- duration: 11s
   slides:
     ball_locked_slide:
       widgets:
-      - type: text
-        text: ESCAPE MULTIBALL
-        style: dmd_big
+      - type: image
+        image: escape_multiball_v2
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0

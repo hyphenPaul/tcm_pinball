@@ -15,6 +15,7 @@ class Magnavuk(CustomCode):
         self.machine.events.add_handler('ball_started', self.enable)
         self.machine.events.add_handler('ball_ended', self.disable)
         self.machine.events.add_handler('cmd_custom_magna_vuk_handler', self.add_custom_vuk_handler)
+        self.machine.events.add_handler('cmd_mangna_vuk_reset_auto_handler', self.reset_auto_vuk_handler)
 
     def enable(self, **kwargs):
         del kwargs
@@ -69,6 +70,11 @@ class Magnavuk(CustomCode):
         else:
             self.disable()
 
+    def reset_auto_vuk_handler(self, **kwargs):
+        self.remove_auto_vuk_handler()
+        self.remove_current_switch_handler()
+        self.add_auto_vuk_handler()
+
     def remove_auto_vuk_handler(self):
         self.info_log('remove_auto_vuk_handler')
         self.machine.switch_controller.remove_switch_handler(
@@ -83,7 +89,7 @@ class Magnavuk(CustomCode):
         self.info_log('add_custom_vuk_handler')
 
         self.remove_auto_vuk_handler()
-        self.remove_current_switch_handler() 
+        self.remove_current_switch_handler()
 
         self.current_custom_switch_handler = self.machine.switch_controller.add_switch_handler(
             's_jump_ball_vuk', self.handle_custom_vuk_event, 1, 500, False, kwargs)

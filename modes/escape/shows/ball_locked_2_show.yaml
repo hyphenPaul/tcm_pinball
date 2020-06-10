@@ -2,7 +2,7 @@
 
 - duration: 3.6s
   slides:
-    ball_locked_slide:
+    ball_locked_2_slide:
       widgets:
       - type: image
         image: ball_2_locked_v1

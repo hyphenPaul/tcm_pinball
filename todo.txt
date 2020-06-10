@@ -1,4 +1,13 @@
-- Make sure SFTG and extra ball don't fire at the same time
+- skill shot
+  - sound design
+    - left ramp made
+    - basket made
+    - fail
+  - wire up remaining awards
+  - extra ball only on 3rd ball etc
+  - lock only when applicable
+  - it's not working on later balls - probably in a weird state
+
 - disable mystery after complete
 - deactivate hook during multiball
 - finish hook counter
@@ -8,6 +17,7 @@
 - Help Multiplier lights
 
 Nice to have
+- Make a nice intro on first ball "Welcome to Texas" with the TCM logo
 - 4 orbit combo is a franklin combo
 - Franklin audio pitch shifts higher and higher
 - funny bonuses
@@ -27,3 +37,4 @@ Fix ghosting around multiball girl face
 Bonus music (tweak a bit)
 Franklin Hurry up award music
 Flipper lane sound effects
+Fix Jackpot Font

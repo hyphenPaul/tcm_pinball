@@ -5,21 +5,21 @@ machine_vars:
   #####################################
   # Diverter
   #####################################
-  
+
   v_diverter_is_active:
     initial_value: 0
 
   #####################################
   # Magnavuk
   #####################################
-  
+
   magnavuk_auto_fire:
     initial_value: 1
 
   #####################################
   # Mask Making
   #####################################
-  
+
   v_enable_mask_making:
     initial_value: 0
   v_enable_mask_mania:
@@ -34,21 +34,21 @@ machine_vars:
   #####################################
   # Pop Bumpers
   #####################################
-  
+
   pop_bumper_mystery_complete_count:
     initial_value: 20
 
   #####################################
   # Franklin
   #####################################
-  
+
   franklin_bonus_value:
     initial_value: 100_000
 
   #####################################
   # Meathook
   #####################################
-  
+
   meathook_total_for_reward_1:
     initial_value: 7
   meathook_total_for_reward_2:
@@ -59,7 +59,7 @@ machine_vars:
   #####################################
   # Bonus
   #####################################
-  
+
   meathook_bonus_value:
     initial_value: 100_000
   combo_bonus_value:
@@ -186,7 +186,7 @@ player_vars:
   #####################################
   # Methook
   #####################################
-  
+
   v_meathook_total:
     initial_value: 0
   v_meathook_message:
@@ -211,26 +211,30 @@ player_vars:
   #####################################
   # Ball Save
   #####################################
-  
+
   v_initial_playfield_active_fired:
     initial_value: 0
+
+  #####################################
+  # Escape
+  #####################################
+
+  v_light_lock_light_complete:
+    initial_value: 0
+  v_light_lock_lock_complete:
+    initial_value: 0
+  v_escape_lock_lit:
+    initial_value: 0
+  v_balls_locked_count:
+    initial_value: 0
+  v_escape_state:
+    initial_value: "start"
+    value_type: str
 
   #####################################
   # Escape Multiball
   #####################################
 
-  v_escape_left_is_lit:
-    initial_value: 0
-  v_escape_right_is_lit:
-    initial_value: 0
-  v_light_lock_light_complete:
-    initial_value: 0
-  v_light_lock_lock_complete:
-    initial_value: 0
-  v_balls_locked_count:
-    initial_value: 0
-  v_escape_multiball_active:
-    initial_value: 0
   v_escape_jackpot_captive_ball_collected:
     initial_value: 0
   v_escape_jackpot_left_ramp_collected:
@@ -242,4 +246,6 @@ player_vars:
   v_escape_jackpot_slaughter_house_collected:
     initial_value: 0
   v_escape_jackpot_right_orbit_collected:
+    initial_value: 0
+  v_escape_orbit_active:
     initial_value: 0

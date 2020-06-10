@@ -59,7 +59,8 @@ event_player:
   # Escape Multiball
   ##################################################
 
-  cmd_start_escape_multiball:
+  cmd_start_escape_multiball_mode:
+    - cmd_stop_mode_escape
     - cmd_stop_mode_chainsaw
     - cmd_stop_mode_franklin
     - cmd_stop_mode_franklin_hurry_up
@@ -68,14 +69,17 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
+    - cmd_start_mode_escape_multiball
 
-  multiball_escape_multiball_ended:
+  cmd_stop_escape_multiball_mode:
+    - cmd_stop_mode_escape_multiball
     - cmd_start_mode_chainsaw
     - cmd_start_mode_franklin
     - cmd_start_mode_mask
     - cmd_start_mode_save_from_the_grave
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
+    - cmd_start_mode_escape
 
   ##################################################
   # Franklin
@@ -99,8 +103,8 @@ event_player:
   ##################################################
   # Testing
   ##################################################
-  
+
   s_left_flipper_active:
-    #- cmd_stop_mode_franklin_frenzy
+    cmd_stop_mode_escape
   s_right_flipper_active:
-    #- cmd_start_mode_franklin_frenzy
+    cmd_start_mode_escape
