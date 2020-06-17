@@ -1,0 +1,42 @@
+#config_version=5
+#
+mode:
+  start_events:
+    - cmd_start_mode_test
+  stop_events:
+    - cmd_stop_mode_test
+  priority: 500
+
+# Have to set one of these up, just one
+queue_event_player:
+  cmd_test_queue_event_player:
+    queue_event: cmd_test_queue_event
+    events_when_finished: cmd_test_queue_event_finished
+
+# This is the magic - add to this relay player
+queue_relay_player:
+  cmd_test_queue_event.10:
+     post: cmd_play_test_show_1
+     wait_for: cmd_test_show_1_complete
+  cmd_test_queue_event.5:
+     post: cmd_play_test_show_2
+     wait_for: cmd_test_show_2_complete
+
+# need to make sure there's an event when complete - these get populated in the queue relay player
+show_player:
+  cmd_play_test_show_1:
+    test_show_1:
+      action: play
+      loops: 0
+      events_when_completed: cmd_test_show_1_complete
+  cmd_play_test_show_2:
+    test_show_2:
+      action: play
+      loops: 0
+      events_when_completed: cmd_test_show_2_complete
+
+event_player:
+  s_left_flipper_active:
+    cmd_test_queue_event_player
+#  s_right_flipper_active:
+#    cmd_start_mode_escape

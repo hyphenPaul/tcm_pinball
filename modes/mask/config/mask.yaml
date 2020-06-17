@@ -273,7 +273,7 @@ show_player:
     mask_making:
       loops: 0
       show_tokens:
-        mask_image: get_a_head_v4
+        mask_image: get_a_head_v6
   cmd_play_mask_making_show_2:
     mask_making:
       loops: 0

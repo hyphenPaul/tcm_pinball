@@ -10,6 +10,7 @@ event_player:
     - cmd_start_mode_base
     - cmd_start_mode_chainsaw
     - cmd_start_mode_escape
+      #- cmd_start_mode_test
     - cmd_start_mode_franklin
     - cmd_start_mode_help
     - cmd_start_mode_mask
@@ -104,7 +105,7 @@ event_player:
   # Testing
   ##################################################
 
-  s_left_flipper_active:
-    cmd_stop_mode_escape
-  s_right_flipper_active:
-    cmd_start_mode_escape
+      #  s_left_flipper_active:
+      #    cmd_stop_mode_escape
+      #  s_right_flipper_active:
+      #    cmd_start_mode_escape

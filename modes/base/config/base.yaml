@@ -249,16 +249,13 @@ event_player:
   ########################################
   # Testing
   ########################################
+  
   s_right_flipper_active:
     - cmd_test_flipper_right
   s_left_flipper_active:
     - cmd_test_flipper_left
 
 timers:
-
-  ########################################
-  # Testing
-  ########################################
 
   my_test_timer:
     start_value: 0
