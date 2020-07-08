@@ -24,6 +24,15 @@ sounds:
   mask_slice:
     file: mask_slice.wav
     volume: 1.0
+  mask_show_1:
+    file: get_a_head_v6_score.wav
+    volume: 1.0
+  mask_show_2:
+    file: boil_it_up_v6_score.wav
+    volume: 1.0
+  mask_show_3:
+    file: face_time_v3_score.wav
+    volume: 1.0
   franklin_hurry_up:
     file: franklin_hurry_up_v1.wav
     mode_end_action: stop
@@ -148,8 +157,8 @@ sounds:
     file: franklin_frenzy_bonus_v1.wav
     volume: 1
     mode_end_action: stop
-  franklin_hurry_up_finish:
-    file: franklin_hurry_up_finish.wav
+  franklin_hurry_up_complete:
+    file: franklin_follow_us.wav
     volume: 1
     mode_end_action: stop
   chainsaw_multiball_audio_v2:

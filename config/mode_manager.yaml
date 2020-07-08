@@ -10,13 +10,13 @@ event_player:
     - cmd_start_mode_base
     - cmd_start_mode_chainsaw
     - cmd_start_mode_escape
-      #- cmd_start_mode_test
+    - cmd_start_mode_test
     - cmd_start_mode_franklin
     - cmd_start_mode_help
     - cmd_start_mode_mask
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_save_from_the_grave
-    - cmd_start_mode_skill_shot
+      #- cmd_start_mode_skill_shot
     - cmd_start_mode_standard_extra_ball
 
   ball_ending:

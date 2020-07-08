@@ -17,6 +17,57 @@ class Magnavuk(CustomCode):
         self.machine.events.add_handler('cmd_custom_magna_vuk_handler', self.add_custom_vuk_handler)
         self.machine.events.add_handler('cmd_mangna_vuk_reset_auto_handler', self.reset_auto_vuk_handler)
 
+        # handler queue
+        self.custom_switch_handler_queue = []
+        self.machine.events.add_handler('cmd_custom_magna_vuk_queue_event', self.add_queue_event)
+        self.machine.events.add_handler('cmd_play_magna_vuk_queue', self.play_queue_events)
+        self.current_queue_event = None
+        self.queue_callback_handler = None
+
+    def add_queue_event(self, **kwargs):
+        self.info_log('add_queue_event_fired')
+
+        if kwargs not in self.custom_switch_handler_queue:
+            self.custom_switch_handler_queue.append(kwargs)
+
+        self.info_log(self.custom_switch_handler_queue)
+
+    def play_queue_events(self, **kwargs):
+        self.info_log('play_queue_events')
+
+        if self.queue_callback_handler:
+            self.clear_callback_handler()
+
+        self.custom_switch_handler_queue.sort(key=lambda y: y.get('priority'))
+
+        if self.custom_switch_handler_queue == []:
+            self.info_log('queue_is_done')
+            self.event_queue_complete()
+        else:
+            self.current_queue_event = self.custom_switch_handler_queue.pop()
+            self.play_current_queue_event()
+
+    def clear_callback_handler(self):
+        self.machine.events.remove_handler_by_key(self.queue_callback_handler)
+        self.queue_callback_handler = None
+            
+ 
+    def play_current_queue_event(self):
+        if self.current_queue_event:
+            self.queue_callback_handler = self.machine.events.add_handler(
+                self.current_queue_event['wait_for'],
+                self.play_queue_events
+            )
+
+            self.machine.events.post(self.current_queue_event['post'])
+        else:
+            event_queue_complete()
+
+    def event_queue_complete(self):
+        self.info_log("event_queue_complete")
+
+        self.machine.events.post('cmd_mangna_vuk_queue_complete')
+
     def enable(self, **kwargs):
         del kwargs
 
@@ -36,6 +87,41 @@ class Magnavuk(CustomCode):
             'magnavuk_magnet_disabled', self.choose_lane)
 
         self.enabled = True
+
+        # testing
+        self.machine.events.add_handler(
+            'cmd_test_queue_event',
+            self.test_queue_event,
+            priority=10,
+            blocking_facility=None,
+            kwargs={"post": "cmd_play_test_show_1", "wait_for":"cmd_test_show_1_complete"}
+        )
+
+        #self.machine.events.add_handler(
+        #    'cmd_test_queue_event',
+        #    self.test_queue_event,
+        #    priority=9,
+        #    blocking_facility=None,
+        #    kwargs={"post": "cmd_play_test_show_2", "wait_for":"cmd_test_show_2_complete"}
+        #)
+
+        # notes
+        # - settings = "the event name"
+        # - context = "mode name"
+        # - calling_context = "event"
+
+    def test_queue_event(self, **kwargs):
+
+        self.info_log('000')
+        self.info_log(self.machine.queue_relay_player.config_file_section) # queue_relay_player
+        self.info_log(self.machine.queue_relay_player.instances['test'])
+        self.info_log(self.machine.queue_relay_player.validate_config('queue_relay_player'))
+        self.info_log('000')
+
+        self.machine.events.post(kwargs['kwargs']['post'])
+
+        self.info_log('****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************')
+
 
     def disable(self, **kwargs):
         del kwargs
@@ -93,6 +179,32 @@ class Magnavuk(CustomCode):
 
         self.current_custom_switch_handler = self.machine.switch_controller.add_switch_handler(
             's_jump_ball_vuk', self.handle_custom_vuk_event, 1, 500, False, kwargs)
+
+    def push_custom_vuk_handler(self, **kwargs):
+        self.info_log('add_custom_vuk_handler')
+
+        self.remove_current_switch_handler()
+
+        self.current_custom_switch_handler = self.machine.switch_controller.add_switch_handler(
+            's_jump_ball_vuk', self.handle_custom_vuk_event, 1, 500, False, kwargs)
+        # This may be as easy as just adding events, 
+
+        # Posting queue: http://developer.missionpinball.org/en/dev/api/self.machine.events.html#mpf.core.events.EventManager.post_queue
+
+        # Questions: How do I register a queue event vs regular event
+
+
+        # Add queue event player that fires the vuk at the end
+        # It also removes any items from the queue player
+        # 
+
+        # create a function that adds to the relay player
+        # it needs to check to make sure it doesn't exist already
+        # need to pass the post value (beginngin of show) and the wait_for value (end of the show), the post \
+        #   - they all listen to the same event (queue event from the queue event player)
+
+        # how the fuck do you dynamically add a queue event
+
 
     def handle_custom_vuk_event(self, **kwargs):
         self.info_log('handle_custom_vuk_event')

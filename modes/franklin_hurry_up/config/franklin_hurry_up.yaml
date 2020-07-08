@@ -85,7 +85,7 @@ sound_player:
       action: stop
       priority: 120
   cmd_franklin_hurry_up_completed.1:
-    franklin_hurry_up_finish:
+    franklin_hurry_up_complete:
       action: play
       priority: 130
       volume: 0.45

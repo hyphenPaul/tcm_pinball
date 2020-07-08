@@ -1,0 +1,12 @@
+#show_version=5
+
+- duration: 3.8s
+  slides:
+    mask_making:
+      widgets:
+      - type: image
+        image: (mask_image)
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0

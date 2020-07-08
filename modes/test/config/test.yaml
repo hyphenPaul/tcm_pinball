@@ -15,10 +15,10 @@ queue_event_player:
 
 # This is the magic - add to this relay player
 queue_relay_player:
-  cmd_test_queue_event.10:
+  cmd_test_queue_event_z.10:
      post: cmd_play_test_show_1
      wait_for: cmd_test_show_1_complete
-  cmd_test_queue_event.5:
+  cmd_test_queue_event_z.5:
      post: cmd_play_test_show_2
      wait_for: cmd_test_show_2_complete
 
@@ -37,6 +37,13 @@ show_player:
 
 event_player:
   s_left_flipper_active:
-    cmd_test_queue_event_player
-#  s_right_flipper_active:
-#    cmd_start_mode_escape
+    cmd_play_magna_vuk_queue
+  s_right_flipper_active.2:
+    cmd_custom_magna_vuk_queue_event:
+      post: cmd_play_test_show_1
+      wait_for: cmd_test_show_1_complete
+  s_right_flipper_active.1:
+    cmd_custom_magna_vuk_queue_event:
+      post: cmd_play_test_show_2
+      wait_for: cmd_test_show_2_complete
+    # cmd_test_queue_event_player

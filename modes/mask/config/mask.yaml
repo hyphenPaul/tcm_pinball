@@ -8,14 +8,8 @@
 mode:
   start_events:
     - cmd_start_mode_mask
-    #    - ball_starting
-    #    - cmd_enable_progressive_passive_modes
-    #    - mode_franklin_hurry_up_stopped
   stop_events:
     - cmd_stop_mode_mask
-    #    - cmd_disable_progressive_passive_modes__chainsaw_mode
-    #    - cmd_disable_mask_mode
-    #    - mode_franklin_hurry_up_started
   priority: 200
 
 counters:
@@ -99,10 +93,13 @@ event_player:
 
   counter_mask_making_hit{count==1}:
     - cmd_play_mask_making_show_1
+    - cmd_play_mask_making_show_1_audio
   counter_mask_making_hit{count==2}:
     - cmd_play_mask_making_show_2
+    - cmd_play_mask_making_show_2_audio
   counter_mask_making_hit{count==3}:
     - cmd_play_mask_making_show_3
+    - cmd_play_mask_making_show_3_audio
 
   ##################################################
   # Mask Mania
@@ -278,17 +275,21 @@ show_player:
     mask_making:
       loops: 0
       show_tokens:
-        mask_image: boil_it_up_v3
+        mask_image: boil_it_up_v6
   cmd_play_mask_making_show_3:
-    mask_making:
+    mask_making_2:
       loops: 0
       show_tokens:
-        mask_image: face_time_v1
+        mask_image: face_time_v3
   cmd_play_mask_making_show_4:
     placeholder:
       loops: 0
       show_tokens:
         copy: Mask Making 4
+
+  # gethead - 4.3s
+  # boil it up - 4.3s
+  # face time - 3.8s
 
   ##################################################
   # Mask Mania
@@ -341,7 +342,18 @@ sound_player:
     mask_slice:
       action: play
       loops: 0
-
+  cmd_play_mask_making_show_1_audio:
+    mask_show_1:
+      action: play
+      loops: 0
+  cmd_play_mask_making_show_2_audio:
+    mask_show_2:
+      action: play
+      loops: 0
+  cmd_play_mask_making_show_3_audio:
+    mask_show_3:
+      action: play
+      loops: 0
   cmd_stop_mask_mania_music.1:
     dead_skin_mask_100:
       action: stop
