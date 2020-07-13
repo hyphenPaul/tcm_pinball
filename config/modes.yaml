@@ -10,7 +10,7 @@ modes:
   - franklin_frenzy
   - franklin_hurry_up
   - help
-  - test
+    #  - test
   - mask
   - meathook
   - pop_bumpers

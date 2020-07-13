@@ -28,9 +28,10 @@ event_player:
   cmd_super_skill_shot_award_mystery_meat:
     - cmd_light_mystery_meat
   cmd_light_mystery_meat:
-    cmd_custom_magna_vuk_handler:
-      switch_hit_evnt: cmd_get_mystery
-      fire_vuk_evnt: cmd_mystery_show_complete
+    cmd_custom_magna_vuk_queue_event:
+      post: cmd_get_mystery
+      wait_for: cmd_mystery_show_complete
+      priority: 1000
       coil_direction: left
   cmd_mystery_choice:
     - cmd_play_mystery_show
