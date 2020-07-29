@@ -1,11 +1,11 @@
 #show_version=5
 
-- duration: 11s
+- duration: 8s
   slides:
     ball_locked_slide:
       widgets:
       - type: image
-        image: escape_multiball_v2
+        image: leatherface_hammer_v3
         anchor_x: 0
         anchor_y: 0
         x: 0

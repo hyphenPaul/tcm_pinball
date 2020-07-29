@@ -1,4 +1,4 @@
-#config_version=5 
+#config_version=5
 
 event_player:
 
@@ -10,7 +10,7 @@ event_player:
     - cmd_start_mode_base
     - cmd_start_mode_chainsaw
     - cmd_start_mode_escape
-    - cmd_start_mode_test
+      #    - cmd_start_mode_test
     - cmd_start_mode_franklin
     - cmd_start_mode_help
     - cmd_start_mode_mask

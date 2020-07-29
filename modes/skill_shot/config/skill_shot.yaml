@@ -179,8 +179,8 @@ slide_player:
         duration: 0.3s
         direction: down
 
-  cmd_play_skill_shot_slide_gas_station:
-    skill_shot_gas_station:
+  cmd_play_skill_shot_slide_van:
+    skill_shot_van:
       action: play
       transition:
         type: push
@@ -253,8 +253,8 @@ slide_player:
         direction: down
         easing: out_bounce
 
-  cmd_skill_shot_show_award_gas_station:
-    skill_shot_success_gas_station:
+  cmd_skill_shot_show_award_van:
+    skill_shot_success_van:
       action: play
       transition:
         type: push

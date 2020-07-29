@@ -130,7 +130,7 @@ class SkillShot(CustomCode):
             "one_million": "One Million Points", # written
             "ball_save": "+20 second Ballsave",
             "add_help": "Add Help Letter", # written
-            "gas_station": "Light Gas Station",
+            "van": "Light Gas Station",
             "five_million": "Five Million Points", # written
         }
 

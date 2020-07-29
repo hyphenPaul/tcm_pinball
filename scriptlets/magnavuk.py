@@ -127,9 +127,15 @@ class Magnavuk(CustomCode):
         else:
             self.disable()
 
+
     def add_vuk_handler(self):
         self.info_log('Add handler')
         self.machine.switch_controller.add_switch_handler(
+            's_jump_ball_vuk', self.play_queue_events, 1, 500)
+
+    def remove_auto_vuk_handler(self):
+        self.info_log('remove_auto_vuk_handler')
+        self.machine.switch_controller.remove_switch_handler(
             's_jump_ball_vuk', self.play_queue_events, 1, 500)
  
 

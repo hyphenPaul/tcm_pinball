@@ -32,10 +32,10 @@
       - type: image
         image: ss_help_v2
 
-    skill_shot_gas_station:
+    skill_shot_van:
       widgets:
       - type: image
-        image: ss_gas_station_v2
+        image: ss_van_v1
 
     skill_shot_five_million:
       widgets:
@@ -74,10 +74,10 @@
       - type: image 
         image: ssr_help_v1
 
-    skill_shot_success_gas_station:
+    skill_shot_success_van:
       widgets:
       - type: image 
-        image: ssr_gas_station_v1
+        image: ss_van_is_lit_v1
 
     skill_shot_success_five_million:
       widgets:
