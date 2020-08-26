@@ -7,4 +7,4 @@
       - type: text
         round_anchor_x: left
         text: (copy)
-        style: dmd_big
+        style: big

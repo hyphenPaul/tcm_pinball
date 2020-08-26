@@ -49,7 +49,7 @@ slides:
         x: 50%
       - type: text
         text: PLAYER (number)
-        style: dmd_small
+        style: small
         y: 0
         x: left+2
         anchor_x: left
@@ -57,7 +57,7 @@ slides:
         font_size: 10
       - type: text
         text: BALL (ball)
-        style: dmd_small
+        style: small
         y: 0
         x: right-2
         anchor_x: right

@@ -315,7 +315,7 @@ widgets:
       round_anchor_x: left
       round_anchor_y: bottom
       text: (player|v_mask_mania_value)
-      style: dmd_big
+      style: big
       anchor_y: bottom
       y: 32
       z: 10

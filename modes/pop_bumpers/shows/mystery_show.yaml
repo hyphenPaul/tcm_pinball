@@ -20,6 +20,6 @@
               duration: 0.3s
       - type: text
         text: (mystery_award)
-        style: dmd_small
+        style: small
         round_anchor_x: left
         round_anchor_y: bottom

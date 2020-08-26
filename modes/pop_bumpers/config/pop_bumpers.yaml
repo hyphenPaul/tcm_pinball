@@ -92,7 +92,7 @@ slides:
     widgets:
     - type: text
       text: SHOOT THE
-      style: dmd_big
+      style: big
       anchor_x: 0
       anchor_y: 0
       x: 57
@@ -101,7 +101,7 @@ slides:
         show_slide: sawyer_flash
     - type: text
       text: SLAUGHTERHOUSE
-      style: dmd_small
+      style: small
       anchor_x: 0
       anchor_y: 0
       x: 53
@@ -129,7 +129,7 @@ shows:
           widgets:
           - type: text
             text: MYSTERY MEATER
-            style: dmd_small
+            style: small
             anchor_x: 0
             anchor_y: 0
             x: 1

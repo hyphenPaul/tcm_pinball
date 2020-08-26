@@ -33,10 +33,6 @@ variable_player:
       action: set
       int: 0
 
-  cmd_escape_multiball_jackpot_variable_captive_ball:
-    v_escape_jackpot_captive_ball_collected:
-      action: set
-      int: 1
   cmd_escape_multiball_jackpot_variable_left_ramp:
     v_escape_jackpot_left_ramp_collected:
       action: set
@@ -58,12 +54,70 @@ variable_player:
       action: set
       int: 1
 
+  cmd_set_escape_multiball_state.1{state=="ready"}:
+    v_escape_multiball_state:
+      action: set
+      string: "ready"
+
+  cmd_set_escape_multiball_state.2{state=="captive_shot"}:
+    v_escape_multiball_state:
+      action: set
+      string: "captive_shot"
+
+  cmd_set_escape_multiball_state.3{state=="super_jackpot"}:
+    v_escape_multiball_state:
+      action: set
+      string: "super_jackpot"
+
 event_player:
 
   mode_escape_multiball_started:
-    - cmd_start_escape_multiball
-    - cmd_turn_on_escape_multiball_jackpot_lights
-    - cmd_start_leatherface_chase_show
+    cmd_set_escape_multiball_state:
+      state:
+        value: machine.mv_escape_state_ready
+        type: string
+    cmd_escape_multiball_reset_jackpot_variables:
+    cmd_start_escape_multiball:
+    cmd_escape_multiball_refresh:
+    cmd_escape_multiball_start_kids:
+    cmd_escape_multiball_shot_accrual_reset:
+
+  ## control flow ##
+  
+  cmd_escape_multiball_refresh.1{current_player.v_escape_multiball_state=="ready"}:
+    cmd_turn_on_escape_multiball_jackpot_lights:
+    cmd_escape_multiball_turn_off_light_captive_ball:
+    cmd_escpae_multiball_turn_off_super_jackpot_lights:
+  cmd_escape_multiball_refresh.2{current_player.v_escape_multiball_state=="captive_shot"}:
+    cmd_turn_off_escape_multiball_jackpot_lights:
+    cmd_escape_multiball_turn_on_light_captive_ball:
+    cmd_escpae_multiball_turn_off_super_jackpot_lights:
+  cmd_escape_multiball_refresh.3{current_player.v_escape_multiball_state=="super_jackpot"}:
+    cmd_escape_multiball_turn_off_light_captive_ball:
+    cmd_turn_off_escape_multiball_jackpot_lights:
+    cmd_escpae_multiball_turn_on_super_jackpot_lights:
+
+  cmd_escape_multiball_captive_ball_hit.1{device.accruals.escape_multiball_shot_accrual.completed}:
+    cmd_set_escape_multiball_state:
+      state:
+        value: machine.mv_escape_state_super_jackpot
+        type: string
+    cmd_escape_multiball_refresh:
+
+  cmd_escape_multiball_captive_ball_hit.2{not device.accruals.escape_multiball_shot_accrual.completed}:
+    cmd_set_escape_multiball_state:
+      state:
+        value: machine.mv_escape_state_ready
+        type: string
+    cmd_escape_multiball_refresh:
+    
+
+  multiball_escape_multiball_ended:
+    - cmd_escape_multiball_reset_jackpot_variables
+    - cmd_stop_escape_multiball_mode
+    - cmd_escape_multiball_shot_accrual_reset
+
+  ## lights ##
 
   cmd_turn_on_escape_multiball_jackpot_lights.1{current_player.v_escape_jackpot_slaughter_house_collected==0}:
     - cmd_escape_multiball_turn_on_light_slaughter_house
@@ -76,51 +130,108 @@ event_player:
   cmd_turn_on_escape_multiball_jackpot_lights.6{current_player.v_escape_jackpot_right_orbit_collected==0}:
     - cmd_escape_multiball_turn_on_light_right_orbit
 
-  player_v_escape_jackpot_slaughter_house_collected{value==1}:
-    - cmd_escape_multiball_turn_off_light_slaughter_house
-    - cmd_escape_multiball_turn_on_captive_ball
-  player_v_escape_jackpot_left_orbit_collected{value==1}:
-    - cmd_escape_multiball_turn_off_light_left_orbit
-    - cmd_escape_multiball_turn_on_captive_ball
-  player_v_escape_jackpot_left_ramp_collected{value==1}:
-    - cmd_escape_multiball_turn_off_light_left_ramp
-    - cmd_escape_multiball_turn_on_captive_ball
-  player_v_escape_jackpot_right_ramp_collected{value==1}:
-    - cmd_escape_multiball_turn_off_light_right_ramp
-    - cmd_escape_multiball_turn_on_captive_ball
-  player_v_escape_jackpot_right_orbit_collected{value==1}:
-    - cmd_escape_multiball_turn_off_light_right_orbit
-    - cmd_escape_multiball_turn_on_captive_ball
+  cmd_turn_off_escape_multiball_jackpot_lights:
+    cmd_escape_multiball_turn_off_light_slaughter_house:
+    cmd_escape_multiball_turn_off_light_left_orbit:
+    cmd_escape_multiball_turn_off_light_left_ramp:
+    cmd_escape_multiball_turn_off_light_right_ramp:
+    cmd_escape_multiball_turn_off_light_right_orbit:
 
-  cmd_turn_on_escape_multiball_jackpot_lights.2{current_player.v_escape_jackpot_captive_ball_collected==0}:
-    - cmd_escape_multiball_turn_on_light_captive_ball
-  player_v_escape_jackpot_captive_ball_collected{value==1}:
-    - cmd_escape_multiball_turn_off_light_captive_ball
-  s_captive_ball_target_active{current_player.v_escape_jackpot_captive_ball_collected==0}:
-    - cmd_escape_multiball_jackpot
-    - cmd_escape_multiball_jackpot_variable_captive_ball
+  ## config hack ##
+  cmd_escape_multiball_show_safe_jerry:
+    cmd_bobo_config_hack
+  cmd_escape_multiball_show_safe_franklin:
+    cmd_bobo_config_hack
+  cmd_escape_multiball_show_safe_pam:
+    cmd_bobo_config_hack
+  cmd_escape_multiball_show_safe_sally:
+    cmd_bobo_config_hack
+  cmd_escape_multiball_show_safe_kirk:
+    cmd_bobo_config_hack
 
-  s_slaughter_house_target_active{current_player.v_escape_jackpot_slaughter_house_collected==0}:
-    - cmd_escape_multiball_jackpot
-    - cmd_escape_multiball_jackpot_variable_slaughter_house
-  left_orbit_hit{current_player.v_escape_jackpot_left_orbit_collected==0}:
-    - cmd_escape_multiball_jackpot
-    - cmd_escape_multiball_jackpot_variable_left_orbit
-  left_ramp_hit{current_player.v_escape_jackpot_left_ramp_collected==0}:
-    - cmd_escape_multiball_jackpot
-    - cmd_escape_multiball_jackpot_variable_left_ramp
-  right_ramp_hit{current_player.v_escape_jackpot_right_ramp_collected==0}:
-    - cmd_escape_multiball_jackpot
-    - cmd_escape_multiball_jackpot_variable_right_ramp
-  right_orbit_hit{current_player.v_escape_jackpot_right_orbit_collected==0}:
-    - cmd_escape_multiball_jackpot
-    - cmd_escape_multiball_jackpot_variable_right_orbit
+  ## switches ##
 
-  # The end
+  s_captive_ball_target_active{current_player.v_escape_multiball_state=="captive_shot"}:
+    cmd_escape_multiball_captive_ball_jackpot:
+    cmd_escape_multiball_captive_ball_hit:
 
-  multiball_escape_multiball_ended:
-    - cmd_escape_multiball_reset_jackpot_variables
-    - cmd_stop_escape_multiball_mode
+  s_slaughter_house_target_active{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_slaughter_house_collected==0}:
+    cmd_set_escape_multiball_state:
+      state:
+        value: machine.mv_escape_state_captive_shot
+        type: string
+    cmd_escape_multiball_jackpot:
+    cmd_escape_multiball_jackpot_variable_slaughter_house:
+    cmd_escape_multiball_accrual_slaughter_house:
+    cmd_escape_multiball_refresh:
+    cmd_escape_multiball_show_safe_jerry:
+  left_orbit_hit{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_left_orbit_collected==0}:
+    cmd_set_escape_multiball_state:
+      state:
+        value: machine.mv_escape_state_captive_shot
+        type: string
+    cmd_escape_multiball_jackpot:
+    cmd_escape_multiball_jackpot_variable_left_orbit:
+    cmd_escape_multiball_accrual_left_orbit:
+    cmd_escape_multiball_refresh:
+    cmd_escape_multiball_show_safe_franklin:
+  left_ramp_hit{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_left_ramp_collected==0}:
+    cmd_set_escape_multiball_state:
+      state:
+        value: machine.mv_escape_state_captive_shot
+        type: string
+    cmd_escape_multiball_jackpot:
+    cmd_escape_multiball_jackpot_variable_left_ramp:
+    cmd_escape_multiball_accrual_left_ramp:
+    cmd_escape_multiball_refresh:
+    cmd_escape_multiball_show_safe_pam:
+  right_ramp_hit{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_right_ramp_collected==0}:
+    cmd_set_escape_multiball_state:
+      state:
+        value: machine.mv_escape_state_captive_shot
+        type: string
+    cmd_escape_multiball_jackpot:
+    cmd_escape_multiball_jackpot_variable_right_ramp:
+    cmd_escape_multiball_accrual_right_ramp:
+    cmd_escape_multiball_refresh:
+    cmd_escape_multiball_show_safe_sally:
+  right_orbit_hit{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_right_orbit_collected==0}:
+    cmd_set_escape_multiball_state:
+      state:
+        value: machine.mv_escape_state_captive_shot
+        type: string
+    cmd_escape_multiball_jackpot:
+    cmd_escape_multiball_jackpot_variable_right_orbit:
+    cmd_escape_multiball_accrual_right_orbit:
+    cmd_escape_multiball_refresh:
+    cmd_escape_multiball_show_safe_kirk:
+
+  s_super_duper_jackpot_active{current_player.v_escape_multiball_state=="super_jackpot"}:
+    cmd_escape_multiball_shot_accrual_reset:
+    cmd_escape_multiball_reset_jackpot_variables:
+    cmd_set_escape_multiball_state:
+      state:
+        value: machine.mv_escape_state_ready
+        type: string
+    cmd_escape_multiball_super_jackpot:
+    cmd_escape_multiball_refresh:
+
+##################################################
+# Logicblocks
+##################################################
+
+accruals:
+  escape_multiball_shot_accrual:
+    events:
+      - cmd_escape_multiball_accrual_slaughter_house
+      - cmd_escape_multiball_accrual_left_orbit
+      - cmd_escape_multiball_accrual_left_ramp
+      - cmd_escape_multiball_accrual_right_ramp
+      - cmd_escape_multiball_accrual_right_orbit
+    reset_events:
+      cmd_escape_multiball_shot_accrual_reset:
+    reset_on_complete: False
+    disable_on_complete: False
 
 ##################################################
 # Devices
@@ -138,10 +249,22 @@ multiballs:
 ###################################################
 
 show_player:
-  cmd_start_leatherface_chase_show:
+  cmd_escape_multiball_start_leatherface_chase_show:
     escape_multiball_leatherface_chase:
+      priority: 2000
       action: play
       loops: -1
+  cmd_escape_multiball_stop_leatherface_chase_show:
+    escape_multiball_leatherface_chase:
+      action: stop 
+  cmd_escape_multiball_start_kids:
+    escape_multiball_kids:
+      priority: 1000
+      action: play
+      loops: -1
+  cmd_escape_multiball_stop_kids:
+    escape_multiball_kids:
+      action: stop 
 
 light_player:
 
@@ -179,3 +302,8 @@ light_player:
     right_ramp_arrow: 0
   cmd_escape_multiball_turn_off_light_right_orbit:
     right_orbit_arrow: 0
+
+  cmd_escpae_multiball_turn_on_super_jackpot_lights:
+    super_duper_jackpot: ff
+  cmd_escpae_multiball_turn_off_super_jackpot_lights:
+    super_duper_jackpot: 0

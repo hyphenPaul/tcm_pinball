@@ -6,7 +6,7 @@
       widgets:
       - type: text
         text: (player|v_mask_mania_value)
-        style: dmd_small
+        style: small
         round_anchor_x: left
         anchor_y: bottom
         y: 27

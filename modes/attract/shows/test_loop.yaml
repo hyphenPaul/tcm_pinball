@@ -6,7 +6,7 @@
       #widgets:
       #- type: text
         #text: JACKPOT
-        ##style: dmd_big
+        ##style: big
         #color: 404040
         #font_name: DoubleFeature20
         #font_size: 22

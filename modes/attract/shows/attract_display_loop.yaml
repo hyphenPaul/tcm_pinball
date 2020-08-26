@@ -5,9 +5,7 @@
 #    slide_1:
 #      widgets:
 #      - type: image
-#        #        image: shoot_the_van_v5
-#        #image: boil_it_up_v6
-#        image: face_time_v3
+#        image: shoot_the_van_v5
 #        anchor_x: 0
 #        anchor_y: 0
 #        x: 0
@@ -19,7 +17,7 @@
 #      - type: text
 #        text: SAFE
 #        color: black
-#        style: dmd_small
+#        style: small
 #        anchor_x: 0
 #        anchor_y: 0
 #        x: 3
@@ -58,7 +56,7 @@
 #      - type: text
 #        text: SAFE
 #        color: black
-#        style: dmd_small
+#        style: small
 #        anchor_x: 0
 #        anchor_y: 0
 #        x: 28
@@ -97,7 +95,7 @@
 #      - type: text
 #        text: SAFE
 #        color: black
-#        style: dmd_small
+#        style: small
 #        anchor_x: 0
 #        anchor_y: 0
 #        x: 54
@@ -136,7 +134,7 @@
 #      - type: text
 #        text: SAFE
 #        color: black
-#        style: dmd_small
+#        style: small
 #        anchor_x: 0
 #        anchor_y: 0
 #        x: 80
@@ -175,7 +173,7 @@
 #      - type: text
 #        text: SAFE
 #        color: black
-#        style: dmd_small
+#        style: small
 #        anchor_x: 0
 #        anchor_y: 0
 #        x: 106
@@ -224,13 +222,13 @@
             #      widgets:
             #      - type: text
             #        text: 5 ON A
-            #        style: dmd_small
+            #        style: small
             #        round_anchor_x: left
             #        anchor_y: 0
             #        y: 26
             #      - type: text
             #        text: 10 LIGHTS EXTRA BALL
-            #        style: dmd_small
+            #        style: small
             #        round_anchor_x: left
             #        anchor_y: 0
             #        y: 1
@@ -258,7 +256,7 @@
 #       widgets:
 #       - type: text
 #         text: SHOOT THE
-#         style: dmd_med
+#         style: medium
 #         anchor_y: 0
 #         round_anchor_x: left
 #         y: 20
@@ -266,7 +264,7 @@
 #           show_slide: sawyer_flash
 #       - type: text
 #         text: SUPER JACKPOT
-#         style: dmd_big
+#         style: big
 #         anchor_y: 0
 #         y: 8
 #         animations:
@@ -316,7 +314,7 @@
       widgets:
       - type: text
         text: TEXAS
-        style: dmd_big
+        style: big
         font_size: 14
 
 - duration: 1.5s
@@ -325,7 +323,7 @@
       widgets:
       - type: text
         text: CHAINSAW
-        style: dmd_big
+        style: big
         font_size: 15
 
 - duration: 1.5s
@@ -334,7 +332,7 @@
       widgets:
       - type: text
         text: MASSACRE
-        style: dmd_big
+        style: big
         font_size: 15
 
 - duration: 1s
@@ -356,7 +354,7 @@
         text: PRESS START
         font_size: 15
         color: black
-        style: dmd_big
+        style: big
         animations:
           show_slide:
           - property: opacity

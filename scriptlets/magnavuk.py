@@ -155,7 +155,7 @@ class Magnavuk(CustomCode):
     def choose_lane(self, **kwargs):
         del kwargs
 
-        if self.machine.get_machine_var('magnavuk_left'):
+        if self.machine.variables.get_machine_var('magnavuk_left'):
             self.ramp_left()
         else:
             self.ramp_right()

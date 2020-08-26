@@ -6,7 +6,7 @@
       widgets:
       - type: text
         text: (message)
-        style: dmd_small
+        style: small
         round_anchor_x: left
         anchor_y: 0
         y: 1
@@ -21,7 +21,7 @@
             duration: .3s
       - type: text
         text: (hook_count) ON A
-        style: dmd_small
+        style: small
         round_anchor_x: left
         anchor_y: 0
         opacity: 0

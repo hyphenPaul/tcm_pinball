@@ -67,6 +67,20 @@ machine_vars:
   mode_bonus_value:
     initial_value: 100_000
 
+  
+  #####################################
+  # Escape Multiball
+  #####################################
+
+  mv_escape_state_ready:
+    initial_value: "ready"
+    value_type: str
+  mv_escape_state_captive_shot:
+    initial_value: "captive_shot"
+    value_type: str
+  mv_escape_state_super_jackpot:
+    initial_value: "super_jackpot"
+    value_type: str
 
 player_vars:
 
@@ -229,6 +243,7 @@ player_vars:
     initial_value: 0
   v_escape_state:
     initial_value: "start"
+#    initial_value: "lock_3_lit"
     value_type: str
 
   #####################################
@@ -249,3 +264,6 @@ player_vars:
     initial_value: 0
   v_escape_orbit_active:
     initial_value: 0
+  v_escape_multiball_state:
+    initial_value: "ready"
+    value_type: str
