@@ -102,10 +102,6 @@ timers:
     start_value: 0
 
 show_player:
-  cmd_play_skillshot_show:
-    skill_shot_show:
-      action: play
-      loops: 0
   cmd_light_super_skill_shot:
     fast_flash:
       action: play
@@ -124,6 +120,103 @@ sound_player:
     super_skill_shot_reward_sound:
       action: play
       loops: 0
+  cmd_play_film_reel_stop_sound:
+    film_stop_quick:
+      action: play
+      loops: 0
+
+slides:
+  skill_shot_light_lock:
+    widgets:
+    - type: image
+      image: ss_light_lock_v3
+
+  skill_shot_extra_ball:
+    widgets:
+    - type: image
+      image: ss_extra_ball_v3
+
+  skill_shot_mystery_meat:
+    widgets:
+    - type: image
+      image: ss_mystery_meat_v2
+
+  skill_shot_one_million:
+    widgets:
+    - type: image
+      image: ss_1million_v3
+
+  skill_shot_ball_save:
+    widgets:
+    - type: image
+      image: ss_ball_save_v3
+
+  skill_shot_add_help:
+    widgets:
+    - type: image
+      image: ss_help_v2
+
+  skill_shot_van:
+    widgets:
+    - type: image
+      image: ss_van_v1
+
+  skill_shot_five_million:
+    widgets:
+    - type: image
+      image: ss_5million_v3
+
+  #--------------------------------------------------
+
+  skill_shot_success_light_lock:
+    widgets:
+    - type: image 
+      image: ssr_lock_is_lit_v1
+
+  skill_shot_success_extra_ball:
+    widgets:
+    - type: image 
+      image: ssr_extra_ball_v1
+      
+  skill_shot_success_mystery_meat:
+    widgets:
+    - type: image 
+      image: ssr_mystery_meat_v1
+
+  skill_shot_success_one_million:
+    widgets:
+    - type: image 
+      image: ssr_one_million_v1
+
+  skill_shot_success_ball_save:
+    widgets:
+    - type: image 
+      image: ssr_ball_save_v1
+
+  skill_shot_success_add_help:
+    widgets:
+    - type: image 
+      image: ssr_help_v1
+
+  skill_shot_success_van:
+    widgets:
+    - type: image 
+      image: ss_van_is_lit_v1
+
+  skill_shot_success_five_million:
+    widgets:
+    - type: image 
+      image: ssr_five_million_v1
+
+  skill_shot_background:
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      width: 128
+      height: 32
 
 slide_player:
 

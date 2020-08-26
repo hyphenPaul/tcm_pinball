@@ -15,6 +15,9 @@ event_player:
     - cmd_start_post_skillshot_sound
     - cmd_start_base_music
 
+  cmd_play_escape_multiball:
+    - cmd_stop_music
+
 sound_player:
 
   ##################################################

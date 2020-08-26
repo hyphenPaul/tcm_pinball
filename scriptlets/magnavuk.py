@@ -7,7 +7,9 @@ class Magnavuk(CustomCode):
 
         self.enabled = False
 
-        if self.machine.switch_controller.is_active('s_jump_ball_vuk'):
+        self.s_jump_ball_vuk_switch = self.machine.switches['s_jump_ball_vuk']
+
+        if self.machine.switch_controller.is_active(self.s_jump_ball_vuk_switch):
             self.delay.add(1000, self.clear_ball)
 
         self.machine.events.add_handler('ball_started', self.enable)
@@ -122,7 +124,7 @@ class Magnavuk(CustomCode):
 
         self.info_log('Check if clear')
 
-        if self.machine.switch_controller.is_active('s_jump_ball_vuk'):
+        if self.machine.switch_controller.is_active(self.s_jump_ball_vuk_switch):
             self.clear_ball()
         else:
             self.disable()

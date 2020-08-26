@@ -181,6 +181,12 @@ sounds:
     file: three_bells.wav
     volume: 1
     mode_end_action: stop
+  shoot_the_van:
+    file: shoot_the_van_5_score.wav
+    volume: 1
+    mode_end_action: stop
+  escape_multiball_intro:
+    file: leatherface_hammer_v3_score.wav
   chainsaw_multiball_start:
     file: chainsaw_multiball_3_10frame.wav
     volume: 1
@@ -259,6 +265,9 @@ sounds:
     file: help_sfx_v1.wav
   super_skill_shot_reward_sound:
     file: ss_reward_v4.wav
+  film_stop_quick:
+    file: film_stop_v1.wav
+    volume: 0.2
   outer_flipper_lane:
     file: outer_drain_v1.wav
   inner_flipper_lane:

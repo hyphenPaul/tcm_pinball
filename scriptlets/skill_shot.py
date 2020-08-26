@@ -49,6 +49,7 @@ class SkillShot(CustomCode):
         if self.is_shooting():
             self.machine.events.post('cmd_stop_projector_loop')
             self.machine.events.post('cmd_light_super_skill_shot')
+            self.machine.events.post('cmd_play_film_reel_stop_sound')
             self.state = self.BASKET_MADE
             self.timer.stop()
 
