@@ -8,7 +8,7 @@ mode:
   priority: 500
 
 ##################################################
-# Events and Variables
+# Variables
 ##################################################
 
 variable_player:
@@ -69,6 +69,57 @@ variable_player:
       action: set
       string: "super_jackpot"
 
+  # Franklin
+  logicblock_escape_multiball_shot_accrual_updated.100{value[0]}:
+    v_escape_franklin_safe:
+      action: set
+      int: 1
+
+  # Pam
+  logicblock_escape_multiball_shot_accrual_updated.200{value[1]}:
+    v_escape_pam_safe:
+      action: set
+      int: 1
+
+  # Jerry
+  logicblock_escape_multiball_shot_accrual_updated.300{value[2]}:
+    v_escape_jerry_safe:
+      action: set
+      int: 1
+
+  # Sally
+  logicblock_escape_multiball_shot_accrual_updated.400{value[3]}:
+    v_escape_sally_safe:
+      action: set
+      int: 1
+
+  # Kirk
+  logicblock_escape_multiball_shot_accrual_updated.500{value[4]}:
+    v_escape_kirk_safe:
+      action: set
+      int: 1
+
+  cmd_escape_multiball_reset_kid_variables{value[0]}:
+    v_escape_franklin_safe:
+      action: set
+      int: 0
+    v_escape_pam_safe:
+      action: set
+      int: 0
+    v_escape_jerry_safe:
+      action: set
+      int: 0
+    v_escape_sally_safe:
+      action: set
+      int: 0
+    v_escape_kirk_safe:
+      action: set
+      int: 0
+
+##################################################
+# Events
+##################################################
+
 event_player:
 
   mode_escape_multiball_started:
@@ -79,7 +130,6 @@ event_player:
     cmd_escape_multiball_reset_jackpot_variables:
     cmd_start_escape_multiball:
     cmd_escape_multiball_refresh:
-    cmd_escape_multiball_start_kids:
     cmd_escape_multiball_shot_accrual_reset:
 
   ## control flow ##
@@ -87,15 +137,21 @@ event_player:
   cmd_escape_multiball_refresh.1{current_player.v_escape_multiball_state=="ready"}:
     cmd_turn_on_escape_multiball_jackpot_lights:
     cmd_escape_multiball_turn_off_light_captive_ball:
-    cmd_escpae_multiball_turn_off_super_jackpot_lights:
+    cmd_escape_multiball_turn_off_super_jackpot_lights:
+    # shows
+    cmd_escape_multiball_stop_leatherface_chase_show:
+    cmd_escape_multiball_start_kids:
   cmd_escape_multiball_refresh.2{current_player.v_escape_multiball_state=="captive_shot"}:
     cmd_turn_off_escape_multiball_jackpot_lights:
     cmd_escape_multiball_turn_on_light_captive_ball:
-    cmd_escpae_multiball_turn_off_super_jackpot_lights:
+    cmd_escape_multiball_turn_off_super_jackpot_lights:
+    # shows
+    cmd_start_escape_leatherface_show_timer:
+
   cmd_escape_multiball_refresh.3{current_player.v_escape_multiball_state=="super_jackpot"}:
     cmd_escape_multiball_turn_off_light_captive_ball:
     cmd_turn_off_escape_multiball_jackpot_lights:
-    cmd_escpae_multiball_turn_on_super_jackpot_lights:
+    cmd_escape_multiball_turn_on_super_jackpot_lights:
 
   cmd_escape_multiball_captive_ball_hit.1{device.accruals.escape_multiball_shot_accrual.completed}:
     cmd_set_escape_multiball_state:
@@ -117,6 +173,12 @@ event_player:
     - cmd_stop_escape_multiball_mode
     - cmd_escape_multiball_shot_accrual_reset
 
+  ## shows ##
+
+  timer_escape_multiball_leatherface_show_timer_complete{current_player.v_escape_multiball_state=="captive_shot"}:
+    cmd_escape_multiball_stop_kids:
+    cmd_escape_multiball_start_leatherface_chase_show:
+
   ## lights ##
 
   cmd_turn_on_escape_multiball_jackpot_lights.1{current_player.v_escape_jackpot_slaughter_house_collected==0}:
@@ -136,18 +198,6 @@ event_player:
     cmd_escape_multiball_turn_off_light_left_ramp:
     cmd_escape_multiball_turn_off_light_right_ramp:
     cmd_escape_multiball_turn_off_light_right_orbit:
-
-  ## config hack ##
-  cmd_escape_multiball_show_safe_jerry:
-    cmd_bobo_config_hack
-  cmd_escape_multiball_show_safe_franklin:
-    cmd_bobo_config_hack
-  cmd_escape_multiball_show_safe_pam:
-    cmd_bobo_config_hack
-  cmd_escape_multiball_show_safe_sally:
-    cmd_bobo_config_hack
-  cmd_escape_multiball_show_safe_kirk:
-    cmd_bobo_config_hack
 
   ## switches ##
 
@@ -223,9 +273,9 @@ event_player:
 accruals:
   escape_multiball_shot_accrual:
     events:
-      - cmd_escape_multiball_accrual_slaughter_house
       - cmd_escape_multiball_accrual_left_orbit
       - cmd_escape_multiball_accrual_left_ramp
+      - cmd_escape_multiball_accrual_slaughter_house
       - cmd_escape_multiball_accrual_right_ramp
       - cmd_escape_multiball_accrual_right_orbit
     reset_events:
@@ -244,6 +294,15 @@ multiballs:
     shoot_again: 5s
     start_events: cmd_start_escape_multiball
 
+timers:
+  escape_multiball_leatherface_show_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 3s
+    control_events:
+      - action: restart
+        event: cmd_start_escape_leatherface_show_timer
+
 ###################################################
 # Sound & Graphics
 ###################################################
@@ -251,17 +310,28 @@ multiballs:
 show_player:
   cmd_escape_multiball_start_leatherface_chase_show:
     escape_multiball_leatherface_chase:
-      priority: 2000
+      priority: 10000
       action: play
       loops: -1
   cmd_escape_multiball_stop_leatherface_chase_show:
     escape_multiball_leatherface_chase:
       action: stop 
-  cmd_escape_multiball_start_kids:
+  cmd_escape_multiball_start_kids.10:
     escape_multiball_kids:
-      priority: 1000
+      priority: 10000
       action: play
       loops: -1
+      show_tokens:
+        franklin_safe_text_opacity: (current_player.v_escape_franklin_safe)
+        franklin_safe_bg_opacity: (current_player.v_escape_franklin_safe * 0.3)
+        pam_safe_text_opacity: (current_player.v_escape_pam_safe)
+        pam_safe_bg_opacity: (current_player.v_escape_pam_safe * 0.3)
+        jerry_safe_text_opacity: (current_player.v_escape_jerry_safe)
+        jerry_safe_bg_opacity: (current_player.v_escape_jerry_safe * 0.3)
+        sally_safe_text_opacity: (current_player.v_escape_sally_safe)
+        sally_safe_bg_opacity: (current_player.v_escape_sally_safe * 0.3)
+        kirk_safe_text_opacity: (current_player.v_escape_kirk_safe)
+        kirk_safe_bg_opacity: (current_player.v_escape_kirk_safe * 0.3)
   cmd_escape_multiball_stop_kids:
     escape_multiball_kids:
       action: stop 
@@ -303,7 +373,7 @@ light_player:
   cmd_escape_multiball_turn_off_light_right_orbit:
     right_orbit_arrow: 0
 
-  cmd_escpae_multiball_turn_on_super_jackpot_lights:
+  cmd_escape_multiball_turn_on_super_jackpot_lights:
     super_duper_jackpot: ff
-  cmd_escpae_multiball_turn_off_super_jackpot_lights:
+  cmd_escape_multiball_turn_off_super_jackpot_lights:
     super_duper_jackpot: 0

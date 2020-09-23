@@ -18,6 +18,9 @@ event_player:
   cmd_play_escape_multiball:
     - cmd_stop_music
 
+#  cmd_test_flipper_left:
+#    - cmd_stop_music
+
 sound_player:
 
   ##################################################

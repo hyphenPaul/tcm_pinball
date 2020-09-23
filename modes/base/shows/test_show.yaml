@@ -1,0 +1,12 @@
+#show_version=5
+#
+- duration: 10.2s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: hammer_time_intro_v2
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0

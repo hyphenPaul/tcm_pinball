@@ -49,3 +49,4 @@ custom_code:
   - scriptlets.magnaramp.Magnaramp
   - scriptlets.mystery.Mystery
   - scriptlets.skill_shot.SkillShot
+  - scriptlets.test.Test

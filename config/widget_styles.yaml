@@ -34,7 +34,7 @@ widget_styles:
     z: 20
   bonus_bottom_style:
     anchor_y: botton
-    y: 1
+    y: 2
     font_name: pinball_score_v2
     font_size: 22
     number_grouping: true

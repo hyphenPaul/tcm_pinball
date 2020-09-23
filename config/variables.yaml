@@ -267,3 +267,13 @@ player_vars:
   v_escape_multiball_state:
     initial_value: "ready"
     value_type: str
+  v_escape_franklin_safe:
+    initial_value: 0
+  v_escape_pam_safe:
+    initial_value: 0
+  v_escape_jerry_safe:
+    initial_value: 0
+  v_escape_sally_safe:
+    initial_value: 0
+  v_escape_kirk_safe:
+    initial_value: 0

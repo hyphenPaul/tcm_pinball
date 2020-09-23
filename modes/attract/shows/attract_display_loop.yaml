@@ -1,15 +1,15 @@
 #show_version=5
 
-#- duration: 200s
-#  slides:
-#    slide_1:
-#      widgets:
-#      - type: image
-#        image: shoot_the_van_v5
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 0
-#        y: 0
+- duration: 200s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: hammer_time_intro_test
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
 #  slides:
 #    slide_1:
 #      widgets:
@@ -315,6 +315,7 @@
       - type: text
         text: TEXAS
         style: big
+        round_anchor_x: left
         font_size: 14
 
 - duration: 1.5s
@@ -324,7 +325,8 @@
       - type: text
         text: CHAINSAW
         style: big
-        font_size: 15
+        round_anchor_x: left
+        font_size: 14
 
 - duration: 1.5s
   slides:
@@ -333,7 +335,8 @@
       - type: text
         text: MASSACRE
         style: big
-        font_size: 15
+        round_anchor_x: left
+        font_size: 14
 
 - duration: 1s
   slides:
@@ -352,7 +355,8 @@
       widgets:
       - type: text
         text: PRESS START
-        font_size: 15
+        font_size: 14
+        round_anchor_x: left
         color: black
         style: big
         animations:

@@ -85,7 +85,7 @@ slides:
       style: big
       round_anchor_x: left
       anchor_y: bottom
-      y: 20
+      y: 21
     - type: text
       text: (score)
       style: bonus_bottom_style
@@ -125,7 +125,7 @@ slides:
       style: big
       round_anchor_x: left
       anchor_y: bottom
-      y: 20
+      y: 21
     - type: text
       text: (score)
       style: bonus_bottom_style
@@ -165,7 +165,7 @@ slides:
       style: big
       round_anchor_x: left
       anchor_y: bottom
-      y: 20
+      y: 21
     - type: text
       text: (score)
       style: bonus_bottom_style
@@ -205,7 +205,7 @@ slides:
       style: big
       round_anchor_x: left
       anchor_y: bottom
-      y: 20
+      y: 21
     - type: text
       text: (score)
       style: bonus_bottom_style
@@ -245,7 +245,7 @@ slides:
       style: big
       round_anchor_x: left
       anchor_y: bottom
-      y: 20
+      y: 21
     - type: text
       text: (score)
       style: bonus_bottom_style
@@ -285,7 +285,7 @@ slides:
       style: big
       round_anchor_x: left
       anchor_y: bottom
-      y: 20
+      y: 21
     - type: text
       text: (multiplier)X
       style: bonus_bottom_style
@@ -326,7 +326,7 @@ slides:
         style: big
         round_anchor_x: left
         anchor_y: bottom
-        y: 20
+        y: 21
       - type: text
         text: (score)
         style: bonus_bottom_style

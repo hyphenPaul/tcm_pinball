@@ -24,6 +24,18 @@ show_player:
       show_tokens:
         lights: shoot_again
 
+#  cmd_test_flipper_left:
+#    test_show:
+#      action: play
+#      loops: 0
+#
+#sound_player:
+#  cmd_test_flipper_left:
+#    hammer_time_intro_v2_score:
+#      action: play
+#      loops: 0
+
+
 ball_saves:
   player_start:
     active_time: 10s
@@ -50,7 +62,7 @@ slides:
       - type: text
         text: PLAYER (number)
         style: small
-        y: 0
+        y: 1
         x: left+2
         anchor_x: left
         anchor_y: bottom
@@ -58,7 +70,7 @@ slides:
       - type: text
         text: BALL (ball)
         style: small
-        y: 0
+        y: 1
         x: right-2
         anchor_x: right
         anchor_y: bottom

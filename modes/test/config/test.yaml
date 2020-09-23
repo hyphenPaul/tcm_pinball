@@ -36,14 +36,16 @@ show_player:
       events_when_completed: cmd_test_show_2_complete
 
 event_player:
-#   s_left_flipper_active:
-#     cmd_play_magna_vuk_queue
-  s_right_flipper_active.2:
-    cmd_custom_magna_vuk_queue_event:
-      post: cmd_play_test_show_1
-      wait_for: cmd_test_show_1_complete
-  s_right_flipper_active.1:
-    cmd_custom_magna_vuk_queue_event:
-      post: cmd_play_test_show_2
-      wait_for: cmd_test_show_2_complete
+   s_left_flipper_active:
+     cmd_test_flipper
+#  s_right_flipper_active.2:
+#    cmd_custom_magna_vuk_queue_event:
+#      post: cmd_play_test_show_1
+#      wait_for: cmd_test_show_1_complete
+#  s_right_flipper_active.1:
+#    cmd_custom_magna_vuk_queue_event:
+#      post: cmd_play_test_show_2
+#      wait_for: cmd_test_show_2_complete
     # cmd_test_queue_event_player
+    #
+

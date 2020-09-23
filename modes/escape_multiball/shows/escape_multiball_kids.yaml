@@ -9,36 +9,27 @@
           text: SAFE
           color: black
           style: small
+          opacity: (franklin_safe_text_opacity)
           anchor_x: 0
           anchor_y: 0
           x: 3
-          y: 38
+          y: 13
           animations:
-            show_slide:
-              - property: y
-                value: 13
-                duration: 2
-              - property: y
-                value: -3
-                duration: 0.3
-              - property: y
-                value: 38
-                duration: 0
-              - property: y
-                value: 13
-                duration: 0.3
-                repeat: True
+            cmd_escape_multiball_show_safe_franklin:
+              - property: opacity
+                value: 1
+                duration: 0.5s
         - type: rectangle
           color: white
           anchor_x: 0
           anchor_y: 0
           x: 0
           y: 0
-          opacity: 0
+          opacity: (franklin_safe_bg_opacity)
           width: 25
           height: 32
           animations:
-            show_slide:
+            cmd_escape_multiball_show_safe_franklin:
               - property: opacity
                 value: 0.3
                 duration: 0.5s
@@ -48,32 +39,23 @@
           text: SAFE
           color: black
           style: small
+          opacity: (pam_safe_text_opacity)
           anchor_x: 0
           anchor_y: 0
           x: 28
-          y: 38
+          y: 13
           animations:
             cmd_escape_multiball_show_safe_pam:
-              - property: y
-                value: 13
-                duration: 2
-              - property: y
-                value: -3
-                duration: 0.3
-              - property: y
-                value: 38
-                duration: 0
-              - property: y
-                value: 13
-                duration: 0.3
-                repeat: True
+              - property: opacity
+                value: 1
+                duration: 0.5s
         - type: rectangle
           color: white
           anchor_x: 0
           anchor_y: 0
           x: 26
           y: 0
-          opacity: 0
+          opacity: (pam_safe_bg_opacity)
           width: 25
           height: 32
           animations:
@@ -87,32 +69,23 @@
           text: SAFE
           color: black
           style: small
+          opacity: (jerry_safe_text_opacity)
           anchor_x: 0
           anchor_y: 0
           x: 54
-          y: 38
+          y: 13
           animations:
             cmd_escape_multiball_show_safe_jerry:
-              - property: y
-                value: 13
-                duration: 2
-              - property: y
-                value: -3
-                duration: 0.3
-              - property: y
-                value: 38
-                duration: 0
-              - property: y
-                value: 13
-                duration: 0.3
-                repeat: True
+              - property: opacity
+                value: 1
+                duration: 0.5s
         - type: rectangle
           color: white
           anchor_x: 0
           anchor_y: 0
           x: 51
           y: 0
-          opacity: 0
+          opacity: (jerry_safe_bg_opacity)
           width: 25
           height: 32
           animations:
@@ -126,32 +99,23 @@
           text: SAFE
           color: black
           style: small
+          opacity: (sally_safe_text_opacity)
           anchor_x: 0
           anchor_y: 0
           x: 80
-          y: 38
+          y: 13
           animations:
             cmd_escape_multiball_show_safe_sally:
-              - property: y
-                value: 13
-                duration: 2
-              - property: y
-                value: -3
-                duration: 0.3
-              - property: y
-                value: 38
-                duration: 0
-              - property: y
-                value: 13
-                duration: 0.3
-                repeat: True
+              - property: opacity
+                value: 1
+                duration: 0.5s
         - type: rectangle
           color: white
           anchor_x: 0
           anchor_y: 0
           x: 77
           y: 0
-          opacity: 0
+          opacity: (sally_safe_bg_opacity)
           width: 25
           height: 32
           animations:
@@ -165,36 +129,27 @@
           text: SAFE
           color: black
           style: small
+          opacity: (kirk_safe_text_opacity)
           anchor_x: 0
           anchor_y: 0
           x: 106
-          y: 38
+          y: 13
           animations:
-            cmd_escape_multiball_show_safe_kirk:
-              - property: y
-                value: 13
-                duration: 2
-              - property: y
-                value: -3
-                duration: 0.3
-              - property: y
-                value: 38
-                duration: 0
-              - property: y
-                value: 13
-                duration: 0.3
-                repeat: True
+            cmd_escape_multiball_show_safe_pam:
+              - property: opacity
+                value: 1
+                duration: 0.5s
         - type: rectangle
           color: white
           anchor_x: 0
           anchor_y: 0
-          x: 103
+          x: 26
           y: 0
-          opacity: 0
+          opacity: (kirk_safe_bg_opacity)
           width: 25
           height: 32
           animations:
-            cmd_escape_multiball_show_safe_kirk:
+            cmd_escape_multiball_show_safe_pam:
               - property: opacity
                 value: 0.3
                 duration: 0.5s

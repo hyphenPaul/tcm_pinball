@@ -133,7 +133,7 @@ shows:
             anchor_x: 0
             anchor_y: 0
             x: 1
-            y: 0
+            y: 1
           - type: image
             image: pops_hitchhiker_up_v2
             anchor_x: 0
