@@ -135,7 +135,7 @@
           x: 106
           y: 13
           animations:
-            cmd_escape_multiball_show_safe_pam:
+            cmd_escape_multiball_show_safe_kirk:
               - property: opacity
                 value: 1
                 duration: 0.5s
@@ -143,13 +143,13 @@
           color: white
           anchor_x: 0
           anchor_y: 0
-          x: 26
+          x: 103
           y: 0
           opacity: (kirk_safe_bg_opacity)
           width: 25
           height: 32
           animations:
-            cmd_escape_multiball_show_safe_pam:
+            cmd_escape_multiball_show_safe_kirk:
               - property: opacity
                 value: 0.3
                 duration: 0.5s
