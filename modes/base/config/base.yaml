@@ -44,6 +44,13 @@ ball_saves:
     balls_to_save: 1
     grace_period: 2s
     eject_delay: 3.2s
+  multiball_start:
+    active_time: 20s
+    enable_events: mode_escape_multiball_started
+    auto_launch: yes
+    balls_to_save: -1
+    grace_period: 5s
+    
 
 slides:
   base_score_slide:

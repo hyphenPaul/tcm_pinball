@@ -15,8 +15,13 @@ event_player:
     - cmd_start_post_skillshot_sound
     - cmd_start_base_music
 
-  cmd_play_escape_multiball:
+  mode_escape_multiball_started:
     - cmd_stop_music
+    - cmd_start_escape_multiball_music
+
+  mode_escape_multiball_stopping:
+    - cmd_stop_escape_multiball_music
+    - cmd_start_base_music
 
 #  cmd_test_flipper_left:
 #    - cmd_stop_music

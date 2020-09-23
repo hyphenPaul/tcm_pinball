@@ -14,9 +14,6 @@ mode:
 variable_player:
 
   cmd_escape_multiball_reset_jackpot_variables:
-    v_escape_jackpot_captive_ball_collected:
-      action: set
-      int: 0
     v_escape_jackpot_left_ramp_collected:
       action: set
       int: 0
@@ -33,22 +30,27 @@ variable_player:
       action: set
       int: 0
 
-  cmd_escape_multiball_jackpot_variable_left_ramp:
-    v_escape_jackpot_left_ramp_collected:
-      action: set
-      int: 1
+  # Franklin
   cmd_escape_multiball_jackpot_variable_left_orbit:
     v_escape_jackpot_left_orbit_collected:
       action: set
       int: 1
-  cmd_escape_multiball_jackpot_variable_right_ramp:
-    v_escape_jackpot_right_ramp_collected:
+  # Pam
+  cmd_escape_multiball_jackpot_variable_left_ramp:
+    v_escape_jackpot_left_ramp_collected:
       action: set
       int: 1
+  # Jerry
   cmd_escape_multiball_jackpot_variable_slaughter_house:
     v_escape_jackpot_slaughter_house_collected:
       action: set
       int: 1
+  # Sally
+  cmd_escape_multiball_jackpot_variable_right_ramp:
+    v_escape_jackpot_right_ramp_collected:
+      action: set
+      int: 1
+  # Kirk
   cmd_escape_multiball_jackpot_variable_right_orbit:
     v_escape_jackpot_right_orbit_collected:
       action: set
@@ -68,53 +70,6 @@ variable_player:
     v_escape_multiball_state:
       action: set
       string: "super_jackpot"
-
-  # Franklin
-  logicblock_escape_multiball_shot_accrual_updated.100{value[0]}:
-    v_escape_franklin_safe:
-      action: set
-      int: 1
-
-  # Pam
-  logicblock_escape_multiball_shot_accrual_updated.200{value[1]}:
-    v_escape_pam_safe:
-      action: set
-      int: 1
-
-  # Jerry
-  logicblock_escape_multiball_shot_accrual_updated.300{value[2]}:
-    v_escape_jerry_safe:
-      action: set
-      int: 1
-
-  # Sally
-  logicblock_escape_multiball_shot_accrual_updated.400{value[3]}:
-    v_escape_sally_safe:
-      action: set
-      int: 1
-
-  # Kirk
-  logicblock_escape_multiball_shot_accrual_updated.500{value[4]}:
-    v_escape_kirk_safe:
-      action: set
-      int: 1
-
-  cmd_escape_multiball_reset_kid_variables{value[0]}:
-    v_escape_franklin_safe:
-      action: set
-      int: 0
-    v_escape_pam_safe:
-      action: set
-      int: 0
-    v_escape_jerry_safe:
-      action: set
-      int: 0
-    v_escape_sally_safe:
-      action: set
-      int: 0
-    v_escape_kirk_safe:
-      action: set
-      int: 0
 
 ##################################################
 # Events
@@ -258,6 +213,7 @@ event_player:
 
   s_super_duper_jackpot_active{current_player.v_escape_multiball_state=="super_jackpot"}:
     cmd_escape_multiball_shot_accrual_reset:
+    cmd_escape_multiball_reset_kid_variables:
     cmd_escape_multiball_reset_jackpot_variables:
     cmd_set_escape_multiball_state:
       state:
@@ -308,33 +264,54 @@ timers:
 ###################################################
 
 show_player:
+
   cmd_escape_multiball_start_leatherface_chase_show:
     escape_multiball_leatherface_chase:
       priority: 10000
       action: play
       loops: -1
+
   cmd_escape_multiball_stop_leatherface_chase_show:
     escape_multiball_leatherface_chase:
       action: stop 
+
   cmd_escape_multiball_start_kids.10:
     escape_multiball_kids:
       priority: 10000
       action: play
       loops: -1
       show_tokens:
-        franklin_safe_text_opacity: (current_player.v_escape_franklin_safe)
-        franklin_safe_bg_opacity: (current_player.v_escape_franklin_safe * 0.3)
-        pam_safe_text_opacity: (current_player.v_escape_pam_safe)
-        pam_safe_bg_opacity: (current_player.v_escape_pam_safe * 0.3)
-        jerry_safe_text_opacity: (current_player.v_escape_jerry_safe)
-        jerry_safe_bg_opacity: (current_player.v_escape_jerry_safe * 0.3)
-        sally_safe_text_opacity: (current_player.v_escape_sally_safe)
-        sally_safe_bg_opacity: (current_player.v_escape_sally_safe * 0.3)
-        kirk_safe_text_opacity: (current_player.v_escape_kirk_safe)
-        kirk_safe_bg_opacity: (current_player.v_escape_kirk_safe * 0.3)
+        franklin_safe_text_opacity: (current_player.v_escape_jackpot_left_orbit_collected)
+        franklin_safe_bg_opacity: (current_player.v_escape_jackpot_left_orbit_collected * 0.3)
+        pam_safe_text_opacity: (current_player.v_escape_jackpot_left_ramp_collected)
+        pam_safe_bg_opacity: (current_player.v_escape_jackpot_left_ramp_collected * 0.3)
+        jerry_safe_text_opacity: (current_player.v_escape_jackpot_slaughter_house_collected)
+        jerry_safe_bg_opacity: (current_player.v_escape_jackpot_slaughter_house_collected * 0.3)
+        sally_safe_text_opacity: (current_player.v_escape_jackpot_right_ramp_collected)
+        sally_safe_bg_opacity: (current_player.v_escape_jackpot_right_ramp_collected * 0.3)
+        kirk_safe_text_opacity: (current_player.v_escape_jackpot_right_orbit_collected)
+        kirk_safe_bg_opacity: (current_player.v_escape_jackpot_right_orbit_collected * 0.3)
+
   cmd_escape_multiball_stop_kids:
     escape_multiball_kids:
       action: stop 
+
+  # Ball Save (needs to be here, did not work in the base.yaml)
+
+  ball_save_multiball_start_enabled:
+    on:
+      show_tokens:
+        lights: shoot_again
+
+  ball_save_multiball_start_disabled:
+    off:
+      show_tokens:
+        lights: shoot_again
+
+  ball_save_multiball_start_grace_period:
+    off:
+      show_tokens:
+        lights: shoot_again
 
 light_player:
 
