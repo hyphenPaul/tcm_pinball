@@ -82,6 +82,15 @@ sound_player:
       action: play
       loops: -1
 
+  cmd_start_escape_multiball_music:
+    escape_multiball_music_temp:
+      action: play
+      loops: -1
+
+  cmd_stop_escape_multiball_music:
+    escape_multiball_music_temp:
+      action: stop
+
   cmd_main_music_volume_down:
     base_bg_music:
       volume: 0.10

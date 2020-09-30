@@ -1,6 +1,6 @@
 #show_version=5
 
-- duration: 8s
+- duration: 7.5s
   slides:
     ball_locked_slide:
       widgets:

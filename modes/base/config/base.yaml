@@ -153,6 +153,21 @@ variable_player:
       action: set
       int: 1
 
+
+  ########################################
+  # Universal Variable Player
+  ########################################
+
+  # It keeps turning off the main animation during multiball so I have this garbage hack
+  cmd_start_mode_escape_multiball:
+    v_play_help_animation:
+      action: set
+      int: 0
+  cmd_stop_mode_escape_multiball:
+    v_play_help_animation:
+      action: set
+      int: 1
+
   ########################################
   # Testing
   ########################################

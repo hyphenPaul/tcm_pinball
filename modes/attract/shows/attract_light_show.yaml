@@ -8,7 +8,7 @@
     grid_space_jam: off
     grid_rebound: off
     grid_slam: off
-    gird_fastbreak: off
+    grid_fastbreak: off
     grid_super_jackpot: off
     left_orbit_arrow: off
     captive_ball_arrow: off
@@ -88,7 +88,7 @@
     grid_space_jam: ff
     grid_rebound: ff
     grid_slam: ff
-    gird_fastbreak: ff
+    grid_fastbreak: ff
     grid_super_jackpot: ff
     left_orbit_arrow: ff
     captive_ball_arrow: ff

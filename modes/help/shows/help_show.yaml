@@ -1,6 +1,6 @@
 #show_version=5
 
-- duration: 3s
+- duration: 2.8s
   slides:
     slide_1:
       widgets:

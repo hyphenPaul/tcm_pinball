@@ -56,10 +56,9 @@ variable_player:
     bonus_multiplier: 1
 
 show_player:
-  cmd_play_help_show:
+  cmd_play_help_show{current_player.v_play_help_animation==1}:
     help_show:
       action: play
       loops: 0
       show_tokens:
         multiplier: (current_player.bonus_multiplier)
-        

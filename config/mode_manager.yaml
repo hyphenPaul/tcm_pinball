@@ -8,6 +8,7 @@ event_player:
 
   ball_starting:
     - cmd_start_mode_base
+    - cmd_start_modes
     - cmd_start_mode_chainsaw
     - cmd_start_mode_escape
       #    - cmd_start_mode_test

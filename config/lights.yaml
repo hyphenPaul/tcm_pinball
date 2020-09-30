@@ -13,7 +13,7 @@ lights:
     number: L05
   grid_slam:
     number: L06
-  gird_fastbreak:
+  grid_fastbreak:
     number: L07
   grid_super_jackpot:
     number: L08

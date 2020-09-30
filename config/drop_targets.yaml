@@ -1,18 +1,18 @@
 #config_version=5
 
 drop_targets:
-  top:
+  n:
     switch: s_3_bank_drop_top
     reset_coil: c_3_bank_drop_target_reset
-  mid:
+  a:
     switch: s_3_bank_drop_mid
     reset_coil: c_3_bank_drop_target_reset
-  bottom:
+  v:
     switch: s_3_bank_drop_bottom
     reset_coil: c_3_bank_drop_target_reset
 
 drop_target_banks:
-  drop: #TODO: needs a rename
-    drop_targets: top, mid, bottom
+  van: #TODO: needs a rename
+    drop_targets: v, a, n
     reset_coils: c_3_bank_drop_target_reset
-    reset_on_complete: 0.5s
+    reset_events: cmd_reset_van_drop_targets

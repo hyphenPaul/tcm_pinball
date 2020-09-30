@@ -5,7 +5,7 @@ mode:
     - cmd_start_mode_escape_multiball
   stop_events:
     - cmd_stop_mode_escape_multiball
-  priority: 500
+  priority: 10000
 
 ##################################################
 # Variables
@@ -159,6 +159,8 @@ event_player:
   s_captive_ball_target_active{current_player.v_escape_multiball_state=="captive_shot"}:
     cmd_escape_multiball_captive_ball_jackpot:
     cmd_escape_multiball_captive_ball_hit:
+    cmd_escape_multiball_play_jackpot_show:
+    cmd_escape_multiball_play_jackpot_sound:
 
   s_slaughter_house_target_active{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_slaughter_house_collected==0}:
     cmd_set_escape_multiball_state:
@@ -254,7 +256,7 @@ timers:
   escape_multiball_leatherface_show_timer:
     start_value: 0
     end_value: 1
-    tick_interval: 3s
+    tick_interval: 1.5s
     control_events:
       - action: restart
         event: cmd_start_escape_leatherface_show_timer
@@ -273,7 +275,14 @@ show_player:
 
   cmd_escape_multiball_stop_leatherface_chase_show:
     escape_multiball_leatherface_chase:
-      action: stop 
+      priority: 10000
+      action: stop
+
+  cmd_escape_multiball_play_jackpot_show:
+    escape_multiball_jackpot:
+      priority: 10000
+      action: play
+      loops: 0
 
   cmd_escape_multiball_start_kids.10:
     escape_multiball_kids:
@@ -294,7 +303,7 @@ show_player:
 
   cmd_escape_multiball_stop_kids:
     escape_multiball_kids:
-      action: stop 
+      action: stop
 
   # Ball Save (needs to be here, did not work in the base.yaml)
 
@@ -354,3 +363,7 @@ light_player:
     super_duper_jackpot: ff
   cmd_escape_multiball_turn_off_super_jackpot_lights:
     super_duper_jackpot: 0
+
+sound_player:
+  cmd_escape_multiball_play_jackpot_sound: escape_mb_jackpot_v1_score
+
