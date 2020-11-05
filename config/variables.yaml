@@ -74,7 +74,6 @@ machine_vars:
   mode_bonus_value:
     initial_value: 100_000
 
-  
   #####################################
   # Escape Multiball
   #####################################
@@ -249,8 +248,8 @@ player_vars:
   v_balls_locked_count:
     initial_value: 0
   v_escape_state:
-#    initial_value: "start"
-    initial_value: "lock_3_lit"
+    initial_value: "start"
+#    initial_value: "lock_3_lit"
     value_type: str
 
   #####################################
@@ -274,3 +273,5 @@ player_vars:
   v_escape_multiball_state:
     initial_value: "ready"
     value_type: str
+  v_escape_shoot_captive_ball_vo_fired:
+    initial_value: 0

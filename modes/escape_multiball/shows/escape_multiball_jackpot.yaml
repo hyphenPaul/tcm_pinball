@@ -1,11 +1,11 @@
 #show_version=5
 
-- duration: 2.7s
+- duration: 2.2s
   slides:
     escape_multiball_jackpot_slide:
       widgets:
       - type: image
-        image: escape_mb_jackpot_v1
+        image: escape_mb_jackpot_v2
         anchor_x: 0
         anchor_y: 0
         x: 0

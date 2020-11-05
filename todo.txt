@@ -1,3 +1,17 @@
+bugs
+- mask mania dead skin mask not turning off
+
+todo:
+  - We should cut background music out when the mystery meater goes
+  - "your bonus got more help" audio
+  - add 2x playfield to mystery meat
+  - make sure mystery starts over
+  - make sure mask values persist
+  - disable franklin shots during hurry up
+  - add value to back to hurry up when you hit the orbits
+  - make sure the hurry turns off end of ball (everything should)
+  - Base level bonus (10000)
+
 - skill shot
   - sound design
     - left ramp made
@@ -8,8 +22,6 @@
   - lock only when applicable
   - it's not working on later balls - probably in a weird state
 
-- disable mystery after complete
-- deactivate hook during multiball
 - finish hook counter
 - finish the mystery activating bonuses
 - mystery meater gets harder
@@ -26,15 +38,49 @@ Nice to have
 -- drunk flippers (30s reverse flippers but double playfield)
 -- one shot one kill (a single chance to shoot a basket)
 
-
+----------------------------------------------------------------------------------------
+Post update list:
 ----------------------------------------------------------------------------------------
 
-Media list:
+- lock lights not showing up
 
-Bumper sounds
-Light lock sounds
-Fix ghosting around multiball girl face
-Bonus music (tweak a bit)
-Franklin Hurry up award music
-Flipper lane sound effects
-Fix Jackpot Font
+----------------------------------------------------------------------------------------
+Media list:
+----------------------------------------------------------------------------------------
+
+Video
+
+- Mystery Meat Text Pages for awards
+- Fix ghosting around multiball girl face
+
+--------------------------------------------------
+
+Audio
+
+- scratch voiceover
+- Escape Multiball Begin Animation Audio
+- Bumper sounds
+- Franklin Hurry up award music
+- Flipper inlane sound effects
+
+----------------------------------------------------------------------------------------
+Script:
+----------------------------------------------------------------------------------------
+
+- Shoot for the captive ball
+- Hit the captive ball
+- Save the kids
+- We gotta get outta here
+- He's coming for us
+- She's Safe
+- He's Safe
+- He got away
+- She got away
+- chainsaw sounds with ground walking
+- Shoot for super jackpot
+- Shoot for the lit arrows
+- Shoot the lit shots
+- Captive ball target hit sound
+- Sounds effect for "safe" hit
+- Multiball
+- 

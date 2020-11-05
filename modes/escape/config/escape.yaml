@@ -309,7 +309,10 @@ shot_groups:
 
 sound_player:
   cmd_play_ball_lock_audio: ball_lock_audio
-  cmd_play_escape_multiball_audio: escape_multiball_intro
+  cmd_play_escape_multiball_audio:
+    escape_multiball_intro:
+      action: play
+      volume: 0.3
 
 animations:
   flicker_lock:

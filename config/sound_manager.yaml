@@ -1,4 +1,4 @@
-#config_version=5 
+#config_version=5
 
 event_player:
   mode_attract_started:
@@ -83,12 +83,13 @@ sound_player:
       loops: -1
 
   cmd_start_escape_multiball_music:
-    escape_multiball_music_temp:
+    escape_mb_v2_music:
       action: play
+      volume: 0.3
       loops: -1
 
   cmd_stop_escape_multiball_music:
-    escape_multiball_music_temp:
+    escape_mb_v2_music:
       action: stop
 
   cmd_main_music_volume_down:
