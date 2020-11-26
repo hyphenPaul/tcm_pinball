@@ -83,13 +83,13 @@ sound_player:
       loops: -1
 
   cmd_start_escape_multiball_music:
-    escape_mb_v2_music:
+    escape_multiball_v2_1:
       action: play
       volume: 0.3
       loops: -1
 
   cmd_stop_escape_multiball_music:
-    escape_mb_v2_music:
+    escape_multiball_v2_1:
       action: stop
 
   cmd_main_music_volume_down:

@@ -66,7 +66,7 @@ coils:
     default_hold_power: 0.7
   c_flash_jump_ball:
     number: C19
-  c_sawyer_house_vuk:
+  c_van_vuk:
     number: C20
     allow_enable: true
     default_pulse_ms: 40

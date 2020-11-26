@@ -50,4 +50,4 @@ custom_code:
   - scriptlets.mystery.Mystery
   - scriptlets.skill_shot.SkillShot
   - scriptlets.test.Test
-#  - scriptlets.modes.Modes
+  - scriptlets.modes.Modes

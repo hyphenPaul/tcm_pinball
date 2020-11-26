@@ -56,6 +56,31 @@ variable_player:
       action: set
       int: 1
 
+  cmd_escape_set_last_saved_kid_franklin:
+    v_escape_last_saved_kid:
+      action: set
+      string: "franklin"
+
+  cmd_escape_set_last_saved_kid_pam:
+    v_escape_last_saved_kid:
+      action: set
+      string: "pam"
+
+  cmd_escape_set_last_saved_kid_jerry:
+    v_escape_last_saved_kid:
+      action: set
+      string: "jerry"
+
+  cmd_escape_set_last_saved_kid_sally:
+    v_escape_last_saved_kid:
+      action: set
+      string: "sally"
+
+  cmd_escape_set_last_saved_kid_kirk:
+    v_escape_last_saved_kid:
+      action: set
+      string: "kirk"
+
   cmd_set_escape_multiball_state.1{state=="ready"}:
     v_escape_multiball_state:
       action: set
@@ -94,6 +119,7 @@ event_player:
         type: string
     cmd_escape_multiball_reset_jackpot_variables:
     cmd_start_escape_multiball:
+    cmd_escape_multiball_show_intro_show:
     cmd_escape_multiball_refresh:
     cmd_escape_multiball_shot_accrual_reset:
     cmd_escape_shoot_captive_ball_vo_fired_off:
@@ -104,6 +130,7 @@ event_player:
     cmd_escape_multiball_turn_off_light_captive_ball:
     cmd_escape_multiball_turn_off_super_jackpot_lights:
     # shows
+    cmd_escape_multiball_stop_super_jackpot_show:
     cmd_escape_multiball_stop_leatherface_chase_show:
     cmd_escape_multiball_start_kids:
   cmd_escape_multiball_refresh.2{current_player.v_escape_multiball_state=="captive_shot"}:
@@ -111,12 +138,17 @@ event_player:
     cmd_escape_multiball_turn_on_light_captive_ball:
     cmd_escape_multiball_turn_off_super_jackpot_lights:
     # shows
+    cmd_escape_multiball_stop_super_jackpot_show:
     cmd_start_escape_leatherface_show_timer:
 
   cmd_escape_multiball_refresh.3{current_player.v_escape_multiball_state=="super_jackpot"}:
     cmd_escape_multiball_turn_off_light_captive_ball:
     cmd_turn_off_escape_multiball_jackpot_lights:
     cmd_escape_multiball_turn_on_super_jackpot_lights:
+    # shows
+    cmd_escape_multiball_stop_leatherface_chase_show:
+    cmd_escape_multiball_start_super_jackpot_show:
+    cmd_escape_multiball_play_start_super_jackpot_sound:
 
   cmd_escape_multiball_captive_ball_hit.1{device.accruals.escape_multiball_shot_accrual.completed}:
     cmd_set_escape_multiball_state:
@@ -141,6 +173,7 @@ event_player:
 
   timer_escape_multiball_leatherface_show_timer_complete{current_player.v_escape_multiball_state=="captive_shot"}:
     cmd_escape_multiball_stop_kids:
+    cmd_escape_multiball_stop_super_jackpot_show:
     cmd_escape_multiball_start_leatherface_chase_show:
     cmd_start_shoot_captive_ball_vo_timer:
 
@@ -155,6 +188,21 @@ event_player:
 
   timer_escape_multiball_shes_safe_vo_timer_complete:
     cmd_escape_multiball_play_shes_safe_vo:
+
+  timer_escape_multiball_kid_callout_timer_complete{current_player.v_escape_last_saved_kid=="franklin"}:
+    cmd_escape_multiball_play_franklin_callout
+
+  timer_escape_multiball_kid_callout_timer_complete{current_player.v_escape_last_saved_kid=="pam"}:
+    cmd_escape_multiball_play_pam_callout
+
+  timer_escape_multiball_kid_callout_timer_complete{current_player.v_escape_last_saved_kid=="kirk"}:
+    cmd_escape_multiball_play_kirk_callout
+
+  timer_escape_multiball_kid_callout_timer_complete{current_player.v_escape_last_saved_kid=="sally"}:
+    cmd_escape_multiball_play_sally_callout
+
+  timer_escape_multiball_kid_callout_timer_complete{current_player.v_escape_last_saved_kid=="jerry"}:
+    cmd_escape_multiball_play_jerry_callout
 
   ## lights ##
 
@@ -189,6 +237,7 @@ event_player:
       state:
         value: machine.mv_escape_state_captive_shot
         type: string
+    cmd_escape_set_last_saved_kid_jerry:
     cmd_escape_multiball_jackpot:
     cmd_escape_multiball_jackpot_variable_slaughter_house:
     cmd_escape_multiball_accrual_slaughter_house:
@@ -196,11 +245,13 @@ event_player:
     cmd_escape_multiball_show_safe_jerry:
     cmd_escape_multiball_play_safe_sound:
     cmd_start_hes_safe_vo_timer:
+    cmd_escape_start_kid_callout_timer:
   left_orbit_hit{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_left_orbit_collected==0}:
     cmd_set_escape_multiball_state:
       state:
         value: machine.mv_escape_state_captive_shot
         type: string
+    cmd_escape_set_last_saved_kid_franklin:
     cmd_escape_multiball_jackpot:
     cmd_escape_multiball_jackpot_variable_left_orbit:
     cmd_escape_multiball_accrual_left_orbit:
@@ -208,11 +259,13 @@ event_player:
     cmd_escape_multiball_show_safe_franklin:
     cmd_escape_multiball_play_safe_sound:
     cmd_start_hes_safe_vo_timer:
+    cmd_escape_start_kid_callout_timer:
   left_ramp_hit{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_left_ramp_collected==0}:
     cmd_set_escape_multiball_state:
       state:
         value: machine.mv_escape_state_captive_shot
         type: string
+    cmd_escape_set_last_saved_kid_pam:
     cmd_escape_multiball_jackpot:
     cmd_escape_multiball_jackpot_variable_left_ramp:
     cmd_escape_multiball_accrual_left_ramp:
@@ -220,11 +273,13 @@ event_player:
     cmd_escape_multiball_show_safe_pam:
     cmd_escape_multiball_play_safe_sound:
     cmd_start_shes_safe_vo_timer:
+    cmd_escape_start_kid_callout_timer:
   right_ramp_hit{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_right_ramp_collected==0}:
     cmd_set_escape_multiball_state:
       state:
         value: machine.mv_escape_state_captive_shot
         type: string
+    cmd_escape_set_last_saved_kid_sally:
     cmd_escape_multiball_jackpot:
     cmd_escape_multiball_jackpot_variable_right_ramp:
     cmd_escape_multiball_accrual_right_ramp:
@@ -232,11 +287,13 @@ event_player:
     cmd_escape_multiball_show_safe_sally:
     cmd_escape_multiball_play_safe_sound:
     cmd_start_shes_safe_vo_timer:
+    cmd_escape_start_kid_callout_timer:
   right_orbit_hit{current_player.v_escape_multiball_state=="ready" and current_player.v_escape_jackpot_right_orbit_collected==0}:
     cmd_set_escape_multiball_state:
       state:
         value: machine.mv_escape_state_captive_shot
         type: string
+    cmd_escape_set_last_saved_kid_kirk:
     cmd_escape_multiball_jackpot:
     cmd_escape_multiball_jackpot_variable_right_orbit:
     cmd_escape_multiball_accrual_right_orbit:
@@ -244,6 +301,7 @@ event_player:
     cmd_escape_multiball_show_safe_kirk:
     cmd_escape_multiball_play_safe_sound:
     cmd_start_hes_safe_vo_timer:
+    cmd_escape_start_kid_callout_timer:
 
   s_super_duper_jackpot_active{current_player.v_escape_multiball_state=="super_jackpot"}:
     cmd_escape_multiball_shot_accrual_reset:
@@ -255,6 +313,8 @@ event_player:
         type: string
     cmd_escape_multiball_super_jackpot:
     cmd_escape_multiball_refresh:
+    cmd_escape_play_super_jackpot_hit_show:
+    cmd_escape_play_super_jackpot_hit_sound:
 
 ##################################################
 # Logicblocks
@@ -306,6 +366,13 @@ timers:
     control_events:
       - action: restart
         event: cmd_start_hes_safe_vo_timer
+  escape_multiball_kid_callout_timer:
+    start_value: 0
+    end_value: 1
+    tick_interval: 2.5s
+    control_events:
+      - action: restart
+        event: cmd_escape_start_kid_callout_timer
   escape_multiball_shes_safe_vo_timer:
     start_value: 0
     end_value: 1
@@ -327,6 +394,12 @@ timers:
 
 show_player:
 
+  cmd_escape_multiball_show_intro_show:
+    escape_multiball_intro_description:
+      priority: 20000
+      action: play
+      loops: 0
+
   cmd_escape_multiball_start_leatherface_chase_show:
     escape_multiball_leatherface_chase:
       priority: 10000
@@ -338,8 +411,25 @@ show_player:
       priority: 10000
       action: stop
 
+  cmd_escape_multiball_start_super_jackpot_show:
+    escape_multiball_super_jackpot:
+      priority: 10000
+      action: play
+      loops: -1
+
+  cmd_escape_multiball_stop_super_jackpot_show:
+    escape_multiball_super_jackpot:
+      priority: 10000
+      action: stop
+
   cmd_escape_multiball_play_jackpot_show:
     escape_multiball_jackpot:
+      priority: 10000
+      action: play
+      loops: 0
+
+  cmd_escape_play_super_jackpot_hit_show:
+    escape_multiball_super_jackpot_hit:
       priority: 10000
       action: play
       loops: 0
@@ -437,4 +527,25 @@ sound_player:
       volume: 1.0
   cmd_escape_multiball_play_shes_safe_vo:
     vo_shes_safe:
+      volume: 1.0
+  cmd_escape_multiball_play_start_super_jackpot_sound:
+    super_jackpot_is_lit_score_v1:
+      volume: 1.0
+  cmd_escape_play_super_jackpot_hit_sound:
+    escape_mb_super_jackpot_v1_score:
+      volume: 1.0
+  cmd_escape_multiball_play_jerry_callout{current_player.v_escape_shoot_captive_ball_vo_fired==1}:
+    escape_multiball_jerry_callout:
+      volume: 1.0
+  cmd_escape_multiball_play_pam_callout{current_player.v_escape_shoot_captive_ball_vo_fired==1}:
+    escape_multiball_pam_callout:
+      volume: 1.0
+  cmd_escape_multiball_play_kirk_callout{current_player.v_escape_shoot_captive_ball_vo_fired==1}:
+    escape_multiball_kirk_callout:
+      volume: 1.0
+  cmd_escape_multiball_play_franklin_callout{current_player.v_escape_shoot_captive_ball_vo_fired==1}:
+    escape_multiball_franklin_callout:
+      volume: 1.0
+  cmd_escape_multiball_play_sally_callout{current_player.v_escape_shoot_captive_ball_vo_fired==1}:
+    escape_multiball_sally_callout:
       volume: 1.0

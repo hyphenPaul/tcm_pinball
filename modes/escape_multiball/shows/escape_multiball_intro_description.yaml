@@ -1,0 +1,29 @@
+#show_version=5
+
+- duration: 2.5s
+  slides:
+    escape_multiball_intro_description_slide:
+      widgets:
+      - type: rectangle
+        color: black
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
+        width: 128
+        height: 32
+        animations:
+          show_slide:
+            - property: opacity
+              value: 1
+              duration: 0.2s
+            - property: opacity
+              value: 0
+              duration: 0.1s
+              repeat: true
+      - type: image
+        image: save_the_kids_v1
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0

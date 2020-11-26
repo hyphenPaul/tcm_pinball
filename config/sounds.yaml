@@ -186,7 +186,7 @@ sounds:
     volume: 1
     mode_end_action: stop
   escape_multiball_intro:
-    file: leatherface_hammer_v3_score_2.wav
+    file: leatherface_hammer_v4_score.wav
     volume: 0.4
   chainsaw_multiball_start:
     file: chainsaw_multiball_3_10frame.wav

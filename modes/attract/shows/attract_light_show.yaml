@@ -40,7 +40,7 @@
     super_jackpot: off
     double: off
     jackpot: off
-    sawyer_house: off
+    van: off
     right_7_seg_a: off
     right_7_seg_b: off
     right_7_seg_c: off
@@ -120,7 +120,7 @@
     super_jackpot: ff
     double: ff
     jackpot: ff
-    sawyer_house: ff
+    van: ff
     right_7_seg_a: ff
     right_7_seg_b: ff
     right_7_seg_c: ff

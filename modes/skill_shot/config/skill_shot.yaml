@@ -62,7 +62,7 @@ event_player:
     - cmd_cancel_skill_shot
   s_jump_ball_vuk_active:
     - cmd_cancel_skill_shot
-  s_sawyer_house_vuk_active:
+  s_van_vuk_active:
     - cmd_cancel_skill_shot
   s_left_orbit_bottom_active:
     - cmd_cancel_skill_shot

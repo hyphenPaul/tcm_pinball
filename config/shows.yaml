@@ -22,3 +22,33 @@ shows:
           color: off
         (leds):
           color: off
+  med_flash:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+  van_flash:
+    - duration: 0.5
+      lights:
+        van:
+          color: on
+    - duration: 0.5
+      lights:
+        van:
+          color: off
