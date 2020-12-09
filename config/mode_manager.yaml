@@ -48,6 +48,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
+    - cmd_disable_mode_switcher
 
   multiball_mb_chainsaw_multiball_ended:
     - cmd_start_mode_escape
@@ -56,6 +57,7 @@ event_player:
     - cmd_start_mode_save_from_the_grave
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
+    - cmd_enable_mode_switcher
 
   ##################################################
   # Escape Multiball
@@ -71,6 +73,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
+    - cmd_disable_mode_switcher
     - cmd_start_mode_escape_multiball
 
   cmd_stop_escape_multiball_mode:
@@ -82,6 +85,175 @@ event_player:
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_escape
+    - cmd_enable_mode_switcher
+
+  ##################################################
+  # Placeholder A
+  ##################################################
+
+  cmd_start_placeholder_a_mode:
+    - cmd_stop_mode_escape
+    - cmd_stop_mode_chainsaw
+    - cmd_stop_mode_franklin
+    - cmd_stop_mode_franklin_hurry_up
+    - cmd_stop_mode_franklin_frenzy # It would be awesome to have this roll over until after multiball
+    - cmd_stop_mode_mask
+    - cmd_stop_mode_save_from_the_grave
+    - cmd_stop_mode_meathook
+    - cmd_stop_mode_pop_bumpers
+    - cmd_disable_mode_switcher
+    - cmd_start_mode_placeholder_a
+
+  cmd_stop_placeholder_a_mode:
+    - cmd_stop_mode_placeholder_a
+    - cmd_start_mode_chainsaw
+    - cmd_start_mode_franklin
+    - cmd_start_mode_mask
+    - cmd_start_mode_save_from_the_grave
+    - cmd_start_mode_meathook
+    - cmd_start_mode_pop_bumpers
+    - cmd_start_mode_escape
+    - cmd_enable_mode_switcher
+
+  ##################################################
+  # Placeholder B
+  ##################################################
+
+  cmd_start_placeholder_b_mode:
+    - cmd_stop_mode_escape
+    - cmd_stop_mode_chainsaw
+    - cmd_stop_mode_franklin
+    - cmd_stop_mode_franklin_hurry_up
+    - cmd_stop_mode_franklin_frenzy # It would be awesome to have this roll over until after multiball
+    - cmd_stop_mode_mask
+    - cmd_stop_mode_save_from_the_grave
+    - cmd_stop_mode_meathook
+    - cmd_stop_mode_pop_bumpers
+    - cmd_disable_mode_switcher
+    - cmd_start_mode_placeholder_b
+
+  cmd_stop_placeholder_b_mode:
+    - cmd_stop_mode_placeholder_b
+    - cmd_start_mode_chainsaw
+    - cmd_start_mode_franklin
+    - cmd_start_mode_mask
+    - cmd_start_mode_save_from_the_grave
+    - cmd_start_mode_meathook
+    - cmd_start_mode_pop_bumpers
+    - cmd_start_mode_escape
+    - cmd_enable_mode_switcher
+
+  ##################################################
+  # Placeholder C
+  ##################################################
+
+  cmd_start_placeholder_c_mode:
+    - cmd_stop_mode_escape
+    - cmd_stop_mode_chainsaw
+    - cmd_stop_mode_franklin
+    - cmd_stop_mode_franklin_hurry_up
+    - cmd_stop_mode_franklin_frenzy # It would be awesome to have this roll over until after multiball
+    - cmd_stop_mode_mask
+    - cmd_stop_mode_save_from_the_grave
+    - cmd_stop_mode_meathook
+    - cmd_stop_mode_pop_bumpers
+    - cmd_disable_mode_switcher
+    - cmd_start_mode_placeholder_c
+
+  cmd_stop_placeholder_c_mode:
+    - cmd_stop_mode_placeholder_c
+    - cmd_start_mode_chainsaw
+    - cmd_start_mode_franklin
+    - cmd_start_mode_mask
+    - cmd_start_mode_save_from_the_grave
+    - cmd_start_mode_meathook
+    - cmd_start_mode_pop_bumpers
+    - cmd_start_mode_escape
+    - cmd_enable_mode_switcher
+
+  ##################################################
+  # Placeholder D
+  ##################################################
+
+  cmd_start_placeholder_d_mode:
+    - cmd_stop_mode_escape
+    - cmd_stop_mode_chainsaw
+    - cmd_stop_mode_franklin
+    - cmd_stop_mode_franklin_hurry_up
+    - cmd_stop_mode_franklin_frenzy # It would be awesome to have this roll over until after multiball
+    - cmd_stop_mode_mask
+    - cmd_stop_mode_save_from_the_grave
+    - cmd_stop_mode_meathook
+    - cmd_stop_mode_pop_bumpers
+    - cmd_disable_mode_switcher
+    - cmd_start_mode_placeholder_d
+
+  cmd_stop_placeholder_d_mode:
+    - cmd_stop_mode_placeholder_d
+    - cmd_start_mode_chainsaw
+    - cmd_start_mode_franklin
+    - cmd_start_mode_mask
+    - cmd_start_mode_save_from_the_grave
+    - cmd_start_mode_meathook
+    - cmd_start_mode_pop_bumpers
+    - cmd_start_mode_escape
+    - cmd_enable_mode_switcher
+
+  ##################################################
+  # Placeholder E
+  ##################################################
+
+  cmd_start_placeholder_e_mode:
+    - cmd_stop_mode_escape
+    - cmd_stop_mode_chainsaw
+    - cmd_stop_mode_franklin
+    - cmd_stop_mode_franklin_hurry_up
+    - cmd_stop_mode_franklin_frenzy # It would be awesome to have this roll over until after multiball
+    - cmd_stop_mode_mask
+    - cmd_stop_mode_save_from_the_grave
+    - cmd_stop_mode_meathook
+    - cmd_stop_mode_pop_bumpers
+    - cmd_disable_mode_switcher
+    - cmd_start_mode_placeholder_e
+
+  cmd_stop_placeholder_e_mode:
+    - cmd_stop_mode_placeholder_e
+    - cmd_start_mode_chainsaw
+    - cmd_start_mode_franklin
+    - cmd_start_mode_mask
+    - cmd_start_mode_save_from_the_grave
+    - cmd_start_mode_meathook
+    - cmd_start_mode_pop_bumpers
+    - cmd_start_mode_escape
+    - cmd_enable_mode_switcher
+
+  ##################################################
+  # Placeholder F
+  ##################################################
+
+  cmd_start_placeholder_f_mode:
+    - cmd_stop_mode_escape
+    - cmd_stop_mode_chainsaw
+    - cmd_stop_mode_franklin
+    - cmd_stop_mode_franklin_hurry_up
+    - cmd_stop_mode_franklin_frenzy # It would be awesome to have this roll over until after multiball
+    - cmd_stop_mode_mask
+    - cmd_stop_mode_save_from_the_grave
+    - cmd_stop_mode_meathook
+    - cmd_stop_mode_pop_bumpers
+    - cmd_disable_mode_switcher
+    - cmd_start_mode_placeholder_f
+
+  cmd_stop_placeholder_f_mode:
+    - cmd_stop_mode_placeholder_f
+    - cmd_start_mode_chainsaw
+    - cmd_start_mode_franklin
+    - cmd_start_mode_mask
+    - cmd_start_mode_save_from_the_grave
+    - cmd_start_mode_meathook
+    - cmd_start_mode_pop_bumpers
+    - cmd_start_mode_escape
+    - cmd_enable_mode_switcher
 
   ##################################################
   # Franklin

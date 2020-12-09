@@ -1,15 +1,15 @@
 #show_version=5
 
-#- duration: 200s
-#  slides:
-#    slide_1:
-#      widgets:
-#      - type: image
-#        image: hammer_time_intro_test
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 0
-#        y: 0
+- duration: 200s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: van_inside_generic_v1
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
 #  slides:
 #    slide_1:
 #      widgets:

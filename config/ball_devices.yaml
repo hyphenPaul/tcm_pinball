@@ -18,3 +18,4 @@ ball_devices:
     eject_coil: c_van_vuk
     eject_targets: playfield
     eject_timeouts: 500ms
+    auto_fire_on_unexpected_ball: true

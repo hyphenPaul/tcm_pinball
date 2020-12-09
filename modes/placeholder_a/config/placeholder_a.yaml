@@ -1,0 +1,33 @@
+#config_version=5
+
+mode:
+  start_events:
+    - cmd_start_mode_placeholder_a
+  stop_events:
+    - cmd_stop_mode_placeholder_a
+  priority: 10000
+
+timers:
+  placeholder_a_timer:
+    start_value: 0
+    end_value: 5
+    tick_interval: 1s
+    direction: up
+    start_running: True
+
+slides:
+  placeholder_a_slide:
+    widgets:
+      - type: text
+        text: PLACEHOLDER A
+        style: small
+
+slide_player:
+  mode_placeholder_a_started:
+    placeholder_a_slide:
+      priority: 300
+      expire: 5
+
+event_player:
+  mode_placeholder_a_started: cmd_release_all_bh_mode_van
+  timer_placeholder_a_timer_complete: cmd_stop_placeholder_a_mode

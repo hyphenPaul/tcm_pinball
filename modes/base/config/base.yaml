@@ -28,7 +28,7 @@ show_player:
         lights: shoot_again
 
   cmd_flash_mode_light_grid_in_yer_face:
-    med_flash:
+    fast_flash:
       action: play
       show_tokens:
         lights:
@@ -36,7 +36,7 @@ show_player:
           van
 
   cmd_flash_mode_light_grid_fire:
-    med_flash:
+    fast_flash:
       action: play
       show_tokens:
         lights:
@@ -44,7 +44,7 @@ show_player:
           van
 
   cmd_flash_mode_light_grid_space_jam:
-    med_flash:
+    fast_flash:
       action: play
       show_tokens:
         lights:
@@ -52,7 +52,7 @@ show_player:
           van
 
   cmd_flash_mode_light_grid_rebound:
-    med_flash:
+    fast_flash:
       action: play
       show_tokens:
         lights:
@@ -60,7 +60,7 @@ show_player:
           van
 
   cmd_flash_mode_light_grid_slam:
-    med_flash:
+    fast_flash:
       action: play
       show_tokens:
         lights:
@@ -68,7 +68,7 @@ show_player:
           van
 
   cmd_flash_mode_light_grid_fastbreak:
-    med_flash:
+    fast_flash:
       action: play
       show_tokens:
         lights:
@@ -80,10 +80,19 @@ show_player:
       action: play
       show_tokens:
         light: (current_player.v_active_mode_light)
-      loops: 1
 
   cmd_stop_flash_mode_lights:
     med_flash:
+      action: stop
+      show_tokens:
+        lights:
+          - grid_in_yer_face
+          - grid_fire
+          - grid_space_jam
+          - grid_rebound
+          - grid_slam
+          - grid_fastbreak
+    fast_flash:
       action: stop
       show_tokens:
         lights:
@@ -97,16 +106,12 @@ show_player:
     van_flash:
       action: stop
 
-#  cmd_test_flipper_left:
-#    test_show:
-#      action: play
-#      loops: 0
-#
-#sound_player:
-#  cmd_test_flipper_left:
-#    hammer_time_intro_v2_score:
-#      action: play
-#      loops: 0
+sound_player:
+  cmd_start_shoot_the_van:
+    shoot_the_van:
+      action: play
+      loops: 0
+      volume: 0.8
 
 
 ball_saves:
@@ -158,6 +163,14 @@ slides:
 
 slide_player:
   mode_base_started: base_score_slide
+  cmd_start_shoot_the_van:
+    chainsaw_shoot_the_van_slide:
+      priority: 500
+      expire: 4.6s
+
+##################################################
+# Shots
+##################################################
 
 shots:
   top_turbo_bumper:
@@ -170,6 +183,19 @@ shots:
     switch: s_right_slingshot
   left_slingshot:
     switch: s_left_slingshot
+
+##################################################
+# Devices
+##################################################
+
+ball_holds:
+  bh_mode_van:
+    balls_to_hold: 1
+    hold_devices: bd_van
+    reset_events: cmd_reset_bh_mode_van
+    enable_events: cmd_enable_bh_mode_van
+    disable_events: cmd_disable_bh_mode_van
+    release_all_events: cmd_release_all_bh_mode_van
 
 variable_player:
   top_turbo_bumper_hit:

@@ -17,7 +17,7 @@ event_player:
     cmd_reset_chainsaw_progression_slide:
     cmd_reset_letter_animation_timer:
   mode_chainsaw_started{current_player.v_chainsaw_all_collected==1}:
-    cmd_reset_bh_van:
+    cmd_reset_bh_chainsaw_van:
     cmd_light_multiball:
   mode_chainsaw_started{current_player.v_cs_multiball_completion_counter_count==0}:
     cmd_enable_c_shot:
@@ -50,14 +50,14 @@ event_player:
     cmd_set_chainsaw_all_collected:
     cmd_light_multiball:
     cmd_start_shoot_the_van_timer:
-  ball_hold_bh_van_full:
+  ball_hold_bh_chainsaw_van_full:
     cmd_unset_chainsaw_all_collected:
     cmd_stop_music:
-  ball_hold_bh_van_full.1{current_player.v_space_jam_takeover_ready==0}:
+  ball_hold_bh_chainsaw_van_full.1{current_player.v_space_jam_takeover_ready==0}:
     cmd_chainsaw_multi_ball_triggered:
     cmd_start_chainsaw_multiball_intro:
     cmd_start_chainsaw_multiball_start_timer:
-  ball_hold_bh_van_full.2{current_player.v_space_jam_takeover_ready==1}:
+  ball_hold_bh_chainsaw_van_full.2{current_player.v_space_jam_takeover_ready==1}:
     cmd_chainsaw_multi_ball_triggered:
     cmd_start_space_jam_takeover_multiball_intro:
     cmd_start_space_jam_takeover_multiball_start_timer:
@@ -516,10 +516,10 @@ multiballs:
     start_events: cmd_start_chainsaw_multiball
 
 ball_holds:
-  bh_van:
+  bh_chainsaw_van:
     balls_to_hold: 1
     hold_devices: bd_van
-    reset_events: cmd_reset_bh_van
+    reset_events: cmd_reset_bh_chainsaw_van
     enable_events: cmd_light_multiball
     disable_events: cmd_disable_sawyer_ball_hold
     release_all_events: cmd_release_sawyer_ball

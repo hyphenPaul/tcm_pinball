@@ -6,28 +6,57 @@ class Modes(CustomCode):
         self.info_log('Enabling')
 
         self.modes = {
-            "a" :  { "light" : "grid_in_yer_face" },
-            "b" :  { "light" : "grid_fire" },
-            "c" :  { "light" : "grid_space_jam" },
-            "d" :  { "light" : "grid_rebound" },
-            "e" :  { "light" : "grid_slam" },
-            "f" :  { "light" : "grid_fastbreak" }
+            "placeholder_a" :  { "light" : "grid_in_yer_face" },
+            "placeholder_b" :  { "light" : "grid_fire" },
+            "placeholder_c" :  { "light" : "grid_space_jam" },
+            "placeholder_d" :  { "light" : "grid_rebound" },
+            "placeholder_e" :  { "light" : "grid_slam" },
+            "placeholder_f" :  { "light" : "grid_fastbreak" }
         }
 
         self.machine.events.add_handler('mode_base_started', self.init_on_ball_start)
-        self.machine.events.add_handler('drop_target_bank_van_down', self.on_drop_target)
-        self.machine.events.add_handler('s_left_slingshot_active', self.cycle_mode)
-        self.machine.events.add_handler('s_right_slingshot_active', self.cycle_mode)
+        self.machine.events.add_handler('cmd_enable_mode_switcher', self.on_enable)
+        self.machine.events.add_handler('cmd_disable_mode_switcher', self.on_disable)
 
     def init_on_ball_start(self, **kwargs):
         self.initiated = True
-        self.refresh_lights()
+        self.enable()
 
-    def refresh_lights(self):
-        self.info_log('refresh_lights')
+    def enable(self):
+        self.info_log('enable')
+        self.machine.events.add_handler('drop_target_bank_van_down', self.on_drop_target)
+        self.machine.events.add_handler('s_left_slingshot_active', self.cycle_mode)
+        self.machine.events.add_handler('s_right_slingshot_active', self.cycle_mode)
+        self.reset_van_drop_targets()
+        self.refresh()
+
+    def disable(self):
+        self.info_log('disable')
+        self.machine.events.post('cmd_disable_bh_mode_van')
+        self.machine.events.remove_handler_by_event('drop_target_bank_van_down', self.on_drop_target)
+        self.machine.events.remove_handler_by_event('s_left_slingshot_active', self.cycle_mode)
+        self.machine.events.remove_handler_by_event('s_right_slingshot_active', self.cycle_mode)
+        self.turn_off_all_lights()
+
+    def on_enable(self, **kwargs):
+        self.enable()
+
+    def on_disable(self, **kwargs):
+        self.disable()
+
+    def turn_off_all_lights(self):
+        self.info_log('turn_off_all_lights')
+        # playfield lights
+        for mode in self.modes:
+            self.machine.lights[self.modes[mode]["light"]].off()
+
+        self.stop_flash_lights()
+
+    def refresh(self):
+        self.info_log('refresh')
 
         if not self.initiated:
-            self.info_log('refresh_lights not initiated')
+            self.info_log('refresh not initiated')
             return
 
         current_player = self.current_player()
@@ -39,25 +68,53 @@ class Modes(CustomCode):
                 self.machine.lights[self.modes[mode]["light"]].off()
 
         self.stop_flash_lights()
+        self.machine.events.remove_handler_by_event('ball_hold_bh_mode_van_full', self.on_van_vuk)
 
         if self.current_active_mode():
-            self.info_log('refresh_lights active mode')
+            self.info_log('refresh active mode')
             current_player['v_active_mode_light'] = self.modes[self.current_active_mode()]["light"]
 
-            if self.mode_is_active():
+            if self.is_mode_active():
                 self.flash_light()
+                self.add_van_vuk_listeners()
+                self.start_shoot_the_van_show()
             else:
                 self.pulse_light()
         else:
-            self.info_log('refresh_lights no active mode')
+            self.info_log('refresh no active mode')
+
+    def reset_van_ball_hold(self):
+        self.machine.events.remove_handler_by_event('ball_hold_bh_mode_van_full', self.on_van_vuk)
+        self.machine.events.post('cmd_reset_bh_mode_van')
+        self.machine.events.post('cmd_enable_bh_mode_van')
+
+    def add_van_vuk_listeners(self):
+        self.reset_van_ball_hold()
+        self.machine.events.add_handler('ball_hold_bh_mode_van_full', self.on_van_vuk)
+
+    def on_van_vuk(self, **kwargs):
+        self.info_log('on_vuk')
+        self.machine.events.remove_handler_by_event('ball_hold_bh_mode_van_full', self.on_van_vuk)
+        self.machine.events.post('cmd_disable_bh_mode_van')
+        self.collect_current_mode()
+        self.machine.events.post('cmd_start_' + self.current_active_mode() + '_mode')
+        self.set_mode_is_inactive()
+        self.reset_van_drop_targets()
+        self.disable()
+
+    def start_shoot_the_van_show(self):
+        self.machine.events.post('cmd_start_shoot_the_van')
+
+    def reset_van_drop_targets(self):
+        self.machine.events.post('cmd_reset_van_drop_targets')
 
     def cycle_mode(self, **kwargs):
         self.info_log('cycle_mode')
 
-        current_player = self.current_player()
-
-        if current_player['v_mode_is_active']:
+        if self.is_mode_active():
             return
+
+        current_player = self.current_player()
 
         if self.current_active_mode():
             current_index = self.remaining_modes().index(self.current_active_mode())
@@ -67,10 +124,10 @@ class Modes(CustomCode):
             else:
                 current_player['v_current_active_mode'] = self.remaining_modes()[current_index + 1]
 
-            self.refresh_lights()
+            self.refresh()
 
     def stop_flash_lights(self):
-        self.machine.events.post('cmd_stop_flash_mode_light')
+        self.machine.events.post('cmd_stop_flash_mode_lights')
 
     def pulse_light(self):
         self.machine.events.post('cmd_pulse_mode_light')
@@ -82,18 +139,28 @@ class Modes(CustomCode):
         if not self.initiated:
             return
 
-        current_player = self.current_player()
+        if self.is_mode_active():
+            return
 
+        self.set_mode_is_active()
+        self.refresh()
+
+    def set_mode_is_active(self):
+        current_player = self.current_player()
         current_player['v_mode_is_active'] = True
 
-        self.refresh_lights()
+    def set_mode_is_inactive(self):
+        current_player = self.current_player()
+        current_player['v_mode_is_active'] = False
+        current_player['v_current_active_mode'] = None
 
-    def mode_is_active(self):
+
+    def is_mode_active(self):
         current_player = self.current_player()
 
         if current_player['v_mode_is_active'] is None:
             current_player['v_mode_is_active'] = False
-            
+
         return current_player['v_mode_is_active']
 
     def mode_list(self):
@@ -101,6 +168,12 @@ class Modes(CustomCode):
 
     def remaining_modes(self):
         return list(set(self.mode_list()) - set(self.current_collected_modes()))
+
+    def collect_current_mode(self):
+        current_player = self.current_player()
+
+        if self.current_active_mode() not in self.current_collected_modes():
+            current_player['v_collected_modes'].append(self.current_active_mode())
 
     def current_collected_modes(self):
         current_player = self.current_player()
