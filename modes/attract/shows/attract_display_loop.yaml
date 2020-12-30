@@ -1,15 +1,11 @@
 #show_version=5
 
-- duration: 200s
+- duration: 10s
   slides:
-    slide_1:
+    hitchhiker_franklin_slide:
       widgets:
-      - type: image
-        image: van_inside_generic_v1
-        anchor_x: 0
-        anchor_y: 0
-        x: 0
-        y: 0
+        - type: image
+          image: dude_test
 #  slides:
 #    slide_1:
 #      widgets:
@@ -308,73 +304,73 @@
 
 # ------------ attract mode start --------------
 
-- duration: 1.5s
-  slides:
-    slide_1:
-      widgets:
-      - type: text
-        text: TEXAS
-        style: big
-        round_anchor_x: left
-        font_size: 14
-
-- duration: 1.5s
-  slides:
-    slide_1:
-      widgets:
-      - type: text
-        text: CHAINSAW
-        style: big
-        round_anchor_x: left
-        font_size: 14
-
-- duration: 1.5s
-  slides:
-    slide_1:
-      widgets:
-      - type: text
-        text: MASSACRE
-        style: big
-        round_anchor_x: left
-        font_size: 14
-
-- duration: 1s
-  slides:
-    slide_1:
-      widgets:
-      - type: image
-        image: leatherface
-        anchor_x: left
-        anchor_y: bottom
-        x: 0
-        y: -20
-
-- duration: 6s
-  slides:
-    slide_1:
-      widgets:
-      - type: text
-        text: PRESS START
-        font_size: 14
-        round_anchor_x: left
-        color: black
-        style: big
-        animations:
-          show_slide:
-          - property: opacity
-            value: 1
-            duration: 0
-          - property: opacity
-            value: 1
-            duration: .5s
-          - property: opacity
-            value: 0
-            duration: 0
-          - property: opacity
-            value: 0
-            duration: .5s
-            repeat: true
-            
-      - type: rectangle
-        width: 128
-        height: 32
+#- duration: 1.5s
+#  slides:
+#    slide_1:
+#      widgets:
+#      - type: text
+#        text: TEXAS
+#        style: big
+#        round_anchor_x: left
+#        font_size: 14
+#
+#- duration: 1.5s
+#  slides:
+#    slide_1:
+#      widgets:
+#      - type: text
+#        text: CHAINSAW
+#        style: big
+#        round_anchor_x: left
+#        font_size: 14
+#
+#- duration: 1.5s
+#  slides:
+#    slide_1:
+#      widgets:
+#      - type: text
+#        text: MASSACRE
+#        style: big
+#        round_anchor_x: left
+#        font_size: 14
+#
+#- duration: 1s
+#  slides:
+#    slide_1:
+#      widgets:
+#      - type: image
+#        image: leatherface
+#        anchor_x: left
+#        anchor_y: bottom
+#        x: 0
+#        y: -20
+#
+#- duration: 6s
+#  slides:
+#    slide_1:
+#      widgets:
+#      - type: text
+#        text: PRESS START
+#        font_size: 14
+#        round_anchor_x: left
+#        color: black
+#        style: big
+#        animations:
+#          show_slide:
+#          - property: opacity
+#            value: 1
+#            duration: 0
+#          - property: opacity
+#            value: 1
+#            duration: .5s
+#          - property: opacity
+#            value: 0
+#            duration: 0
+#          - property: opacity
+#            value: 0
+#            duration: .5s
+#            repeat: true
+#            
+#      - type: rectangle
+#        width: 128
+#        height: 32

@@ -1,0 +1,405 @@
+#config_version=5
+
+mode:
+  start_events:
+    - cmd_start_mode_hitchhiker
+  stop_events:
+    - cmd_stop_mode_hitchhiker
+  priority: 10000
+
+##################################################
+# Events
+##################################################
+
+event_player:
+
+  mode_hitchhiker_started:
+    cmd_hitchhiker_set_state_starting:
+    cmd_hitchhiker_start_intro_slide:
+    cmd_hitchhiker_plan_intro_slide_sound:
+    cmd_disable_bh_hitchhiker_van:
+
+  slide_hitchhiker_intro_slide_removed:
+    cmd_hitchhiker_after_intro_complete:
+    cmd_play_hitchhiker_bg_music:
+
+  cmd_hitchhiker_after_intro_complete:
+    cmd_release_all_bh_mode_van:
+    cmd_hitchhiker_set_state_orbits:
+    cmd_hitchhiker_start_orbits_slide:
+    cmd_hitchhiker_refresh_lights:
+
+  cmd_hitchhiker_refresh_lights:
+    cmd_hitchhiker_clear_playfield_lights:
+    cmd_hitchhiker_turn_on_playfield_lights:
+
+  timer_hitchhiker_mode_timer_complete:
+    cmd_stop_hitchhiker_mode:
+
+  left_orbit_hit{current_player.v_hitchhiker_state=="orbits"}:
+    cmd_hitchhiker_orbit_hit:
+
+  right_orbit_hit{current_player.v_hitchhiker_state=="orbits"}:
+    cmd_hitchhiker_orbit_hit:
+
+  cmd_hitchhiker_orbit_hit:
+    cmd_hitchhiker_set_state_van_1:
+    cmd_hitchhiker_refresh_lights:
+    cmd_enable_bh_hitchhiker_van:
+    cmd_hitchhiker_start_shoot_van_slide:
+
+  ball_hold_bh_hitchhiker_van_full{current_player.v_hitchhiker_state=="van_1"}:
+    cmd_hitchhiker_mode_timer_stop:
+    cmd_hitchhiker_start_cut_slide:
+
+  slide_hitchhiker_cut_slide_removed:
+    cmd_hitchhiker_mode_timer_start:
+    cmd_hitchhiker_set_state_ramps:
+    cmd_hitchhiker_refresh_lights:
+    cmd_release_all_bh_hitchhiker_van:
+    cmd_disable_bh_hitchhiker_van:
+    cmd_hitchhiker_start_ramps_slide:
+
+  left_ramp_hit{current_player.v_hitchhiker_state=="ramps"}:
+    cmd_hitchhiker_ramp_hit:
+
+  right_ramp_hit{current_player.v_hitchhiker_state=="ramps"}:
+    cmd_hitchhiker_ramp_hit:
+
+  cmd_hitchhiker_ramp_hit:
+    cmd_hitchhiker_set_state_van_2:
+    cmd_hitchhiker_refresh_lights:
+    cmd_enable_bh_hitchhiker_van:
+    cmd_hitchhiker_start_shoot_van_slide:
+
+  ball_hold_bh_hitchhiker_van_full{current_player.v_hitchhiker_state=="van_2"}:
+    cmd_hitchhiker_mode_timer_stop:
+    cmd_hitchhiker_start_photo_slide:
+
+  slide_hitchhiker_photo_slide_removed:
+    cmd_hitchhiker_mode_timer_start:
+    cmd_hitchhiker_set_state_targets:
+    cmd_hitchhiker_refresh_lights:
+    cmd_release_all_bh_hitchhiker_van:
+    cmd_disable_bh_hitchhiker_van:
+    cmd_hitchhiker_start_targets_slide:
+
+  s_chain_target_c_active{current_player.v_hitchhiker_state=="targets"}:
+    cmd_hitchhiker_targets_hit:
+
+  s_chain_target_h_active{current_player.v_hitchhiker_state=="targets"}:
+    cmd_hitchhiker_targets_hit:
+
+  s_chain_target_a_active{current_player.v_hitchhiker_state=="targets"}:
+    cmd_hitchhiker_targets_hit:
+
+  s_chain_target_i_active{current_player.v_hitchhiker_state=="targets"}:
+    cmd_hitchhiker_targets_hit:
+
+  s_chain_target_n_active{current_player.v_hitchhiker_state=="targets"}:
+    cmd_hitchhiker_targets_hit:
+
+  s_saw_target_s_active{current_player.v_hitchhiker_state=="targets"}:
+    cmd_hitchhiker_targets_hit:
+
+  s_saw_target_a_active{current_player.v_hitchhiker_state=="targets"}:
+    cmd_hitchhiker_targets_hit:
+
+  s_saw_target_w_active{current_player.v_hitchhiker_state=="targets"}:
+    cmd_hitchhiker_targets_hit:
+
+  cmd_hitchhiker_targets_hit:
+    cmd_hitchhiker_set_state_van_3:
+    cmd_hitchhiker_refresh_lights:
+    cmd_enable_bh_hitchhiker_van:
+    cmd_hitchhiker_start_shoot_van_slide:
+
+  ball_hold_bh_hitchhiker_van_full{current_player.v_hitchhiker_state=="van_3"}:
+    cmd_hitchhiker_mode_timer_stop:
+    cmd_hitchhiker_start_franklin_slide:
+
+  slide_hitchhiker_franklin_slide_removed:
+    cmd_release_all_bh_hitchhiker_van:
+    cmd_stop_hitchhiker_mode:
+
+##################################################
+# Variables
+##################################################
+
+variable_player:
+  cmd_hitchhiker_set_state_starting:
+    v_hitchhiker_state:
+      action: set
+      string: "starting"
+  cmd_hitchhiker_set_state_orbits:
+    v_hitchhiker_state:
+      action: set
+      string: "orbits"
+  cmd_hitchhiker_set_state_van_1:
+    v_hitchhiker_state:
+      action: set
+      string: "van_1"
+  cmd_hitchhiker_set_state_van_2:
+    v_hitchhiker_state:
+      action: set
+      string: "van_2"
+  cmd_hitchhiker_set_state_van_3:
+    v_hitchhiker_state:
+      action: set
+      string: "van_3"
+  cmd_hitchhiker_set_state_ramps:
+    v_hitchhiker_state:
+      action: set
+      string: "ramps"
+  cmd_hitchhiker_set_state_targets:
+    v_hitchhiker_state:
+      action: set
+      string: "targets"
+
+##################################################
+# Logic
+##################################################
+
+timers:
+  hitchhiker_mode_timer:
+    start_value: 0
+    end_value: 60
+    tick_interval: 1s
+    direction: up
+    start_running: True
+    control_events:
+      - event: cmd_hitchhiker_mode_timer_stop
+        action: stop
+      - event: cmd_hitchhiker_mode_timer_start
+        action: start
+
+##################################################
+# Devices
+##################################################
+
+ball_holds:
+  bh_hitchhiker_van:
+    balls_to_hold: 1
+    hold_devices: bd_van
+    enable_events: cmd_enable_bh_hitchhiker_van
+    disable_events: cmd_disable_bh_hitchhiker_van
+    release_all_events: cmd_release_all_bh_hitchhiker_van
+
+##################################################
+# Sites and Sounds
+##################################################
+
+slides:
+  hitchhiker_intro_slide:
+    widgets:
+      - type: image
+        image: hitchhiker_intro_v2
+  hitchhiker_orbits_slide:
+    widgets:
+      - type: image
+        image: hitchhiker_shoot_orbits_v2
+  hitchhiker_ramps_slide:
+    widgets:
+      - type: image
+        image: hitchhiker_shoot_ramps_v1
+  hitchhiker_targets_slide:
+    widgets:
+      - type: image
+        image: hitchhiker_shoot_targets_v1
+  hitchhiker_shoot_van_slide:
+    widgets:
+      - type: image
+        image: hitchhiker_shoot_van_v1
+  hitchhiker_cut_slide:
+    widgets:
+      - type: text
+        text: 10000000
+        number_grouping: true
+        min_digits: 2
+        font_name: pinball_score
+        font_size: 22
+        round_anchor_x: left
+        anchor_x: middle
+        anchor_y: bottom
+        y: 8
+        x: 50%
+        color: black
+        opacity: 0
+        animations:
+          show_slide:
+            - property: opacity
+              value: 0
+              duration: 1.7
+            - property: opacity
+              value: 1
+              duration: 0.2
+      - type: image
+        image: hitchhiker_cutting_v1
+  hitchhiker_photo_slide:
+    widgets:
+      - type: text
+        text: 20000000
+        number_grouping: true
+        min_digits: 2
+        font_name: pinball_score
+        font_size: 22
+        round_anchor_x: left
+        anchor_x: middle
+        anchor_y: bottom
+        y: 8
+        x: 50%
+        opacity: 0
+        color: black
+        animations:
+          show_slide:
+            - property: opacity
+              value: 0
+              duration: 3.0
+            - property: opacity
+              value: 1
+              duration: 0.2
+      - type: image
+        image: hitchhiker_photo_v1
+  hitchhiker_franklin_slide:
+    widgets:
+      - type: text
+        text: 30000000
+        number_grouping: true
+        min_digits: 2
+        font_name: pinball_score
+        font_size: 22
+        round_anchor_x: left
+        anchor_x: middle
+        anchor_y: bottom
+        y: 8
+        x: 50%
+        opacity: 0
+        color: black
+        animations:
+          show_slide:
+            - property: opacity
+              value: 0
+              duration: 2.4
+            - property: opacity
+              value: 1
+              duration: 0.2
+      - type: image
+        image: hitchhiker_cutting_franklin_v1
+
+slide_player:
+  cmd_hitchhiker_start_intro_slide:
+    hitchhiker_intro_slide:
+      priority: 300
+      expire: 4.1s
+
+  # states
+
+  cmd_hitchhiker_start_shoot_van_slide:
+     hitchhiker_shoot_van_slide:
+      priority: 300
+      transition:
+        type: push
+        duration: 0.4s
+        direction: down
+  cmd_hitchhiker_start_orbits_slide:
+    hitchhiker_orbits_slide:
+      priority: 300
+  cmd_hitchhiker_start_ramps_slide:
+    hitchhiker_ramps_slide:
+      priority: 300
+  cmd_hitchhiker_start_targets_slide:
+    hitchhiker_targets_slide:
+      priority: 300
+
+  # van animations
+
+  cmd_hitchhiker_start_cut_slide:
+    hitchhiker_cut_slide:
+      priority: 300
+      expire: 5.0s
+  cmd_hitchhiker_start_photo_slide:
+    hitchhiker_photo_slide:
+      priority: 300
+      expire: 5.0s
+  cmd_hitchhiker_start_franklin_slide:
+    hitchhiker_franklin_slide:
+      priority: 300
+      expire: 5.0s
+
+sound_player:
+  cmd_hitchhiker_plan_intro_slide_sound: hitchhiker_intro_score_v1
+  cmd_play_hitchhiker_bg_music:
+    hitchhiker_bg_music:
+      action: play
+      loops: -1
+  cmd_stop_hitchhiker_music:
+    hitchhiker_bg_music:
+      action: stop
+
+show_player:
+  cmd_hitchhiker_clear_playfield_lights:
+    med_flash:
+      action: stop
+      show_tokens:
+        lights:
+          - left_orbit_arrow
+          - right_orbit_arrow
+          - basket_ramp_arrow
+          - right_ramp_arrow
+          - chain_target_c
+          - chain_target_h
+          - chain_target_a
+          - chain_target_i
+          - chain_target_n
+          - saw_target_s
+          - saw_target_a
+          - saw_target_w
+          - van
+
+  cmd_hitchhiker_turn_on_playfield_lights{current_player.v_hitchhiker_state=="orbits"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          left_orbit_arrow,
+          right_orbit_arrow
+
+  cmd_hitchhiker_turn_on_playfield_lights{current_player.v_hitchhiker_state=="ramps"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          basket_ramp_arrow,
+          right_ramp_arrow
+
+  cmd_hitchhiker_turn_on_playfield_lights{current_player.v_hitchhiker_state=="targets"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          chain_target_c,
+          chain_target_h,
+          chain_target_a,
+          chain_target_i,
+          chain_target_n,
+          saw_target_s,
+          saw_target_a,
+          saw_target_w
+
+  cmd_hitchhiker_turn_on_playfield_lights{current_player.v_hitchhiker_state=="van_1"}:
+    med_flash:
+      action: play
+      show_tokens:
+        light: van
+
+  cmd_hitchhiker_turn_on_playfield_lights{current_player.v_hitchhiker_state=="van_2"}:
+    med_flash:
+      action: play
+      show_tokens:
+        light: van
+
+  cmd_hitchhiker_turn_on_playfield_lights{current_player.v_hitchhiker_state=="van_3"}:
+    med_flash:
+      action: play
+      show_tokens:
+        light: van

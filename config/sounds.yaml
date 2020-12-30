@@ -273,4 +273,7 @@ sounds:
     file: outer_drain_v1.wav
   inner_flipper_lane:
     file: inner_flipper_lane_v1.wav
+  hitchhiker_bg_music:
+    mode_end_action: stop
+    file: tcm_music_hitcher_v2.wav
 

@@ -48,6 +48,13 @@ variable_player:
     v_mystery_meater_width:
       float: 57.0 * current_player.v_mystery_meater_count / machine.pop_bumper_mystery_complete_count
       action: set
+  cmd_get_mystery:
+    v_mystery_meater_complete:
+      int: 0
+      action: set
+    v_mystery_meater_count:
+      int: 0
+      action: set
   cmd_mystery_meater_completed:
     v_mystery_meater_complete: 1
   cmd_reset_mystery_meater:

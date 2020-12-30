@@ -91,7 +91,7 @@ event_player:
   # Placeholder A
   ##################################################
 
-  cmd_start_placeholder_a_mode:
+  cmd_start_hitchhiker_mode:
     - cmd_stop_mode_escape
     - cmd_stop_mode_chainsaw
     - cmd_stop_mode_franklin
@@ -102,10 +102,10 @@ event_player:
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
     - cmd_disable_mode_switcher
-    - cmd_start_mode_placeholder_a
+    - cmd_start_mode_hitchhiker
 
-  cmd_stop_placeholder_a_mode:
-    - cmd_stop_mode_placeholder_a
+  cmd_stop_hitchhiker_mode:
+    - cmd_stop_mode_hitchhiker
     - cmd_start_mode_chainsaw
     - cmd_start_mode_franklin
     - cmd_start_mode_mask

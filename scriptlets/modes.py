@@ -6,7 +6,7 @@ class Modes(CustomCode):
         self.info_log('Enabling')
 
         self.modes = {
-            "placeholder_a" :  { "light" : "grid_in_yer_face" },
+            "hitchhiker" :  { "light" : "grid_in_yer_face" },
             "placeholder_b" :  { "light" : "grid_fire" },
             "placeholder_c" :  { "light" : "grid_space_jam" },
             "placeholder_d" :  { "light" : "grid_rebound" },
@@ -17,6 +17,7 @@ class Modes(CustomCode):
         self.machine.events.add_handler('mode_base_started', self.init_on_ball_start)
         self.machine.events.add_handler('cmd_enable_mode_switcher', self.on_enable)
         self.machine.events.add_handler('cmd_disable_mode_switcher', self.on_disable)
+        self.machine.events.add_handler('cmd_super_skill_shot_award_van', self.on_skill_shot)
 
     def init_on_ball_start(self, **kwargs):
         self.initiated = True
@@ -82,6 +83,19 @@ class Modes(CustomCode):
                 self.pulse_light()
         else:
             self.info_log('refresh no active mode')
+
+    def available_for_skillshot(self):
+        if self.is_mode_active():
+            return False
+
+        if self.current_active_mode():
+            return True
+        else:
+            return False
+
+    def on_skill_shot(self, **kwargs):
+        self.set_mode_is_active()
+        self.refresh()
 
     def reset_van_ball_hold(self):
         self.machine.events.remove_handler_by_event('ball_hold_bh_mode_van_full', self.on_van_vuk)

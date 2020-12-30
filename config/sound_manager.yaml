@@ -23,6 +23,13 @@ event_player:
     - cmd_stop_escape_multiball_music
     - cmd_start_base_music
 
+  mode_hitchhiker_started:
+    - cmd_stop_music
+
+  mode_hitchhiker_stopping:
+    - cmd_stop_hitchhiker_music
+    - cmd_start_base_music
+
 #  cmd_test_flipper_left:
 #    - cmd_stop_music
 
@@ -40,6 +47,8 @@ sound_player:
     attract_dark:
       action: stop
     skill_shot_projector_loop_sound:
+      action: stop
+    hitchhiker_bg_music:
       action: stop
 
   cmd_stop_projector_loop:

@@ -10,6 +10,14 @@ machine_vars:
     initial_value: 0
 
   #####################################
+  # Hitchhiker
+  #####################################
+
+  v_hitchhiker_state:
+    initial_value: "starting"
+    value_type: str
+
+  #####################################
   # Help
   #####################################
 
@@ -248,8 +256,8 @@ player_vars:
   v_balls_locked_count:
     initial_value: 0
   v_escape_state:
-#    initial_value: "start"
-    initial_value: "lock_3_lit"
+    initial_value: "start"
+#    initial_value: "lock_3_lit"
     value_type: str
 
   #####################################
