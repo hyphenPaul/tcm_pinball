@@ -4,7 +4,7 @@ LABEL maintainer="seanpaulfenton@gmail.com"
 
 RUN apt update && \
 apt upgrade -y && \
-apt install -y curl unzip sudo software-properties-common python3.5 && \
+apt install -y curl unzip sudo software-properties-common python3.5 usbutils && \
 apt clean
 
 # users
@@ -21,4 +21,4 @@ cd mpf-debian-installer-dev && \
 chmod +x install && sudo ./install && \
 chmod +x install-proc && ./install-proc"
 
-COPY . /mpf/home
+COPY . /home/mpf
