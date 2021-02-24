@@ -272,7 +272,9 @@ sounds:
   outer_flipper_lane:
     file: outer_drain_v1.wav
   inner_flipper_lane:
-    file: inner_flipper_lane_v1.wav
+#    file: inner_flipper_lane_v1.wav
+    file: shot_made_v3.wav
+    volume: 0.2
   hitchhiker_bg_music:
     mode_end_action: stop
     file: tcm_music_hitcher_v2.wav

@@ -3,15 +3,16 @@ from mpf.core.custom_code import CustomCode
 class Modes(CustomCode):
     def on_load(self):
         self.initiated = False
+        self.enabled = False
         self.info_log('Enabling')
 
         self.modes = {
-            "hitchhiker" :  { "light" : "grid_in_yer_face" },
-            "placeholder_b" :  { "light" : "grid_fire" },
-            "placeholder_c" :  { "light" : "grid_space_jam" },
-            "placeholder_d" :  { "light" : "grid_rebound" },
-            "placeholder_e" :  { "light" : "grid_slam" },
-            "placeholder_f" :  { "light" : "grid_fastbreak" }
+            "hitchhiker" :  { "light" : "grid_in_yer_face", "mode_name" : "hitchhiker" },
+            "hitchhiker1" :  { "light" : "grid_fire", "mode_name" : "hitchhiker" },
+            "hitchhiker2" :  { "light" : "grid_space_jam", "mode_name" : "hitchhiker" },
+            "hitchhiker3" :  { "light" : "grid_rebound", "mode_name" : "hitchhiker" },
+            "hitchhiker4" :  { "light" : "grid_slam", "mode_name" : "hitchhiker" },
+            "hitchhiker5" :  { "light" : "grid_fastbreak", "mode_name" : "hitchhiker" }
         }
 
         self.machine.events.add_handler('mode_base_started', self.init_on_ball_start)
@@ -25,14 +26,18 @@ class Modes(CustomCode):
 
     def enable(self):
         self.info_log('enable')
-        self.machine.events.add_handler('drop_target_bank_van_down', self.on_drop_target)
-        self.machine.events.add_handler('s_left_slingshot_active', self.cycle_mode)
-        self.machine.events.add_handler('s_right_slingshot_active', self.cycle_mode)
-        self.reset_van_drop_targets()
-        self.refresh()
+
+        if self.enabled == False:
+            self.enabled = True
+            self.machine.events.add_handler('drop_target_bank_van_down', self.on_drop_target)
+            self.machine.events.add_handler('s_left_slingshot_active', self.cycle_mode)
+            self.machine.events.add_handler('s_right_slingshot_active', self.cycle_mode)
+            self.reset_van_drop_targets()
+            self.refresh()
 
     def disable(self):
         self.info_log('disable')
+        self.enabled = False
         self.machine.events.post('cmd_disable_bh_mode_van')
         self.machine.events.remove_handler_by_event('drop_target_bank_van_down', self.on_drop_target)
         self.machine.events.remove_handler_by_event('s_left_slingshot_active', self.cycle_mode)
@@ -102,8 +107,12 @@ class Modes(CustomCode):
         self.machine.events.post('cmd_reset_bh_mode_van')
         self.machine.events.post('cmd_enable_bh_mode_van')
 
+    def disable_base_vuk_messaging(self):
+        self.machine.events.post('cmd_disable_light_van_message')
+
     def add_van_vuk_listeners(self):
         self.reset_van_ball_hold()
+        self.disable_base_vuk_messaging()
         self.machine.events.add_handler('ball_hold_bh_mode_van_full', self.on_van_vuk)
 
     def on_van_vuk(self, **kwargs):
@@ -111,7 +120,7 @@ class Modes(CustomCode):
         self.machine.events.remove_handler_by_event('ball_hold_bh_mode_van_full', self.on_van_vuk)
         self.machine.events.post('cmd_disable_bh_mode_van')
         self.collect_current_mode()
-        self.machine.events.post('cmd_start_' + self.current_active_mode() + '_mode')
+        self.machine.events.post('cmd_start_' + self.modes[self.current_active_mode()]["mode_name"] + '_mode')
         self.set_mode_is_inactive()
         self.reset_van_drop_targets()
         self.disable()

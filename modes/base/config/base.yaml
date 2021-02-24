@@ -8,6 +8,10 @@ mode:
   priority: 100
 
 show_player:
+  cmd_show_van_messaging:
+    van_messaging:
+      loops: 0
+
   ball_save_player_start_saving_ball:
     standard_ball_save:
       loops: 0
@@ -75,6 +79,20 @@ show_player:
           grid_fastbreak,
           van
 
+  cmd_flash_van_for_eject:
+    super_fast_flash:
+      action: play
+      show_tokens:
+        lights:
+          van
+
+  cmd_stop_flash_van_for_eject:
+    super_fast_flash:
+      action: stop
+      show_tokens:
+        lights:
+          van
+
   cmd_pulse_mode_light:
     med_flash:
       action: play
@@ -112,6 +130,16 @@ sound_player:
       action: play
       loops: 0
       volume: 0.8
+  cmd_play_van_eject_vuk_sound:
+    van_vuk_out_long:
+      action: play
+      loops: 0
+      volume: 0.8
+      events_when_about_to_finish:
+        - cmd_release_all_bh_van
+        - cmd_release_all_bh_mode_van
+        - cmd_stop_flash_van_for_eject
+      about_to_finish_time: 1.5s
 
 
 ball_saves:
@@ -128,7 +156,6 @@ ball_saves:
     auto_launch: yes
     balls_to_save: -1
     grace_period: 5s
-    
 
 slides:
   base_score_slide:
@@ -214,6 +241,20 @@ variable_player:
     score: 2
 
   ########################################
+  # Van Vuk
+  ########################################
+
+  cmd_set_van_messaging_on:
+    v_enable_van_messaging:
+      action: set
+      int: 1
+
+  cmd_set_van_messaging_off:
+    v_enable_van_messaging:
+      action: set
+      int: 0
+
+  ########################################
   # Bonus
   ########################################
 
@@ -270,7 +311,7 @@ variable_player:
   ########################################
   # Testing
   ########################################
-  
+
       #  s_left_flipper_active:
       #    v_diverter_is_active:
       #      action: set
@@ -281,6 +322,35 @@ variable_player:
       #      int: 1
 
 event_player:
+
+  ########################################
+  # Start Base Mode
+  ########################################
+
+  mode_base_started:
+    - cmd_enable_light_van_message
+
+  ########################################
+  # Start Ball
+  ########################################
+
+  ball_started:
+    - cmd_enable_mode_switcher
+
+  ########################################
+  # Van VUK
+  ########################################
+
+  cmd_enable_light_van_message:
+    - cmd_enable_bh_mode_van
+    - cmd_set_van_messaging_on
+
+  cmd_disable_light_van_message:
+    - cmd_set_van_messaging_off
+
+  ball_hold_bh_mode_van_full{current_player.v_enable_van_messaging==1}:
+    - cmd_eject_van_vuk_with_audio
+    - cmd_show_van_messaging
 
   ########################################
   # Chainsaw Multiball
@@ -380,9 +450,17 @@ event_player:
 
 
   ########################################
+  # Van Eject
+  ########################################
+
+  cmd_eject_van_vuk_with_audio:
+    - cmd_play_van_eject_vuk_sound
+    - cmd_flash_van_for_eject
+
+  ########################################
   # Testing
   ########################################
-  
+
   s_right_flipper_active:
     - cmd_test_flipper_right
   s_left_flipper_active:

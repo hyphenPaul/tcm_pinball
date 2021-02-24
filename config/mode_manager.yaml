@@ -48,7 +48,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_disable_mode_switcher
+    - cmd_disable_mode_switcher_and_message
 
   multiball_mb_chainsaw_multiball_ended:
     - cmd_start_mode_escape
@@ -57,7 +57,7 @@ event_player:
     - cmd_start_mode_save_from_the_grave
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
-    - cmd_enable_mode_switcher
+    - cmd_enable_mode_switcher_and_message
 
   ##################################################
   # Escape Multiball
@@ -73,7 +73,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_disable_mode_switcher
+    - cmd_disable_mode_switcher_and_message
     - cmd_start_mode_escape_multiball
 
   cmd_stop_escape_multiball_mode:
@@ -85,7 +85,7 @@ event_player:
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_escape
-    - cmd_enable_mode_switcher
+    - cmd_enable_mode_switcher_and_message
 
   ##################################################
   # Placeholder A
@@ -101,7 +101,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_disable_mode_switcher
+    - cmd_disable_mode_switcher_and_message
     - cmd_start_mode_hitchhiker
 
   cmd_stop_hitchhiker_mode:
@@ -113,7 +113,7 @@ event_player:
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_escape
-    - cmd_enable_mode_switcher
+    - cmd_enable_mode_switcher_and_message
 
   ##################################################
   # Placeholder B
@@ -129,7 +129,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_disable_mode_switcher
+    - cmd_disable_mode_switcher_and_message
     - cmd_start_mode_placeholder_b
 
   cmd_stop_placeholder_b_mode:
@@ -141,7 +141,7 @@ event_player:
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_escape
-    - cmd_enable_mode_switcher
+    - cmd_enable_mode_switcher_and_message
 
   ##################################################
   # Placeholder C
@@ -157,7 +157,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_disable_mode_switcher
+    - cmd_disable_mode_switcher_and_message
     - cmd_start_mode_placeholder_c
 
   cmd_stop_placeholder_c_mode:
@@ -169,7 +169,7 @@ event_player:
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_escape
-    - cmd_enable_mode_switcher
+    - cmd_enable_mode_switcher_and_message
 
   ##################################################
   # Placeholder D
@@ -185,7 +185,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_disable_mode_switcher
+    - cmd_disable_mode_switcher_and_message
     - cmd_start_mode_placeholder_d
 
   cmd_stop_placeholder_d_mode:
@@ -197,7 +197,7 @@ event_player:
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_escape
-    - cmd_enable_mode_switcher
+    - cmd_enable_mode_switcher_and_message
 
   ##################################################
   # Placeholder E
@@ -213,7 +213,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_disable_mode_switcher
+    - cmd_disable_mode_switcher_and_message
     - cmd_start_mode_placeholder_e
 
   cmd_stop_placeholder_e_mode:
@@ -225,7 +225,7 @@ event_player:
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_escape
-    - cmd_enable_mode_switcher
+    - cmd_enable_mode_switcher_and_message
 
   ##################################################
   # Placeholder F
@@ -241,7 +241,7 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_disable_mode_switcher
+    - cmd_disable_mode_switcher_and_message
     - cmd_start_mode_placeholder_f
 
   cmd_stop_placeholder_f_mode:
@@ -253,7 +253,7 @@ event_player:
     - cmd_start_mode_meathook
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_escape
-    - cmd_enable_mode_switcher
+    - cmd_enable_mode_switcher_and_message
 
   ##################################################
   # Franklin
