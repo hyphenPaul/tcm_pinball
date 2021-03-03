@@ -51,6 +51,7 @@ event_player:
   ball_hold_bh_mode_van_full{current_player.v_hitchhiker_state=="van_1"}:
     cmd_hitchhiker_mode_timer_stop:
     cmd_hitchhiker_start_cut_slide:
+    cmd_stop_hitchhiker_music:
     cmd_hitchhiker_play_cut_audio:
 
   # Sean - the timer needs to start 4 seconds later - or add 4 seconds
@@ -78,6 +79,7 @@ event_player:
   ball_hold_bh_mode_van_full{current_player.v_hitchhiker_state=="van_2"}:
     cmd_hitchhiker_mode_timer_stop:
     cmd_hitchhiker_start_photo_slide:
+    cmd_stop_hitchhiker_music:
     cmd_hitchhiker_play_photo_audio:
 
   slide_hitchhiker_photo_slide_removed:
@@ -122,6 +124,7 @@ event_player:
   ball_hold_bh_mode_van_full{current_player.v_hitchhiker_state=="van_3"}:
     cmd_hitchhiker_mode_timer_stop:
     cmd_hitchhiker_start_franklin_slide:
+    cmd_stop_hitchhiker_music:
     cmd_hitchhiker_play_franklin_audio:
 
   slide_hitchhiker_franklin_slide_removed:
@@ -349,17 +352,21 @@ sound_player:
   cmd_hitchhiker_play_cut_audio:
     hitchhiker_cutting_score_v5:
       volume: 1.0
+      events_when_about_to_finish: cmd_play_hitchhiker_bg_music
+      about_to_finish_time: 1.5s
 
   cmd_hitchhiker_play_photo_audio:
-    hitchhiker_photo_score_v1:
+    hitchhiker_photo_score_v1_alt:
       volume: 1.0
+      events_when_about_to_finish: cmd_play_hitchhiker_bg_music
+      about_to_finish_time: 1.5s
 
   cmd_hitchhiker_play_franklin_audio:
-    hitchhiker_kickout_score_v4:
+    hitchhiker_kickout_score_v4_alt:
       volume: 1.0
 
   cmd_hitchhiker_play_shot_sound:
-    shot_made_v1:
+    shot_made_v7:
       volume: 1.0
 
   cmd_play_hitchhiker_bg_music:

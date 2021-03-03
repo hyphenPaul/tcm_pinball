@@ -4,7 +4,9 @@
   slides:
     slide_1:
       widgets:
-      - type: text
-        text: SHOOT THE DROP TARGETS
-        style: small
-        round_anchor_x: left
+      - type: image
+        image: hit_the_drop_targets
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0

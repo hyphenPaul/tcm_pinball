@@ -1,15 +1,15 @@
 #show_version=5
 
-#- duration: 100s
-#  slides:
-#    slide_1:
-#      widgets:
-#      - type: image
-#        image: hitchhiker_kickout_v1
-#        anchor_x: left
-#        anchor_y: bottom
-#        x: 0
-#        y: 0
+- duration: 100s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: sawyer_v1_test
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
 
 #- duration: 10s
 #  slides:

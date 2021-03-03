@@ -327,19 +327,25 @@ event_player:
   # Start Base Mode
   ########################################
 
-  mode_base_started:
-    - cmd_enable_light_van_message
+#  mode_base_started:
+#    - cmd_enable_light_van_message
 
   ########################################
   # Start Ball
   ########################################
 
   ball_started:
-    - cmd_enable_mode_switcher
+    - cmd_enable_mode_switcher_and_message
 
   ########################################
   # Van VUK
   ########################################
+
+  # enable message then trigger mode switcher
+  # the mode switcher will conditionally turn off message as needed
+  cmd_enable_mode_switcher_and_message:
+    - cmd_enable_light_van_message
+    - cmd_enable_mode_switcher
 
   cmd_enable_light_van_message:
     - cmd_enable_bh_mode_van
