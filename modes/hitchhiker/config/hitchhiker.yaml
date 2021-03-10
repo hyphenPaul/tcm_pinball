@@ -14,10 +14,10 @@ mode:
 event_player:
 
   mode_hitchhiker_started:
+    cmd_disable_bh_mode_van:
     cmd_hitchhiker_set_state_starting:
     cmd_hitchhiker_start_intro_slide:
-    cmd_hitchhiker_plan_intro_slide_sound:
-    cmd_disable_bh_mode_van:
+    cmd_hitchhiker_start_intro_slide_sound:
 
   slide_hitchhiker_intro_slide_removed:
     cmd_hitchhiker_after_intro_complete:
@@ -342,7 +342,7 @@ slide_player:
       expire: 8.6s
 
 sound_player:
-  cmd_hitchhiker_plan_intro_slide_sound:
+  cmd_hitchhiker_start_intro_slide_sound:
     hitchhiker_intro_score_v5:
       action: play
       loops: 0

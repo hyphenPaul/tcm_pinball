@@ -88,6 +88,34 @@ event_player:
     - cmd_enable_mode_switcher_and_message
 
   ##################################################
+  # Barbecue
+  ##################################################
+
+  cmd_start_barbecue_mode:
+    - cmd_stop_mode_escape
+    - cmd_stop_mode_chainsaw
+    - cmd_stop_mode_franklin
+    - cmd_stop_mode_franklin_hurry_up
+    - cmd_stop_mode_franklin_frenzy # It would be awesome to have this roll over until after multiball
+    - cmd_stop_mode_mask
+    - cmd_stop_mode_save_from_the_grave
+    - cmd_stop_mode_meathook
+    - cmd_stop_mode_pop_bumpers
+    - cmd_disable_mode_switcher_and_message
+    - cmd_start_mode_barbecue
+
+  cmd_stop_barbecue_mode:
+    - cmd_stop_mode_barbecue
+    - cmd_start_mode_chainsaw
+    - cmd_start_mode_franklin
+    - cmd_start_mode_mask
+    - cmd_start_mode_save_from_the_grave
+    - cmd_start_mode_meathook
+    - cmd_start_mode_pop_bumpers
+    - cmd_start_mode_escape
+    - cmd_enable_mode_switcher_and_message
+
+  ##################################################
   # Placeholder A
   ##################################################
 
@@ -106,34 +134,6 @@ event_player:
 
   cmd_stop_hitchhiker_mode:
     - cmd_stop_mode_hitchhiker
-    - cmd_start_mode_chainsaw
-    - cmd_start_mode_franklin
-    - cmd_start_mode_mask
-    - cmd_start_mode_save_from_the_grave
-    - cmd_start_mode_meathook
-    - cmd_start_mode_pop_bumpers
-    - cmd_start_mode_escape
-    - cmd_enable_mode_switcher_and_message
-
-  ##################################################
-  # Placeholder B
-  ##################################################
-
-  cmd_start_placeholder_b_mode:
-    - cmd_stop_mode_escape
-    - cmd_stop_mode_chainsaw
-    - cmd_stop_mode_franklin
-    - cmd_stop_mode_franklin_hurry_up
-    - cmd_stop_mode_franklin_frenzy # It would be awesome to have this roll over until after multiball
-    - cmd_stop_mode_mask
-    - cmd_stop_mode_save_from_the_grave
-    - cmd_stop_mode_meathook
-    - cmd_stop_mode_pop_bumpers
-    - cmd_disable_mode_switcher_and_message
-    - cmd_start_mode_placeholder_b
-
-  cmd_stop_placeholder_b_mode:
-    - cmd_stop_mode_placeholder_b
     - cmd_start_mode_chainsaw
     - cmd_start_mode_franklin
     - cmd_start_mode_mask

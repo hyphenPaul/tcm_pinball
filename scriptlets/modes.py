@@ -7,12 +7,13 @@ class Modes(CustomCode):
         self.info_log('Enabling')
 
         self.modes = {
-            "hitchhiker" :  { "light" : "grid_in_yer_face", "mode_name" : "hitchhiker" },
-            "hitchhiker1" :  { "light" : "grid_fire", "mode_name" : "hitchhiker" },
-            "hitchhiker2" :  { "light" : "grid_space_jam", "mode_name" : "hitchhiker" },
-            "hitchhiker3" :  { "light" : "grid_rebound", "mode_name" : "hitchhiker" },
-            "hitchhiker4" :  { "light" : "grid_slam", "mode_name" : "hitchhiker" },
-            "hitchhiker5" :  { "light" : "grid_fastbreak", "mode_name" : "hitchhiker" }
+#            "hitchhiker" :  { "light" : "grid_in_yer_face", "mode_name" : "hitchhiker" },
+            "barbecue" :  { "light" : "grid_in_yer_face", "mode_name" : "barbecue" },
+            "barbecue1" :  { "light" : "grid_fire", "mode_name" : "barbecue" },
+            "barbecue2" :  { "light" : "grid_space_jam", "mode_name" : "barbecue" },
+            "barbecue3" :  { "light" : "grid_rebound", "mode_name" : "barbecue" },
+            "barbecue4" :  { "light" : "grid_slam", "mode_name" : "barbecue" },
+            "barbecue5" :  { "light" : "grid_fastbreak", "mode_name" : "barbecue" }
         }
 
         self.machine.events.add_handler('mode_base_started', self.init_on_ball_start)

@@ -1,0 +1,457 @@
+#config_version=5
+
+mode:
+  start_events:
+    - cmd_start_mode_barbecue
+  stop_events:
+    - cmd_stop_mode_barbecue
+  priority: 10000
+
+##################################################
+# Events
+##################################################
+
+event_player:
+
+  timer_barbecue_mode_timer_complete:
+    cmd_barbecue_clean_up:
+    cmd_stop_barbecue_mode:
+
+  ### mode progression ###
+
+  mode_barbecue_started:
+    cmd_disable_bh_mode_van:
+    cmd_barbecue_set_state_starting:
+    cmd_barbecue_start_intro_slide:
+    cmd_barbecue_start_intro_slide_sound:
+
+  slide_barbecue_intro_slide_removed:
+    cmd_barbecue_after_intro_complete:
+    cmd_play_barbecue_bg_music:
+
+  cmd_barbecue_after_intro_complete:
+    cmd_barbecue_set_state_all_shots:
+    cmd_barbecue_refresh_lights:
+
+  cmd_barbecue_all_shots_hit:
+    cmd_barbecue_set_state_roaming_half:
+    cmd_barbecue_refresh_lights:
+    cmd_barbecue_roaming_half_timer_start:
+
+  cmd_barbecue_roaming_half_hit:
+    cmd_barbecue_roaming_half_timer_stop:
+    cmd_barbecue_set_state_roaming_double:
+    cmd_barbecue_refresh_lights:
+    cmd_barbecue_roaming_double_timer_start:
+
+  cmd_barbecue_roaming_double_hit:
+    cmd_barbecue_roaming_double_timer_stop:
+    cmd_barbecue_set_state_roaming_single:
+    cmd_barbecue_refresh_lights:
+    cmd_barbecue_roaming_single_timer_start:
+
+  cmd_barbecue_roaming_single_hit:
+    cmd_barbecue_roaming_single_timer_stop:
+    cmd_barbecue_set_state_final_shot:
+    cmd_barbecue_refresh_lights:
+    cmd_enable_bh_mode_van:
+
+  cmd_barbecue_final_shot_hit:
+    cmd_barbecue_mode_timer_stop:
+    cmd_barbecue_start_final_slide:
+
+  slide_barbecue_final_slide_removed:
+    cmd_eject_van_vuk_with_audio:
+    cmd_stop_barbecue_mode:
+
+  # lights
+
+  cmd_barbecue_refresh_lights:
+    cmd_barbecue_clear_playfield_lights:
+    cmd_barbecue_turn_on_playfield_lights:
+
+  timer_barbecue_roaming_half_timer_tick:
+    cmd_barbecue_clear_playfield_lights:
+    cmd_barbecue_turn_on_playfield_lights:
+
+  timer_barbecue_roaming_double_timer_tick:
+    cmd_barbecue_clear_playfield_lights:
+    cmd_barbecue_turn_on_playfield_lights:
+
+  timer_barbecue_roaming_single_timer_tick:
+    cmd_barbecue_clear_playfield_lights:
+    cmd_barbecue_turn_on_playfield_lights:
+
+  #### shot handlers ####
+
+  # all_shots
+
+  left_orbit_hit{current_player.v_barbecue_state=="all_shots"}:
+    cmd_barbecue_all_shots_hit:
+
+  s_captive_ball_target_active{current_player.v_barbecue_state=="all_shots"}:
+    cmd_barbecue_all_shots_hit:
+
+  left_ramp_hit{current_player.v_barbecue_state=="all_shots"}:
+    cmd_barbecue_all_shots_hit:
+
+  s_slaughter_house_target_active{current_player.v_barbecue_state=="all_shots"}:
+    cmd_barbecue_all_shots_hit:
+
+  right_ramp_hit{current_player.v_barbecue_state=="all_shots"}:
+    cmd_barbecue_all_shots_hit:
+
+  right_orbit_hit{current_player.v_barbecue_state=="all_shots"}:
+    cmd_barbecue_all_shots_hit:
+
+  # half roaming
+
+  left_orbit_hit{current_player.v_barbecue_state=="roaming_half" and current_player.v_barbecue_timer_tick==0}:
+    cmd_barbecue_roaming_half_hit:
+
+  s_captive_ball_target_active{current_player.v_barbecue_state=="roaming_half" and current_player.v_barbecue_timer_tick==0}:
+    cmd_barbecue_roaming_half_hit:
+
+  left_ramp_hit{current_player.v_barbecue_state=="roaming_half" and current_player.v_barbecue_timer_tick==0}:
+    cmd_barbecue_roaming_half_hit:
+
+  s_slaughter_house_target_active{current_player.v_barbecue_state=="roaming_half" and current_player.v_barbecue_timer_tick==1}:
+    cmd_barbecue_roaming_half_hit:
+
+  right_ramp_hit{current_player.v_barbecue_state=="roaming_half" and current_player.v_barbecue_timer_tick==1}:
+    cmd_barbecue_roaming_half_hit:
+
+  right_orbit_hit{current_player.v_barbecue_state=="roaming_half" and current_player.v_barbecue_timer_tick==1}:
+    cmd_barbecue_roaming_half_hit:
+
+  # roaming double
+
+  left_orbit_hit{current_player.v_barbecue_state=="roaming_double" and current_player.v_barbecue_timer_tick==0}:
+    cmd_barbecue_roaming_double_hit:
+
+  s_captive_ball_target_active{current_player.v_barbecue_state=="roaming_double" and current_player.v_barbecue_timer_tick==0}:
+    cmd_barbecue_roaming_double_hit:
+
+  left_ramp_hit{current_player.v_barbecue_state=="roaming_double" and current_player.v_barbecue_timer_tick==1}:
+    cmd_barbecue_roaming_double_hit:
+
+  s_slaughter_house_target_active{current_player.v_barbecue_state=="roaming_double" and current_player.v_barbecue_timer_tick==1}:
+    cmd_barbecue_roaming_double_hit:
+
+  right_ramp_hit{current_player.v_barbecue_state=="roaming_double" and current_player.v_barbecue_timer_tick==2}:
+    cmd_barbecue_roaming_double_hit:
+
+  right_orbit_hit{current_player.v_barbecue_state=="roaming_double" and current_player.v_barbecue_timer_tick==2}:
+    cmd_barbecue_roaming_double_hit:
+
+  # roaming single
+
+  left_orbit_hit{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==0}:
+    cmd_barbecue_roaming_single_hit:
+
+  s_captive_ball_target_active{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==1}:
+    cmd_barbecue_roaming_single_hit:
+
+  left_ramp_hit{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==2}:
+    cmd_barbecue_roaming_single_hit:
+
+  s_slaughter_house_target_active{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==3}:
+    cmd_barbecue_roaming_single_hit:
+
+  right_ramp_hit{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==4}:
+    cmd_barbecue_roaming_single_hit:
+
+  right_orbit_hit{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==5}:
+    cmd_barbecue_roaming_single_hit:
+
+  # final shot
+
+  ball_hold_bh_mode_van_full{current_player.v_barbecue_state=="final_shot"}:
+    cmd_barbecue_final_shot_hit:
+
+  # clean up
+
+  cmd_barbecue_clean_up:
+    cmd_barbecue_roaming_half_timer_stop:
+    cmd_barbecue_roaming_double_timer_stop:
+    cmd_barbecue_roaming_single_timer_stop:
+
+##################################################
+# Logic
+##################################################
+
+timers:
+  barbecue_mode_timer:
+    start_value: 0
+    end_value: 100
+    tick_interval: 1s
+    direction: up
+    start_running: True
+    control_events:
+      - event: cmd_barbecue_mode_timer_stop
+        action: stop
+      - event: cmd_barbecue_mode_timer_start
+        action: start
+
+  barbecue_roaming_half_timer:
+    start_value: 0
+    end_value: 2
+    tick_interval: 4s
+    direction: up
+    start_running: False
+    restart_on_complete: True
+    control_events:
+      - event: cmd_barbecue_roaming_half_timer_stop
+        action: stop
+      - event: cmd_barbecue_roaming_half_timer_start
+        action: start
+
+  barbecue_roaming_double_timer:
+    start_value: 0
+    end_value: 3
+    tick_interval: 4s
+    direction: up
+    start_running: False
+    restart_on_complete: True
+    control_events:
+      - event: cmd_barbecue_roaming_double_timer_stop
+        action: stop
+      - event: cmd_barbecue_roaming_double_timer_start
+        action: start
+
+  barbecue_roaming_single_timer:
+    start_value: 0
+    end_value: 6
+    tick_interval: 4s
+    direction: up
+    start_running: False
+    restart_on_complete: True
+    control_events:
+      - event: cmd_barbecue_roaming_single_timer_stop
+        action: stop
+      - event: cmd_barbecue_roaming_single_timer_start
+        action: start
+
+##################################################
+# Variables
+##################################################
+
+variable_player:
+  cmd_barbecue_set_state_starting:
+    v_barbecue_state:
+      action: set
+      string: "starting"
+
+  cmd_barbecue_set_state_all_shots:
+    v_barbecue_state:
+      action: set
+      string: "all_shots"
+
+  cmd_barbecue_set_state_roaming_half:
+    v_barbecue_state:
+      action: set
+      string: "roaming_half"
+
+  cmd_barbecue_set_state_roaming_double:
+    v_barbecue_state:
+      action: set
+      string: "roaming_double"
+
+  cmd_barbecue_set_state_roaming_single:
+    v_barbecue_state:
+      action: set
+      string: "roaming_single"
+
+  cmd_barbecue_set_state_final_shot:
+    v_barbecue_state:
+      action: set
+      string: "final_shot"
+
+  # timer
+
+  timer_barbecue_roaming_half_timer_tick.100:
+    v_barbecue_timer_tick:
+      int: device.timers.barbecue_roaming_half_timer.ticks
+      action: set
+
+  timer_barbecue_roaming_double_timer_tick.100:
+    v_barbecue_timer_tick:
+      int: device.timers.barbecue_roaming_double_timer.ticks
+      action: set
+
+  timer_barbecue_roaming_single_timer_tick.100:
+    v_barbecue_timer_tick:
+      int: device.timers.barbecue_roaming_single_timer.ticks
+      action: set
+
+##################################################
+# Shows
+##################################################
+
+show_player:
+  cmd_barbecue_clear_playfield_lights:
+    med_flash:
+      action: stop
+      show_tokens:
+        lights:
+          - left_orbit_arrow
+          - captive_ball_arrow
+          - basket_ramp_arrow
+          - right_ramp_arrow
+          - slaughter_house_arrow
+          - right_orbit_arrow
+          - van
+
+  # all shots
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="all_shots"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          left_orbit_arrow,
+          captive_ball_arrow,
+          basket_ramp_arrow,
+          right_ramp_arrow,
+          slaughter_house_arrow,
+          right_orbit_arrow
+
+  # roaming half
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_half" and current_player.v_barbecue_timer_tick==0}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          left_orbit_arrow,
+          captive_ball_arrow,
+          basket_ramp_arrow
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_half" and current_player.v_barbecue_timer_tick==1}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          right_ramp_arrow,
+          slaughter_house_arrow,
+          right_orbit_arrow
+
+  # roaming double
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_double" and current_player.v_barbecue_timer_tick==0}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          left_orbit_arrow,
+          captive_ball_arrow
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_double" and current_player.v_barbecue_timer_tick==1}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          basket_ramp_arrow,
+          slaughter_house_arrow
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_double" and current_player.v_barbecue_timer_tick==2}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          right_ramp_arrow,
+          right_orbit_arrow
+
+  # roaming single
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==0}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          left_orbit_arrow
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==1}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          captive_ball_arrow
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==2}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          basket_ramp_arrow
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==3}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          slaughter_house_arrow
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==4}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          right_ramp_arrow
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="roaming_single" and current_player.v_barbecue_timer_tick==5}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          right_ramp_arrow
+
+  # final shot
+
+  cmd_barbecue_turn_on_playfield_lights{current_player.v_barbecue_state=="final_shot"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          van
+
+##################################################
+# Shows
+##################################################
+
+slides:
+  barbecue_intro_slide:
+    widgets:
+      - type: image
+        image: barbecue_intro_v4
+  barbecue_final_slide:
+    widgets:
+      - type: text
+        text: placeholder final slide
+
+##################################################
+# Slides
+##################################################
+
+slide_player:
+  cmd_barbecue_start_intro_slide:
+    barbecue_intro_slide:
+      priority: 300
+      expire: 5.9s
+  cmd_barbecue_start_final_slide:
+    barbecue_final_slide:
+      priority: 300
+      expire: 3s
+
+##################################################
+# Audio
+##################################################
+
+sound_player:
+  cmd_barbecue_start_intro_slide_sound:
+    barbecue_intro_score_v4:
+      action: play
+      loops: 0
+      volume: 1.0
+      events_when_about_to_finish: cmd_eject_van_vuk_with_audio
+      about_to_finish_time: 2s

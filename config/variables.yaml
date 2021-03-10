@@ -25,6 +25,17 @@ machine_vars:
     value_type: str
 
   #####################################
+  # Barbecue
+  #####################################
+
+  v_barbecue_state:
+    initial_value: "starting"
+    value_type: str
+
+  v_barbecue_timer_tick:
+    initial_value: 0
+
+  #####################################
   # Help
   #####################################
 

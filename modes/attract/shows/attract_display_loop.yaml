@@ -5,7 +5,7 @@
     slide_1:
       widgets:
       - type: image
-        image: sawyer_v1_test
+        image: barbecue_intro_v4
         anchor_x: left
         anchor_y: bottom
         x: 0
