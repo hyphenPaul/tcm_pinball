@@ -11,9 +11,9 @@ class Modes(CustomCode):
             "barbecue" :  { "light" : "grid_in_yer_face", "mode_name" : "barbecue" },
             "barbecue1" :  { "light" : "grid_fire", "mode_name" : "barbecue" },
             "barbecue2" :  { "light" : "grid_space_jam", "mode_name" : "barbecue" },
-            "barbecue3" :  { "light" : "grid_rebound", "mode_name" : "barbecue" },
-            "barbecue4" :  { "light" : "grid_slam", "mode_name" : "barbecue" },
-            "barbecue5" :  { "light" : "grid_fastbreak", "mode_name" : "barbecue" }
+            "barbecue3" :  { "light" : "grid_rebound", "mode_name" : "hitchhiker" },
+            "barbecue4" :  { "light" : "grid_slam", "mode_name" : "hitchhiker" },
+            "barbecue5" :  { "light" : "grid_fastbreak", "mode_name" : "hitchhiker" }
         }
 
         self.machine.events.add_handler('mode_base_started', self.init_on_ball_start)

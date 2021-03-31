@@ -183,18 +183,6 @@ timers:
         action: start
 
 ##################################################
-# Devices
-##################################################
-
-#ball_holds:
-#  bh_hitchhiker_van:
-#    balls_to_hold: 1
-#    hold_devices: bd_van
-#    enable_events: cmd_enable_bh_hitchhiker_van
-#    disable_events: cmd_disable_bh_hitchhiker_van
-#    release_all_events: cmd_release_all_bh_van
-
-##################################################
 # Sites and Sounds
 ##################################################
 
