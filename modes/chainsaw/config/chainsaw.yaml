@@ -18,6 +18,7 @@ event_player:
     cmd_reset_letter_animation_timer:
   mode_chainsaw_started{current_player.v_chainsaw_all_collected==1}:
     cmd_reset_bh_chainsaw_van:
+    cmd_disable_mode_switcher_and_message:
     cmd_light_multiball:
   mode_chainsaw_started{current_player.v_cs_multiball_completion_counter_count==0}:
     cmd_enable_c_shot:
@@ -48,6 +49,7 @@ event_player:
     cmd_play_saw_w_activated:
   chainsaw_shot_group_complete:
     cmd_set_chainsaw_all_collected:
+    cmd_disable_mode_switcher_and_message:
     cmd_light_multiball:
     cmd_start_shoot_the_van_timer:
   ball_hold_bh_chainsaw_van_full:

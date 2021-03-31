@@ -43,6 +43,7 @@ class Modes(CustomCode):
         self.machine.events.remove_handler_by_event('drop_target_bank_van_down', self.on_drop_target)
         self.machine.events.remove_handler_by_event('s_left_slingshot_active', self.cycle_mode)
         self.machine.events.remove_handler_by_event('s_right_slingshot_active', self.cycle_mode)
+        self.machine.events.remove_handler_by_event('ball_hold_bh_mode_van_full', self.on_van_vuk)
         self.turn_off_all_lights()
 
     def on_enable(self, **kwargs):

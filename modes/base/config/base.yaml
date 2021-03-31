@@ -358,6 +358,11 @@ event_player:
     - cmd_eject_van_vuk_with_audio
     - cmd_show_van_messaging
 
+  # only used this if you're not using the van ball hold like chainsaw multiball
+  cmd_disable_mode_switcher_and_message:
+    - cmd_disable_mode_switcher
+    - cmd_disable_light_van_message
+
   ########################################
   # Chainsaw Multiball
   ########################################
