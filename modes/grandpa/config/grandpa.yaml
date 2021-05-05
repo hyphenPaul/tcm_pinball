@@ -1,0 +1,106 @@
+#config_version=5
+
+mode:
+  start_events:
+    - cmd_start_mode_grandpa
+  stop_events:
+    - cmd_stop_mode_grandpa
+  priority: 10000
+
+##################################################
+# Events
+##################################################
+
+event_player:
+  mode_grandpa_started:
+    cmd_disable_bh_mode_van:
+    cmd_grandpa_set_state_starting:
+    cmd_grandpa_start_intro_slide:
+    cmd_grandpa_start_intro_slide_sound:
+
+  timer_grandpa_mode_timer_complete:
+    cmd_stop_grandpa_mode:
+
+  slide_grandpa_intro_slide_removed:
+    # Sean: add this to the sound intro once i get it
+    # cmd_eject_van_vuk_with_audio:
+    cmd_grandpa_after_intro_complete:
+    cmd_play_grandpa_bg_music:
+
+  cmd_grandpa_after_intro_complete:
+    cmd_grandpa_set_state_combo_1_shooting:
+    cmd_play_grandpa_bg_music:
+    cmd_grandpa_refresh_lights:
+
+  cmd_grandpa_refresh_lights:
+    cmd_grandpa_clear_playfield_lights:
+    cmd_grandpa_turn_on_playfield_lights:
+
+  #### Shots ####
+
+  right_ramp_hit{current_player.v_grandpa_state=="combo_1_shooting"}:
+    cmd_hitchhiker_ramp_hit:
+
+##################################################
+# Logic
+##################################################
+
+timers:
+  grandpa_mode_timer:
+    start_value: 0
+    end_value: 30
+    tick_interval: 1s
+    direction: up
+    start_running: True
+
+##################################################
+# Variables
+##################################################
+
+variable_player:
+  cmd_grandpa_set_state_starting:
+    v_grandpa_state:
+      action: set
+      string: "starting"
+
+  cmd_grandpa_set_state_combo_1_shooting:
+    v_grandpa_state:
+      action: set
+      string: "combo_1_shooting"
+
+##################################################
+# Sites and Sounds
+##################################################
+
+slides:
+  grandpa_intro_slide:
+    widgets:
+      - type: image
+        image: hammer_time_intro_v3
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+slide_player:
+  cmd_grandpa_start_intro_slide:
+    grandpa_intro_slide:
+      priority: 300
+      expire: 6.1s
+
+sound_player:
+  cmd_grandpa_start_intro_slide_sound:
+    hammer_time_intro_score_v3:
+      action: play
+      loops: 0
+      events_when_about_to_finish: cmd_eject_van_vuk_with_audio
+      about_to_finish_time: 1s
+
+show_player:
+  cmd_grandpa_clear_playfield_lights:
+    med_flash:
+      action: stop
+      show_tokens:
+        lights:
+          - basket_ramp_arrow
+          - right_ramp_arrow

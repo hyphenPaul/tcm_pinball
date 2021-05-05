@@ -113,7 +113,7 @@ event_player:
     - cmd_enable_mode_switcher_and_message
 
   ##################################################
-  # Placeholder A
+  # Hitchhiker
   ##################################################
 
   cmd_start_hitchhiker_mode:
@@ -143,7 +143,7 @@ event_player:
   # Placeholder C
   ##################################################
 
-  cmd_start_placeholder_c_mode:
+  cmd_start_grandpa_mode:
     - cmd_stop_mode_escape
     - cmd_stop_mode_chainsaw
     - cmd_stop_mode_franklin
@@ -153,10 +153,10 @@ event_player:
     - cmd_stop_mode_save_from_the_grave
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_start_mode_placeholder_c
+    - cmd_start_mode_grandpa
 
-  cmd_stop_placeholder_c_mode:
-    - cmd_stop_mode_placeholder_c
+  cmd_stop_grandpa_mode:
+    - cmd_stop_mode_grandpa
     - cmd_start_mode_chainsaw
     - cmd_start_mode_franklin
     - cmd_start_mode_mask

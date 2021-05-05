@@ -25,6 +25,14 @@ machine_vars:
     value_type: str
 
   #####################################
+  # Grandpa
+  #####################################
+
+  v_grandpa_state:
+    initial_value: "starting"
+    value_type: str
+
+  #####################################
   # Barbecue
   #####################################
 
@@ -34,13 +42,6 @@ machine_vars:
 
   v_barbecue_timer_tick:
     initial_value: 0
-
-  #####################################
-  # Help
-  #####################################
-
-  v_play_help_animation:
-    initial_value: 1
 
   #####################################
   # Magnavuk
@@ -304,3 +305,10 @@ player_vars:
   v_escape_last_saved_kid:
     initial_value: ""
     value_type: str
+
+  #####################################
+  # Help
+  #####################################
+
+  v_play_help_animation:
+    initial_value: 1

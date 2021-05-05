@@ -27,7 +27,7 @@ event_player:
 
   slide_barbecue_intro_slide_removed:
     cmd_barbecue_after_intro_complete:
-    cmd_play_barbecue_bg_music:
+    cmd_play_barbecue_music:
 
   cmd_barbecue_after_intro_complete:
     cmd_barbecue_set_state_all_shots:
@@ -37,28 +37,38 @@ event_player:
     cmd_barbecue_set_state_roaming_half:
     cmd_barbecue_refresh_lights:
     cmd_barbecue_roaming_half_timer_start:
+    cmd_play_first_shot_slide:
+    cmd_play_grill_sound:
 
   cmd_barbecue_roaming_half_hit:
     cmd_barbecue_roaming_half_timer_stop:
     cmd_barbecue_set_state_roaming_double:
     cmd_barbecue_refresh_lights:
     cmd_barbecue_roaming_double_timer_start:
+    cmd_play_second_shot_slide:
+    cmd_play_grill_sound:
 
   cmd_barbecue_roaming_double_hit:
     cmd_barbecue_roaming_double_timer_stop:
     cmd_barbecue_set_state_roaming_single:
     cmd_barbecue_refresh_lights:
     cmd_barbecue_roaming_single_timer_start:
+    cmd_play_third_shot_slide:
+    cmd_play_grill_sound:
 
   cmd_barbecue_roaming_single_hit:
     cmd_barbecue_roaming_single_timer_stop:
     cmd_barbecue_set_state_final_shot:
     cmd_barbecue_refresh_lights:
     cmd_enable_bh_mode_van:
+    cmd_play_forth_shot_slide:
+    cmd_play_grill_sound:
 
   cmd_barbecue_final_shot_hit:
     cmd_barbecue_mode_timer_stop:
     cmd_barbecue_start_final_slide:
+    cmd_stop_barbecue_music:
+    cmd_play_bonus_sound:
 
   slide_barbecue_final_slide_removed:
     cmd_eject_van_vuk_with_audio:
@@ -183,7 +193,7 @@ event_player:
 timers:
   barbecue_mode_timer:
     start_value: 0
-    end_value: 100
+    end_value: 60
     tick_interval: 1s
     direction: up
     start_running: True
@@ -209,7 +219,7 @@ timers:
   barbecue_roaming_double_timer:
     start_value: 0
     end_value: 3
-    tick_interval: 4s
+    tick_interval: 3s
     direction: up
     start_running: False
     restart_on_complete: True
@@ -222,7 +232,7 @@ timers:
   barbecue_roaming_single_timer:
     start_value: 0
     end_value: 6
-    tick_interval: 4s
+    tick_interval: 2s
     direction: up
     start_running: False
     restart_on_complete: True
@@ -424,10 +434,26 @@ slides:
     widgets:
       - type: image
         image: barbecue_intro_v4
+  barbecue_arm_slide:
+    widgets:
+      - type: image
+        image: bbq_arm_v3
+  barbecue_leg_slide:
+    widgets:
+      - type: image
+        image: bbq_leg_v1
+  barbecue_guts_slide:
+    widgets:
+      - type: image
+        image: bbq_guts_v1
+  barbecue_butt_slide:
+    widgets:
+      - type: image
+        image: bbq_butt_v2
   barbecue_final_slide:
     widgets:
-      - type: text
-        text: placeholder final slide
+      - type: image
+        image: bbq_bonus_v3_low_res
 
 ##################################################
 # Slides
@@ -438,10 +464,31 @@ slide_player:
     barbecue_intro_slide:
       priority: 300
       expire: 5.9s
+
+  cmd_play_first_shot_slide:
+    barbecue_arm_slide:
+      priority: 300
+      expire: 3.6s
+
+  cmd_play_second_shot_slide:
+    barbecue_leg_slide:
+      priority: 400
+      expire: 3.6s
+
+  cmd_play_third_shot_slide:
+    barbecue_guts_slide:
+      priority: 500
+      expire: 3.6s
+
+  cmd_play_forth_shot_slide:
+    barbecue_butt_slide:
+      priority: 600
+      expire: 3.6s
+
   cmd_barbecue_start_final_slide:
     barbecue_final_slide:
-      priority: 300
-      expire: 3s
+      priority: 700
+      expire: 4.9s
 
 ##################################################
 # Audio
@@ -455,3 +502,24 @@ sound_player:
       volume: 1.0
       events_when_about_to_finish: cmd_eject_van_vuk_with_audio
       about_to_finish_time: 2s
+
+  cmd_play_grill_sound:
+    barbecue_reward_score_v2:
+      action: play
+      loops: 0
+      volume: 1.0
+
+  cmd_play_bonus_sound:
+    barbecue_bonus_score:
+      action: play
+      loops: 0
+      volume: 1.0
+
+  cmd_play_barbecue_music:
+    barbecue_bg_music:
+      action: play
+      loops: -1
+
+  cmd_stop_barbecue_music:
+    barbecue_bg_music:
+      action: stop

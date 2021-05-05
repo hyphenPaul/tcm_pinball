@@ -5,7 +5,7 @@
     slide_1:
       widgets:
       - type: image
-        image: bbq_arm_v3
+        image: hammer_time_intro_v3
         anchor_x: left
         anchor_y: bottom
         x: 0

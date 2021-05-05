@@ -278,4 +278,8 @@ sounds:
   hitchhiker_bg_music:
     mode_end_action: stop
     file: tcm_music_hitcher_v2.wav
+  barbecue_bg_music:
+    mode_end_action: stop
+    file: bbq_music_v3.wav
+    volume: 0.9
 
