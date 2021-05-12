@@ -22,24 +22,93 @@ event_player:
     cmd_stop_grandpa_mode:
 
   slide_grandpa_intro_slide_removed:
-    # Sean: add this to the sound intro once i get it
-    # cmd_eject_van_vuk_with_audio:
     cmd_grandpa_after_intro_complete:
-    cmd_play_grandpa_bg_music:
 
   cmd_grandpa_after_intro_complete:
     cmd_grandpa_set_state_combo_1_shooting:
     cmd_play_grandpa_bg_music:
+    cmd_eject_van_vuk_with_audio:
     cmd_grandpa_refresh_lights:
+
+  cmd_grandpa_right_ramp_hit:
+    cmd_activate_diverter:
+    cmd_grandpa_combo_timer_restart:
+    cmd_grandpa_refresh_lights:
+    cmd_grandpa_start_lift_hammer_slide:
+
+  cmd_grandpa_combo_missed:
+    cmd_grandpa_refresh_lights:
+    cmd_grandpa_start_drop_hammer_slide:
+
+  cmd_grandpa_combo_completed:
+    cmd_grandpa_refresh_lights:
+    cmd_grandpa_start_hit_sally_slide:
+
+  #### Lights ####
 
   cmd_grandpa_refresh_lights:
     cmd_grandpa_clear_playfield_lights:
     cmd_grandpa_turn_on_playfield_lights:
 
+  cmd_grandpa_turn_on_playfield_lights{current_player.v_grandpa_state=="combo_1_shooting"}:
+    cmd_grandpa_show_right_ramp_light:
+
+  cmd_grandpa_turn_on_playfield_lights{current_player.v_grandpa_state=="combo_2_shooting"}:
+    cmd_grandpa_show_right_ramp_light:
+
+  cmd_grandpa_turn_on_playfield_lights{current_player.v_grandpa_state=="combo_3_shooting"}:
+    cmd_grandpa_show_right_ramp_light:
+
+  cmd_grandpa_turn_on_playfield_lights{current_player.v_grandpa_state=="combo_1_shot"}:
+    cmd_grandpa_show_right_basket_light:
+
+  cmd_grandpa_turn_on_playfield_lights{current_player.v_grandpa_state=="combo_2_shot"}:
+    cmd_grandpa_show_right_basket_light:
+
+  cmd_grandpa_turn_on_playfield_lights{current_player.v_grandpa_state=="combo_3_shot"}:
+    cmd_grandpa_show_right_basket_light:
+
   #### Shots ####
 
   right_ramp_hit{current_player.v_grandpa_state=="combo_1_shooting"}:
-    cmd_hitchhiker_ramp_hit:
+    cmd_grandpa_set_state_combo_1_shot:
+    cmd_grandpa_right_ramp_hit:
+
+  right_ramp_hit{current_player.v_grandpa_state=="combo_2_shooting"}:
+    cmd_grandpa_set_state_combo_2_shot:
+    cmd_grandpa_right_ramp_hit:
+
+  right_ramp_hit{current_player.v_grandpa_state=="combo_3_shooting"}:
+    cmd_grandpa_set_state_combo_3_shot:
+    cmd_grandpa_right_ramp_hit:
+
+  timer_grandpa_combo_timer_complete{current_player.v_grandpa_state=="combo_1_shot"}:
+    cmd_grandpa_set_state_combo_1_shooting:
+    cmd_grandpa_combo_missed:
+
+  timer_grandpa_combo_timer_complete{current_player.v_grandpa_state=="combo_2_shot"}:
+    cmd_grandpa_set_state_combo_2_shooting:
+    cmd_grandpa_combo_missed:
+
+  timer_grandpa_combo_timer_complete{current_player.v_grandpa_state=="combo_3_shot"}:
+    cmd_grandpa_set_state_combo_3_shooting:
+    cmd_grandpa_combo_missed:
+
+  left_ramp_hit{current_player.v_grandpa_state=="combo_1_shot"}:
+    cmd_grandpa_combo_timer_stop:
+    cmd_grandpa_set_state_combo_2_shooting: 
+    cmd_grandpa_combo_completed:
+
+  left_ramp_hit{current_player.v_grandpa_state=="combo_2_shot"}:
+    cmd_grandpa_combo_timer_stop:
+    cmd_grandpa_set_state_combo_3_shooting: 
+    cmd_grandpa_combo_completed:
+
+  left_ramp_hit{current_player.v_grandpa_state=="combo_3_shot"}:
+    cmd_grandpa_combo_timer_stop:
+    cmd_grandpa_set_state_winning: 
+    cmd_grandpa_combo_completed:
+
 
 ##################################################
 # Logic
@@ -48,10 +117,26 @@ event_player:
 timers:
   grandpa_mode_timer:
     start_value: 0
-    end_value: 30
+    end_value: 60
     tick_interval: 1s
     direction: up
     start_running: True
+    control_events:
+      - event: cmd_grandpa_mode_timer_add
+        action: add
+        value: 8
+
+  grandpa_combo_timer:
+    start_value: 0
+    end_value: 7
+    tick_interval: 1s
+    direction: up
+    start_running: False
+    control_events:
+      - event: cmd_grandpa_combo_timer_stop
+        action: stop
+      - event: cmd_grandpa_combo_timer_restart
+        action: restart
 
 ##################################################
 # Variables
@@ -68,6 +153,31 @@ variable_player:
       action: set
       string: "combo_1_shooting"
 
+  cmd_grandpa_set_state_combo_2_shooting:
+    v_grandpa_state:
+      action: set
+      string: "combo_2_shooting"
+
+  cmd_grandpa_set_state_combo_3_shooting:
+    v_grandpa_state:
+      action: set
+      string: "combo_3_shooting"
+
+  cmd_grandpa_set_state_combo_1_shot:
+    v_grandpa_state:
+      action: set
+      string: "combo_1_shot"
+
+  cmd_grandpa_set_state_combo_2_shot:
+    v_grandpa_state:
+      action: set
+      string: "combo_2_shot"
+
+  cmd_grandpa_set_state_combo_3_shot:
+    v_grandpa_state:
+      action: set
+      string: "combo_3_shot"
+
 ##################################################
 # Sites and Sounds
 ##################################################
@@ -82,21 +192,64 @@ slides:
         x: 0
         y: 0
 
+  grandpa_lift_hammer_slide:
+    widgets:
+      - type: image
+        image: grandpa_pickup_sledge_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  grandpa_drop_hammer_slide:
+    widgets:
+      - type: image
+        image: grandpa_miss_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  grandpa_hit_sally_slide:
+    widgets:
+      - type: image
+        image: grandpa_hit_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
 slide_player:
   cmd_grandpa_start_intro_slide:
     grandpa_intro_slide:
       priority: 300
       expire: 6.1s
 
+  cmd_grandpa_start_lift_hammer_slide:
+    grandpa_lift_hammer_slide:
+      priority: 300
+      expire: 7s
+
+  cmd_grandpa_start_drop_hammer_slide:
+    grandpa_drop_hammer_slide:
+      priority: 400
+      expire: 3.4s
+
+  cmd_grandpa_start_hit_sally_slide:
+    grandpa_hit_sally_slide:
+      priority: 500
+      expire: 3.6s
+
 sound_player:
   cmd_grandpa_start_intro_slide_sound:
     hammer_time_intro_score_v3:
       action: play
       loops: 0
-      events_when_about_to_finish: cmd_eject_van_vuk_with_audio
-      about_to_finish_time: 1s
 
 show_player:
+
+  ## Lights ##
+
   cmd_grandpa_clear_playfield_lights:
     med_flash:
       action: stop
@@ -104,3 +257,17 @@ show_player:
         lights:
           - basket_ramp_arrow
           - right_ramp_arrow
+
+  cmd_grandpa_show_right_ramp_light:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          right_ramp_arrow
+
+  cmd_grandpa_show_right_basket_light:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          basket_ramp_arrow
