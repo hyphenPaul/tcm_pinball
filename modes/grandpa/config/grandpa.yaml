@@ -35,14 +35,20 @@ event_player:
     cmd_grandpa_combo_timer_restart:
     cmd_grandpa_refresh_lights:
     cmd_grandpa_start_lift_hammer_slide:
+    cmd_add_grandpa_rando_sound_counter:
 
   cmd_grandpa_combo_missed:
     cmd_grandpa_refresh_lights:
     cmd_grandpa_start_drop_hammer_slide:
+    cmd_grandpa_miss_sally_sound:
+    cmd_grandpa_remove_background_slide:
 
   cmd_grandpa_combo_completed:
     cmd_grandpa_refresh_lights:
     cmd_grandpa_start_hit_sally_slide:
+    cmd_grandpa_hit_sally_sound:
+    cmd_grandpa_remove_background_slide:
+
 
   #### Lights ####
 
@@ -222,27 +228,57 @@ slides:
 slide_player:
   cmd_grandpa_start_intro_slide:
     grandpa_intro_slide:
-      priority: 300
+      priority: 500
       expire: 6.1s
 
   cmd_grandpa_start_lift_hammer_slide:
     grandpa_lift_hammer_slide:
-      priority: 300
+      priority: 600
       expire: 7s
 
   cmd_grandpa_start_drop_hammer_slide:
     grandpa_drop_hammer_slide:
-      priority: 400
+      priority: 700
       expire: 3.4s
 
   cmd_grandpa_start_hit_sally_slide:
     grandpa_hit_sally_slide:
-      priority: 500
+      priority: 800
       expire: 3.6s
 
 sound_player:
   cmd_grandpa_start_intro_slide_sound:
     hammer_time_intro_score_v3:
+      action: play
+      loops: 0
+
+  cmd_grandpa_hit_sally_sound:
+    grandpa_hit_score_v1_1:
+      action: play
+      loops: 0
+
+  cmd_grandpa_miss_sally_sound:
+    grandpa_miss_score_v1_1:
+      action: play
+      loops: 0
+
+  counter_grandpa_rando_sound_counter_hit{count==1}:
+    grandpa_pickup_sledge_score_v1_1:
+      action: play
+      loops: 0
+
+  counter_grandpa_rando_sound_counter_hit{count==2}:
+    grandpa_pickup_sledge_score_v1_1:
+      action: play
+      loops: 0
+
+  counter_grandpa_rando_sound_counter_hit{count==3}:
+    grandpa_pickup_sledge_score_v1_1:
+      action: play
+      loops: 0
+
+  logicblock_grandpa_rando_sound_counter_complete:
+    grandpa_pickup_sledge_score_v1_1:
       action: play
       loops: 0
 
@@ -271,3 +307,10 @@ show_player:
       show_tokens:
         lights:
           basket_ramp_arrow
+
+counters:
+  grandpa_rando_sound_counter:
+    count_events: cmd_add_grandpa_rando_sound_counter
+    disable_on_complete: False
+    reset_on_complete: True
+    count_complete_value: 4
