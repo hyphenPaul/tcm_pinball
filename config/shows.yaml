@@ -64,6 +64,27 @@ shows:
           color: off
         (leds):
           color: off
+  slow_flash:
+    - duration: 1
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
   van_flash:
     - duration: 0.5
       lights:

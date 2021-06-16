@@ -252,6 +252,16 @@ sound_player:
       action: play
       loops: 0
 
+  cmd_play_grandpa_bg_music:
+    grandpa_bg_music:
+      action: play
+      loops: -1 
+      volume: 0.2
+
+  cmd_stop_grandpa_bg_music:
+    grandpa_bg_music:
+      action: stop
+
   cmd_grandpa_hit_sally_sound:
     grandpa_hit_score_v1_1:
       action: play

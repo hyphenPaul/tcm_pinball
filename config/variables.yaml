@@ -33,6 +33,18 @@ machine_vars:
     value_type: str
 
   #####################################
+  # Grave
+  #####################################
+
+  v_grave_state:
+    initial_value: "base"
+    value_type: str
+
+  v_grave_multiplier:
+    initial_value: 0.0
+    value_type: float
+
+  #####################################
   # Barbecue
   #####################################
 

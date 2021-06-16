@@ -282,4 +282,12 @@ sounds:
     mode_end_action: stop
     file: bbq_music_v3.wav
     volume: 0.9
+  grandpa_bg_music:
+    mode_end_action: stop
+    file: u_cant_touch_this.wav
+    volume: 0.2
+  grave_bg_music:
+    mode_end_action: stop
+    file: hammer_time_mode_music_v1.wav
+    volume: 1
 

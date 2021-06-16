@@ -41,7 +41,14 @@ event_player:
     - cmd_stop_music
 
   mode_grandpa_stopping:
-    - cmd_stop_grandpa_music
+    - cmd_stop_grandpa_bg_music
+    - cmd_start_base_music
+
+  mode_grave_started:
+    - cmd_stop_music
+
+  mode_grave_stopping:
+    - cmd_stop_grave_bg_music
     - cmd_start_base_music
 
 #  cmd_test_flipper_left:

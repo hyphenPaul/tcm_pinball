@@ -9,12 +9,13 @@ class Modes(CustomCode):
         self.modes = {
 #            "hitchhiker" :  { "light" : "grid_in_yer_face", "mode_name" : "hitchhiker" },
 #            "barbecue" :  { "light" : "grid_fire", "mode_name" : "hitchhiker" },
-            "grandpa" :  { "light" : "grid_in_yer_face", "mode_name" : "grandpa" },
-            "grandpa1" :  { "light" : "grid_fire", "mode_name" : "grandpa" },
-            "grandpa2" :  { "light" : "grid_space_jam", "mode_name" : "grandpa" },
-            "grandpa3" :  { "light" : "grid_rebound", "mode_name" : "grandpa" },
-            "grandpa4" :  { "light" : "grid_slam", "mode_name" : "grandpa" },
-            "grandpa5" :  { "light" : "grid_fastbreak", "mode_name" : "grandpa" }
+#            "grandpa" :  { "light" : "grid_in_yer_face", "mode_name" : "grandpa" },
+            "grave" :  { "light" : "grid_in_yer_face", "mode_name" : "grave" },
+            "grave1" :  { "light" : "grid_fire", "mode_name" : "grave" },
+            "grave2" :  { "light" : "grid_space_jam", "mode_name" : "grave" },
+            "grave3" :  { "light" : "grid_rebound", "mode_name" : "grave" },
+            "grave4" :  { "light" : "grid_slam", "mode_name" : "grave" },
+            "grave5" :  { "light" : "grid_fastbreak", "mode_name" : "grave" }
         }
 
         self.machine.events.add_handler('mode_base_started', self.init_on_ball_start)
