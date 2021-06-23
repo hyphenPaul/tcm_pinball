@@ -26,8 +26,9 @@ event_player:
     cmd_grave_after_intro_complete:
 
   cmd_grave_after_intro_complete:
-    cmd_start_grave_multiball:
-    cmd_start_shoot_again_flash:
+    cmd_play_grave_base_slide:
+    cmd_grave_start_grave_multiball:
+    cmd_grave_start_shoot_again_flash:
     cmd_grave_set_state_combo_1_shooting:
     cmd_play_grave_bg_music:
     cmd_eject_van_vuk_with_audio:
@@ -64,21 +65,36 @@ event_player:
 
   cmd_grave_combo_ramp_hit{current_player.v_grave_state=="base"}:
     cmd_grave_set_state_combo:
+    cmd_grave_combo_timer_restart:
     cmd_grave_refresh_lights:
     cmd_grave_increase_multiplier:
     cmd_grave_start_combo_timer:
 
   cmd_grave_combo_ramp_hit{current_player.v_grave_state=="combo"}:
     cmd_grave_increase_multiplier:
+    cmd_grave_refresh_lights:
     cmd_grave_combo_timer_restart:
+
+  cmd_grave_combo_ramp_hit{current_player.v_grave_state=="combo_timing_out"}:
+    cmd_grave_increase_multiplier:
+    cmd_grave_refresh_lights:
+    cmd_grave_combo_timer_restart:
+
+  timer_grave_combo_timer_tick.10{current_player.v_grave_combo_timer_tick < 3}:
+    cmd_grave_set_state_combo_timing_out:
+    cmd_grave_refresh_lights:
 
   cmd_grave_single_jackpot_hit:
     cmd_grave_reset_values:
     cmd_grave_refresh_lights:
+    cmd_grave_play_jackpot_slide:
+    cmd_grave_play_jackpot_slide_audio:
 
   cmd_grave_double_jackpot_hit:
     cmd_grave_reset_values:
     cmd_grave_refresh_lights:
+    cmd_grave_play_jackpot_slide:
+    cmd_grave_play_jackpot_slide_audio:
 
   cmd_grave_reset_values:
     cmd_grave_set_state_base:
@@ -97,7 +113,7 @@ multiballs:
     ball_count: 1
     ball_count_type: add
     shoot_again: 25s
-    start_events: cmd_start_grave_multiball
+    start_events: cmd_grave_start_grave_multiball
 
 ##################################################
 # Logic
@@ -105,10 +121,10 @@ multiballs:
 
 timers:
   grave_combo_timer:
-    start_value: 0
-    end_value: 6
+    start_value: 9
+    end_value: 0
     tick_interval: 1s
-    direction: up
+    direction: down
     start_running: False
     control_events:
       - event: cmd_grave_combo_timer_stop
@@ -131,21 +147,50 @@ variable_player:
       action: set
       string: "combo"
 
+  cmd_grave_set_state_combo_timing_out:
+    v_grave_state:
+      action: set
+      string: "combo_timing_out"
+
   cmd_grave_set_mutiplier_to_base:
     v_grave_multiplier:
       action: set
-      float: 0.0
+      float: 0.5
 
   cmd_grave_increase_multiplier:
     v_grave_multiplier:
       action: set
       float: current_player.v_grave_multiplier + 0.5
 
+  player_v_grave_multiplier:
+    v_grave_jackpot:
+      action: set
+      int: current_player.v_grave_multiplier * 1000000
+
+    v_grave_super_jackpot:
+      action: set
+      int: current_player.v_grave_multiplier * 1000000 * 2
+
   cmd_grave_single_jackpot_hit.100:
-    score: 1000000 * current_player.v_grave_multiplier
+    score: current_player.v_grave_jackpot
 
   cmd_grave_double_jackpot_hit.100:
-    score: 1000000 * 2 * current_player.v_grave_multiplier
+    score: current_player.v_grave_super_jackpot
+
+  cmd_grave_single_jackpot_hit.1000:
+    v_grave_last_jackpot:
+      action: set
+      int: current_player.v_grave_jackpot
+
+  cmd_grave_double_jackpot_hit.1000:
+    v_grave_last_jackpot:
+      action: set
+      int: current_player.v_grave_super_jackpot
+
+  timer_grave_combo_timer_tick.100:
+    v_grave_combo_timer_tick:
+      int: device.timers.grave_combo_timer.ticks
+      action: set
 
 ##################################################
 # Sites and Sounds
@@ -161,11 +206,110 @@ slides:
         x: 0
         y: 0
 
+  grave_base_slide:
+    widgets:
+      - type: text
+        text: GRAVE ROBBER JACKPOT
+        style: small
+        anchor_y: top
+        anchor_x: left
+        x: 28
+        y: 32
+        font_size: 10
+      - type: text
+        text: (player|v_grave_jackpot)
+        style: big
+        anchor_x: left
+        anchor_y: top
+        x: 65
+        y: 18
+        number_grouping: true
+        animations:
+          player_v_grave_multiplier:
+            - property: opacity
+              value: 0
+              duration: 0.2
+            - property: opacity
+              value: 1
+              duration: 0.2
+            - property: opacity
+              value: 0
+              duration: 0.2
+            - property: opacity
+              value: 1
+              duration: 0.2
+      - type: image
+        image: grave_robber_bg_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  grave_jackpot_slide:
+    widgets:
+      - type: image
+        image: grave_robber_jackpot_v2
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+        animations:
+          show_slide:
+            - property: opacity
+              value: 1
+              duration: 2
+            - property: opacity
+              value: 0
+              duration: 0
+      - type: text
+        text: (player|v_grave_last_jackpot)
+        number_grouping: true
+        min_digits: 2
+        font_name: pinball_score
+        font_size: 22
+        round_anchor_x: left
+        anchor_x: middle
+        anchor_y: bottom
+        y: 8
+        x: 50%
+      - type: rectangle
+        color: white
+        anchor_x: 0
+        anchor_y: 0
+        x: 0
+        y: 0
+        width: 128
+        height: 32
+        animations:
+          show_slide:
+            - property: opacity
+              value: 1
+              duration: 0
+            - property: opacity
+              value: 1
+              duration: 0.1
+            - property: opacity
+              value: 0
+              duration: 0
+            - property: opacity
+              value: 0
+              duration: 0.1
+              repeat: True
+
 slide_player:
   cmd_grave_start_intro_slide:
     grave_intro_slide:
       priority: 500
-      expire: 6.1s
+      expire: 7s
+
+  cmd_play_grave_base_slide:
+    grave_base_slide:
+      priority: 500
+
+  cmd_grave_play_jackpot_slide:
+    grave_jackpot_slide:
+      priority: 600
+      expire: 3.5s
 
 sound_player:
   cmd_grave_start_intro_slide_sound:
@@ -179,9 +323,19 @@ sound_player:
       loops: -1
       volume: 2
 
+  cmd_grave_combo_ramp_hit:
+    grave_robber_bonus_charge_score_v3:
+      action: play
+      loops: 0
+
+  cmd_grave_play_jackpot_slide_audio:
+    grave_robber_jackpot_v2_score:
+      action: play
+      loops: 0
+
 show_player:
 
-  cmd_start_shoot_again_flash:
+  cmd_grave_start_shoot_again_flash:
     fast_flash:
       action: play
       show_tokens:
@@ -205,8 +359,22 @@ show_player:
           left_orbit_arrow,
           right_orbit_arrow
 
+    slow_flash:
+      action: play
+      show_tokens:
+        lights:
+          super_jackpot,
+          super_duper_jackpot
+
   cmd_grave_turn_on_playfield_lights{current_player.v_grave_state=="combo"}:
-    med_flash:
+    on:
+      action: play
+      show_tokens:
+        lights:
+          super_jackpot,
+          super_duper_jackpot
+
+    slow_flash:
       action: play
       show_tokens:
         lights:
@@ -215,12 +383,22 @@ show_player:
           left_orbit_arrow,
           right_orbit_arrow
 
+  cmd_grave_turn_on_playfield_lights{current_player.v_grave_state=="combo_timing_out"}:
+    on:
+      action: play
+      show_tokens:
+        lights:
+          super_jackpot,
+          super_duper_jackpot
+
     fast_flash:
       action: play
       show_tokens:
         lights:
-          captive_ball_arrow,
-          super_duper_jackpot
+          basket_ramp_arrow,
+          right_ramp_arrow,
+          left_orbit_arrow,
+          right_orbit_arrow
 
   cmd_grave_clear_playfield_lights:
     on:
@@ -231,8 +409,10 @@ show_player:
           - right_ramp_arrow
           - left_orbit_arrow
           - right_orbit_arrow
+          - super_jackpot
+          - super_duper_jackpot
 
-    med_flash:
+    slow_flash:
       action: stop
       show_tokens:
         lights:
@@ -241,16 +421,12 @@ show_player:
           - left_orbit_arrow
           - right_orbit_arrow
 
-    slow_flash:
-      action: stop
-      show_tokens:
-        lights:
-          - captive_ball_arrow
-          - super_duper_jackpot
-
     fast_flash:
       action: stop
       show_tokens:
         lights:
-          - captive_ball_arrow
-          - super_duper_jackpot
+          - basket_ramp_arrow
+          - right_ramp_arrow
+          - left_orbit_arrow
+          - right_orbit_arrow
+

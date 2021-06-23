@@ -288,6 +288,6 @@ sounds:
     volume: 0.2
   grave_bg_music:
     mode_end_action: stop
-    file: hammer_time_mode_music_v1.wav
+    file: grave_robber_music_v1.wav
     volume: 1
 

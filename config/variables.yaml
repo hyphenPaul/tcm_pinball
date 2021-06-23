@@ -41,8 +41,20 @@ machine_vars:
     value_type: str
 
   v_grave_multiplier:
-    initial_value: 0.0
+    initial_value: 0.5
     value_type: float
+
+  v_grave_jackpot:
+    initial_value: 500000
+
+  v_grave_super_jackpot:
+    initial_value: 1000000
+
+  v_grave_combo_timer_tick:
+    initial_value: 6
+
+  v_grave_last_jackpot:
+    initial_value: 500000
 
   #####################################
   # Barbecue
