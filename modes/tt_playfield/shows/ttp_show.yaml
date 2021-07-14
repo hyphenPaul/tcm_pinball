@@ -1,11 +1,11 @@
 #show_version=5
 
-- duration: 4.1s
+- duration: 2s
   slides:
     slide_1:
       widgets:
       - type: image
-        image: save_from_the_grave_save_v3
+        image: 2x_scoring_v2
         anchor_x: left
         anchor_y: bottom
         x: 0

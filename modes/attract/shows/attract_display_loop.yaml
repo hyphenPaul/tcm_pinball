@@ -5,37 +5,37 @@
 #    slide_1:
 #      widgets:
 #      - type: image
-#        image: grave_robber_jackpot_v1
+#        image: 2x_scoring_v2
 #        anchor_x: left
 #        anchor_y: bottom
 #        x: 0
 #        y: 0
 
-- duration: 100s
-  slides:
-    widgets:
-      - type: text
-        text: GRAVE ROBBER JACKPOT
-        style: small
-        anchor_y: top
-        anchor_x: left
-        x: 28
-        y: 32
-        font_size: 10
-      - type: text
-        text: 1000000
-        style: big
-        anchor_x: left
-        anchor_y: top
-        x: 65
-        y: 18
-        number_grouping: true
-      - type: image
-        image: grave_robber_bg_v1
-        anchor_x: left
-        anchor_y: bottom
-        x: 0
-        y: 0
+#- duration: 100s
+#  slides:
+#    widgets:
+#      - type: text
+#        text: GRAVE ROBBER JACKPOT
+#        style: small
+#        anchor_y: top
+#        anchor_x: left
+#        x: 28
+#        y: 32
+#        font_size: 10
+#      - type: text
+#        text: 1000000
+#        style: big
+#        anchor_x: left
+#        anchor_y: top
+#        x: 65
+#        y: 18
+#        number_grouping: true
+#      - type: image
+#        image: grave_robber_bg_v1
+#        anchor_x: left
+#        anchor_y: bottom
+#        x: 0
+#        y: 0
 
 #- duration: 10s
 #  slides:

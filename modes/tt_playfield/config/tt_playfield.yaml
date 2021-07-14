@@ -1,0 +1,210 @@
+#config_version=5
+
+mode:
+  start_events:
+    - cmd_start_mode_tt_playfield
+  stop_events:
+    - cmd_stop_mode_tt_playfield
+  priority: 500
+
+##################################################
+# Events and Variables
+##################################################
+
+event_player:
+  mode_tt_playfield_started:
+    - cmd_refresh_mode_tt_playfield
+
+  cmd_clean_up_modes:
+    - cmd_reset_tt_playfield
+
+  cmd_reset_tt_playfield:
+    - cmd_ttp_disable
+    - cmd_set_tt_playfield_counter_0
+    - cmd_ttp_restart_counter
+    - cmd_refresh_tt_playfield_lights
+    - cmd_reset_tt_playfield_variable
+    - cmd_tt_playfield_reset_timer
+
+  cmd_refresh_mode_tt_playfield:
+    - cmd_refresh_tt_playfield_lights
+
+  player_v_tt_playfield_counter_count:
+    - cmd_refresh_tt_playfield_lights
+  player_v_tt_playfield_counter_count.10{value==4}:
+    - cmd_start_tt_playfield
+
+  # light control
+  cmd_refresh_tt_playfield_lights{current_player.v_tt_playfield_counter_count==0}:
+    - cmd_show_lights_ttp_stage_0
+  cmd_refresh_tt_playfield_lights.1{current_player.v_tt_playfield_counter_count==1}:
+    - cmd_show_lights_ttp_stage_1
+  cmd_refresh_tt_playfield_lights.2{current_player.v_tt_playfield_counter_count==2}:
+    - cmd_show_lights_ttp_stage_2
+  cmd_refresh_tt_playfield_lights.3{current_player.v_tt_playfield_counter_count==3}:
+    - cmd_show_lights_ttp_stage_3
+  cmd_refresh_tt_playfield_lights.4{current_player.v_tt_playfield_counter_count==4}:
+    - cmd_show_lights_ttp_stage_4
+    - cmd_tt_playfield_flash_light
+
+  # counter variable control
+  logicblock_tt_playfield_counter_updated{value==1}:
+    - cmd_set_tt_playfield_counter_1
+  logicblock_tt_playfield_counter_updated{value==2}:
+    - cmd_set_tt_playfield_counter_2
+  logicblock_tt_playfield_counter_updated{value==3}:
+    - cmd_set_tt_playfield_counter_3
+  logicblock_tt_playfield_counter_updated{value==4}:
+    - cmd_set_tt_playfield_counter_4
+
+  s_captive_ball_target_active{current_player.v_ttp_enabled==0}:
+    - cmd_count_ttp
+
+  logicblock_tt_playfield_counter_hit{current_player.v_tt_playfield_counter_count!=4}:
+    - cmd_play_bump_show
+    - cmd_play_bump_audio
+
+  cmd_start_tt_playfield:
+    - cmd_play_ttp_show
+    - cmd_play_ttp_audio
+    - cmd_ttp_enable
+    - cmd_set_tt_playfield_variable
+    - cmd_tt_playfield_start_timer
+
+  timer_tt_playfield_timer_complete:
+    - cmd_reset_tt_playfield
+
+  # Don't show the animation if the extra ball animation is about to play
+#  ball_save_ttp_ball_save_saving_ball{current_player.v_extra_ball_animation_playing<1}:
+#    - cmd_reset_tt_playfield
+#    - cmd_play_ttp_show
+#    - cmd_play_save_audio
+
+variable_player:
+  cmd_ttp_enable:
+    v_ttp_enabled:
+      int: 1
+      action: set
+  cmd_ttp_disable:
+    v_ttp_enabled:
+      int: 0
+      action: set
+  cmd_set_tt_playfield_counter_0:
+    v_tt_playfield_counter_count:
+      int: 0
+      action: set
+  cmd_set_tt_playfield_counter_1:
+    v_tt_playfield_counter_count:
+      int: 1
+      action: set
+  cmd_set_tt_playfield_counter_2:
+    v_tt_playfield_counter_count:
+      int: 2
+      action: set
+  cmd_set_tt_playfield_counter_3:
+    v_tt_playfield_counter_count:
+      int: 3
+      action: set
+  cmd_set_tt_playfield_counter_4:
+    v_tt_playfield_counter_count:
+      int: 4
+      action: set
+  cmd_set_tt_playfield_variable:
+    v_playfield_multiplier:
+      int: 2
+      action: set
+  cmd_reset_tt_playfield_variable:
+    v_playfield_multiplier:
+      int: 1
+      action: set
+
+##################################################
+# Logicblocks
+##################################################
+
+counters:
+  tt_playfield_counter:
+    count_events: cmd_count_ttp
+    disable_on_complete: True
+    persist_state: True # Not used for in between balls but when activating and deactivating
+    count_complete_value: 4
+    restart_events: cmd_ttp_restart_counter
+
+##################################################
+# Timers
+##################################################
+
+timers:
+  tt_playfield_timer:
+    start_value: 0
+    end_value: 60
+    tick_interval: 1s
+    control_events:
+      - action: restart
+        event: cmd_tt_playfield_start_timer
+      - action: reset
+        event: cmd_tt_playfield_reset_timer
+
+##################################################
+# Sound / Visual
+##################################################
+
+sound_player:
+  cmd_play_bump_audio: ttp_bump
+  cmd_play_ttp_audio: ttp_show_audio
+
+show_player:
+  cmd_play_bump_show:
+    ttp_bump_show:
+      action: play
+      loops: 0
+
+  cmd_play_ttp_show:
+    ttp_show:
+      action: play
+      loops: 0
+
+  cmd_tt_playfield_flash_light:
+    fast_flash:
+      priority: 100
+      action: play
+      show_tokens:
+        light: l_ttp_enabled
+
+  cmd_show_lights_ttp_stage_0:
+    fast_flash:
+      priority: 100
+      action: stop
+      show_tokens:
+        light: l_ttp_enabled
+
+light_player:
+  cmd_show_lights_ttp_stage_0:
+    ttp_save: 0
+    ttp_for_the: 0
+    ttp_grave: 0
+    l_ttp_enabled: 0
+
+  cmd_show_lights_ttp_stage_1:
+    ttp_save: ff
+    ttp_for_the: 0
+    ttp_grave: 0
+    l_ttp_enabled: 0
+
+  cmd_show_lights_ttp_stage_2:
+    ttp_save: ff
+    ttp_for_the: ff
+    ttp_grave: 0
+    l_ttp_enabled: 0
+
+  cmd_show_lights_ttp_stage_3:
+    ttp_save: ff
+    ttp_for_the: ff
+    ttp_grave: ff
+    l_ttp_enabled: ff
+
+  cmd_show_lights_ttp_stage_4.10:
+    ttp_save: 0
+    ttp_for_the: 0
+    ttp_grave: 0
+    l_ttp_enabled: 0

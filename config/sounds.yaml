@@ -215,11 +215,11 @@ sounds:
     file: cow_1.wav
   slaugherhouse_gun:
     file: slaughtergun_v3.wav
-  sftg_bump:
-    file: sftg_bump_audio_v1_with_rise.wav
+  ttp_bump:
+    file: ttp_bump_audio_v1_with_rise.wav
     volume: 1
-  sftg_save:
-    file: sftg_save_audio_v3_with_rise.wav
+  ttp_show_audio:
+    file: 2_x_scoring_score_v2.wav
     volume: 1
   shoot_the_slaugherhouse:
     file: franklin_slaughter_room.wav

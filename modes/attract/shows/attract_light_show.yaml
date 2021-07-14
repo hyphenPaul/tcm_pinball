@@ -49,7 +49,7 @@
     right_7_seg_f: off
     right_7_seg_g: off
     lock_3: off
-    l_sftg_enabled: off
+    l_ttp_enabled: off
     3_points: off
     10_points: off
     final_jam: off
@@ -77,9 +77,9 @@
     help_l: off
     help_p: off
     lock_2: off
-    sftg_grave: off
-    sftg_for_the: off
-    sftg_save: off
+    ttp_grave: off
+    ttp_for_the: off
+    ttp_save: off
 - duration: .5
   lights:
     shoot_again: ff
@@ -129,7 +129,7 @@
     right_7_seg_f: ff
     right_7_seg_g: ff
     lock_3: ff
-    l_sftg_enabled: ff
+    l_ttp_enabled: ff
     3_points: ff
     10_points: ff
     final_jam: ff
@@ -157,6 +157,6 @@
     help_l: ff
     help_p: ff
     lock_2: ff
-    sftg_grave: ff
-    sftg_for_the: ff
-    sftg_save: ff
+    ttp_grave: ff
+    ttp_for_the: ff
+    ttp_save: ff

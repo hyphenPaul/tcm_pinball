@@ -95,7 +95,7 @@ lights:
     number: L47
   lock_3:
     number: L48
-  l_sftg_enabled:
+  l_ttp_enabled:
     number: L49
   3_points:
     number: L50
@@ -151,9 +151,9 @@ lights:
     number: L76
   lock_2:
     number: L77
-  sftg_grave:
+  ttp_grave:
     number: L78
-  sftg_for_the:
+  ttp_for_the:
     number: L79
-  sftg_save:
+  ttp_save:
     number: L80

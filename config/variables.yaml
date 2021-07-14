@@ -249,10 +249,12 @@ player_vars:
   # Save From the Grave
   #####################################
 
-  v_sftg_enabled:
+  v_ttp_enabled:
     initial_value: 0
-  v_grave_save_counter_count:
+  v_tt_playfield_counter_count:
     initial_value: 0
+  v_playfield_multiplier:
+    initial_value: 1
 
   #####################################
   # Methook
