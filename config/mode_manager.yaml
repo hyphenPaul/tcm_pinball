@@ -194,10 +194,10 @@ event_player:
     - cmd_enable_mode_switcher_and_message
 
   ##################################################
-  # Placeholder E
+  # Sally
   ##################################################
 
-  cmd_start_placeholder_e_mode:
+  cmd_start_sally_mode:
     - cmd_stop_mode_escape
     - cmd_stop_mode_chainsaw
     - cmd_stop_mode_franklin
@@ -207,10 +207,10 @@ event_player:
     - cmd_stop_mode_tt_playfield
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_start_mode_placeholder_e
+    - cmd_start_mode_sally
 
-  cmd_stop_placeholder_e_mode:
-    - cmd_stop_mode_placeholder_e
+  cmd_stop_sally_mode:
+    - cmd_stop_mode_sally
     - cmd_start_mode_chainsaw
     - cmd_start_mode_franklin
     - cmd_start_mode_mask

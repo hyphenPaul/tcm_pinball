@@ -1,4 +1,5 @@
 bugs
+- 2 x playfield not turning off (maybe when active and drain)
 - mask mania dead skin mask not turning off
 - make the van message switch more fool proof - it shouldn't be active for a mode and kick out right away (try lighting van and draining)
 - the van has double listeners on the next ball when it's lit and you drain (was after getting it through skill shot)

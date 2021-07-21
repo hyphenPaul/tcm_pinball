@@ -44,6 +44,13 @@ event_player:
     - cmd_stop_grandpa_bg_music
     - cmd_start_base_music
 
+  mode_sally_started:
+    - cmd_stop_music
+
+  mode_sally_stopping:
+    - cmd_stop_sally_bg_music
+    - cmd_start_base_music
+
   mode_grave_started:
     - cmd_stop_music
 

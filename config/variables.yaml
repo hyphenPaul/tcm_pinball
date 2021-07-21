@@ -33,6 +33,17 @@ machine_vars:
     value_type: str
 
   #####################################
+  # Sally
+  #####################################
+
+  v_sally_state:
+    initial_value: "starting"
+    value_type: str
+
+  v_sally_pop_bumper_counter:
+    initial_value: 60
+
+  #####################################
   # Grave
   #####################################
 
