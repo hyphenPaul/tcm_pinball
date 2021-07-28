@@ -15,11 +15,14 @@ event_player:
   mode_sally_started:
     cmd_disable_bh_mode_van:
     cmd_sally_set_state_starting:
-    cmd_sally_set_reset_sally_pop_bumper_counter:
+    cmd_sally_reset_variables:
     cmd_sally_start_intro_slide:
     cmd_sally_start_intro_slide_sound:
 
   timer_sally_timer_1_complete:
+    cmd_stop_sally_mode:
+
+  timer_sally_timer_2_complete:
     cmd_stop_sally_mode:
 
   slide_sally_intro_slide_removed:
@@ -32,8 +35,13 @@ event_player:
     cmd_sally_refresh_lights:
     cmd_sally_play_pop_bumper_slide:
 
-  logicblock_sally_counter_complete:
+  player_v_sally_pop_bumper_counter{current_player.v_sally_pop_bumper_counter<=0}:
+    cmd_sally_set_state_shots:
+    cmd_sally_refresh_lights:
+
+  cmd_sally_counter_complete:
     cmd_stop_sally_timer_1:
+    cmd_start_sally_timer_2:
 
   #### Lights ####
 
@@ -42,7 +50,25 @@ event_player:
     cmd_sally_turn_on_playfield_lights:
 
   cmd_sally_turn_on_playfield_lights{current_player.v_sally_state=="pop_bumpers"}:
-    cmd_sally_show_pop_bumpers:
+    cmd_sally_flash_pop_bumpers:
+
+  cmd_sally_turn_on_playfield_lights.1{current_player.v_sally_state=="shots" and current_player.v_sally_left_orbit_hit!=1}:
+    cmd_sally_light_left_orbit:
+
+  cmd_sally_turn_on_playfield_lights.2{current_player.v_sally_state=="shots" and current_player.v_sally_captive_ball_hit!=1}:
+    cmd_sally_light_captive_ball:
+
+  cmd_sally_turn_on_playfield_lights.3{current_player.v_sally_state=="shots" and current_player.v_sally_left_ramp_hit!=1}:
+    cmd_sally_light_basket_ramp:
+
+  cmd_sally_turn_on_playfield_lights.4{current_player.v_sally_state=="shots" and current_player.v_sally_slaughterhouse_hit!=1}:
+    cmd_sally_light_slaughter_house:
+
+  cmd_sally_turn_on_playfield_lights.5{current_player.v_sally_state=="shots" and current_player.v_sally_right_ramp_hit!=1}:
+    cmd_sally_light_right_ramp:
+
+  cmd_sally_turn_on_playfield_lights.6{current_player.v_sally_state=="shots" and current_player.v_sally_right_orbit_hit!=1}:
+    cmd_sally_light_right_orbit:
 
   #### Switch Hits ###
 
@@ -54,6 +80,30 @@ event_player:
 
   right_turbo_bumper_hit{current_player.v_sally_state=="pop_bumpers"}:
     - sally_pop_bumper_hit
+
+  left_orbit_hit{current_player.v_sally_state=="shots" and current_player.v_sally_left_orbit_hit!=1}:
+    - cmd_set_sally_left_orbit_hit
+    - cmd_sally_refresh_lights
+
+  s_captive_ball_target_active{current_player.v_sally_state=="shots" and current_player.v_sally_captive_ball_hit!=1}:
+    - cmd_set_sally_captive_ball_hit
+    - cmd_sally_refresh_lights
+
+  left_ramp_hit{current_player.v_sally_state=="shots" and current_player.v_sally_left_ramp_hit!=1}:
+    - cmd_set_sally_left_ramp_hit
+    - cmd_sally_refresh_lights
+
+  s_slaughter_house_target_active{current_player.v_sally_state=="shots" and current_player.v_sally_slaughterhouse_hit!=1}:
+    - cmd_set_sally_slaughterhouse_hit
+    - cmd_sally_refresh_lights
+
+  right_ramp_hit{current_player.v_sally_state=="shots" and current_player.v_sally_right_ramp_hit!=1}:
+    - cmd_set_sally_right_ramp_hit
+    - cmd_sally_refresh_lights
+
+  right_orbit_hit{current_player.v_sally_state=="shots" and current_player.v_sally_right_orbit_hit!=1}:
+    - cmd_set_sally_right_orbit_hit
+    - cmd_sally_refresh_lights
 
 ##################################################
 # Timers
@@ -70,20 +120,17 @@ timers:
       - action: stop
         event: cmd_stop_sally_timer_1
 
-##################################################
-# Counters
-##################################################
-
-counters:
-  sally_counter:
-    count_events: cmd_add_sally_counter
-    direction: down
-    # remember to set the base state
-    starting_count: 20
-    disable_on_complete: True
-    reset_on_complete: False
-    count_complete_value: 0
-    persist_state: True
+  sally_timer_2:
+    start_value: 0
+    end_value: 60
+    tick_interval: 1s
+    direction: up
+    start_running: False
+    control_events:
+      - action: stop
+        event: cmd_stop_sally_timer_2
+      - action: start
+        event: cmd_start_sally_timer_2
 
 ##################################################
 # Variables
@@ -100,11 +147,70 @@ variable_player:
       action: set
       string: "pop_bumpers"
 
-  cmd_sally_set_reset_sally_pop_bumper_counter:
+  cmd_sally_set_state_shots:
+    v_sally_state:
+      action: set
+      string: "shots"
+
+  cmd_sally_reset_variables:
     # remember to set the starting_count
     v_sally_pop_bumper_counter:
       action: set
       int: 20
+
+    v_sally_left_orbit_hit:
+      action: set
+      int: 0
+
+    v_sally_captive_ball_hit:
+      action: set
+      int: 0
+
+    v_sally_left_ramp_hit:
+      action: set
+      int: 0
+
+    v_sally_slaughterhouse_hit:
+      action: set
+      int: 0
+
+    v_sally_right_ramp_hit:
+      action: set
+      int: 0
+
+    v_sally_right_orbit_hit:
+      action: set
+      int: 0
+
+  cmd_set_sally_left_orbit_hit:
+    v_sally_left_orbit_hit:
+      action: set
+      int: 1
+
+  cmd_set_sally_captive_ball_hit:
+    v_sally_captive_ball_hit:
+      action: set
+      int: 1
+
+  cmd_set_sally_left_ramp_hit:
+    v_sally_left_ramp_hit:
+      action: set
+      int: 1
+
+  cmd_set_sally_slaughterhouse_hit:
+    v_sally_slaughterhouse_hit:
+      action: set
+      int: 1
+
+  cmd_set_sally_right_ramp_hit:
+    v_sally_right_ramp_hit:
+      action: set
+      int: 1
+
+  cmd_set_sally_right_orbit_hit:
+    v_sally_right_orbit_hit:
+      action: set
+      int: 1
 
   sally_pop_bumper_hit:
     v_sally_pop_bumper_counter: -1
@@ -117,7 +223,7 @@ slides:
   sally_intro_slide:
     widgets:
       - type: image
-        image: dinner_with_sally_intro_v1
+        image: dinner_with_sally_intro_v4
         anchor_x: left
         anchor_y: bottom
         x: 0
@@ -157,7 +263,7 @@ show_player:
           - left_turbo_bumper
           - right_turbo_bumper
 
-  cmd_sally_show_pop_bumpers:
+  cmd_sally_flash_pop_bumpers:
     med_flash:
       action: play
       show_tokens:
@@ -165,6 +271,37 @@ show_player:
           top_turbo_bumper,
           left_turbo_bumper,
           right_turbo_bumper
+
+##################################################
+# Light Player
+##################################################
+light_player:
+  cmd_sally_clear_playfield_lights:
+    left_orbit_arrow: 0
+    captive_ball_arrow: 0
+    basket_ramp_arrow: 0
+    slaughter_house_arrow: 0
+    right_ramp_arrow: 0
+    right_orbit_arrow: 0
+
+
+  cmd_sally_light_left_orbit:
+    left_orbit_arrow: ff
+
+  cmd_sally_light_captive_ball:
+    captive_ball_arrow: ff
+
+  cmd_sally_light_basket_ramp:
+    basket_ramp_arrow: ff
+
+  cmd_sally_light_slaughter_house:
+    slaughter_house_arrow: ff
+
+  cmd_sally_light_right_ramp:
+    right_ramp_arrow: ff
+
+  cmd_sally_light_right_orbit:
+    right_orbit_arrow: ff
 
 
 ##################################################

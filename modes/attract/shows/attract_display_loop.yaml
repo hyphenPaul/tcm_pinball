@@ -1,15 +1,15 @@
 #show_version=5
 
-#- duration: 100s
-#  slides:
-#    slide_1:
-#      widgets:
-#      - type: image
-#        image: 2x_scoring_v2
-#        anchor_x: left
-#        anchor_y: bottom
-#        x: 0
-#        y: 0
+- duration: 100s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: dinner_with_sally_intro_v4
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
 
 #- duration: 100s
 #  slides:
