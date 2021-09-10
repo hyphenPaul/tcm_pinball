@@ -31,7 +31,7 @@ event_player:
     cmd_custom_magna_vuk_queue_event:
       post: cmd_get_mystery
       wait_for: cmd_mystery_show_complete
-      priority: 1000
+      mode: pop_bumpers
       coil_direction: left
   cmd_mystery_choice:
     - cmd_play_mystery_show

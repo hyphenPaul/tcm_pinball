@@ -224,6 +224,8 @@ event_player:
     cmd_custom_magna_vuk_queue_event:
       post: cmd_on_ball_lock
       wait_for: cmd_fire_ball_from_vuk
+      priority: 1000
+      mode: escape
       coil_direction: left
 
   cmd_on_ball_lock{current_player.v_escape_state=="lock_1_lit"}:

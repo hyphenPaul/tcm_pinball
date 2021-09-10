@@ -210,15 +210,21 @@ event_player:
     - cmd_start_mode_sally
 
   cmd_stop_sally_mode:
-    - cmd_stop_mode_sally
-    - cmd_start_mode_chainsaw
-    - cmd_start_mode_franklin
-    - cmd_start_mode_mask
-    - cmd_start_mode_tt_playfield
-    - cmd_start_mode_meathook
-    - cmd_start_mode_pop_bumpers
-    - cmd_start_mode_escape
-    - cmd_enable_mode_switcher_and_message
+    cmd_stop_mode_sally:
+    cmd_start_mode_chainsaw:
+    cmd_start_mode_franklin:
+    cmd_start_mode_mask:
+    cmd_start_mode_tt_playfield:
+    cmd_start_mode_meathook:
+    cmd_start_mode_pop_bumpers:
+    cmd_start_mode_escape:
+    cmd_enable_mode_switcher_and_message:
+    cmd_custom_magna_vuk_remove_event:
+      post: cmd_sally_final_shot
+      wait_for: slide_sally_complete_slide_removed
+      priority: 1000
+      mode: sally
+      coil_direction: left
 
   ##################################################
   # Placeholder F

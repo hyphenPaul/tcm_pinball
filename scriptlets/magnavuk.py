@@ -19,6 +19,7 @@ class Magnavuk(CustomCode):
         self.custom_switch_handler_queue = []
         self.machine.events.add_handler('cmd_custom_magna_vuk_queue_event', self.add_queue_event)
         self.machine.events.add_handler('cmd_clear_magna_vuk_queue', self.clear_queue)
+        self.machine.events.add_handler('cmd_custom_magna_vuk_remove_event', self.remove_event_from_queue)
         self.current_queue_event = None
         self.queue_callback_handler = None
 
@@ -43,13 +44,48 @@ class Magnavuk(CustomCode):
             self.clear_callback_handler()
 
         self.custom_switch_handler_queue.sort(key=lambda y: y.get('priority'))
+        self.current_queue_event = self.next_switch_handler_for_mode()
 
-        if self.custom_switch_handler_queue == []:
+        if self.current_queue_event:
+            self.play_current_queue_event()
+        else:
             self.info_log('queue_is_done')
             self.event_queue_complete()
+
+    def next_switch_handler_for_mode(self):
+        for switch_handler in self.custom_switch_handler_queue:
+            if self.in_active_mode(switch_handler):
+                self.custom_switch_handler_queue.remove(switch_handler)
+                return switch_handler
+
+        return None
+
+    def in_active_mode(self, switch_handler):
+        if switch_handler.get('mode'):
+            return self.machine.mode_controller.is_active(switch_handler['mode'])
         else:
-            self.current_queue_event = self.custom_switch_handler_queue.pop()
-            self.play_current_queue_event()
+            True
+
+    def remove_event_from_queue(self, **kwargs):
+        self.info_log("********** handler before removal kwargs **********")
+        self.info_log(kwargs)
+
+        self.info_log("********** handler before removal **********")
+        self.info_log(self.custom_switch_handler_queue)
+
+        for switch_handler in self.custom_switch_handler_queue:
+            if self.handler_match(kwargs, switch_handler):
+                self.custom_switch_handler_queue.remove(switch_handler)
+
+        self.info_log("********** handler after removal **********")
+        self.info_log(self.custom_switch_handler_queue)
+
+    def handler_match(self, kwargs, switch_handler):
+        for key in kwargs:
+            if switch_handler[key] and kwargs[key] != switch_handler[key]:
+                return False
+
+        return True
 
     def clear_callback_handler(self):
         self.info_log('clear_callback_handler')
@@ -61,9 +97,11 @@ class Magnavuk(CustomCode):
         self.info_log('play_current_queue_event')
 
         if self.current_queue_event:
+            # set a callback handler that plays the next queue event
             self.queue_callback_handler = self.machine.events.add_handler(
                 self.current_queue_event['wait_for'],
-                self.play_queue_events
+                self.play_queue_events,
+                10000
             )
 
             self.machine.events.post(self.current_queue_event['post'])
@@ -139,7 +177,7 @@ class Magnavuk(CustomCode):
         self.info_log('remove_auto_vuk_handler')
         self.machine.switch_controller.remove_switch_handler(
             's_jump_ball_vuk', self.play_queue_events, 1, 500)
- 
+
 
     def fire_vuk(self, **kwargs):
         self.info_log('Vuk firing')

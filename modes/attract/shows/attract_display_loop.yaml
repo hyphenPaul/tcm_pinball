@@ -5,7 +5,7 @@
     slide_1:
       widgets:
       - type: image
-        image: dinner_with_sally_intro_v4
+        image: sally_struggle_v1
         anchor_x: left
         anchor_y: bottom
         x: 0

@@ -43,16 +43,13 @@ machine_vars:
   v_sally_pop_bumper_counter:
     initial_value: 60
 
+  v_sally_pop_bumper_slide_int:
+    initial_value: 0
+
   v_sally_left_orbit_hit:
     initial_value: 0
 
-  v_sally_captive_ball_hit:
-    initial_value: 0
-
   v_sally_left_ramp_hit:
-    initial_value: 0
-
-  v_sally_slaughterhouse_hit:
     initial_value: 0
 
   v_sally_right_ramp_hit:

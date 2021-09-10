@@ -15,6 +15,7 @@ event_player:
   mode_sally_started:
     cmd_disable_bh_mode_van:
     cmd_sally_set_state_starting:
+    cmd_sally_reset_shot_accrual:
     cmd_sally_reset_variables:
     cmd_sally_start_intro_slide:
     cmd_sally_start_intro_slide_sound:
@@ -36,12 +37,37 @@ event_player:
     cmd_sally_play_pop_bumper_slide:
 
   player_v_sally_pop_bumper_counter{current_player.v_sally_pop_bumper_counter<=0}:
-    cmd_sally_set_state_shots:
-    cmd_sally_refresh_lights:
+    cmd_sally_start_shot_phase:
 
-  cmd_sally_counter_complete:
+  cmd_sally_start_shot_phase:
+    cmd_sally_set_state_shots:
     cmd_stop_sally_timer_1:
     cmd_start_sally_timer_2:
+    cmd_sally_refresh_lights:
+    cmd_sally_remove_pop_bumper_slide:
+    cmd_sally_add_shots_slide:
+
+  logicblock_sally_shot_accrual_complete:
+    cmd_sally_start_final_phase:
+
+  cmd_sally_start_final_phase:
+    cmd_add_timer_2_time:
+    cmd_sally_set_state_final:
+    cmd_sally_refresh_lights:
+    cmd_sally_add_final_slide:
+    # this gets removed in mode_manager - any changes here have to happen there
+    cmd_custom_magna_vuk_queue_event:
+      post: cmd_sally_final_shot
+      wait_for: slide_sally_complete_slide_removed
+      priority: 1000
+      mode: sally
+      coil_direction: left
+
+  cmd_sally_final_shot:
+    cmd_sally_add_complete_slide:
+
+  slide_sally_complete_slide_removed:
+    cmd_stop_sally_mode:
 
   #### Lights ####
 
@@ -55,20 +81,17 @@ event_player:
   cmd_sally_turn_on_playfield_lights.1{current_player.v_sally_state=="shots" and current_player.v_sally_left_orbit_hit!=1}:
     cmd_sally_light_left_orbit:
 
-  cmd_sally_turn_on_playfield_lights.2{current_player.v_sally_state=="shots" and current_player.v_sally_captive_ball_hit!=1}:
-    cmd_sally_light_captive_ball:
-
   cmd_sally_turn_on_playfield_lights.3{current_player.v_sally_state=="shots" and current_player.v_sally_left_ramp_hit!=1}:
     cmd_sally_light_basket_ramp:
-
-  cmd_sally_turn_on_playfield_lights.4{current_player.v_sally_state=="shots" and current_player.v_sally_slaughterhouse_hit!=1}:
-    cmd_sally_light_slaughter_house:
 
   cmd_sally_turn_on_playfield_lights.5{current_player.v_sally_state=="shots" and current_player.v_sally_right_ramp_hit!=1}:
     cmd_sally_light_right_ramp:
 
   cmd_sally_turn_on_playfield_lights.6{current_player.v_sally_state=="shots" and current_player.v_sally_right_orbit_hit!=1}:
     cmd_sally_light_right_orbit:
+
+  cmd_sally_turn_on_playfield_lights.4{current_player.v_sally_state=="final"}:
+    cmd_sally_light_slaughter_house:
 
   #### Switch Hits ###
 
@@ -81,29 +104,69 @@ event_player:
   right_turbo_bumper_hit{current_player.v_sally_state=="pop_bumpers"}:
     - sally_pop_bumper_hit
 
+  sally_pop_bumper_hit{current_player.v_sally_pop_bumper_slide_int==0}:
+    sally_toggle_slide_variable_1:
+
+  sally_pop_bumper_hit{current_player.v_sally_pop_bumper_slide_int==1}:
+    sally_toggle_slide_variable_0:
+
+  player_v_sally_pop_bumper_slide_int{value==1}:
+    sally_show_eyes_1:
+
+  player_v_sally_pop_bumper_slide_int{value==0}:
+    sally_show_eyes_2:
+
   left_orbit_hit{current_player.v_sally_state=="shots" and current_player.v_sally_left_orbit_hit!=1}:
+    - sally_shot_hit
     - cmd_set_sally_left_orbit_hit
     - cmd_sally_refresh_lights
-
-  s_captive_ball_target_active{current_player.v_sally_state=="shots" and current_player.v_sally_captive_ball_hit!=1}:
-    - cmd_set_sally_captive_ball_hit
-    - cmd_sally_refresh_lights
+    - cmd_sally_left_orbit_hit
 
   left_ramp_hit{current_player.v_sally_state=="shots" and current_player.v_sally_left_ramp_hit!=1}:
+    - sally_shot_hit
     - cmd_set_sally_left_ramp_hit
     - cmd_sally_refresh_lights
-
-  s_slaughter_house_target_active{current_player.v_sally_state=="shots" and current_player.v_sally_slaughterhouse_hit!=1}:
-    - cmd_set_sally_slaughterhouse_hit
-    - cmd_sally_refresh_lights
+    - cmd_sally_left_ramp_hit
 
   right_ramp_hit{current_player.v_sally_state=="shots" and current_player.v_sally_right_ramp_hit!=1}:
+    - sally_shot_hit
     - cmd_set_sally_right_ramp_hit
     - cmd_sally_refresh_lights
+    - cmd_sally_right_ramp_hit
 
   right_orbit_hit{current_player.v_sally_state=="shots" and current_player.v_sally_right_orbit_hit!=1}:
+    - sally_shot_hit
     - cmd_set_sally_right_orbit_hit
     - cmd_sally_refresh_lights
+    - cmd_sally_right_orbit_hit
+
+  player_v_sally_shot_counter{value==1}:
+    cmd_play_sally_escape_1:
+
+  player_v_sally_shot_counter{value==2}:
+    cmd_play_sally_escape_2:
+
+  player_v_sally_shot_counter{value==3}:
+    cmd_play_sally_escape_3:
+
+  player_v_sally_shot_counter{value==4}:
+    cmd_play_sally_escape_4:
+
+##################################################
+# Logicblocks
+##################################################
+
+accruals:
+  sally_shot_accrual:
+    events:
+      - cmd_sally_left_orbit_hit
+      - cmd_sally_left_ramp_hit
+      - cmd_sally_right_ramp_hit
+      - cmd_sally_right_orbit_hit
+    reset_events:
+      cmd_sally_reset_shot_accrual:
+    reset_on_complete: True
+    disable_on_complete: True
 
 ##################################################
 # Timers
@@ -131,6 +194,9 @@ timers:
         event: cmd_stop_sally_timer_2
       - action: start
         event: cmd_start_sally_timer_2
+      - action: add
+        event: cmd_add_timer_2_time
+        value: 10
 
 ##################################################
 # Variables
@@ -152,6 +218,11 @@ variable_player:
       action: set
       string: "shots"
 
+  cmd_sally_set_state_final:
+    v_sally_state:
+      action: set
+      string: "final"
+
   cmd_sally_reset_variables:
     # remember to set the starting_count
     v_sally_pop_bumper_counter:
@@ -162,15 +233,7 @@ variable_player:
       action: set
       int: 0
 
-    v_sally_captive_ball_hit:
-      action: set
-      int: 0
-
     v_sally_left_ramp_hit:
-      action: set
-      int: 0
-
-    v_sally_slaughterhouse_hit:
       action: set
       int: 0
 
@@ -182,23 +245,27 @@ variable_player:
       action: set
       int: 0
 
+    v_sally_shot_counter:
+      action: set
+      int: 0
+
+  sally_toggle_slide_variable_1:
+    v_sally_pop_bumper_slide_int:
+      action: set
+      int: 1
+
+  sally_toggle_slide_variable_0:
+    v_sally_pop_bumper_slide_int:
+      action: set
+      int: 0
+
   cmd_set_sally_left_orbit_hit:
     v_sally_left_orbit_hit:
       action: set
       int: 1
 
-  cmd_set_sally_captive_ball_hit:
-    v_sally_captive_ball_hit:
-      action: set
-      int: 1
-
   cmd_set_sally_left_ramp_hit:
     v_sally_left_ramp_hit:
-      action: set
-      int: 1
-
-  cmd_set_sally_slaughterhouse_hit:
-    v_sally_slaughterhouse_hit:
       action: set
       int: 1
 
@@ -214,6 +281,9 @@ variable_player:
 
   sally_pop_bumper_hit:
     v_sally_pop_bumper_counter: -1
+
+  sally_shot_hit{current_player.v_sally_shot_counter<4}:
+    v_sally_shot_counter: 1
 
 ##################################################
 # Slides
@@ -235,6 +305,53 @@ slides:
         text: (player|v_sally_pop_bumper_counter)
         style: small
 
+  sally_pop_bumper_eyes_1_slide:
+    widgets:
+      - type: image
+        image: sally_bumper_1
+
+  sally_pop_bumper_eyes_2_slide:
+    widgets:
+      - type: image
+        image: sally_bumper_2
+
+  sally_shots_slide:
+    widgets:
+      - type: image
+        image: sally_struggle_v2
+
+  sally_shot_hit_slide_1:
+    widgets:
+      - type: image
+        image: sally_left_hand_cu_v1
+
+  sally_shot_hit_slide_2:
+    widgets:
+      - type: image
+        image: sally_right_hand_cu_v1
+
+  sally_shot_hit_slide_3:
+    widgets:
+      - type: image
+        image: sally_left_hand_free_v1
+
+  sally_shot_hit_slide_4:
+    widgets:
+      - type: image
+        image: sally_right_hand_free_v1
+
+  sally_final_slide:
+    widgets:
+      - type: text
+        text: final placeholder
+        style: small
+
+  sally_complete_slide:
+    widgets:
+      - type: text
+        text: complete placeholder
+        style: small
+
 slide_player:
   cmd_sally_start_intro_slide:
     sally_intro_slide:
@@ -248,6 +365,61 @@ slide_player:
   cmd_sally_remove_pop_bumper_slide:
     sally_pop_bumper_slide:
       action: remove
+
+  sally_show_eyes_1.10:
+    sally_pop_bumper_eyes_2_slide:
+      action: remove
+
+  sally_show_eyes_1.5:
+    sally_pop_bumper_eyes_1_slide:
+      priority: 1000
+      expire: 2s
+
+  sally_show_eyes_2.10:
+    sally_pop_bumper_eyes_1_slide:
+      action: remove
+
+  sally_show_eyes_2.5:
+    sally_pop_bumper_eyes_2_slide:
+      priority: 1000
+      expire: 2s
+
+  cmd_sally_add_shots_slide:
+    sally_shots_slide:
+      priority: 500
+
+  cmd_play_sally_escape_1:
+    sally_shot_hit_slide_1:
+      priority: 600
+      expire: 2.9s
+
+  cmd_play_sally_escape_2:
+    sally_shot_hit_slide_2:
+      priority: 600
+      expire: 2.9s
+
+  cmd_play_sally_escape_3:
+    sally_shot_hit_slide_3:
+      priority: 600
+      expire: 2.3s
+
+  cmd_play_sally_escape_4:
+    sally_shot_hit_slide_4:
+      priority: 600
+      expire: 2.8s
+
+  cmd_sally_remove_shots_slide:
+    sally_shots_slide:
+      action: remove
+
+  cmd_sally_add_final_slide:
+    sally_final_slide:
+      priority: 1000
+
+  cmd_sally_add_complete_slide:
+    sally_complete_slide:
+      priority: 1000
+      expire: 3s
 
 ##################################################
 # Shows
@@ -275,33 +447,28 @@ show_player:
 ##################################################
 # Light Player
 ##################################################
+
 light_player:
   cmd_sally_clear_playfield_lights:
     left_orbit_arrow: 0
-    captive_ball_arrow: 0
     basket_ramp_arrow: 0
-    slaughter_house_arrow: 0
     right_ramp_arrow: 0
     right_orbit_arrow: 0
-
 
   cmd_sally_light_left_orbit:
     left_orbit_arrow: ff
 
-  cmd_sally_light_captive_ball:
-    captive_ball_arrow: ff
-
   cmd_sally_light_basket_ramp:
     basket_ramp_arrow: ff
-
-  cmd_sally_light_slaughter_house:
-    slaughter_house_arrow: ff
 
   cmd_sally_light_right_ramp:
     right_ramp_arrow: ff
 
   cmd_sally_light_right_orbit:
     right_orbit_arrow: ff
+
+  cmd_sally_light_slaughter_house:
+    slaughter_house_arrow: ff
 
 
 ##################################################
