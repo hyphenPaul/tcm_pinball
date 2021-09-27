@@ -1,10 +1,12 @@
 bugs
+- the magnavuk queue events will play regardless of what modes are active
 - 2 x playfield not turning off (maybe when active and drain)
 - mask mania dead skin mask not turning off
 - make the van message switch more fool proof - it shouldn't be active for a mode and kick out right away (try lighting van and draining)
 - the van has double listeners on the next ball when it's lit and you drain (was after getting it through skill shot)
 
 - next up (general)
+  - get the multiplayer display working: https://docs.missionpinball.org/en/latest/displays/slides/multiplayer_display.html
   - save from the grave is now a mystery meater award
   - use the green arrow for the massacre million captive ball jackpot indicator
   - franklin gives you franklin frenzy out of the gate (no hurry up)
