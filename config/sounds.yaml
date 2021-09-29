@@ -290,4 +290,12 @@ sounds:
     mode_end_action: stop
     file: grave_robber_music_v1.wav
     volume: 1
+  sally_bg_music_phase_1:
+    mode_end_action: stop
+    file: dinner_with_sally_music_v2.wav
+    volume: .8
+  sally_bg_music_phase_2:
+    mode_end_action: stop
+    file: dinner_with_sally_music_v2_mid_tempo.wav
+    volume: .5
 

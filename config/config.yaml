@@ -43,6 +43,7 @@ config:
  - shows.yaml
  - modes.yaml
  - mode_manager.yaml
+ - score_slide.yaml
 
 custom_code:
   - scriptlets.magnavuk.Magnavuk

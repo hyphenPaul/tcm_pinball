@@ -141,7 +141,6 @@ sound_player:
         - cmd_stop_flash_van_for_eject
       about_to_finish_time: 1.5s
 
-
 ball_saves:
   player_start:
     active_time: 10s
@@ -157,39 +156,7 @@ ball_saves:
     balls_to_save: -1
     grace_period: 5s
 
-slides:
-  base_score_slide:
-    widgets:
-      - type: text
-        text: (score)
-        number_grouping: true
-        min_digits: 2
-        font_name: pinball_score
-        font_size: 22
-        round_anchor_x: left
-        anchor_x: middle
-        anchor_y: bottom
-        y: 8
-        x: 50%
-      - type: text
-        text: PLAYER (number)
-        style: small
-        y: 1
-        x: left+2
-        anchor_x: left
-        anchor_y: bottom
-        font_size: 10
-      - type: text
-        text: BALL (ball)
-        style: small
-        y: 1
-        x: right-2
-        anchor_x: right
-        anchor_y: bottom
-        font_size: 10
-
 slide_player:
-  mode_base_started: base_score_slide
   cmd_start_shoot_the_van:
     chainsaw_shoot_the_van_slide:
       priority: 500

@@ -31,7 +31,7 @@ event_player:
 
   cmd_sally_after_intro_complete:
     cmd_sally_set_state_pop_bumpers:
-    cmd_play_sally_bg_music:
+    cmd_play_sally_bg_music_phase_1:
     cmd_eject_van_vuk_with_audio:
     cmd_sally_refresh_lights:
     cmd_sally_play_pop_bumper_slide:
@@ -41,6 +41,8 @@ event_player:
 
   cmd_sally_start_shot_phase:
     cmd_sally_set_state_shots:
+    cmd_stop_sally_bg_music_phase_1:
+    cmd_play_sally_bg_music_phase_2:
     cmd_sally_show_eyes_set_var:
     cmd_stop_sally_timer_1:
     cmd_start_sally_timer_2:
@@ -99,12 +101,18 @@ event_player:
 
   top_turbo_bumper_hit{current_player.v_sally_state=="pop_bumpers"}:
     - sally_pop_bumper_hit
+    - cmd_sally_clear_pop_bumper_sound
+    - cmd_sally_pop_bumper_sound_1
 
   left_turbo_bumper_hit{current_player.v_sally_state=="pop_bumpers"}:
     - sally_pop_bumper_hit
+    - cmd_sally_clear_pop_bumper_sound
+    - cmd_sally_pop_bumper_sound_2
 
   right_turbo_bumper_hit{current_player.v_sally_state=="pop_bumpers"}:
     - sally_pop_bumper_hit
+    - cmd_sally_clear_pop_bumper_sound
+    - cmd_sally_pop_bumper_sound_3
 
   sally_pop_bumper_hit{current_player.v_sally_pop_bumper_timer_running==0}:
     - cmd_sally_start_pop_bumper_timer 
@@ -493,6 +501,31 @@ light_player:
 ##################################################
 
 sound_player:
+  cmd_sally_pop_bumper_sound_1:
+    sally_pop_bumper_score_v1:
+      action: play
+      loops: 0
+
+  cmd_sally_pop_bumper_sound_2:
+    sally_pop_bumper_score_v2:
+      action: play
+      loops: 0
+
+  cmd_sally_pop_bumper_sound_3:
+    sally_pop_bumper_score_v3:
+      action: play
+      loops: 0
+
+  cmd_sally_clear_pop_bumper_sound:
+    sally_pop_bumper_score_v1:
+      action: stop
+
+    sally_pop_bumper_score_v2:
+      action: stop
+
+    sally_pop_bumper_score_v3:
+      action: stop
+
   cmd_sally_start_intro_slide_sound:
     dinner_with_sally_v1_score:
       action: play
@@ -500,5 +533,39 @@ sound_player:
 
   cmd_sally_play_complete_audio:
     sally_escape_score_v1:
+      action: play
+      loops: 0
+
+  cmd_play_sally_bg_music_phase_1:
+    sally_bg_music_phase_1:
+      action: play
+      volume: 0.3
+
+  cmd_stop_sally_bg_music_phase_1:
+    sally_bg_music_phase_1:
+      action: stop
+    
+  cmd_play_sally_bg_music_phase_2:
+    sally_bg_music_phase_2:
+      action: play
+      volume: 0.3
+
+  cmd_play_sally_escape_1:
+    sally_hand_cu_score_v1:
+      action: play
+      loops: 0
+
+  cmd_play_sally_escape_2:
+    sally_hand_cu_score_v1:
+      action: play
+      loops: 0
+
+  cmd_play_sally_escape_3:
+    sally_left_hand_free_score_v1:
+      action: play
+      loops: 0
+
+  cmd_play_sally_escape_4:
+    sally_right_hand_free_score_v1:
       action: play
       loops: 0

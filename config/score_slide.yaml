@@ -1,0 +1,143 @@
+#config_version=5
+
+slides:
+  base_score_slide: []
+  multiplayer_score_slide: []
+
+widgets:
+  base_text_widget:
+    - type: text
+      text: (score)
+      number_grouping: true
+      min_digits: 2
+      font_name: pinball_score
+      font_size: 22
+      round_anchor_x: left
+      anchor_x: middle
+      anchor_y: bottom
+      y: 8
+      x: 50%
+  base_player_widget:
+    - type: text
+      text: PLAYER (number)
+      style: small
+      y: 1
+      x: left+2
+      anchor_x: left
+      anchor_y: bottom
+      font_size: 10
+  base_ball_widget:
+    - type: text
+      text: BALL (ball)
+      style: small
+      y: 1
+      x: right-2
+      anchor_x: right
+      anchor_y: bottom
+      font_size: 10
+  score_player_1_widget:
+    - type: text
+      text: (player1|score)
+      number_grouping: true
+      min_digits: 2
+      style: small
+      anchor_x: left
+      anchor_y: top
+      y: 31
+      x: 2
+  score_player_2_widget:
+    - type: text
+      text: (player2|score)
+      number_grouping: true
+      min_digits: 2
+      style: small
+      anchor_x: right
+      anchor_y: top
+      y: 31
+      x: 126
+  score_player_3_widget:
+    - type: text
+      text: (player3|score)
+      number_grouping: true
+      min_digits: 2
+      style: small
+      anchor_x: left
+      anchor_y: bottom
+      y: 10
+      x: 2
+  score_player_4_widget:
+    - type: text
+      text: (player4|score)
+      number_grouping: true
+      min_digits: 2
+      style: small
+      anchor_x: right
+      anchor_y: bottom
+      y: 10
+      x: 126
+  score_player_widget:
+    - type: text
+      text: PLAYER (number)
+      style: small
+      y: 1
+      x: 8
+      anchor_x: left
+      anchor_y: bottom
+      font_size: 10
+  score_ball_widget:
+    - type: text
+      text: BALL (ball)
+      style: small
+      y: 1
+      x: 120
+      anchor_x: right
+      anchor_y: bottom
+      font_size: 10
+  
+widget_player:
+
+  game_started:
+    base_text_widget:
+      slide: base_score_slide
+    base_player_widget:
+      slide: base_score_slide
+    base_ball_widget:
+      slide: base_score_slide
+
+  player_added{num==2}:
+    score_player_1_widget:
+      slide: multiplayer_score_slide
+    score_player_2_widget:
+      slide: multiplayer_score_slide
+    score_player_widget:
+      slide: multiplayer_score_slide
+    score_ball_widget:
+      slide: multiplayer_score_slide
+
+  player_added{num==3}:
+    score_player_3_widget:
+      slide: multiplayer_score_slide
+
+  player_added{num==4}:
+    score_player_4_widget:
+      slide: multiplayer_score_slide
+    
+
+slide_player:
+  single_player_ball_started:
+    base_score_slide
+
+  multi_player_ball_started:
+    multiplayer_score_slide
+
+  multiplayer_game:
+    base_score_slide:
+      action: remove
+    multiplayer_score_slide:
+      action: play
+
+  ball_will_end:
+    base_score_slide:
+      action: remove
+    multiplayer_score_slide:
+      action: remove
