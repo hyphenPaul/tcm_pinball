@@ -1,0 +1,314 @@
+#config_version=5
+
+mode:
+  start_events:
+    - cmd_start_mode_sawemall
+  stop_events:
+    - cmd_stop_mode_sawemall
+  priority: 10000
+
+##################################################
+# Event Player
+##################################################
+
+event_player:
+
+  ################################
+  # MODE PROGRESSION
+  ################################
+
+  mode_sawemall_started:
+    cmd_disable_bh_mode_van:
+    cmd_sawemall_set_state_starting:
+    cmd_sawemall_reset_variables:
+    cmd_sawemall_start_intro_slide:
+    cmd_sawemall_start_intro_slide_sound:
+
+  slide_sawemall_intro_slide_removed:
+    cmd_sawemall_after_intro_complete:
+
+  cmd_sawemall_set_up_targets_phase: 
+    cmd_disable_bh_mode_van:
+    cmd_sawemall_set_state_targets:
+    cmd_sawemall_start_chainsaw_idle_slide:
+    cmd_eject_van_vuk_with_audio:
+    cmd_sawemall_refresh_lights:
+
+  cmd_sawemall_set_up_van_phase: 
+    cmd_sawemall_set_state_van:
+    cmd_enable_bh_mode_van:
+    cmd_sawemall_refresh_lights:
+    cmd_sawemall_start_chainsaw_running_slide:
+
+  cmd_sawemall_after_intro_complete:
+    cmd_sawemall_set_round_1:
+    cmd_sawemall_set_up_targets_phase: 
+
+  cmd_sawemall_target_hit:
+    cmd_sawemall_set_up_van_phase: 
+
+  ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==1}:
+    cmd_sawemall_start_person_chop_1:
+    cmd_sawemall_play_person_chop_1_audio:
+
+  slide_sawemall_person_chop_slide_1_removed:
+    cmd_sawemall_set_round_2:
+    cmd_sawemall_set_up_targets_phase: 
+
+  ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==2}:
+    cmd_sawemall_start_person_chop_2:
+    cmd_sawemall_play_person_chop_2_audio:
+
+  slide_sawemall_person_chop_slide_2_removed:
+    cmd_sawemall_set_round_3:
+    cmd_sawemall_set_up_targets_phase: 
+
+  ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==3}:
+    cmd_sawemall_start_person_chop_3:
+    cmd_sawemall_play_person_chop_3_audio:
+
+  slide_sawemall_person_chop_slide_3_removed:
+    cmd_sawemall_set_round_4:
+    cmd_sawemall_set_up_targets_phase: 
+
+  ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==4}:
+    cmd_sawemall_start_person_chop_4:
+    cmd_sawemall_play_person_chop_4_audio:
+
+  slide_sawemall_person_chop_slide_4_removed:
+    cmd_stop_sawemall_mode:
+
+  ################################
+  # LIGHTS
+  ################################
+
+  cmd_sawemall_refresh_lights:
+    cmd_sawemall_clear_playfield_lights:
+    cmd_sawemall_turn_on_playfield_lights:
+
+  cmd_sawemall_turn_on_playfield_lights{current_player.v_sawemall_state=="targets"}:
+    cmd_sawemall_flash_chainsaw:
+
+  cmd_sawemall_turn_on_playfield_lights{current_player.v_sawemall_state=="van"}:
+    cmd_sawemall_flash_van:
+
+  ################################
+  # TARGETS
+  ################################
+  
+  s_chain_target_c_active{current_player.v_sawemall_state=="targets"}:
+    cmd_sawemall_target_hit:
+  s_chain_target_h_active{current_player.v_sawemall_state=="targets"}:
+    cmd_sawemall_target_hit:
+  s_chain_target_a_active{current_player.v_sawemall_state=="targets"}:
+    cmd_sawemall_target_hit:
+  s_chain_target_i_active{current_player.v_sawemall_state=="targets"}:
+    cmd_sawemall_target_hit:
+  s_chain_target_n_active{current_player.v_sawemall_state=="targets"}:
+    cmd_sawemall_target_hit:
+  s_saw_target_s_active{current_player.v_sawemall_state=="targets"}:
+    cmd_sawemall_target_hit:
+  s_saw_target_a_active{current_player.v_sawemall_state=="targets"}:
+    cmd_sawemall_target_hit:
+  s_saw_target_w_active{current_player.v_sawemall_state=="targets"}:
+    cmd_sawemall_target_hit:
+
+##################################################
+# Variables
+##################################################
+
+variable_player:
+  cmd_sawemall_reset_variables:
+    v_sawemall_round:
+      action: set
+      string: 1
+
+  cmd_sawemall_set_state_starting:
+    v_sawemall_state:
+      action: set
+      string: "starting"
+
+  cmd_sawemall_set_state_targets:
+    v_sawemall_state:
+      action: set
+      string: "targets"
+
+  cmd_sawemall_set_state_van:
+    v_sawemall_state:
+      action: set
+      string: "van"
+
+  cmd_sawemall_set_round_1:
+    v_sawemall_round:
+      action: set
+      int: 1
+
+  cmd_sawemall_set_round_2:
+    v_sawemall_round:
+      action: set
+      int: 2
+
+  cmd_sawemall_set_round_3:
+    v_sawemall_round:
+      action: set
+      int: 3
+
+  cmd_sawemall_set_round_4:
+    v_sawemall_round:
+      action: set
+      int: 4
+
+##################################################
+# Slides
+##################################################
+
+slides:
+  sawemall_intro_slide:
+    widgets:
+      - type: image
+        image: saw_em_all_intro_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  sawemall_chainsaw_idle_slide:
+    widgets:
+      - type: text
+        text: chainsaw idle
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  sawemall_chainsaw_running_slide:
+    widgets:
+      - type: text
+        text: chainsaw running
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  sawemall_person_chop_slide_1:
+    widgets:
+      - type: text
+        text: person chop 1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  sawemall_person_chop_slide_2:
+    widgets:
+      - type: text
+        text: person chop 2
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  sawemall_person_chop_slide_3:
+    widgets:
+      - type: text
+        text: person chop 3
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  sawemall_person_chop_slide_4:
+    widgets:
+      - type: text
+        text: person chop 4
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+slide_player:
+  cmd_sawemall_start_intro_slide:
+    sawemall_intro_slide:
+      priority: 500
+      expire: 5s
+
+  cmd_sawemall_start_chainsaw_idle_slide:
+    sawemall_chainsaw_idle_slide:
+      priority: 500
+
+  cmd_sawemall_start_chainsaw_running_slide:
+    sawemall_chainsaw_running_slide:
+      priority: 500
+
+  cmd_sawemall_start_person_chop_1:
+    sawemall_person_chop_slide_1:
+      priority: 500
+      expire: 5s
+
+  cmd_sawemall_start_person_chop_2:
+    sawemall_person_chop_slide_2:
+      priority: 500
+      expire: 5s
+
+  cmd_sawemall_start_person_chop_3:
+    sawemall_person_chop_slide_3:
+      priority: 500
+      expire: 5s
+
+  cmd_sawemall_start_person_chop_4:
+    sawemall_person_chop_slide_4:
+      priority: 500
+      expire: 5s
+
+##################################################
+# Sound
+##################################################
+
+sound_player:
+  cmd_sawemall_start_intro_slide_sound:
+    saw_em_all_intro_score_v1:
+      action: play
+      loops: 0
+
+
+##################################################
+# Shows
+##################################################
+
+show_player:
+  cmd_sawemall_clear_playfield_lights:
+    med_flash:
+      action: stop
+      show_tokens:
+        lights:
+          - van
+          - chain_target_c
+          - chain_target_h
+          - chain_target_a
+          - chain_target_i
+          - chain_target_n
+          - saw_target_s
+          - saw_target_a
+          - saw_target_w
+
+  cmd_sawemall_flash_chainsaw:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          chain_target_c,
+          chain_target_h,
+          chain_target_a,
+          chain_target_i,
+          chain_target_n,
+          saw_target_s,
+          saw_target_a,
+          saw_target_w
+
+  cmd_sawemall_flash_van:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          van
+

@@ -8,15 +8,16 @@ class Modes(CustomCode):
 
         self.modes = {
 #            "hitchhiker" :  { "light" : "grid_in_yer_face", "mode_name" : "hitchhiker" },
-#            "barbecue" :  { "light" : "grid_fire", "mode_name" : "hitchhiker" },
+#            "barbecue" :  { "light" : "grid_fire", "mode_name" : "barbecue" },
 #            "grandpa" :  { "light" : "grid_space_jam", "mode_name" : "grandpa" },
 #            "grave" :  { "light" : "grid_slam", "mode_name" : "grave" },
-            "sally" :  { "light" : "grid_fastbreak", "mode_name" : "sally" },
-            "sally1" :  { "light" : "grid_rebound", "mode_name" : "sally" },
-            "sally2" :  { "light" : "grid_space_jam", "mode_name" : "sally" },
-            "sally3" :  { "light" : "grid_in_yer_face", "mode_name" : "sally" },
-            "sally4" :  { "light" : "grid_slam", "mode_name" : "sally" },
-            "sally5" :  { "light" : "grid_fire", "mode_name" : "sally" }
+#            "sally" :  { "light" : "grid_fastbreak", "mode_name" : "sally" },
+            "sawemall" :  { "light" : "grid_fastbreak", "mode_name" : "sawemall" },
+            "sawemall1" :  { "light" : "grid_rebound", "mode_name" : "sawemall" },
+            "sawemall2" :  { "light" : "grid_space_jam", "mode_name" : "sawemall" },
+            "sawemall3" :  { "light" : "grid_in_yer_face", "mode_name" : "sawemall" },
+            "sawemall4" :  { "light" : "grid_slam", "mode_name" : "sawemall" },
+            "sawemall5" :  { "light" : "grid_fire", "mode_name" : "sawemall" }
         }
 
         self.machine.events.add_handler('mode_base_started', self.init_on_ball_start)

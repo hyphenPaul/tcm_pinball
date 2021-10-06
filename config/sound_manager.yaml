@@ -58,6 +58,13 @@ event_player:
     - cmd_stop_grave_bg_music
     - cmd_start_base_music
 
+  mode_sawemall_started:
+    - cmd_stop_music
+
+  mode_sawemall_stopping:
+    - cmd_stop_sawemall_music
+    - cmd_start_base_music
+
 #  cmd_test_flipper_left:
 #    - cmd_stop_music
 

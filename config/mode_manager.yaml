@@ -167,7 +167,7 @@ event_player:
     - cmd_enable_mode_switcher_and_message
 
   ##################################################
-  # Placeholder D
+  # Grave
   ##################################################
 
   cmd_start_grave_mode:
@@ -227,10 +227,10 @@ event_player:
       coil_direction: left
 
   ##################################################
-  # Placeholder F
+  # Saw Em All
   ##################################################
 
-  cmd_start_placeholder_f_mode:
+  cmd_start_sawemall_mode:
     - cmd_stop_mode_escape
     - cmd_stop_mode_chainsaw
     - cmd_stop_mode_franklin
@@ -240,10 +240,10 @@ event_player:
     - cmd_stop_mode_tt_playfield
     - cmd_stop_mode_meathook
     - cmd_stop_mode_pop_bumpers
-    - cmd_start_mode_placeholder_f
+    - cmd_start_mode_sawemall
 
-  cmd_stop_placeholder_f_mode:
-    - cmd_stop_mode_placeholder_f
+  cmd_stop_sawemall_mode:
+    - cmd_stop_mode_sawemall
     - cmd_start_mode_chainsaw
     - cmd_start_mode_franklin
     - cmd_start_mode_mask
@@ -252,6 +252,7 @@ event_player:
     - cmd_start_mode_pop_bumpers
     - cmd_start_mode_escape
     - cmd_enable_mode_switcher_and_message
+
 
   ##################################################
   # Franklin

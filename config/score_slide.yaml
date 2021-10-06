@@ -17,6 +17,7 @@ widgets:
       anchor_y: bottom
       y: 8
       x: 50%
+
   base_player_widget:
     - type: text
       text: PLAYER (number)
@@ -26,6 +27,7 @@ widgets:
       anchor_x: left
       anchor_y: bottom
       font_size: 10
+
   base_ball_widget:
     - type: text
       text: BALL (ball)
@@ -35,6 +37,27 @@ widgets:
       anchor_x: right
       anchor_y: bottom
       font_size: 10
+
+  score_player_widget:
+    - type: text
+      text: PLAYER (number)
+      style: small
+      y: 1
+      x: 8
+      anchor_x: left
+      anchor_y: bottom
+      font_size: 10
+
+  score_ball_widget:
+    - type: text
+      text: BALL (ball)
+      style: small
+      y: 1
+      x: 120
+      anchor_x: right
+      anchor_y: bottom
+      font_size: 10
+
   score_player_1_widget:
     - type: text
       text: (player1|score)
@@ -45,6 +68,7 @@ widgets:
       anchor_y: top
       y: 31
       x: 2
+
   score_player_2_widget:
     - type: text
       text: (player2|score)
@@ -55,6 +79,7 @@ widgets:
       anchor_y: top
       y: 31
       x: 126
+
   score_player_3_widget:
     - type: text
       text: (player3|score)
@@ -65,6 +90,7 @@ widgets:
       anchor_y: bottom
       y: 10
       x: 2
+
   score_player_4_widget:
     - type: text
       text: (player4|score)
@@ -75,24 +101,50 @@ widgets:
       anchor_y: bottom
       y: 10
       x: 126
-  score_player_widget:
+
+  score_player_1_active_widget:
     - type: text
-      text: PLAYER (number)
-      style: small
-      y: 1
-      x: 8
+      text: (player1|score)
+      number_grouping: true
+      min_digits: 2
+      style: big
+      anchor_x: left
+      anchor_y: top
+      y: 31
+      x: 2
+
+  score_player_2_active_widget:
+    - type: text
+      text: (player2|score)
+      number_grouping: true
+      min_digits: 2
+      style: big
+      anchor_x: right
+      anchor_y: top
+      y: 31
+      x: 126
+
+  score_player_3_active_widget:
+    - type: text
+      text: (player3|score)
+      number_grouping: true
+      min_digits: 2
+      style: big
       anchor_x: left
       anchor_y: bottom
-      font_size: 10
-  score_ball_widget:
+      y: 10
+      x: 2
+
+  score_player_4_active_widget:
     - type: text
-      text: BALL (ball)
-      style: small
-      y: 1
-      x: 120
+      text: (player4|score)
+      number_grouping: true
+      min_digits: 2
+      style: big
       anchor_x: right
       anchor_y: bottom
-      font_size: 10
+      y: 10
+      x: 126
   
 widget_player:
 
@@ -105,7 +157,7 @@ widget_player:
       slide: base_score_slide
 
   player_added{num==2}:
-    score_player_1_widget:
+    score_player_1_active_widget:
       slide: multiplayer_score_slide
     score_player_2_widget:
       slide: multiplayer_score_slide
@@ -121,7 +173,54 @@ widget_player:
   player_added{num==4}:
     score_player_4_widget:
       slide: multiplayer_score_slide
-    
+
+  player_turn_started{number==1}:
+    score_player_1_widget:
+      action: remove
+    score_player_1_active_widget:
+      slide: multiplayer_score_slide
+
+  player_turn_ended{number==1}:
+    score_player_1_active_widget:
+      action: remove
+    score_player_1_widget:
+      slide: multiplayer_score_slide
+
+  player_turn_started{number==2}:
+    score_player_2_widget:
+      action: remove
+    score_player_2_active_widget:
+      slide: multiplayer_score_slide
+
+  player_turn_ended{number==2}:
+    score_player_2_active_widget:
+      action: remove
+    score_player_2_widget:
+      slide: multiplayer_score_slide
+
+  player_turn_started{number==3}:
+    score_player_3_widget:
+      action: remove
+    score_player_3_active_widget:
+      slide: multiplayer_score_slide
+
+  player_turn_ended{number==3}:
+    score_player_3_active_widget:
+      action: remove
+    score_player_3_widget:
+      slide: multiplayer_score_slide
+
+  player_turn_started{number==4}:
+    score_player_4_widget:
+      action: remove
+    score_player_4_active_widget:
+      slide: multiplayer_score_slide
+
+  player_turn_ended{number==4}:
+    score_player_4_active_widget:
+      action: remove
+    score_player_4_widget:
+      slide: multiplayer_score_slide
 
 slide_player:
   single_player_ball_started:

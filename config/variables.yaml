@@ -59,6 +59,17 @@ machine_vars:
     initial_value: 0
 
   #####################################
+  # Saw `em All
+  #####################################
+
+  v_sawemall_state:
+    initial_value: "starting"
+    value_type: str
+
+  v_sawemall_round:
+    initial_value: 1
+
+  #####################################
   # Grave
   #####################################
 
