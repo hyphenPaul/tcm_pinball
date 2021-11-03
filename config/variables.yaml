@@ -69,6 +69,12 @@ machine_vars:
   v_sawemall_round:
     initial_value: 1
 
+  v_sawemall_timer_counter:
+    initial_value: 100
+
+  v_sawemall_light_swap_timer_counter:
+    initial_value: 0
+
   #####################################
   # Grave
   #####################################
