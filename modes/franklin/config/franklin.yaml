@@ -14,9 +14,7 @@ mode:
 ##################################################
 
 event_player:
-  player_franklin_total_completions{value>0 and value<3}:
-    - cmd_start_franklin_hurry_up
-  player_franklin_total_completions{value==3}:
+  player_franklin_total_completions:
     - cmd_start_franklin_frenzy
   franklin_letters_collected:
     - cmd_add_franklin_bonus

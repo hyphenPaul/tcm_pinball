@@ -268,10 +268,21 @@ event_player:
     - cmd_stop_mode_franklin_hurry_up
 
   cmd_start_franklin_frenzy:
+    - cmd_disable_mode_switcher_and_message
+    - cmd_stop_mode_franklin
+    - cmd_stop_mode_chainsaw
+    - cmd_stop_mode_escape
     - cmd_start_mode_franklin_frenzy
 
-  timer_franklin_frenzy_timer_complete:
+  cmd_stop_franklin_frenzy:
     - cmd_stop_mode_franklin_frenzy
+    - cmd_start_mode_chainsaw
+    - cmd_start_mode_franklin
+    - cmd_start_mode_escape
+    - cmd_enable_mode_switcher_and_message
+
+  timer_franklin_frenzy_timer_complete:
+    - cmd_stop_franklin_frenzy
 
   ##################################################
   # Testing
