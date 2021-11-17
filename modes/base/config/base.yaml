@@ -31,6 +31,25 @@ show_player:
       show_tokens:
         lights: shoot_again
 
+  ball_save_player_start_extended_saving_ball:
+    standard_ball_save:
+      loops: 0
+
+  ball_save_player_start_extended_enabled:
+    on:
+      show_tokens:
+        lights: shoot_again
+
+  ball_save_player_start_extended_disabled:
+    off:
+      show_tokens:
+        lights: shoot_again
+
+  ball_save_player_start_extended_grace_period:
+    off:
+      show_tokens:
+        lights: shoot_again
+
   cmd_flash_mode_light_grid_in_yer_face:
     fast_flash:
       action: play
@@ -147,7 +166,14 @@ ball_saves:
     enable_events: cmd_playfield_initiated
     auto_launch: yes
     balls_to_save: 1
-    grace_period: 2s
+    grace_period: 5s
+    eject_delay: 3.2s
+  player_start_extended:
+    active_time: 25s
+    enable_events: cmd_enable_player_start_extended_ball_save
+    auto_launch: yes
+    balls_to_save: 1
+    grace_period: 5s
     eject_delay: 3.2s
   multiball_start:
     active_time: 20s
@@ -426,6 +452,12 @@ event_player:
   s_right_slingshot_active:
     - cmd_playfield_active
 
+  ########################################
+  # Ball Save Extended
+  ########################################
+
+  cmd_super_skill_shot_award_ball_save:
+    cmd_enable_player_start_extended_ball_save:
 
   ########################################
   # Van Eject

@@ -125,19 +125,31 @@ class SkillShot(CustomCode):
 
     def set_choices(self):
         choices = {
-            "light_lock": "Light Lock",
+            "light_lock": "Light Lock", # written
             "extra_ball": "Extra Ball", # written
             "mystery_meat": "Light Mystery Meat", # written
             "one_million": "One Million Points", # written
             "ball_save": "+20 second Ballsave",
             "add_help": "Add Help Letter", # written
-            "van": "Light Gas Station",
+            "van": "Light Gas Station", # written
             "five_million": "Five Million Points", # written
         }
 
         # Add some conditional choices here
+        if self.should_reject_light_lock():
+           choices.pop("light_lock")
 
         self.skill_shot_choices = choices
+
+    def should_reject_light_lock(self):
+        safe_states = ["start", "lock_1_locked", "lock_2_locked"]
+        current_state = self.machine.game.player["v_escape_state"]
+
+        for i in safe_states:
+            if(i == current_state) :
+                return False
+
+        return True
 
 
     def begin_timer(self):
@@ -171,6 +183,6 @@ class SkillShot(CustomCode):
         self.deactivation_timer.start()
 
     def tick_interval(self):
-        tick_interval = 0.3
+        tick_interval = 0.7
 
         return tick_interval
