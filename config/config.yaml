@@ -27,7 +27,6 @@ config:
  - sound_manager.yaml
  - assets.yaml
  - sounds.yaml
- - videos.yaml
  - images.yaml
  - switches.yaml
  - coils.yaml
