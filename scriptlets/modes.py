@@ -7,27 +7,31 @@ class Modes(CustomCode):
         self.info_log('Enabling')
 
         self.modes = {
-#            "hitchhiker" :  { "light" : "grid_in_yer_face", "mode_name" : "hitchhiker" },
-#            "barbecue" :  { "light" : "grid_fire", "mode_name" : "barbecue" },
-#            "grandpa" :  { "light" : "grid_space_jam", "mode_name" : "grandpa" },
-#            "grave" :  { "light" : "grid_slam", "mode_name" : "grave" },
-#            "sally" :  { "light" : "grid_fastbreak", "mode_name" : "sally" },
-            "sawemall" :  { "light" : "grid_fastbreak", "mode_name" : "sawemall" },
-            "sawemall1" :  { "light" : "grid_rebound", "mode_name" : "sawemall" },
-            "sawemall2" :  { "light" : "grid_space_jam", "mode_name" : "sawemall" },
-            "sawemall3" :  { "light" : "grid_in_yer_face", "mode_name" : "sawemall" },
-            "sawemall4" :  { "light" : "grid_slam", "mode_name" : "sawemall" },
-            "sawemall5" :  { "light" : "grid_fire", "mode_name" : "sawemall" }
+            "hitchhiker" :  { "light" : "grid_in_yer_face", "mode_name" : "hitchhiker" },
+            "barbecue" :  { "light" : "grid_fire", "mode_name" : "barbecue" },
+            "grandpa" :  { "light" : "grid_space_jam", "mode_name" : "grandpa" },
+            "grave" :  { "light" : "grid_slam", "mode_name" : "grave" },
+            "sally" :  { "light" : "grid_fastbreak", "mode_name" : "sally" },
+            "sawemall" :  { "light" : "grid_rebound", "mode_name" : "sawemall" }
+#            "sawemall1" :  { "light" : "grid_rebound", "mode_name" : "sawemall" },
+#            "sawemall2" :  { "light" : "grid_space_jam", "mode_name" : "sawemall" },
+#            "sawemall3" :  { "light" : "grid_in_yer_face", "mode_name" : "sawemall" },
+#            "sawemall4" :  { "light" : "grid_slam", "mode_name" : "sawemall" },
+#            "sawemall5" :  { "light" : "grid_fire", "mode_name" : "sawemall" }
         }
 
         self.machine.events.add_handler('mode_base_started', self.init_on_ball_start)
         self.machine.events.add_handler('cmd_enable_mode_switcher', self.on_enable)
         self.machine.events.add_handler('cmd_disable_mode_switcher', self.on_disable)
         self.machine.events.add_handler('cmd_super_skill_shot_award_van', self.on_skill_shot)
+        self.machine.events.add_handler('game_ending', self.on_game_ending)
 
     def init_on_ball_start(self, **kwargs):
         self.initiated = True
         self.enable()
+
+    def on_game_ending(self, **kwargs):
+        self.clear_current_collected_modes()
 
     def enable(self):
         self.info_log('enable')
@@ -212,6 +216,10 @@ class Modes(CustomCode):
         else:
             current_player['v_collected_modes'] = []
             return []
+
+    def clear_current_collected_modes(self):
+        current_player = self.current_player()
+        current_player['v_collected_modes'] = []
 
     def current_active_mode(self):
         current_player = self.current_player()

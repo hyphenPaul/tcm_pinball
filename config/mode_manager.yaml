@@ -20,7 +20,7 @@ event_player:
     - cmd_start_mode_skill_shot
     - cmd_start_mode_standard_extra_ball
 
-  ball_ending:
+  ball_will_end:
     - cmd_clean_up_modes
 
   ##################################################

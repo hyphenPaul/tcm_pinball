@@ -61,12 +61,21 @@ event_player:
   mode_sawemall_started:
     - cmd_stop_music
 
-  mode_sawemall_stopping:
+  mode_sawemall_will_stop:
     - cmd_stop_sawemall_music
+    - cmd_sawemall_stop_running_chainsaw
+
+  mode_sawemall_stopping:
     - cmd_start_base_music
 
-#  cmd_test_flipper_left:
-#    - cmd_stop_music
+  cmd_stop_music.1:
+    - cmd_stop_escape_multiball_music
+    - cmd_stop_grandpa_bg_music
+    - cmd_stop_grave_bg_music
+    - cmd_stop_sally_bg_music
+    - cmd_stop_hitchhiker_music
+    - cmd_stop_barbecue_music
+    - cmd_stop_sawemall_music
 
 sound_player:
 
@@ -83,7 +92,9 @@ sound_player:
       action: stop
     skill_shot_projector_loop_sound:
       action: stop
-    hitchhiker_bg_music:
+    space_jam_take_over_bg_music:
+      action: stop
+    frenzy_bg_music:
       action: stop
 
   cmd_stop_projector_loop:

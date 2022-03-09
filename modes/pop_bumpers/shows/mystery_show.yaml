@@ -18,8 +18,10 @@
             - property: opacity
               value: 0
               duration: 0.3s
-      - type: text
-        text: (mystery_award)
-        style: small
-        round_anchor_x: left
-        round_anchor_y: bottom
+      - type: image
+        image: mystery_tilt_v1
+#      - type: text
+#        text: (mystery_award)
+#        style: small
+#        round_anchor_x: left
+#        round_anchor_y: bottom

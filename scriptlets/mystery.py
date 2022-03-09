@@ -2,7 +2,6 @@ from mpf.core.custom_code import CustomCode
 import random
 
 class Mystery(CustomCode):
-    
     def on_load(self):
         self.info_log('Enabling')
         self.machine.events.add_handler('cmd_get_mystery', self.get_mystery)
@@ -28,11 +27,11 @@ class Mystery(CustomCode):
     def fetch_choices(self):
         choices = []
         frequenies = {
-            "Small Points": 50,
+            "Small Points": 20,
             "Add Bonus Multiplier": 20,
             "Award Chain Saw letter": 20, # function to determine qualifier
             "Light Lock": 20, # function to determine qualifier
-            "Award 1 Franklin Letter": 20, # function to determine qualifier 
+            "Award 1 Franklin Letter": 20, # function to determine qualifier
             "Save From The Grave": 10,
             "30 second Ball Save": 10,
             "Big Points": 10,

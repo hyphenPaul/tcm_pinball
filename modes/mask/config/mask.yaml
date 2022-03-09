@@ -37,6 +37,8 @@ counters:
 event_player:
 
   #  s_left_flipper_active:
+  #    cmd_play_mask_show_1:
+  #  s_left_flipper_active:
   #    - cmd_play_mask_mania
   #    - cmd_show_widget_score
   #  s_right_flipper_active:

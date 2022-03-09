@@ -381,12 +381,13 @@ event_player:
   cmd_playfield_active{current_player.v_initial_playfield_active_fired==0}:
     - cmd_playfield_initiated
 
-  s_3_bank_drop_bottom_active:
-    - cmd_playfield_active
-  s_3_bank_drop_mid_active:
-    - cmd_playfield_active
-  s_3_bank_drop_top_active:
-    - cmd_playfield_active
+#  Disabling because the reset would clear the skillshot
+#  s_3_bank_drop_bottom_active:
+#    - cmd_playfield_active
+#  s_3_bank_drop_mid_active:
+#    - cmd_playfield_active
+#  s_3_bank_drop_top_active:
+#    - cmd_playfield_active
   s_right_ramp_enter_active:
     - cmd_playfield_active
   s_right_ramp_exit_active:
@@ -476,9 +477,9 @@ event_player:
   s_left_flipper_active:
     - cmd_test_flipper_left
 
-timers:
-
-  my_test_timer:
-    start_value: 0
-    end_value: 1
-    start_running: true
+#timers:
+#
+#  my_test_timer:
+#    start_value: 0
+#    end_value: 1
+#    start_running: true

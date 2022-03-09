@@ -1,297 +1,50 @@
 #show_version=5
 
-- duration: 500s
+- duration: 10s
   slides:
     slide_1:
       widgets:
         - type: image
-          image: dumbass_v1
-
-#  slides:
-#    slide_1:
-#      widgets:
-#      # Franklin
-#      - type: text
-#        text: SAFE
-#        color: black
-#        style: small
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 3
-#        y: 13
-#        animations:
-#          show_slide:
-#            - property: y
-#              value: 13
-#              duration: 2
-#            - property: y
-#              value: -3
-#              duration: 0.3
-#            - property: y
-#              value: 38
-#              duration: 0
-#            - property: y
-#              value: 13
-#              duration: 0.3
-#              repeat: True
-#      - type: rectangle
-#        color: white
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 0
-#        y: 0
-#        opacity: 0
-#        width: 25
-#        height: 32
-#        animations:
-#          show_slide:
-#            - property: opacity
-#              value: 0.3
-#              duration: 0.5s
-#
-#      # black haired girl
-#      - type: text
-#        text: SAFE
-#        color: black
-#        style: small
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 28
-#        y: 13
-#        animations:
-#          show_slide:
-#            - property: y
-#              value: 13
-#              duration: 2
-#            - property: y
-#              value: -3
-#              duration: 0.3
-#            - property: y
-#              value: 38
-#              duration: 0
-#            - property: y
-#              value: 13
-#              duration: 0.3
-#              repeat: True
-#      - type: rectangle
-#        color: white
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 26
-#        y: 0
-#        opacity: 0
-#        width: 25
-#        height: 32
-#        animations:
-#          show_slide:
-#            - property: opacity
-#              value: 0.3
-#              duration: 0.5s
-#
-#      # glasses
-#      - type: text
-#        text: SAFE
-#        color: black
-#        style: small
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 54
-#        y: 13
-#        animations:
-#          show_slide:
-#            - property: y
-#              value: 13
-#              duration: 2
-#            - property: y
-#              value: -3
-#              duration: 0.3
-#            - property: y
-#              value: 38
-#              duration: 0
-#            - property: y
-#              value: 13
-#              duration: 0.3
-#              repeat: True
-#      - type: rectangle
-#        color: white
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 51
-#        y: 0
-#        opacity: 0
-#        width: 25
-#        height: 32
-#        animations:
-#          show_slide:
-#            - property: opacity
-#              value: 0.3
-#              duration: 0.5s
-#
-#      # Sally
-#      - type: text
-#        text: SAFE
-#        color: black
-#        style: small
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 80
-#        y: 13
-#        animations:
-#          show_slide:
-#            - property: y
-#              value: 13
-#              duration: 2
-#            - property: y
-#              value: -3
-#              duration: 0.3
-#            - property: y
-#              value: 38
-#              duration: 0
-#            - property: y
-#              value: 13
-#              duration: 0.3
-#              repeat: True
-#      - type: rectangle
-#        color: white
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 77
-#        y: 0
-#        opacity: 0
-#        width: 25
-#        height: 32
-#        animations:
-#          show_slide:
-#            - property: opacity
-#              value: 0.3
-#              duration: 0.5s
-#
-#      # Dude
-#      - type: text
-#        text: SAFE
-#        color: black
-#        style: small
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 106
-#        y: 13
-#        animations:
-#          show_slide:
-#            - property: y
-#              value: 13
-#              duration: 2
-#            - property: y
-#              value: -3
-#              duration: 0.3
-#            - property: y
-#              value: 38
-#              duration: 0
-#            - property: y
-#              value: 13
-#              duration: 0.3
-#              repeat: True
-#      - type: rectangle
-#        color: white
-#        anchor_x: 0
-#        anchor_y: 0
-#        x: 103
-#        y: 0
-#        opacity: 0
-#        width: 25
-#        height: 32
-#        animations:
-#          show_slide:
-#            - property: opacity
-#              value: 0.3
-#              duration: 0.5s
-#
-#      # base portrait
-#      - type: image 
-#        image: kid_portraits_v3
-#        anchor_x: left
-#        anchor_y: bottom
-#        x: 0
-#        y: 0
-
-            #- duration: 100s
-            #  slides:
-            #    slide_1:
-            #      widgets:
-            #      - type: text
-            #        text: 5 ON A
-            #        style: small
-            #        round_anchor_x: left
-            #        anchor_y: 0
-            #        y: 26
-            #      - type: text
-            #        text: 10 LIGHTS EXTRA BALL
-            #        style: small
-            #        round_anchor_x: left
-            #        anchor_y: 0
-            #        y: 1
-            #      - type: image
-            #        image: meathook_hang_still
-            #        anchor_x: left
-            #        anchor_y: bottom
-            #        x: 0
-            #        y: 0
-
-
-#- duration: 100s
-#   slides:
-#     slide_1:
-#       widgets:
-#       - type: text
-#         text: SHOOT THE
-#         style: medium
-#         anchor_y: 0
-#         round_anchor_x: left
-#         y: 20
-#         animations:
-#           show_slide: sawyer_flash
-#       - type: text
-#         text: SUPER JACKPOT
-#         style: big
-#         anchor_y: 0
-#         y: 8
-#         animations:
-#           show_slide: sawyer_flash
-#       - type: rectangle
-#         color: black
-#         anchor_x: 0
-#         anchor_y: 0
-#         x: 3
-#         y: 6
-#         width: 122
-#         height: 23
-#       - type: rectangle
-#         color: white
-#         anchor_x: 0
-#         anchor_y: 0
-#         x: 2
-#         y: 5
-#         width: 124
-#         height: 25
-#       - type: triangle
-#         color: white
-#         points: 56, 4, 72, 4, 64, 0
-#         animations:
-#           show_slide: sawyer_flash
-#       - type: rectangle
-#         color: black
-#         anchor_x: 0
-#         anchor_y: 0
-#         x: 0
-#         y: 0
-#         width: 128
-#         height: 32
-
-#       - type: image
-#         image: shoot_the_gas_station_v7
-#         anchor_x: 0
-#         anchor_y: 0
-#         x: 0
-#         y: 0
+          image: mystery_tilt_v1
+- duration: 10s
+  slides:
+    slide_1:
+      widgets:
+        - type: image
+          image: mystery_chainsaw_v1
+- duration: 10s
+  slides:
+    slide_1:
+      widgets:
+        - type: text
+          text: Small Points
+          style: small
+          round_anchor_x: left
+          round_anchor_y: bottom
+        - type: image
+          image: slaughterhouse_drips_v1
+- duration: 10s
+  slides:
+    slide_1:
+      widgets:
+        - type: text
+          text: Small Points
+          style: small
+          round_anchor_x: left
+          round_anchor_y: bottom
+        - type: image
+          image: slaughterhouse_drips_v2
+- duration: 10s
+  slides:
+    slide_1:
+      widgets:
+        - type: text
+          text: Small Points
+          style: small
+          round_anchor_x: left
+          round_anchor_y: bottom
+        - type: image
+          image: slaughterhouse_drips_v3
 
 # ------------ attract mode start --------------
 

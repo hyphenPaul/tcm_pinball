@@ -26,8 +26,9 @@ event_player:
 
   slide_sawemall_intro_slide_removed:
     cmd_sawemall_after_intro_complete:
+    cmd_play_sawemall_music:
 
-  cmd_sawemall_set_up_targets_phase: 
+  cmd_sawemall_set_up_targets_phase:
     cmd_disable_bh_mode_van:
     cmd_sawemall_set_state_targets:
     cmd_show_chainsaw_idle_slide:
@@ -53,10 +54,11 @@ event_player:
   cmd_show_chainsaw_idle_slide{current_player.v_sawemall_state=="targets" and current_player.v_sawemall_round==4}:
     cmd_sawemall_start_chainsaw_idle_slide_4:
 
-  cmd_sawemall_set_up_van_phase: 
+  cmd_sawemall_set_up_van_phase:
     cmd_sawemall_set_state_van:
     cmd_enable_bh_mode_van:
     cmd_sawemall_refresh_lights:
+    cmd_sawemall_play_running_chainsaw:
     cmd_sawemall_start_chainsaw_running_slide:
     cmd_stop_rotation_timer:
 
@@ -66,43 +68,47 @@ event_player:
   cmd_sawemall_after_intro_complete:
     cmd_start_sawemall_timer:
     cmd_sawemall_set_round_1:
-    cmd_sawemall_set_up_targets_phase: 
+    cmd_sawemall_set_up_targets_phase:
 
   cmd_sawemall_target_hit:
-    cmd_sawemall_set_up_van_phase: 
+    cmd_sawemall_set_up_van_phase:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==1}:
     cmd_pause_sawemall_timer:
+    cmd_sawemall_stop_running_chainsaw:
     cmd_sawemall_start_person_chop_1:
     cmd_sawemall_play_person_chop_1_audio:
 
   slide_sawemall_person_chop_slide_1_removed:
     cmd_start_sawemall_timer:
     cmd_sawemall_set_round_2:
-    cmd_sawemall_set_up_targets_phase: 
+    cmd_sawemall_set_up_targets_phase:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==2}:
     cmd_pause_sawemall_timer:
+    cmd_sawemall_stop_running_chainsaw:
     cmd_sawemall_start_person_chop_2:
     cmd_sawemall_play_person_chop_2_audio:
 
   slide_sawemall_person_chop_slide_2_removed:
     cmd_start_sawemall_timer:
     cmd_sawemall_set_round_3:
-    cmd_sawemall_set_up_targets_phase: 
+    cmd_sawemall_set_up_targets_phase:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==3}:
     cmd_pause_sawemall_timer:
+    cmd_sawemall_stop_running_chainsaw:
     cmd_sawemall_start_person_chop_3:
     cmd_sawemall_play_person_chop_3_audio:
 
   slide_sawemall_person_chop_slide_3_removed:
     cmd_start_sawemall_timer:
     cmd_sawemall_set_round_4:
-    cmd_sawemall_set_up_targets_phase: 
+    cmd_sawemall_set_up_targets_phase:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==4}:
     cmd_pause_sawemall_timer:
+    cmd_sawemall_stop_running_chainsaw:
     cmd_sawemall_start_person_chop_4:
     cmd_sawemall_play_person_chop_4_audio:
 
@@ -142,7 +148,7 @@ event_player:
   ################################
   # TARGETS
   ################################
-  
+
   s_chain_target_c_active{current_player.v_sawemall_state=="targets" and current_player.v_sawemall_round==1}:
     cmd_sawemall_target_hit:
   s_chain_target_h_active{current_player.v_sawemall_state=="targets" and current_player.v_sawemall_round==1}:
@@ -203,7 +209,7 @@ event_player:
 
 timers:
   sawemall_timer:
-    start_value: 80
+    start_value: 70
     end_value: 0
     tick_interval: 1s
     direction: down
@@ -480,30 +486,18 @@ slides:
 
   sawemall_person_chop_slide_2:
     widgets:
-      - type: text
-        text: person chop 2
-        anchor_x: left
-        anchor_y: bottom
-        x: 0
-        y: 0
+      - type: image
+        image: douchebag_v1
 
   sawemall_person_chop_slide_3:
     widgets:
-      - type: text
-        text: person chop 3
-        anchor_x: left
-        anchor_y: bottom
-        x: 0
-        y: 0
+      - type: image
+        image: dumbass_v1
 
   sawemall_person_chop_slide_4:
     widgets:
-      - type: text
-        text: person chop 4
-        anchor_x: left
-        anchor_y: bottom
-        x: 0
-        y: 0
+      - type: image
+        image: boss_v2
 
 slide_player:
   cmd_sawemall_start_intro_slide:
@@ -539,17 +533,17 @@ slide_player:
   cmd_sawemall_start_person_chop_2:
     sawemall_person_chop_slide_2:
       priority: 500
-      expire: 5s
+      expire: 7s
 
   cmd_sawemall_start_person_chop_3:
     sawemall_person_chop_slide_3:
       priority: 500
-      expire: 5s
+      expire: 8.7s
 
   cmd_sawemall_start_person_chop_4:
     sawemall_person_chop_slide_4:
       priority: 500
-      expire: 5s
+      expire: 8.7s
 
 ##################################################
 # Sound
@@ -561,6 +555,44 @@ sound_player:
       action: play
       loops: 0
 
+  cmd_play_sawemall_music:
+    saw_em_all_music_v1:
+      action: play
+      loops: -1
+
+  cmd_stop_sawemall_music:
+    saw_em_all_music_v1:
+      action: stop
+
+  cmd_sawemall_play_person_chop_1_audio:
+    saw_em_all_karen_audio_v1:
+      action: play
+      loops: 0
+
+  cmd_sawemall_play_person_chop_2_audio:
+    saw_em_all_douchebag_audio_v1:
+      action: play
+      loops: 0
+
+  cmd_sawemall_play_person_chop_3_audio:
+    saw_em_all_dumbass_audio_v1:
+      action: play
+      loops: 0
+
+  cmd_sawemall_play_person_chop_4_audio:
+    saw_em_all_boss_audio_v2:
+      action: play
+      loops: 0
+
+  cmd_sawemall_play_running_chainsaw:
+    saw_em_all_chainsaw_running_audio_v1:
+      action: play
+      loops: -1 
+      volume: 0.2
+
+  cmd_sawemall_stop_running_chainsaw:
+    saw_em_all_chainsaw_running_audio_v1:
+      action: stop
 
 ##################################################
 # Shows

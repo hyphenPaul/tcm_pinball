@@ -73,6 +73,10 @@ event_player:
   slide_sally_complete_slide_removed:
     cmd_stop_sally_mode:
 
+  cmd_stop_sally_bg_music:
+    cmd_stop_sally_bg_music_phase_1:
+    cmd_stop_sally_bg_music_phase_2:
+
   #### Lights ####
 
   cmd_sally_refresh_lights:
@@ -544,11 +548,15 @@ sound_player:
   cmd_stop_sally_bg_music_phase_1:
     sally_bg_music_phase_1:
       action: stop
-    
+
   cmd_play_sally_bg_music_phase_2:
     sally_bg_music_phase_2:
       action: play
       volume: 0.3
+
+  cmd_stop_sally_bg_music_phase_2:
+    sally_bg_music_phase_2:
+      action: stop
 
   cmd_play_sally_escape_1:
     sally_hand_cu_score_v1:
