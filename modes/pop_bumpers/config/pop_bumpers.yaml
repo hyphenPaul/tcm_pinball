@@ -33,8 +33,45 @@ event_player:
       wait_for: cmd_mystery_show_complete
       mode: pop_bumpers
       coil_direction: left
-  cmd_mystery_choice:
+  cmd_mystery_choice{choice=="small_points"}:
     - cmd_play_mystery_show
+    - cmd_play_mystery_show_small_points
+  cmd_mystery_choice{choice=="add_bonus_multiplier"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_show_add_bonus_multiplier
+  cmd_mystery_choice{choice=="award_chain_saw_letter"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_award_chain_saw_letter
+  cmd_mystery_choice{choice=="light_lock"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_light_lock
+  cmd_mystery_choice{choice=="award_franklin_letter"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_award_franklin_letter
+  cmd_mystery_choice{choice=="save_from_the_grave"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_save_from_the_grave
+  cmd_mystery_choice{choice=="30_second_ball_save"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_30_second_ball_save
+  cmd_mystery_choice{choice=="big_points"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_big_points
+  cmd_mystery_choice{choice=="jack_shit"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_jack_shit
+  cmd_mystery_choice{choice=="award_tilt_warning"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_award_tilt_warning
+  cmd_mystery_choice{choice=="light_extra_ball"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_light_extra_ball
+  cmd_mystery_choice{choice=="franklin_frenzy"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_franklin_frenzy
+  cmd_mystery_choice{choice=="3_x_playfield"}:
+    - cmd_play_mystery_show
+    - cmd_play_mystery_3_x_playfield
   cmd_play_mystery_show:
     - cmd_main_music_volume_down
   cmd_mystery_show_complete:
@@ -262,13 +299,80 @@ show_player:
   cmd_hide_family_bumpers:
     family_show:
       action: stop
-  cmd_play_mystery_show:
-    mystery_show:
+
+
+  cmd_play_mystery_show_small_points:
+    mystery_show_small_points:
       action: play
       events_when_completed: cmd_mystery_show_complete
-      show_tokens:
-        mystery_award: (current_player.v_current_mystery_value)
       loops: 0
+
+  cmd_play_mystery_show_add_bonus_multiplier:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_award_chain_saw_letter:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_light_lock:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_award_franklin_letter:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_save_from_the_grave:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_big_points:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_jack_shit:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_award_tilt_warning:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_light_extra_ball:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_franklin_frenzy:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
+  cmd_play_mystery_3_x_playfield:
+    mystery_show_add_bonus_multiplier:
+      action: play
+      events_when_completed: cmd_mystery_show_complete
+      loops: 0
+
 
 sound_player:
   cmd_mystery_meater_completed: shoot_the_slaugherhouse

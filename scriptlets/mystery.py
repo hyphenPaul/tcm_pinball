@@ -27,18 +27,19 @@ class Mystery(CustomCode):
     def fetch_choices(self):
         choices = []
         frequenies = {
-            "Small Points": 20,
-            "Add Bonus Multiplier": 20,
-            "Award Chain Saw letter": 20, # function to determine qualifier
-            "Light Lock": 20, # function to determine qualifier
-            "Award 1 Franklin Letter": 20, # function to determine qualifier
-            "Save From The Grave": 10,
-            "30 second Ball Save": 10,
-            "Big Points": 10,
-            "Jack Shit": 10,
-            "Award Tilt Warning": 5,
-            "Light Extra Ball": 5,
-            "Franklin Frenzy": 1
+            "small_points": 20, # done score.yaml
+            "add_bonus_multiplier": 20,
+            "award_chain_saw_letter": 20, # function to determine qualifier
+            "light_lock": 20, # function to determine qualifier
+            "award_franklin_letter": 20, # function to determine qualifier
+            "3_x_playfield": 10,
+            "save_from_the_grave": 10,
+            "30_second_ball_save": 10,
+            "big_points": 10, # done score.yaml
+            "jack_shit": 10,
+            "award_tilt_warning": 5,
+            "light_extra_ball": 5,
+            "franklin_frenzy": 1
         }
 
         for choice, number in frequenies.items():

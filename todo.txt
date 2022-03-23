@@ -1,3 +1,4 @@
+- mode sounds persists when draining
 
 - next up (general)
   - When i swap the ball save for the extended ball save, the light isn't turning off (i think it's because of the grace period maybe)

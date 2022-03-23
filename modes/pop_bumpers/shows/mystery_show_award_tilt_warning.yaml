@@ -1,6 +1,6 @@
 #show_version=5
 
-- duration: 5s
+- duration: 3.2s
   slides:
     slide_1:
       widgets:
@@ -18,10 +18,9 @@
             - property: opacity
               value: 0
               duration: 0.3s
+- duration: 3s
+  slides:
+    slide_2:
+      widgets:
       - type: image
         image: mystery_tilt_v1
-#      - type: text
-#        text: (mystery_award)
-#        style: small
-#        round_anchor_x: left
-#        round_anchor_y: bottom

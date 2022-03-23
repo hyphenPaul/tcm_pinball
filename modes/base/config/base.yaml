@@ -231,7 +231,13 @@ variable_player:
   magnavuk_shot_left:
     score: 100000
   magnavuk_shot_right:
-    score: 2
+    score: 100000
+
+  # mystery awards
+  cmd_mystery_choice{choice=="small_points"}:
+    score: 10000
+  cmd_mystery_choice{choice=="big_points"}:
+    score: 2000000
 
   ########################################
   # Van Vuk

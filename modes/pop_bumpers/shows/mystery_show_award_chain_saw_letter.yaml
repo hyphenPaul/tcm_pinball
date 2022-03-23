@@ -1,0 +1,26 @@
+#show_version=5
+
+- duration: 3.2s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: mystery_meat_v6
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+        animations:
+          show_slide:
+            - property: opacity
+              value: 1
+              duration: 2.9s
+            - property: opacity
+              value: 0
+              duration: 0.3s
+- duration: 3s
+  slides:
+    slide_2:
+      widgets:
+      - type: image
+        image: mystery_chainsaw_v1
