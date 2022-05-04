@@ -16,6 +16,90 @@ variable_player:
     franklin_total_completions:
       action: set
       int: 0
+    v_franklin_millions_score:
+      action: set
+      int: 300000
+  cmd_franklin_increase_millions_count:
+    v_franklin_millions_score: 100000
+
+event_player:
+  ## millions (orbits) ##
+
+  left_orbit_hit:
+    cmd_franklin_millions:
+  right_orbit_hit:
+    cmd_franklin_millions:
+  cmd_franklin_millions:
+    cmd_play_millions_show:
+    cmd_score_franklin_millions:
+    cmd_franklin_increase_millions_count:
+
+  ## switches ##
+
+  mode_franklin_frenzy_started:
+    - cmd_score_franklin_frenzy_switch
+  left_slingshot_hit:
+    - cmd_score_franklin_frenzy_switch
+  right_slingshot_hit:
+    - cmd_score_franklin_frenzy_switch
+  s_chain_target_c_active:
+    - cmd_score_franklin_frenzy_switch
+  s_chain_target_h_active:
+    - cmd_score_franklin_frenzy_switch
+  s_chain_target_a_active:
+    - cmd_score_franklin_frenzy_switch
+  s_chain_target_i_active:
+    - cmd_score_franklin_frenzy_switch
+  s_chain_target_n_active:
+    - cmd_score_franklin_frenzy_switch
+  s_3_bank_drop_bottom_active:
+    - cmd_score_franklin_frenzy_switch
+  s_3_bank_drop_mid_active:
+    - cmd_score_franklin_frenzy_switch
+  s_3_bank_drop_top_active:
+    - cmd_score_franklin_frenzy_switch
+  s_right_ramp_enter_active:
+    - cmd_score_franklin_frenzy_switch
+  s_right_ramp_exit_active:
+    - cmd_score_franklin_frenzy_switch
+  s_captive_ball_target_active:
+    - cmd_score_franklin_frenzy_switch
+  s_top_basket_enter_active:
+    - cmd_score_franklin_frenzy_switch
+  s_top_basket_made_active:
+    - cmd_score_franklin_frenzy_switch
+  s_right_ramp_s_u_left_active:
+    - cmd_score_franklin_frenzy_switch
+  s_right_ramp_s_u_right_active:
+    - cmd_score_franklin_frenzy_switch
+  s_saw_target_s_active:
+    - cmd_score_franklin_frenzy_switch
+  s_saw_target_a_active:
+    - cmd_score_franklin_frenzy_switch
+  s_saw_target_w_active:
+    - cmd_score_franklin_frenzy_switch
+  s_super_duper_jackpot_active:
+    - cmd_score_franklin_frenzy_switch
+  s_slaughter_house_target_active:
+    - cmd_score_franklin_frenzy_switch
+  s_jump_ball_vuk_active:
+    - cmd_score_franklin_frenzy_switch
+  s_van_vuk_active:
+    - cmd_score_franklin_frenzy_switch
+  s_top_turbo_bumper_active:
+    - cmd_score_franklin_frenzy_switch
+  s_left_turbo_bumper_active:
+    - cmd_score_franklin_frenzy_switch
+  s_right_turbo_bumper_active:
+    - cmd_score_franklin_frenzy_switch
+  s_left_outlane_active:
+    - cmd_score_franklin_frenzy_switch
+  s_left_return_lane_active:
+    - cmd_score_franklin_frenzy_switch
+  s_right_outlane_active:
+    - cmd_score_franklin_frenzy_switch
+  s_right_return_lane_active:
+    - cmd_score_franklin_frenzy_switch
 
 ##################################################
 # Logicblocks
@@ -175,11 +259,7 @@ slide_player:
     franklin_frenzy_slide:
       priority: 300
       expire: 4s
-  left_orbit_hit:
-    franklin_bonus_slide:
-      priority: 300
-      expire: 3s
-  right_orbit_hit:
+  cmd_play_millions_show:
     franklin_bonus_slide:
       priority: 300
       expire: 3s

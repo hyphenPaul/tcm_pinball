@@ -220,6 +220,13 @@ player_vars:
     initial_value: 0
 
   #####################################
+  # Franklin Frenzy
+  #####################################
+
+  v_franklin_millions_score:
+    initial_value: 300000
+
+  #####################################
   # Chainsaw Multiball
   #####################################
 
@@ -256,6 +263,8 @@ player_vars:
   v_chainsaw_jackpot_right_orbit_collected:
     initial_value: 0
   v_chainsaw_super_jackpot_lit:
+    initial_value: 0
+  v_chainsaw_jackpot_count:
     initial_value: 0
   v_cs_multiball_completion_counter_count:
     initial_value: 0

@@ -9,6 +9,12 @@ mode:
   priority: 500
 
 event_player:
+  top_turbo_bumper_hit.1:
+    - cmd_score_pop_bumper
+  left_turbo_bumper_hit.1:
+    - cmd_score_pop_bumper
+  right_turbo_bumper_hit.1:
+    - cmd_score_pop_bumper
   top_turbo_bumper_hit{current_player.v_mystery_meater_complete==0}:
     - cmd_show_old_man
     - cmd_show_pop_bumper_slide

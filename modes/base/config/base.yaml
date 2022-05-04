@@ -218,22 +218,107 @@ ball_holds:
     release_all_events: cmd_release_all_bh_mode_van
 
 variable_player:
-  top_turbo_bumper_hit:
-    score: 2510
-  left_turbo_bumper_hit:
-    score: 2510
-  right_turbo_bumper_hit:
-    score: 2510
+
+  ########################################
+  # Score
+  ########################################
+
+  ## pop bumpers ##
+
+  cmd_score_pop_bumper:
+    score: 5330
+  cmd_score_complete_mystery_meat:
+    score: 250000
+
   left_slingshot_hit:
-    score: 1100
+    score: 2550
   right_slingshot_hit:
-    score: 1100
+    score: 2550
   magnavuk_shot_left:
     score: 100000
   magnavuk_shot_right:
     score: 100000
 
+  ## chainsaw ##
+
+  cmd_score_chainsaw_letter:
+    score: 5000
+  cmd_score_chainsaw_rev:
+    score: 5330
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==1 and current_player.v_cs_multiball_completion_counter_count==0}:
+    score: 200000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==2 and current_player.v_cs_multiball_completion_counter_count==0}:
+    score: 250000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==3 and current_player.v_cs_multiball_completion_counter_count==0}:
+    score: 300000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==4 and current_player.v_cs_multiball_completion_counter_count==0}:
+    score: 350000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==5 and current_player.v_cs_multiball_completion_counter_count==0}:
+    score: 400000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==6 and current_player.v_cs_multiball_completion_counter_count==0}:
+    score: 750000
+  cmd_score_chainsaw_super_jackpot{current_player.v_cs_multiball_completion_counter_count==0}:
+    score: 1000000
+
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==1 and current_player.v_cs_multiball_completion_counter_count==1}:
+    score: 300000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==2 and current_player.v_cs_multiball_completion_counter_count==1}:
+    score: 350000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==3 and current_player.v_cs_multiball_completion_counter_count==1}:
+    score: 400000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==4 and current_player.v_cs_multiball_completion_counter_count==1}:
+    score: 450000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==5 and current_player.v_cs_multiball_completion_counter_count==1}:
+    score: 500000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==6 and current_player.v_cs_multiball_completion_counter_count==1}:
+    score: 1000000
+  cmd_score_chainsaw_super_jackpot{current_player.v_cs_multiball_completion_counter_count==1}:
+    score: 2000000
+
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==1 and current_player.v_cs_multiball_completion_counter_count>1}:
+    score: 500000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==2 and current_player.v_cs_multiball_completion_counter_count>1}:
+    score: 500000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==3 and current_player.v_cs_multiball_completion_counter_count>1}:
+    score: 500000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==4 and current_player.v_cs_multiball_completion_counter_count>1}:
+    score: 500000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==5 and current_player.v_cs_multiball_completion_counter_count>1}:
+    score: 500000
+  cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==6 and current_player.v_cs_multiball_completion_counter_count>1}:
+    score: 500000
+  cmd_score_chainsaw_super_jackpot{current_player.v_cs_multiball_completion_counter_count>1}:
+    score: 3000000
+
+  ## franklin ##
+
+  logicblock_left_franklin_counter_hit{count==1}:
+    score: 10000
+  logicblock_left_franklin_counter_hit{count==2}:
+    score: 20000
+  logicblock_left_franklin_counter_hit{count==3}:
+    score: 30000
+  logicblock_left_franklin_counter_hit{count==4}:
+    score: 40000
+  logicblock_right_franklin_counter_hit{count==1}:
+    score: 10000
+  logicblock_right_franklin_counter_hit{count==2}:
+    score: 20000
+  logicblock_right_franklin_counter_hit{count==3}:
+    score: 30000
+  logicblock_right_franklin_counter_hit{count==4}:
+    score: 40000
+  franklin_letters_collected:
+    score: 200000
+
+  ## franklin frenzy ##
+  cmd_score_franklin_frenzy_switch:
+    score: 5000
+  cmd_score_franklin_millions:
+    score: current_player.v_franklin_millions_score
+
   # mystery awards
+
   cmd_mystery_choice{choice=="small_points"}:
     score: 10000
   cmd_mystery_choice{choice=="big_points"}:

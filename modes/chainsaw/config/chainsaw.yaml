@@ -68,6 +68,7 @@ event_player:
   timer_space_jam_takeover_start_timer_complete:
     cmd_start_chainsaw_multiball:
   cmd_start_chainsaw_multiball:
+    cmd_reset_jackpot_variable:
     cmd_disable_sawyer_ball_hold:
     cmd_release_sawyer_ball:
     cmd_stop_sawyer_light_flashing:
@@ -101,31 +102,43 @@ event_player:
     cmd_start_shoot_the_van:
 
   s_slaughter_house_target_active{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_slaughter_house_collected==0}:
+    cmd_add_jackpot_variable:
+    cmd_chainsaw_score_jackpot:
     cmd_jackpot:
     cmd_jackpot_accrual_slaughter_house:
     cmd_jackpot_variable_slaughter_house:
     cmd_turn_off_light_slaughter_house:
   s_captive_ball_target_active{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_captive_ball_collected==0}:
+    cmd_add_jackpot_variable:
+    cmd_chainsaw_score_jackpot:
     cmd_jackpot:
     cmd_jackpot_accrual_captive_ball:
     cmd_jackpot_variable_captive_ball:
     cmd_turn_off_light_captive_ball:
   left_orbit_hit{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_left_orbit_collected==0}:
+    cmd_add_jackpot_variable:
+    cmd_chainsaw_score_jackpot:
     cmd_jackpot:
     cmd_jackpot_accrual_left_orbit:
     cmd_jackpot_variable_left_orbit:
     cmd_turn_off_light_left_orbit:
   left_ramp_hit{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_left_ramp_collected==0}:
+    cmd_add_jackpot_variable:
+    cmd_chainsaw_score_jackpot:
     cmd_jackpot:
     cmd_jackpot_accrual_left_ramp:
     cmd_jackpot_variable_left_ramp:
     cmd_turn_off_light_left_ramp:
   right_ramp_hit{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_right_ramp_collected==0}:
+    cmd_add_jackpot_variable:
+    cmd_chainsaw_score_jackpot:
     cmd_jackpot:
     cmd_jackpot_accrual_right_ramp:
     cmd_jackpot_variable_right_ramp:
     cmd_turn_off_light_right_ramp:
   right_orbit_hit{current_player.v_chainsaw_multiball_active==1 and current_player.v_chainsaw_jackpot_right_orbit_collected==0}:
+    cmd_add_jackpot_variable:
+    cmd_chainsaw_score_jackpot:
     cmd_jackpot:
     cmd_jackpot_accrual_right_orbit:
     cmd_jackpot_variable_right_orbit:
@@ -136,9 +149,11 @@ event_player:
     cmd_turn_on_jackpot_lights:
     cmd_reset_jackpot_variables:
   s_super_duper_jackpot_active{current_player.v_chainsaw_super_jackpot_lit==1 and current_player.v_space_jam_takeover_ready==0}:
+    cmd_score_chainsaw_super_jackpot:
     cmd_play_super_jackpot_sound:
     cmd_start_super_jackpot_slide:
   s_super_duper_jackpot_active{current_player.v_chainsaw_super_jackpot_lit==1 and current_player.v_space_jam_takeover_ready==1}:
+    cmd_score_chainsaw_super_jackpot:
     cmd_play_take_over_super_jackpot_sound:
     cmd_start_take_over_super_jackpot_slide:
   cmd_jackpot{current_player.v_space_jam_takeover_ready==0}:
@@ -152,15 +167,18 @@ event_player:
 
   # animation shots
   chain_c_shot_hit{advancing==True}:
+    cmd_score_chainsaw_letter:
     cmd_play_rumble_sound:
     cmd_display_chainsaw_progression:
     cmd_play_chain_c_activated:
     cmd_set_chain_c_variable:
   chain_c_shot_hit{current_player.v_chainsaw_multiball_active>0  and current_player.v_space_jam_takeover_ready==0}:
+    cmd_score_chainsaw_rev:
     cmd_play_chainsaw_rev:
   chain_c_shot_hit{current_player.v_cs_multiball_completion_counter_count>0}:
     cmd_enable_h_shot:
   chain_h_shot_hit{advancing==True}:
+    cmd_score_chainsaw_letter:
     cmd_play_rumble_sound:
     cmd_display_chainsaw_progression:
     cmd_play_chain_h_activated:
@@ -170,54 +188,66 @@ event_player:
   chain_h_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     cmd_enable_a_shot:
   chain_a_shot_hit{advancing==True}:
+    cmd_score_chainsaw_letter:
     cmd_play_rumble_sound:
     cmd_display_chainsaw_progression:
     cmd_play_chain_a_activated:
     cmd_set_chain_a_variable:
   chain_a_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    cmd_score_chainsaw_rev:
     cmd_play_chainsaw_rev:
   chain_a_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     cmd_enable_i_shot:
   chain_i_shot_hit{advancing==True}:
+    cmd_score_chainsaw_letter:
     cmd_play_rumble_sound:
     cmd_display_chainsaw_progression:
     cmd_play_chain_i_activated:
     cmd_set_chain_i_variable:
   chain_i_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    cmd_score_chainsaw_rev:
     cmd_play_chainsaw_rev_2:
   chain_i_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     cmd_enable_n_shot:
   chain_n_shot_hit{advancing==True}:
+    cmd_score_chainsaw_letter:
     cmd_play_rumble_sound:
     cmd_display_chainsaw_progression:
     cmd_play_chain_n_activated:
     cmd_set_chain_n_variable:
   chain_n_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    cmd_score_chainsaw_rev:
     cmd_play_chainsaw_rev:
   saw_s_shot_hit{advancing==True}:
+    cmd_score_chainsaw_letter:
     cmd_play_rumble_sound:
     cmd_display_chainsaw_progression:
     cmd_play_saw_s_activated:
     cmd_set_saw_s_variable:
   saw_s_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    cmd_score_chainsaw_rev:
     cmd_play_chainsaw_rev_2:
   saw_s_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     cmd_enable_a2_shot:
   saw_a_shot_hit{advancing==True}:
+    cmd_score_chainsaw_letter:
     cmd_play_rumble_sound:
     cmd_display_chainsaw_progression:
     cmd_play_saw_a_activated:
     cmd_set_saw_a_variable:
   saw_a_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    cmd_score_chainsaw_rev:
     cmd_play_chainsaw_rev:
   saw_a_shot_hit{advancing==True and current_player.v_cs_multiball_completion_counter_count>0}:
     cmd_enable_w_shot:
   saw_w_shot_hit{advancing==True}:
+    cmd_score_chainsaw_letter:
     cmd_play_rumble_sound:
     cmd_display_chainsaw_progression:
     cmd_play_saw_w_activated:
     cmd_set_saw_w_variable:
   saw_w_shot_hit{current_player.v_chainsaw_multiball_active>0 and current_player.v_space_jam_takeover_ready==0}:
+    cmd_score_chainsaw_rev:
     cmd_play_chainsaw_rev_2:
 
   left_orbit{advancing==True}:
@@ -375,6 +405,14 @@ variable_player:
       action: set
       int: 0
 
+  cmd_add_jackpot_variable:
+    v_chainsaw_jackpot_count: 1
+
+  cmd_reset_jackpot_variable:
+    v_chainsaw_jackpot_count:
+      action: set
+      int: 0
+
 ##################################################
 # Logicblocks
 ##################################################
@@ -389,6 +427,7 @@ accruals:
       - cmd_jackpot_accrual_right_ramp
       - cmd_jackpot_accrual_right_orbit
     events_when_complete:
+      - cmd_reset_jackpot_variable
       - cmd_start_super_jackpot_timer
     reset_on_complete: True
     disable_on_complete: False

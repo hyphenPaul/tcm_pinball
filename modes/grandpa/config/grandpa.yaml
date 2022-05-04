@@ -216,10 +216,28 @@ slides:
         x: 0
         y: 0
 
-  grandpa_hit_sally_slide:
+  grandpa_hit_sally_slide_1:
     widgets:
       - type: image
-        image: grandpa_hit_v1
+        image: grandpa_hit_1_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  grandpa_hit_sally_slide_2:
+    widgets:
+      - type: image
+        image: grandpa_hit_2_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  grandpa_hit_sally_slide_3:
+    widgets:
+      - type: image
+        image: grandpa_hit_3_v1
         anchor_x: left
         anchor_y: bottom
         x: 0
@@ -241,10 +259,23 @@ slide_player:
       priority: 700
       expire: 3.4s
 
-  cmd_grandpa_start_hit_sally_slide:
-    grandpa_hit_sally_slide:
+  # Sean - need a new state for this
+  cmd_grandpa_start_hit_sally_slide{current_player.v_grandpa_state=="combo_1_shooting"}:
+    grandpa_hit_sally_slide_1:
       priority: 800
       expire: 3.6s
+
+  # Sean - need a new state for this
+  cmd_grandpa_start_hit_sally_slide{current_player.v_grandpa_state=="combo_2_shooting"}:
+    grandpa_hit_sally_slide_2:
+      priority: 800
+      expire: 4s
+
+  # Sean - need a new state for this
+  cmd_grandpa_start_hit_sally_slide{current_player.v_grandpa_state=="combo_3_shooting"}:
+    grandpa_hit_sally_slide_3:
+      priority: 800
+      expire: 4.8s
 
 sound_player:
   cmd_grandpa_start_intro_slide_sound:

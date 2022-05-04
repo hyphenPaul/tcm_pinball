@@ -40,25 +40,6 @@ variable_player:
   logicblock_right_franklin_counter_hit.25:
     v_franklin_right_hit_total: 1
 
-  # scoring
-
-  logicblock_left_franklin_counter_hit{count==1}:
-    score: 25000
-  logicblock_left_franklin_counter_hit{count==2}:
-    score: 35000
-  logicblock_left_franklin_counter_hit{count==3}:
-    score: 50000
-  logicblock_left_franklin_counter_hit{count==4}:
-    score: 100000
-  logicblock_right_franklin_counter_hit{count==1}:
-    score: 25000
-  logicblock_right_franklin_counter_hit{count==2}:
-    score: 35000
-  logicblock_right_franklin_counter_hit{count==3}:
-    score: 50000
-  logicblock_right_franklin_counter_hit{count==4}:
-    score: 100000
-
 ##################################################
 # Logicblocks
 ##################################################

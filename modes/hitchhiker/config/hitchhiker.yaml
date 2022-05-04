@@ -210,7 +210,7 @@ slides:
   hitchhiker_cut_slide:
     widgets:
       - type: text
-        text: 10000000
+        text: 500000
         number_grouping: true
         min_digits: 2
         font_name: pinball_score
@@ -235,7 +235,7 @@ slides:
   hitchhiker_photo_slide:
     widgets:
       - type: text
-        text: 20000000
+        text: 750000
         number_grouping: true
         min_digits: 2
         font_name: pinball_score
@@ -260,7 +260,7 @@ slides:
   hitchhiker_franklin_slide:
     widgets:
       - type: text
-        text: 30000000
+        text: 1000000
         number_grouping: true
         min_digits: 2
         font_name: pinball_score
