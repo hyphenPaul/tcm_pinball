@@ -206,16 +206,19 @@ event_player:
     cmd_reset_light_lock_complete_variables:
 
   light_lock_target_group_hit{current_player.v_light_lock_light_complete==1 and current_player.v_light_lock_lock_complete==0}:
+    cmd_score_lock_target_hit:
     cmd_disable_light_lock_light_target:
     cmd_add_light_lock_light_widget:
     cmd_show_light_lock_slide:
 
   light_lock_target_group_hit{current_player.v_light_lock_light_complete==0 and current_player.v_light_lock_lock_complete==1}:
+    cmd_score_lock_target_hit:
     cmd_disable_light_lock_lock_target:
     cmd_add_light_lock_lock_widget:
     cmd_show_light_lock_slide:
 
   light_lock_target_group_complete:
+    cmd_score_lock_target_hit:
     cmd_add_light_lock_light_widget:
     cmd_add_light_lock_lock_widget:
     cmd_show_light_lock_slide:
@@ -232,12 +235,15 @@ event_player:
       coil_direction: left
 
   cmd_on_ball_lock{current_player.v_escape_state=="lock_1_lit"}:
+    cmd_score_ball_1_lock:
     cmd_play_ball_1_lock:
 
   cmd_on_ball_lock{current_player.v_escape_state=="lock_2_lit"}:
+    cmd_score_ball_2_lock:
     cmd_play_ball_2_lock:
 
   cmd_on_ball_lock{current_player.v_escape_state=="lock_3_lit"}:
+    cmd_score_ball_3_lock:
     cmd_escape_progress_state:
     cmd_play_escape_multiball:
 

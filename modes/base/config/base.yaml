@@ -182,11 +182,24 @@ ball_saves:
     balls_to_save: -1
     grace_period: 5s
 
+slides:
+  tilt_slide:
+    - type: text
+      text: "TILTING!!!"
+      style: big
+      round_anchor_x: left
+      anchor_y: bottom
+      y: 21
+
 slide_player:
   cmd_start_shoot_the_van:
     chainsaw_shoot_the_van_slide:
       priority: 500
       expire: 4.6s
+  s_plumb_bob_tilt_active:
+    tilt_slide:
+      priority: 500
+      expire: 2.5s
 
 ##################################################
 # Shots
@@ -273,7 +286,7 @@ variable_player:
   cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==6 and current_player.v_cs_multiball_completion_counter_count==1}:
     score: 1000000
   cmd_score_chainsaw_super_jackpot{current_player.v_cs_multiball_completion_counter_count==1}:
-    score: 2000000
+    score: 1500000
 
   cmd_chainsaw_score_jackpot{current_player.v_chainsaw_jackpot_count==1 and current_player.v_cs_multiball_completion_counter_count>1}:
     score: 500000
@@ -312,17 +325,86 @@ variable_player:
     score: 200000
 
   ## franklin frenzy ##
+
   cmd_score_franklin_frenzy_switch:
     score: 5000
   cmd_score_franklin_millions:
     score: current_player.v_franklin_millions_score
 
-  # mystery awards
+  ## meathook ##
+
+  cmd_score_meathook{current_player.v_meathook_total<machine.meathook_total_for_reward_1}:
+    score: 15000
+  cmd_score_meathook{current_player.v_meathook_total>=machine.meathook_total_for_reward_1}:
+    score: 25000
+
+  ## Escape ##
+
+  cmd_score_lock_target_hit:
+    score: 10000
+  cmd_score_ball_1_lock:
+    score: 25000
+  cmd_score_ball_2_lock:
+    score: 50000
+  cmd_score_ball_3_lock:
+    score: 100000
+
+  ## Escape Multiball ##
+
+  cmd_escape_score_kids_safe:
+    score: 50000 * current_player.v_current_escape_multiplier
+  cmd_escape_score_jackpot:
+    score: current_player.v_captive_jackpot_score * current_player.v_current_escape_multiplier
+  cmd_escape_score_super_jackpot:
+    score: 750000 * current_player.v_current_escape_multiplier
+
+  ## mystery awards ##
 
   cmd_mystery_choice{choice=="small_points"}:
     score: 10000
   cmd_mystery_choice{choice=="big_points"}:
     score: 2000000
+
+  ## mask ##
+
+  cmd_mask_score_letter_hit:
+    score: current_player.v_mask_letter_score
+  cmd_mask_score_complete_hit:
+    score: current_player.v_mask_complete_score
+
+  ## general ##
+
+  s_slaughter_house_target_active:
+    score: 5330
+  s_left_outlane_active:
+    score: 5330
+  s_left_return_lane_active:
+    score: 5330
+  s_right_outlane_active:
+    score: 5330
+  s_right_return_lane_active:
+    score: 5330
+
+  ## graveyard multiplier ##
+
+  cmd_tt_score_1:
+    score: 10000
+  cmd_tt_score_2:
+    score: 20000
+  cmd_tt_score_3:
+    score: 30000
+  cmd_tt_score_4:
+    score: 50000
+
+
+  ## drop targets ##
+
+  drop_target_v_down:
+    score: 10000
+  drop_target_a_down:
+    score: 10000
+  drop_target_n_down:
+    score: 10000
 
   ########################################
   # Van Vuk

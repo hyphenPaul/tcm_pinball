@@ -13,6 +13,7 @@ event_player:
     - cmd_add_meathook_bonus
     - cmd_add_meathook_total
     - cmd_give_player_award
+    - cmd_score_meathook
     - cmd_update_meathook_message
     - cmd_show_meathook_hang
     - cmd_check_extra_ball

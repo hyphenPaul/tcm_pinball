@@ -47,10 +47,13 @@ switches:
     number: S16
   s_3_bank_drop_bottom:
     number: S17
+    ignore_window_ms: 500ms
   s_3_bank_drop_mid:
     number: S18
+    ignore_window_ms: 500ms
   s_3_bank_drop_top:
     number: S19
+    ignore_window_ms: 500ms
   s_right_ramp_enter:
     number: S22
   s_right_ramp_exit:

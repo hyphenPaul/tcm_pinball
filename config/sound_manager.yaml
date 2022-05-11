@@ -76,6 +76,7 @@ event_player:
     - cmd_stop_hitchhiker_music
     - cmd_stop_barbecue_music
     - cmd_stop_sawemall_music
+    - cmd_stop_mask_mania_music
 
 sound_player:
 
@@ -145,6 +146,26 @@ sound_player:
 
   cmd_stop_escape_multiball_music:
     escape_multiball_v2_1:
+      action: stop
+
+  cmd_stop_mask_mania_music:
+    dead_skin_mask:
+      action: stop
+    dead_skin_mask_100:
+      action: stop
+    dead_skin_mask_110:
+      action: stop
+    dead_skin_mask_115:
+      action: stop
+    dead_skin_mask_120:
+      action: stop
+    dead_skin_mask_125:
+      action: stop
+    dead_skin_mask_130:
+      action: stop
+    dead_skin_mask_140:
+      action: stop
+    dead_skin_mask_150:
       action: stop
 
   cmd_main_music_volume_down:

@@ -60,16 +60,19 @@ event_player:
   ##################################################
 
   counter_mask_counter_hit{count==1}:
+    - cmd_mask_score_letter_hit
     - cmd_set_mask_variable_off
     - cmd_mask_f_lights_on
     - cmd_play_mask_show_1
     - cmd_play_slice_sound
   counter_mask_counter_hit{count==2}:
+    - cmd_mask_score_letter_hit
     - cmd_set_mask_variable_off
     - cmd_mask_i_lights_on
     - cmd_play_mask_show_2
     - cmd_play_slice_sound
   counter_mask_counter_hit{count==3}:
+    - cmd_mask_score_letter_hit
     - cmd_set_mask_variable_off
     - cmd_mask_r_lights_on
     - cmd_play_mask_show_3
@@ -94,12 +97,18 @@ event_player:
   ##################################################
 
   counter_mask_making_hit{count==1}:
+    - cmd_mask_score_complete_hit
+    - cmd_mask_increase_score
     - cmd_play_mask_making_show_1
     - cmd_play_mask_making_show_1_audio
   counter_mask_making_hit{count==2}:
+    - cmd_mask_score_complete_hit
+    - cmd_mask_increase_score
     - cmd_play_mask_making_show_2
     - cmd_play_mask_making_show_2_audio
   counter_mask_making_hit{count==3}:
+    - cmd_mask_score_complete_hit
+    - cmd_mask_increase_score
     - cmd_play_mask_making_show_3
     - cmd_play_mask_making_show_3_audio
 
@@ -108,6 +117,8 @@ event_player:
   ##################################################
   
   logicblock_mask_making_complete:
+    - cmd_mask_score_complete_hit
+    - cmd_mask_reset_score
     - cmd_start_mask_mania
 
   cmd_start_mask_mania:
@@ -137,14 +148,45 @@ event_player:
     - cmd_show_mask_mania_value
 
 variable_player:
-  logicblock_mask_counter_hit{count==1}:
-    score: 25000
-  logicblock_mask_counter_hit{count==2}:
-    score: 35000
-  logicblock_mask_counter_hit{count==3}:
-    score: 50000
+  ##################################################
+  # Scoring
+  ##################################################
+
+  cmd_mask_increase_score.1{current_player.v_mask_letter_score==15000}:
+    v_mask_letter_score:
+      action: set
+      int: 20000 
+  cmd_mask_increase_score.2{current_player.v_mask_letter_score==20000}:
+    v_mask_letter_score:
+      action: set
+      int: 35000 
+  cmd_mask_increase_score.3{current_player.v_mask_letter_score==35000}:
+    v_mask_letter_score:
+      action: set
+      int: 50000 
+
+  cmd_mask_increase_score.4{current_player.v_mask_complete_score==60000}:
+    v_mask_complete_score:
+      action: set
+      int: 100000 
+  cmd_mask_increase_score.5{current_player.v_mask_complete_score==80000}:
+    v_mask_complete_score:
+      action: set
+      int: 150000 
+  cmd_mask_increase_score.6{current_player.v_mask_complete_score==140000}:
+    v_mask_complete_score:
+      action: set
+      int: 200000 
+
+  cmd_mask_reset_score:
+    v_mask_letter_score:
+      action: set
+      int: 15000 
+    v_mask_complete_score:
+      action: set
+      int: 60000 
+
   logicblock_mask_total_counter_hit:
-    score: 100000
     mask_completion_total: 1
   cmd_add_mask_mania_score:
     score: current_player.v_mask_mania_value
@@ -181,6 +223,7 @@ variable_player:
 
 timers:
   mask_mania:
+    #start_value: 10
     start_value: 45
     end_value: 0
     tick_interval: 1s

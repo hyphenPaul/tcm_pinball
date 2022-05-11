@@ -49,12 +49,16 @@ event_player:
 
   # counter variable control
   logicblock_tt_playfield_counter_updated{value==1}:
+    - cmd_tt_score_1
     - cmd_set_tt_playfield_counter_1
   logicblock_tt_playfield_counter_updated{value==2}:
+    - cmd_tt_score_2
     - cmd_set_tt_playfield_counter_2
   logicblock_tt_playfield_counter_updated{value==3}:
+    - cmd_tt_score_3
     - cmd_set_tt_playfield_counter_3
   logicblock_tt_playfield_counter_updated{value==4}:
+    - cmd_tt_score_4
     - cmd_set_tt_playfield_counter_4
 
   s_captive_ball_target_active{current_player.v_ttp_enabled==0}:
