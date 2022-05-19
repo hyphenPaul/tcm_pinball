@@ -77,14 +77,17 @@ event_player:
   #### Shots ####
 
   right_ramp_hit{current_player.v_grandpa_state=="combo_1_shooting"}:
+    cmd_grandpa_score_right_ramp:
     cmd_grandpa_set_state_combo_1_shot:
     cmd_grandpa_right_ramp_hit:
 
   right_ramp_hit{current_player.v_grandpa_state=="combo_2_shooting"}:
+    cmd_grandpa_score_right_ramp:
     cmd_grandpa_set_state_combo_2_shot:
     cmd_grandpa_right_ramp_hit:
 
   right_ramp_hit{current_player.v_grandpa_state=="combo_3_shooting"}:
+    cmd_grandpa_score_right_ramp:
     cmd_grandpa_set_state_combo_3_shot:
     cmd_grandpa_right_ramp_hit:
 
@@ -101,16 +104,19 @@ event_player:
     cmd_grandpa_combo_missed:
 
   left_ramp_hit{current_player.v_grandpa_state=="combo_1_shot"}:
+    cmd_grandpa_score_left_ramp_1:
     cmd_grandpa_combo_timer_stop:
     cmd_grandpa_set_state_combo_2_shooting: 
     cmd_grandpa_combo_completed:
 
   left_ramp_hit{current_player.v_grandpa_state=="combo_2_shot"}:
+    cmd_grandpa_score_left_ramp_2:
     cmd_grandpa_combo_timer_stop:
     cmd_grandpa_set_state_combo_3_shooting: 
     cmd_grandpa_combo_completed:
 
   left_ramp_hit{current_player.v_grandpa_state=="combo_3_shot"}:
+    cmd_grandpa_score_left_ramp_3:
     cmd_grandpa_combo_timer_stop:
     cmd_grandpa_set_state_winning: 
     cmd_grandpa_combo_completed:

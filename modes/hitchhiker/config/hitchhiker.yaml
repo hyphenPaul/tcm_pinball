@@ -42,6 +42,7 @@ event_player:
     cmd_hitchhiker_orbit_hit:
 
   cmd_hitchhiker_orbit_hit:
+    cmd_hitchhiker_score_orbits:
     cmd_hitchhiker_play_shot_sound:
     cmd_hitchhiker_set_state_van_1:
     cmd_hitchhiker_refresh_lights:
@@ -49,6 +50,7 @@ event_player:
     cmd_hitchhiker_start_shoot_van_slide:
 
   ball_hold_bh_mode_van_full{current_player.v_hitchhiker_state=="van_1"}:
+    cmd_hitchhiker_score_van_1:
     cmd_hitchhiker_mode_timer_stop:
     cmd_hitchhiker_start_cut_slide:
     cmd_stop_hitchhiker_music:
@@ -70,6 +72,7 @@ event_player:
     cmd_hitchhiker_ramp_hit:
 
   cmd_hitchhiker_ramp_hit:
+    cmd_hitchhiker_score_ramp:
     cmd_hitchhiker_play_shot_sound:
     cmd_hitchhiker_set_state_van_2:
     cmd_hitchhiker_refresh_lights:
@@ -77,6 +80,7 @@ event_player:
     cmd_hitchhiker_start_shoot_van_slide:
 
   ball_hold_bh_mode_van_full{current_player.v_hitchhiker_state=="van_2"}:
+    cmd_hitchhiker_score_van_2:
     cmd_hitchhiker_mode_timer_stop:
     cmd_hitchhiker_start_photo_slide:
     cmd_stop_hitchhiker_music:
@@ -115,6 +119,7 @@ event_player:
     cmd_hitchhiker_targets_hit:
 
   cmd_hitchhiker_targets_hit:
+    cmd_hitchhiker_score_target:
     cmd_hitchhiker_play_shot_sound:
     cmd_hitchhiker_set_state_van_3:
     cmd_hitchhiker_refresh_lights:
@@ -122,6 +127,8 @@ event_player:
     cmd_hitchhiker_start_shoot_van_slide:
 
   ball_hold_bh_mode_van_full{current_player.v_hitchhiker_state=="van_3"}:
+    # memorabilia
+    cmd_hitchhiker_score_van_3:
     cmd_hitchhiker_mode_timer_stop:
     cmd_hitchhiker_start_franklin_slide:
     cmd_stop_hitchhiker_music:

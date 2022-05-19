@@ -47,6 +47,7 @@ class SkillShot(CustomCode):
 
     def on_skill_shot_basket_active(self, **kwargs):
         if self.is_shooting():
+            self.machine.events.post('cmd_skill_shot_score_lock')
             self.machine.events.post('cmd_stop_projector_loop')
             self.machine.events.post('cmd_light_super_skill_shot')
             self.machine.events.post('cmd_play_film_reel_stop_sound')
@@ -87,6 +88,7 @@ class SkillShot(CustomCode):
         if self.attempting_super_skill_shot():
             self.state = self.SUPER_SKILL_SHOT_AWARDED
             self.success_timer.stop()
+            self.machine.events.post('cmd_skill_shot_score_success')
             self.machine.events.post('cmd_play_super_skill_shot_success', award=self.current_choice)
             self.machine.events.post('cmd_skill_shot_show_award_' + self.current_choice)
             self.machine.events.post('cmd_super_skill_shot_award_' + self.current_choice)

@@ -13,6 +13,7 @@ event_player:
   player_v_lit_extra_balls{value>0}:
     - cmd_turn_on_extra_ball_light
   s_captive_ball_target_active{current_player.v_lit_extra_balls>0}:
+    - cmd_score_extra_ball
     - cmd_set_extra_ball_animation_playing
     - cmd_award_extra_ball
     - cmd_play_extra_ball_award_show

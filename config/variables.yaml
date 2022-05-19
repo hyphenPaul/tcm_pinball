@@ -139,12 +139,6 @@ machine_vars:
   pop_bumper_mystery_complete_count:
     initial_value: 20
 
-  #####################################
-  # Franklin
-  #####################################
-
-  franklin_bonus_value:
-    initial_value: 100_000
 
   #####################################
   # Meathook
@@ -161,12 +155,18 @@ machine_vars:
   # Bonus
   #####################################
 
-  meathook_bonus_value:
-    initial_value: 100_000
-  combo_bonus_value:
+  franklin_bonus_value:
     initial_value: 100_000
   mode_bonus_value:
+    initial_value: 50000
+  mask_bonus_value:
+    initial_value: 100000
+  meathook_bonus_value:
+    initial_value: 25000
+  combo_bonus_value:
     initial_value: 100_000
+  memorabilia_bonus_value:
+    initial_value: 500000
 
   #####################################
   # Escape Multiball

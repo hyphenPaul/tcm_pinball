@@ -155,21 +155,36 @@ variable_player:
   cmd_grave_set_mutiplier_to_base:
     v_grave_multiplier:
       action: set
-      float: 0.5
+      float: 2
 
-  cmd_grave_increase_multiplier:
+  cmd_grave_increase_multiplier{current_player.v_grave_multiplier==1}:
     v_grave_multiplier:
       action: set
-      float: current_player.v_grave_multiplier + 0.5
+      float: 2
+
+  cmd_grave_increase_multiplier{current_player.v_grave_multiplier==2}:
+    v_grave_multiplier:
+      action: set
+      float: 3
+
+  cmd_grave_increase_multiplier{current_player.v_grave_multiplier==3}:
+    v_grave_multiplier:
+      action: set
+      float: 5
+
+  cmd_grave_increase_multiplier{current_player.v_grave_multiplier==5}:
+    v_grave_multiplier:
+      action: set
+      float: 10
 
   player_v_grave_multiplier:
     v_grave_jackpot:
       action: set
-      int: current_player.v_grave_multiplier * 1000000
+      int: current_player.v_grave_multiplier * 250000
 
     v_grave_super_jackpot:
       action: set
-      int: current_player.v_grave_multiplier * 1000000 * 2
+      int: current_player.v_grave_multiplier * 250000 * 2
 
   cmd_grave_single_jackpot_hit.100:
     score: current_player.v_grave_jackpot

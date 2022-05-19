@@ -67,6 +67,8 @@ event_player:
       coil_direction: left
 
   cmd_sally_final_shot:
+    # memorabilia
+    cmd_sally_score_escape:
     cmd_sally_add_complete_slide:
     cmd_sally_play_complete_audio:
 
@@ -104,16 +106,19 @@ event_player:
   #### Switch Hits ###
 
   top_turbo_bumper_hit{current_player.v_sally_state=="pop_bumpers"}:
+    - cmd_sally_score_pop_bumper
     - sally_pop_bumper_hit
     - cmd_sally_clear_pop_bumper_sound
     - cmd_sally_pop_bumper_sound_1
 
   left_turbo_bumper_hit{current_player.v_sally_state=="pop_bumpers"}:
+    - cmd_sally_score_pop_bumper
     - sally_pop_bumper_hit
     - cmd_sally_clear_pop_bumper_sound
     - cmd_sally_pop_bumper_sound_2
 
   right_turbo_bumper_hit{current_player.v_sally_state=="pop_bumpers"}:
+    - cmd_sally_score_pop_bumper
     - sally_pop_bumper_hit
     - cmd_sally_clear_pop_bumper_sound
     - cmd_sally_pop_bumper_sound_3
@@ -125,24 +130,28 @@ event_player:
     - cmd_sally_reset_pop_bumper_timer 
 
   left_orbit_hit{current_player.v_sally_state=="shots" and current_player.v_sally_left_orbit_hit!=1}:
+    - cmd_sally_score_wiggle
     - sally_shot_hit
     - cmd_set_sally_left_orbit_hit
     - cmd_sally_refresh_lights
     - cmd_sally_left_orbit_hit
 
   left_ramp_hit{current_player.v_sally_state=="shots" and current_player.v_sally_left_ramp_hit!=1}:
+    - cmd_sally_score_wiggle
     - sally_shot_hit
     - cmd_set_sally_left_ramp_hit
     - cmd_sally_refresh_lights
     - cmd_sally_left_ramp_hit
 
   right_ramp_hit{current_player.v_sally_state=="shots" and current_player.v_sally_right_ramp_hit!=1}:
+    - cmd_sally_score_hand_free
     - sally_shot_hit
     - cmd_set_sally_right_ramp_hit
     - cmd_sally_refresh_lights
     - cmd_sally_right_ramp_hit
 
   right_orbit_hit{current_player.v_sally_state=="shots" and current_player.v_sally_right_orbit_hit!=1}:
+    - cmd_sally_score_hand_free
     - sally_shot_hit
     - cmd_set_sally_right_orbit_hit
     - cmd_sally_refresh_lights

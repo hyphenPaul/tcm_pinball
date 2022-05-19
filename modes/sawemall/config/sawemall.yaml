@@ -55,6 +55,7 @@ event_player:
     cmd_sawemall_start_chainsaw_idle_slide_4:
 
   cmd_sawemall_set_up_van_phase:
+    cmd_sawemall_score_targets:
     cmd_sawemall_set_state_van:
     cmd_enable_bh_mode_van:
     cmd_sawemall_refresh_lights:
@@ -74,6 +75,7 @@ event_player:
     cmd_sawemall_set_up_van_phase:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==1}:
+    cmd_sawemall_score_van_1:
     cmd_pause_sawemall_timer:
     cmd_sawemall_stop_running_chainsaw:
     cmd_sawemall_start_person_chop_1:
@@ -85,6 +87,7 @@ event_player:
     cmd_sawemall_set_up_targets_phase:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==2}:
+    cmd_sawemall_score_van_2:
     cmd_pause_sawemall_timer:
     cmd_sawemall_stop_running_chainsaw:
     cmd_sawemall_start_person_chop_2:
@@ -96,6 +99,7 @@ event_player:
     cmd_sawemall_set_up_targets_phase:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==3}:
+    cmd_sawemall_score_van_3:
     cmd_pause_sawemall_timer:
     cmd_sawemall_stop_running_chainsaw:
     cmd_sawemall_start_person_chop_3:
@@ -107,6 +111,7 @@ event_player:
     cmd_sawemall_set_up_targets_phase:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==4}:
+    cmd_sawemall_score_van_4:
     cmd_pause_sawemall_timer:
     cmd_sawemall_stop_running_chainsaw:
     cmd_sawemall_start_person_chop_4:

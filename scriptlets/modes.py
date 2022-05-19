@@ -129,6 +129,7 @@ class Modes(CustomCode):
         self.info_log('on_vuk')
         self.machine.events.remove_handler_by_event('ball_hold_bh_mode_van_full', self.on_van_vuk)
         self.machine.events.post('cmd_disable_bh_mode_van')
+        self.machine.events.post('cmd_score_start_mode')
         self.collect_current_mode()
         self.machine.events.post('cmd_start_' + self.modes[self.current_active_mode()]["mode_name"] + '_mode')
         self.set_mode_is_inactive()

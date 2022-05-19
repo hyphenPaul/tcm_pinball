@@ -145,7 +145,7 @@ widgets:
       anchor_y: bottom
       y: 10
       x: 126
-  
+
 widget_player:
 
   game_started:

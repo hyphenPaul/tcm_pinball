@@ -236,6 +236,13 @@ variable_player:
   # Score
   ########################################
 
+  ## skill shot##
+
+  cmd_skill_shot_score_lock:
+    score: 15000
+  cmd_skill_shot_score_success:
+    score: 50000
+
   ## pop bumpers ##
 
   cmd_score_pop_bumper:
@@ -406,6 +413,81 @@ variable_player:
   drop_target_n_down:
     score: 10000
 
+  ## van/modes ##
+
+  cmd_score_start_mode:
+    score: 15000
+  cmd_score_idle_van:
+    score: 35
+
+  ## extra ball ##
+
+  cmd_score_extra_ball:
+    score: 250000
+
+  ## hitchhiker ##
+
+  cmd_hitchhiker_score_orbits:
+    score: 250000
+  cmd_hitchhiker_score_van_1:
+    score: 500000
+  cmd_hitchhiker_score_ramp:
+    score: 250000
+  cmd_hitchhiker_score_van_2:
+    score: 750000
+  cmd_hitchhiker_score_target:
+    score: 250000
+  cmd_hitchhiker_score_van_3:
+    score: 1000000
+
+  ## barbecue ##
+
+  cmd_barbecue_score_1:
+    score: 200000
+  cmd_barbecue_score_2:
+    score: 300000
+  cmd_barbecue_score_3:
+    score: 500000
+  cmd_barbecue_score_4:
+    score: 750000
+  cmd_barbecue_score_5:
+    score: 1000000
+
+  ## grandpa ##
+
+  cmd_grandpa_score_right_ramp:
+    score: 25000
+  cmd_grandpa_score_left_ramp_1:
+    score: 250000
+  cmd_grandpa_score_left_ramp_2:
+    score: 500000
+  cmd_grandpa_score_left_ramp_3:
+    score: 1500000
+
+  ## sally ##
+
+  cmd_sally_score_pop_bumper:
+    score: 25000
+  cmd_sally_score_wiggle:
+    score: 250000
+  cmd_sally_score_hand_free:
+    score: 500000
+  cmd_sally_score_escape:
+    score: 1000000
+
+  ## sawemall ##
+
+  cmd_sawemall_score_targets:
+    score: 100000
+  cmd_sawemall_score_van_1:
+    score: 250000
+  cmd_sawemall_score_van_2:
+    score: 500000
+  cmd_sawemall_score_van_3:
+    score: 750000
+  cmd_sawemall_score_van_4:
+    score: 1000000
+
   ########################################
   # Van Vuk
   ########################################
@@ -521,6 +603,7 @@ event_player:
     - cmd_set_van_messaging_off
 
   ball_hold_bh_mode_van_full{current_player.v_enable_van_messaging==1}:
+    - cmd_score_idle_van
     - cmd_eject_van_vuk_with_audio
     - cmd_show_van_messaging
 
