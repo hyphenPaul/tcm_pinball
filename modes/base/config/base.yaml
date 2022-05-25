@@ -196,10 +196,10 @@ slide_player:
     chainsaw_shoot_the_van_slide:
       priority: 500
       expire: 4.6s
-  s_plumb_bob_tilt_active:
-    tilt_slide:
-      priority: 500
-      expire: 2.5s
+#  s_plumb_bob_tilt_active:
+#    tilt_slide:
+#      priority: 500
+#      expire: 2.5s
 
 ##################################################
 # Shots

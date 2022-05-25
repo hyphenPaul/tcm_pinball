@@ -21,6 +21,9 @@ event_player:
   timer_grandpa_mode_timer_complete:
     cmd_stop_grandpa_mode:
 
+  slide_grandpa_hit_sally_slide_3_removed:
+    cmd_stop_grandpa_mode:
+
   slide_grandpa_intro_slide_removed:
     cmd_grandpa_after_intro_complete:
 
@@ -45,8 +48,6 @@ event_player:
 
   cmd_grandpa_combo_completed:
     cmd_grandpa_refresh_lights:
-    cmd_grandpa_start_hit_sally_slide:
-    cmd_grandpa_hit_sally_sound:
     cmd_grandpa_remove_background_slide:
 
 
@@ -106,19 +107,25 @@ event_player:
   left_ramp_hit{current_player.v_grandpa_state=="combo_1_shot"}:
     cmd_grandpa_score_left_ramp_1:
     cmd_grandpa_combo_timer_stop:
-    cmd_grandpa_set_state_combo_2_shooting: 
+    cmd_grandpa_start_hit_sally_slide_1:
+    cmd_grandpa_hit_sally_sound_1:
+    cmd_grandpa_set_state_combo_2_shooting:
     cmd_grandpa_combo_completed:
 
   left_ramp_hit{current_player.v_grandpa_state=="combo_2_shot"}:
     cmd_grandpa_score_left_ramp_2:
     cmd_grandpa_combo_timer_stop:
-    cmd_grandpa_set_state_combo_3_shooting: 
+    cmd_grandpa_start_hit_sally_slide_2:
+    cmd_grandpa_hit_sally_sound_2:
+    cmd_grandpa_set_state_combo_3_shooting:
     cmd_grandpa_combo_completed:
 
   left_ramp_hit{current_player.v_grandpa_state=="combo_3_shot"}:
     cmd_grandpa_score_left_ramp_3:
     cmd_grandpa_combo_timer_stop:
-    cmd_grandpa_set_state_winning: 
+    cmd_grandpa_start_hit_sally_slide_3:
+    cmd_grandpa_hit_sally_sound_3:
+    cmd_grandpa_set_state_winning:
     cmd_grandpa_combo_completed:
 
 
@@ -129,7 +136,7 @@ event_player:
 timers:
   grandpa_mode_timer:
     start_value: 0
-    end_value: 60
+    end_value: 80
     tick_interval: 1s
     direction: up
     start_running: True
@@ -140,7 +147,7 @@ timers:
 
   grandpa_combo_timer:
     start_value: 0
-    end_value: 7
+    end_value: 8
     tick_interval: 1s
     direction: up
     start_running: False
@@ -265,20 +272,17 @@ slide_player:
       priority: 700
       expire: 3.4s
 
-  # Sean - need a new state for this
-  cmd_grandpa_start_hit_sally_slide{current_player.v_grandpa_state=="combo_1_shooting"}:
+  cmd_grandpa_start_hit_sally_slide_1:
     grandpa_hit_sally_slide_1:
       priority: 800
       expire: 3.6s
 
-  # Sean - need a new state for this
-  cmd_grandpa_start_hit_sally_slide{current_player.v_grandpa_state=="combo_2_shooting"}:
+  cmd_grandpa_start_hit_sally_slide_2:
     grandpa_hit_sally_slide_2:
       priority: 800
       expire: 4s
 
-  # Sean - need a new state for this
-  cmd_grandpa_start_hit_sally_slide{current_player.v_grandpa_state=="combo_3_shooting"}:
+  cmd_grandpa_start_hit_sally_slide_3:
     grandpa_hit_sally_slide_3:
       priority: 800
       expire: 4.8s
@@ -292,15 +296,25 @@ sound_player:
   cmd_play_grandpa_bg_music:
     grandpa_bg_music:
       action: play
-      loops: -1 
+      loops: -1
       volume: 0.2
 
   cmd_stop_grandpa_bg_music:
     grandpa_bg_music:
       action: stop
 
-  cmd_grandpa_hit_sally_sound:
-    grandpa_hit_score_v1_1:
+  cmd_grandpa_hit_sally_sound_1:
+    grandpa_hit_1_sound_v1:
+      action: play
+      loops: 0
+
+  cmd_grandpa_hit_sally_sound_2:
+    grandpa_hit_2_sound_v1:
+      action: play
+      loops: 0
+
+  cmd_grandpa_hit_sally_sound_3:
+    grandpa_hit_3_sound_v1:
       action: play
       loops: 0
 

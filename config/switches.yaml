@@ -149,6 +149,7 @@ switches:
     number: S55
   s_plumb_bob_tilt:
     number: S56
+    tags: tilt_warning
   s_left_outlane:
     number: S57
   s_left_return_lane:

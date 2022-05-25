@@ -1,0 +1,31 @@
+#config_version=5
+
+slides:
+  _overwrite: true   # this is important to overwrite the existing slides
+  tilt_warning_1:
+    widgets:
+      - type: image
+        image: warning_1v1
+    expire: 1.8s
+  tilt_warning_2:
+    widgets:
+      - type: image
+        image: warning_2v1
+    expire: 1.6s
+  tilt:
+    widgets:
+      - type: image
+        image: tilt_v1
+        animations:
+          show_slide:
+          - property: opacity
+            value: 1
+            duration: 4.1s
+          - property: opacity
+            value: 0
+            duration: 0.1s
+
+sound_player:
+  tilt_warning: warning_sound_1v1
+  tilt_warning_2: warning_sound_2v1
+  tilt: tilt_sound_v1
