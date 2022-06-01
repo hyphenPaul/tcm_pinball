@@ -18,19 +18,12 @@ event_player:
   cmd_clean_up_modes:
     - cmd_reset_tt_playfield
 
-  cmd_reset_tt_playfield:
-    - cmd_ttp_disable
-    - cmd_set_tt_playfield_counter_0
-    - cmd_ttp_restart_counter
-    - cmd_refresh_tt_playfield_lights
-    - cmd_reset_tt_playfield_variable
-    - cmd_tt_playfield_reset_timer
-
   cmd_refresh_mode_tt_playfield:
     - cmd_refresh_tt_playfield_lights
 
   player_v_tt_playfield_counter_count:
     - cmd_refresh_tt_playfield_lights
+
   player_v_tt_playfield_counter_count.10{value==4}:
     - cmd_start_tt_playfield
 
@@ -72,11 +65,8 @@ event_player:
     - cmd_play_ttp_show
     - cmd_play_ttp_audio
     - cmd_ttp_enable
-    - cmd_set_tt_playfield_variable
     - cmd_tt_playfield_start_timer
-
-  timer_tt_playfield_timer_complete:
-    - cmd_reset_tt_playfield
+    - cmd_set_tt_playfield_variable
 
   # Don't show the animation if the extra ball animation is about to play
 #  ball_save_ttp_ball_save_saving_ball{current_player.v_extra_ball_animation_playing<1}:
@@ -84,70 +74,6 @@ event_player:
 #    - cmd_play_ttp_show
 #    - cmd_play_save_audio
 
-variable_player:
-  cmd_ttp_enable:
-    v_ttp_enabled:
-      int: 1
-      action: set
-  cmd_ttp_disable:
-    v_ttp_enabled:
-      int: 0
-      action: set
-  cmd_set_tt_playfield_counter_0:
-    v_tt_playfield_counter_count:
-      int: 0
-      action: set
-  cmd_set_tt_playfield_counter_1:
-    v_tt_playfield_counter_count:
-      int: 1
-      action: set
-  cmd_set_tt_playfield_counter_2:
-    v_tt_playfield_counter_count:
-      int: 2
-      action: set
-  cmd_set_tt_playfield_counter_3:
-    v_tt_playfield_counter_count:
-      int: 3
-      action: set
-  cmd_set_tt_playfield_counter_4:
-    v_tt_playfield_counter_count:
-      int: 4
-      action: set
-  cmd_set_tt_playfield_variable:
-    v_playfield_multiplier:
-      int: 2
-      action: set
-  cmd_reset_tt_playfield_variable:
-    v_playfield_multiplier:
-      int: 1
-      action: set
-
-##################################################
-# Logicblocks
-##################################################
-
-counters:
-  tt_playfield_counter:
-    count_events: cmd_count_ttp
-    disable_on_complete: True
-    persist_state: True # Not used for in between balls but when activating and deactivating
-    count_complete_value: 4
-    restart_events: cmd_ttp_restart_counter
-
-##################################################
-# Timers
-##################################################
-
-timers:
-  tt_playfield_timer:
-    start_value: 0
-    end_value: 60
-    tick_interval: 1s
-    control_events:
-      - action: restart
-        event: cmd_tt_playfield_start_timer
-      - action: reset
-        event: cmd_tt_playfield_reset_timer
 
 ##################################################
 # Sound / Visual

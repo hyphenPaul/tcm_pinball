@@ -56,10 +56,12 @@ event_player:
     cmd_unset_chainsaw_all_collected:
     cmd_stop_music:
   ball_hold_bh_chainsaw_van_full.1{current_player.v_space_jam_takeover_ready==0}:
+    cmd_mode_intro_started:
     cmd_chainsaw_multi_ball_triggered:
     cmd_start_chainsaw_multiball_intro:
     cmd_start_chainsaw_multiball_start_timer:
   ball_hold_bh_chainsaw_van_full.2{current_player.v_space_jam_takeover_ready==1}:
+    cmd_mode_intro_started:
     cmd_chainsaw_multi_ball_triggered:
     cmd_start_space_jam_takeover_multiball_intro:
     cmd_start_space_jam_takeover_multiball_start_timer:
@@ -68,6 +70,7 @@ event_player:
   timer_space_jam_takeover_start_timer_complete:
     cmd_start_chainsaw_multiball:
   cmd_start_chainsaw_multiball:
+    cmd_mode_intro_complete:
     cmd_reset_jackpot_variable:
     cmd_disable_sawyer_ball_hold:
     cmd_release_sawyer_ball:

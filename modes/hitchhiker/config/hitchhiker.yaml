@@ -14,6 +14,7 @@ mode:
 event_player:
 
   mode_hitchhiker_started:
+    cmd_mode_intro_started:
     cmd_disable_bh_mode_van:
     cmd_hitchhiker_set_state_starting:
     cmd_hitchhiker_start_intro_slide:
@@ -21,9 +22,10 @@ event_player:
 
   slide_hitchhiker_intro_slide_removed:
     cmd_hitchhiker_after_intro_complete:
-    cmd_play_hitchhiker_bg_music:
 
   cmd_hitchhiker_after_intro_complete:
+    cmd_mode_intro_complete:
+    cmd_play_hitchhiker_bg_music:
     cmd_hitchhiker_set_state_orbits:
     cmd_hitchhiker_start_orbits_slide:
     cmd_hitchhiker_refresh_lights:

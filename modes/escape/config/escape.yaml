@@ -262,12 +262,14 @@ event_player:
     cmd_escape_progress_state:
 
   cmd_play_escape_multiball:
+    cmd_mode_intro_started:
     cmd_play_escape_multiball_start_show:
     cmd_play_escape_multiball_audio:
 
   ## Start multiball
 
   cmd_escape_multiball_start_show_complete:
+    cmd_mode_intro_complete:
     cmd_fire_ball_from_vuk:
     cmd_escape_reset:
     cmd_start_escape_multiball_mode:

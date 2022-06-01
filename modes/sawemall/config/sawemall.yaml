@@ -18,6 +18,7 @@ event_player:
   ################################
 
   mode_sawemall_started:
+    cmd_mode_intro_started:
     cmd_disable_bh_mode_van:
     cmd_sawemall_set_state_starting:
     cmd_sawemall_reset_variables:
@@ -25,6 +26,7 @@ event_player:
     cmd_sawemall_start_intro_slide_sound:
 
   slide_sawemall_intro_slide_removed:
+    cmd_mode_intro_complete:
     cmd_sawemall_after_intro_complete:
     cmd_play_sawemall_music:
 

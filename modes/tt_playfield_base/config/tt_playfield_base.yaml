@@ -1,0 +1,111 @@
+#config_version=5
+
+##################################################
+# 
+#  A Mode to handle the universal management of
+#  the 2x playfield multiplier to easily pass it
+#  between modes
+# 
+##################################################
+
+mode:
+  start_events:
+    - cmd_start_mode_tt_playfield_base
+  stop_events:
+    - cmd_stop_mode_tt_playfield_base
+  priority: 500
+
+##################################################
+# Events and Variables
+##################################################
+
+event_player:
+
+  cmd_clean_up_modes:
+    - cmd_reset_tt_playfield
+ 
+  cmd_reset_tt_playfield:
+    - cmd_ttp_disable
+    - cmd_set_tt_playfield_counter_0
+    - cmd_ttp_restart_counter
+    - cmd_refresh_tt_playfield_lights
+    - cmd_reset_tt_playfield_variable
+    - cmd_tt_playfield_reset_timer
+
+  timer_tt_playfield_timer_complete:
+    - cmd_reset_tt_playfield
+
+  cmd_mode_intro_started{current_player.v_ttp_enabled==1}:
+    - cmd_tt_playfield_pause_timer
+
+  cmd_mode_intro_complete{current_player.v_ttp_enabled==1}:
+    - cmd_tt_startfield_start_timer
+
+##################################################
+# Timers
+##################################################
+
+timers:
+  tt_playfield_timer:
+    start_value: 0
+    end_value: 60
+    tick_interval: 1s
+    control_events:
+      - action: restart
+        event: cmd_tt_playfield_start_timer
+      - action: reset
+        event: cmd_tt_playfield_reset_timer
+      - action: pause
+        event: cmd_tt_playfield_pause_timer
+      - action: start
+        event: cmd_tt_startfield_start_timer
+
+variable_player:
+  cmd_ttp_enable:
+    v_ttp_enabled:
+      int: 1
+      action: set
+  cmd_ttp_disable:
+    v_ttp_enabled:
+      int: 0
+      action: set
+  cmd_set_tt_playfield_counter_0:
+    v_tt_playfield_counter_count:
+      int: 0
+      action: set
+  cmd_set_tt_playfield_counter_1:
+    v_tt_playfield_counter_count:
+      int: 1
+      action: set
+  cmd_set_tt_playfield_counter_2:
+    v_tt_playfield_counter_count:
+      int: 2
+      action: set
+  cmd_set_tt_playfield_counter_3:
+    v_tt_playfield_counter_count:
+      int: 3
+      action: set
+  cmd_set_tt_playfield_counter_4:
+    v_tt_playfield_counter_count:
+      int: 4
+      action: set
+  cmd_set_tt_playfield_variable:
+    v_playfield_multiplier:
+      int: 2
+      action: set
+  cmd_reset_tt_playfield_variable:
+    v_playfield_multiplier:
+      int: 1
+      action: set
+
+##################################################
+# Logicblocks
+##################################################
+
+counters:
+  tt_playfield_counter:
+    count_events: cmd_count_ttp
+    disable_on_complete: True
+    persist_state: True # Not used for in between balls but when activating and deactivating
+    count_complete_value: 4
+    restart_events: cmd_ttp_restart_counter

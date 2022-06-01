@@ -20,12 +20,14 @@ event_player:
   ### mode progression ###
 
   mode_barbecue_started:
+    cmd_mode_intro_started:
     cmd_disable_bh_mode_van:
     cmd_barbecue_set_state_starting:
     cmd_barbecue_start_intro_slide:
     cmd_barbecue_start_intro_slide_sound:
 
   slide_barbecue_intro_slide_removed:
+    cmd_mode_intro_complete:
     cmd_barbecue_after_intro_complete:
     cmd_play_barbecue_music:
 
