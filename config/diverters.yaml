@@ -8,4 +8,4 @@ diverters:
     disable_events: ball_ending
     activate_events: cmd_activate_diverter
     deactivate_events: cmd_deactivate_diverter
-    activation_time: 2s
+    activation_time: 3s

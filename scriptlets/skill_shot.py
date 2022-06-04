@@ -29,6 +29,7 @@ class SkillShot(CustomCode):
                 'timer_skill_shot_deactivation_timer_complete', self.on_skill_shot_deactivation_timer_complete)
         self.machine.events.add_handler('left_ramp_hit', self.on_super_skill_shot_made)
         self.machine.events.add_handler('cmd_cancel_skill_shot', self.on_cancel_skill_shot)
+        self.machine.events.add_handler('cmd_skill_shot_deactivate', self.on_skill_shot_deactivate)
 
     def remove_event_handlers(self):
         self.machine.events.remove_handler_by_event('timer_skill_shot_timer_tick', self.on_skill_shot_timer_tick)
@@ -40,6 +41,7 @@ class SkillShot(CustomCode):
                 'timer_skill_shot_deactivation_timer_complete', self.on_skill_shot_deactivation_timer_complete)
         self.machine.events.remove_handler_by_event('left_ramp_hit', self.on_super_skill_shot_made)
         self.machine.events.remove_handler_by_event('cmd_cancel_skill_shot', self.on_cancel_skill_shot)
+        self.machine.events.remove_handler_by_event('cmd_skill_shot_deactivate', self.on_skill_shot_deactivate)
 
     def on_skill_shot_timer_tick(self, **kwargs):
         self.current_choice = list(self.skill_shot_choices)[kwargs['ticks']]
@@ -73,6 +75,9 @@ class SkillShot(CustomCode):
     def on_skill_shot_deactivation_timer_complete(self, **kwargs):
         self.deactivate()
 
+    def on_skill_shot_deactivate(self, **kwargs):
+        self.deactivate()
+
     def on_playfield_active(self, **kwargs):
         if self.timer:
             self.timer.stop()
@@ -93,7 +98,13 @@ class SkillShot(CustomCode):
             self.machine.events.post('cmd_skill_shot_show_award_' + self.current_choice)
             self.machine.events.post('cmd_super_skill_shot_award_' + self.current_choice)
             self.machine.events.post('cmd_play_super_skill_shot_slide_background_sound')
+            self.machine.events.post('cmd_enable_diverter')
             self.begin_deactivation_timer()
+        elif self.state == self.SUPER_SKILL_SHOT_AWARDED:
+            self.deactivation_timer.stop()
+            self.machine.events.post('cmd_unlight_super_skill_shot')
+            self.machine.events.post('cmd_skill_shot_play_super_skill_shot')
+            self.machine.events.post('cmd_super_skill_shot_award_one_million')
 
     def reset(self):
         try:
@@ -134,7 +145,7 @@ class SkillShot(CustomCode):
             "ball_save": "+20 second Ballsave",
             "add_help": "Add Help Letter", # written
             "van": "Light Gas Station", # written
-            "five_million": "Five Million Points", # written
+            "two_hundred_fifty": "250,000 Points", # written
         }
 
         # Add some conditional choices here
@@ -181,8 +192,11 @@ class SkillShot(CustomCode):
         self.deactivation_timer.set_tick_interval(1)
         self.deactivation_timer.ticks = 0
         self.deactivation_timer.start_value = 0
-        self.deactivation_timer.end_value = 2
+        self.deactivation_timer.end_value = 7
         self.deactivation_timer.start()
+
+    def stop_deactivation_timer(self):
+        self.deactivation_timer.stop()
 
     def tick_interval(self):
         tick_interval = 0.7

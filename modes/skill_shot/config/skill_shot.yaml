@@ -86,12 +86,14 @@ event_player:
     - cmd_cancel_skill_shot
   cmd_play_super_skill_shot_success:
     - cmd_clear_skill_shot_success_slides
+  slide_skill_shot_super_skill_shot_removed:
+    - cmd_skill_shot_deactivate
 
 variable_player:
   cmd_super_skill_shot_award_one_million:
     score: 1000000
-  cmd_super_skill_shot_award_five_million:
-    score: 5000000
+  cmd_super_skill_shot_award_two_hundred_fifty:
+    score: 250000
 
 timers:
   skill_shot_timer:
@@ -161,10 +163,10 @@ slides:
     - type: image
       image: ss_van_v1
 
-  skill_shot_five_million:
+  skill_shot_two_hundred_fifty:
     widgets:
     - type: image
-      image: ss_5million_v3
+      image: ss_250000_v1 
 
   #--------------------------------------------------
 
@@ -203,10 +205,15 @@ slides:
     - type: image 
       image: ss_van_is_lit_v1
 
-  skill_shot_success_five_million:
+  skill_shot_success_two_hundred_fifty:
     widgets:
     - type: image 
-      image: ssr_five_million_v1
+      image: ssr_250000_v1
+
+  skill_shot_super_skill_shot:
+    widgets:
+    - type: image 
+      image: super_skill_shot_v1
 
   skill_shot_background:
     - type: rectangle
@@ -280,8 +287,8 @@ slide_player:
         duration: 0.3s
         direction: down
 
-  cmd_play_skill_shot_slide_five_million:
-    skill_shot_five_million:
+  cmd_play_skill_shot_slide_two_hundred_fifty:
+    skill_shot_two_hundred_fifty:
       action: play
       transition:
         type: push
@@ -355,12 +362,17 @@ slide_player:
         direction: down
         easing: out_bounce
 
-  cmd_skill_shot_show_award_five_million:
-    skill_shot_success_five_million:
+  cmd_skill_shot_show_award_two_hundred_fifty:
+    skill_shot_success_two_hundred_fifty:
       action: play
       transition:
         type: push
         duration: 0.7s
         direction: down
         easing: out_bounce
+
+  cmd_skill_shot_play_super_skill_shot:
+    skill_shot_super_skill_shot:
+      action: play
+      expire: 2s
 

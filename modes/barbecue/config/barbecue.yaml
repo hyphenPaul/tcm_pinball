@@ -445,23 +445,23 @@ slides:
   barbecue_arm_slide:
     widgets:
       - type: image
-        image: bbq_arm_v3
+        image: bbq_arm_new_score_v1
   barbecue_leg_slide:
     widgets:
       - type: image
-        image: bbq_leg_v1
+        image: bbq_leg_new_score_v1
   barbecue_guts_slide:
     widgets:
       - type: image
-        image: bbq_guts_v1
+        image: bbq_guts_new_score_v1
   barbecue_butt_slide:
     widgets:
       - type: image
-        image: bbq_butt_v2
+        image: bbq_butt_new_score_v1
   barbecue_final_slide:
     widgets:
       - type: image
-        image: bbq_bonus_v3_low_res
+        image: bbq_bonus_new_score_v1
 
 ##################################################
 # Slides
