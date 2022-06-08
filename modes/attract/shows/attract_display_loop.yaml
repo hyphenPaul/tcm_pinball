@@ -1,5 +1,19 @@
 #show_version=5
 
+- duration: 20s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: mp_chicken_v1
+
+- duration: 20s
+  slides:
+    slide_2:
+      widgets:
+      - type: image
+        image: mp_hammer_v1
+
 # ------------ attract mode start --------------
 
 - duration: 1.5s

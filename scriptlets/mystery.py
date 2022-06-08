@@ -32,7 +32,7 @@ class Mystery(CustomCode):
             "award_chain_saw_letter": 20, # function to determine qualifier
             "light_lock": 20, # function to determine qualifier
             "award_franklin_letter": 20, # function to determine qualifier
-            "3_x_playfield": 10,
+            "2_x_playfield": 10,
             "save_from_the_grave": 10,
             "30_second_ball_save": 10,
             "big_points": 10, # done score.yaml
@@ -60,7 +60,46 @@ class Mystery(CustomCode):
             self.machine.game.player["collected_mysteries"] = []
             return choices
 
+        return self.filter_choice_by_state(checked)
+
+    def filter_choice_by_state(self, checked):
+        rejects = []
+
+        rejections = {
+            "award_chain_saw_letter": self.should_reject_saw_letter,
+            "light_lock": self.should_reject_saw_letter,
+            "award_franklin_letter": self.should_reject_franklin_letter,
+            "2_x_playfield": self.should_reject_2_x_playfield,
+            "light_extra_ball": self.should_reject_light_extra_ball,
+            "franklin_frenzy": self.should_reject_franklin_frenzy
+        }
+
+        for choice, reject_func in rejections.items():
+            if reject_func():
+                rejects.append(choice)
+
+        for reject in rejects:
+            checked = list(filter((reject).__ne__, checked))
+
         return checked
+
+    def should_reject_saw_letter(self):
+        return False
+
+    def should_reject_saw_letter(self):
+        return False
+
+    def should_reject_franklin_letter(self):
+        return False
+
+    def should_reject_2_x_playfield(self):
+        return False
+
+    def should_reject_light_extra_ball(self):
+        return False
+
+    def should_reject_franklin_frenzy(self):
+        return False
 
     def save_acquired_mysteries(self, mystery):
         if self.ensure_player_acquired_mysteries():

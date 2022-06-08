@@ -320,7 +320,7 @@ show_player:
       loops: 0
 
   cmd_play_mystery_award_chain_saw_letter:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_award_chain_saw_letter:
       action: play
       events_when_completed: cmd_mystery_show_complete
       loops: 0
