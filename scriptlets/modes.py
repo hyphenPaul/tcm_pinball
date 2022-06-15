@@ -13,22 +13,16 @@ class Modes(CustomCode):
             "grave" :  { "light" : "grid_slam", "mode_name" : "grave" },
             "sally" :  { "light" : "grid_fastbreak", "mode_name" : "sally" },
             "sawemall" :  { "light" : "grid_rebound", "mode_name" : "sawemall" }
-#            "sawemall1" :  { "light" : "grid_rebound", "mode_name" : "sawemall" },
-#            "sawemall2" :  { "light" : "grid_space_jam", "mode_name" : "sawemall" },
-#            "sawemall3" :  { "light" : "grid_in_yer_face", "mode_name" : "sawemall" },
-#            "sawemall4" :  { "light" : "grid_slam", "mode_name" : "sawemall" },
-#            "sawemall5" :  { "light" : "grid_fire", "mode_name" : "sawemall" }
         }
 
-        self.machine.events.add_handler('mode_base_started', self.init_on_ball_start)
+        self.machine.events.add_handler('mode_base_started', self.init_on_game_start)
         self.machine.events.add_handler('cmd_enable_mode_switcher', self.on_enable)
         self.machine.events.add_handler('cmd_disable_mode_switcher', self.on_disable)
         self.machine.events.add_handler('cmd_super_skill_shot_award_van', self.on_skill_shot)
         self.machine.events.add_handler('game_ending', self.on_game_ending)
 
-    def init_on_ball_start(self, **kwargs):
+    def init_on_game_start(self, **kwargs):
         self.initiated = True
-        self.enable()
 
     def on_game_ending(self, **kwargs):
         self.clear_current_collected_modes()
@@ -42,7 +36,8 @@ class Modes(CustomCode):
             self.machine.events.add_handler('s_left_slingshot_active', self.cycle_mode)
             self.machine.events.add_handler('s_right_slingshot_active', self.cycle_mode)
             self.reset_van_drop_targets()
-            self.refresh()
+
+        self.refresh()
 
     def disable(self):
         self.info_log('disable')
@@ -68,6 +63,8 @@ class Modes(CustomCode):
 
         self.stop_flash_lights()
 
+    # When it doubt refresh this thing. It should clean up
+    # Issues based on state at least listener and light wise
     def refresh(self):
         self.info_log('refresh')
 
@@ -77,6 +74,7 @@ class Modes(CustomCode):
 
         current_player = self.current_player()
 
+        # Refresh the playfield lights
         for mode in self.modes:
             if mode in self.current_collected_modes():
                 self.machine.lights[self.modes[mode]["light"]].on()
@@ -93,7 +91,6 @@ class Modes(CustomCode):
             if self.is_mode_active():
                 self.flash_light()
                 self.add_van_vuk_listeners()
-                self.start_shoot_the_van_show()
             else:
                 self.pulse_light()
         else:
@@ -178,6 +175,7 @@ class Modes(CustomCode):
 
         self.set_mode_is_active()
         self.refresh()
+        self.start_shoot_the_van_show()
 
     def set_mode_is_active(self):
         current_player = self.current_player()
@@ -189,6 +187,7 @@ class Modes(CustomCode):
         current_player['v_current_active_mode'] = None
 
 
+    # The drop targets were complete and a shot to the van is ready to be shot
     def is_mode_active(self):
         current_player = self.current_player()
 

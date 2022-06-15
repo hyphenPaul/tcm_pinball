@@ -14,9 +14,8 @@ mode:
 ##################################################
 
 event_player:
-  player_franklin_total_completions:
-    - cmd_start_franklin_frenzy
   franklin_letters_collected:
+    - cmd_start_franklin_frenzy
     - cmd_add_franklin_bonus
   mode_franklin_started:
     - cmd_update_shots

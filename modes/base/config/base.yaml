@@ -589,6 +589,20 @@ event_player:
   # Van VUK
   ########################################
 
+  # Van VUK events:
+  #
+  # - event: cmd_disable_bh_mode_van
+  # - state: disabled
+  # - behavior: Shoots the ball out automatically
+  #
+  # - event: cmd_enable_bh_mode_van
+  # - state: enabled
+  # - behavior: Need to handle the clearing of the VUK manually
+  #
+  # - event: cmd_release_all_bh_mode_van
+  # - state: releasing
+  # - behavior: Ejects the ball
+
   # enable message then trigger mode switcher
   # the mode switcher will conditionally turn off message as needed
   cmd_enable_mode_switcher_and_message:
@@ -602,6 +616,7 @@ event_player:
   cmd_disable_light_van_message:
     - cmd_set_van_messaging_off
 
+  # Show the van messaging when and eject the ball
   ball_hold_bh_mode_van_full{current_player.v_enable_van_messaging==1}:
     - cmd_score_idle_van
     - cmd_eject_van_vuk_with_audio
