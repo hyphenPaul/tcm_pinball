@@ -322,7 +322,9 @@ show_player:
   cmd_play_mystery_award_chain_saw_letter:
     mystery_show_award_chain_saw_letter:
       action: play
-      events_when_completed: cmd_mystery_show_complete
+      events_when_completed:
+        - cmd_mystery_show_complete
+        - cmd_mystery_award_chainsaw_letter
       loops: 0
 
   cmd_play_mystery_light_lock:

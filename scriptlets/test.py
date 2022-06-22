@@ -5,7 +5,7 @@ class Test(CustomCode):
     def on_load(self):
         self.info_log('Test Enabling')
 
-        self.machine.events.add_handler('cmd_test_flipper_left', self.test_flipper)
+        #self.machine.events.add_handler('cmd_test_flipper_left', self.test_flipper)
 
     def test_flipper(self, **kwargs):
         self.info_log("\n\n***\n\n")

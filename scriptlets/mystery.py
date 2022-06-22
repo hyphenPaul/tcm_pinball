@@ -5,6 +5,8 @@ class Mystery(CustomCode):
     def on_load(self):
         self.info_log('Enabling')
         self.machine.events.add_handler('cmd_get_mystery', self.get_mystery)
+        self.machine.events.add_handler('cmd_mystery_award_chainsaw_letter', self.on_award_chainsaw_letter)
+        #self.machine.events.add_handler('s_left_flipper_active', self.flipper_test)
 
     def get_mystery(self, **kwargs):
         del kwargs
@@ -27,19 +29,19 @@ class Mystery(CustomCode):
     def fetch_choices(self):
         choices = []
         frequenies = {
-            "small_points": 20, # done score.yaml
-            "add_bonus_multiplier": 20,
+#            "small_points": 20, # done
+#            "add_bonus_multiplier": 20, # done
             "award_chain_saw_letter": 20, # function to determine qualifier
-            "light_lock": 20, # function to determine qualifier
-            "award_franklin_letter": 20, # function to determine qualifier
-            "2_x_playfield": 10,
-            "save_from_the_grave": 10,
-            "30_second_ball_save": 10,
-            "big_points": 10, # done score.yaml
-            "jack_shit": 10,
-            "award_tilt_warning": 5,
-            "light_extra_ball": 5,
-            "franklin_frenzy": 1
+#            "light_lock": 20, # function to determine qualifier
+#            "award_franklin_letter": 20, # function to determine qualifier
+#            "2_x_playfield": 10,
+#            "save_from_the_grave": 10,
+#            "30_second_ball_save": 10,
+#            "big_points": 10, # done score.yaml
+#            "jack_shit": 10,
+#            "award_tilt_warning": 5,
+#            "light_extra_ball": 5,
+#            "franklin_frenzy": 1
         }
 
         for choice, number in frequenies.items():
@@ -55,19 +57,21 @@ class Mystery(CustomCode):
         for acquired_choice in self.get_player_acquired_mysteries():
             checked = list(filter((acquired_choice).__ne__, checked))
 
+        checked = self.filter_choice_by_state(checked)
+
         if checked == []:
             collected_mysteries = self.get_player_acquired_mysteries()
             self.machine.game.player["collected_mysteries"] = []
-            return choices
+            return self.filter_choice_by_state(choices)
 
-        return self.filter_choice_by_state(checked)
+        return checked
 
     def filter_choice_by_state(self, checked):
         rejects = []
 
         rejections = {
             "award_chain_saw_letter": self.should_reject_saw_letter,
-            "light_lock": self.should_reject_saw_letter,
+            "light_lock": self.should_reject_light_lock,
             "award_franklin_letter": self.should_reject_franklin_letter,
             "2_x_playfield": self.should_reject_2_x_playfield,
             "light_extra_ball": self.should_reject_light_extra_ball,
@@ -82,24 +86,6 @@ class Mystery(CustomCode):
             checked = list(filter((reject).__ne__, checked))
 
         return checked
-
-    def should_reject_saw_letter(self):
-        return False
-
-    def should_reject_saw_letter(self):
-        return False
-
-    def should_reject_franklin_letter(self):
-        return False
-
-    def should_reject_2_x_playfield(self):
-        return False
-
-    def should_reject_light_extra_ball(self):
-        return False
-
-    def should_reject_franklin_frenzy(self):
-        return False
 
     def save_acquired_mysteries(self, mystery):
         if self.ensure_player_acquired_mysteries():
@@ -140,3 +126,58 @@ class Mystery(CustomCode):
            if e not in checked:
                checked.append(e)
            return checked
+
+    ##################################################
+    # Choices Logic
+    ##################################################
+
+    # Chainsaw Letter
+
+    def flipper_test(self, **kwargs):
+        self.info_log(self.is_mode_active('chainsaw'))
+
+    def should_reject_saw_letter(self):
+        if not self.is_mode_active("chainsaw"):
+            return True
+
+        return self.current_available_chainsaw_letters() == []
+
+    def current_available_chainsaw_letters(self):
+        letters = ["c", "h", "a", "i", "n", "s", "a2", "w"]
+        letters_copy = letters.copy()
+
+        for letter in letters_copy:
+            self.info_log(f'letter: {letter}')
+            self.info_log(self.machine.game.player[f'v_chainsaw_{letter}_collected'])
+            if self.machine.game.player[f'v_chainsaw_{letter}_collected'] == 1:
+                letters.remove(letter)
+
+        return letters_copy
+
+    def on_award_chainsaw_letter(self, **kwargs):
+        letters = self.current_available_chainsaw_letters()
+        letter = letters[0]
+        self.info_log(f'awarded letter: {letter}')
+        self.info_log(f'chain_{letter}_shot')
+        self.machine.shots[f'chain_{letter}_shot'].hit()
+
+    def should_reject_light_lock(self):
+        return False
+
+    # Franklin
+
+    def should_reject_franklin_letter(self):
+        return False
+
+    def should_reject_2_x_playfield(self):
+        return False
+
+    def should_reject_light_extra_ball(self):
+        return False
+
+    def should_reject_franklin_frenzy(self):
+        return False
+
+
+    def is_mode_active(self, mode_name):
+        return self.machine.mode_controller.is_active(mode_name)

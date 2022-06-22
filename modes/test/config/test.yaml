@@ -36,8 +36,8 @@ show_player:
       events_when_completed: cmd_test_show_2_complete
 
 event_player:
-   s_left_flipper_active:
-     cmd_test_flipper
+#   s_left_flipper_active:
+#     cmd_test_flipper
 #  s_right_flipper_active.2:
 #    cmd_custom_magna_vuk_queue_event:
 #      post: cmd_play_test_show_1

@@ -54,6 +54,8 @@ shot_groups:
 variable_player:
   cmd_add_multiplier:
     bonus_multiplier: 1
+  cmd_mystery_choice{choice=="add_bonus_multiplier"}:
+    bonus_multiplier: 1
 
 show_player:
   cmd_play_help_show{current_player.v_play_help_animation==1}:
