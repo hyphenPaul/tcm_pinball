@@ -39,6 +39,12 @@ event_player:
       wait_for: cmd_mystery_show_complete
       mode: pop_bumpers
       coil_direction: left
+  cmd_remove_mystery_meat_vuk_event:
+    cmd_custom_magna_vuk_remove_event:
+      post: cmd_get_mystery
+      wait_for: cmd_mystery_show_complete
+      mode: pop_bumpers
+      coil_direction: left
   cmd_mystery_choice{choice=="small_points"}:
     - cmd_play_mystery_show
     - cmd_play_mystery_show_small_points

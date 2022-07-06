@@ -6,6 +6,7 @@ class Mystery(CustomCode):
         self.info_log('Enabling')
         self.machine.events.add_handler('cmd_get_mystery', self.get_mystery)
         self.machine.events.add_handler('cmd_mystery_award_chainsaw_letter', self.on_award_chainsaw_letter)
+        self.machine.events.add_handler('cmd_mystery_light_lock', self.on_light_lock)
         #self.machine.events.add_handler('s_left_flipper_active', self.flipper_test)
 
     def get_mystery(self, **kwargs):
@@ -31,8 +32,8 @@ class Mystery(CustomCode):
         frequenies = {
 #            "small_points": 20, # done
 #            "add_bonus_multiplier": 20, # done
-            "award_chain_saw_letter": 20, # function to determine qualifier
-#            "light_lock": 20, # function to determine qualifier
+#            "award_chain_saw_letter": 20, # function to determine qualifier
+            "light_lock": 20, # function to determine qualifier
 #            "award_franklin_letter": 20, # function to determine qualifier
 #            "2_x_playfield": 10,
 #            "save_from_the_grave": 10,
@@ -144,25 +145,49 @@ class Mystery(CustomCode):
 
     def current_available_chainsaw_letters(self):
         letters = ["c", "h", "a", "i", "n", "s", "a2", "w"]
-        letters_copy = letters.copy()
+        letters_copy = self.chainsaw_letters().copy()
+        collected_letters_copy = self.collected_chainsaw_letters().copy()
+        result = list(set(letters_copy) - set(collected_letters_copy))
+        result.sort(key=self.chainsaw_letter_index)
+
+        return result
+
+    def collected_chainsaw_letters(self):
+        letters_copy = self.chainsaw_letters().copy()
+        collected_letters = []
 
         for letter in letters_copy:
-            self.info_log(f'letter: {letter}')
-            self.info_log(self.machine.game.player[f'v_chainsaw_{letter}_collected'])
             if self.machine.game.player[f'v_chainsaw_{letter}_collected'] == 1:
-                letters.remove(letter)
+                collected_letters.append(letter)
 
-        return letters_copy
+        return collected_letters
+
+    def chainsaw_letters(self):
+        return ["c", "h", "a", "i", "n", "s", "a2", "w"]
+
+    def chainsaw_letter_index(self, letter):
+        return self.chainsaw_letters().index(letter)
 
     def on_award_chainsaw_letter(self, **kwargs):
         letters = self.current_available_chainsaw_letters()
         letter = letters[0]
-        self.info_log(f'awarded letter: {letter}')
-        self.info_log(f'chain_{letter}_shot')
-        self.machine.shots[f'chain_{letter}_shot'].hit()
+
+        if ['s', 'a2', 'w'].count(letter) == 0:
+            self.machine.shots[f'chain_{letter[0]}_shot'].hit()
+        else:
+            self.machine.shots[f'saw_{letter[0]}_shot'].hit()
+
+    # escape lock
 
     def should_reject_light_lock(self):
         return False
+
+    def on_light_lock(self):
+        # need to stop the vuk and fire it with the escape mode
+        self.machine.events.post('cmd_remove_mystery_meat_vuk_event')
+
+        # fire the next lock animation
+        # set the appropriate variables and shots in escape
 
     # Franklin
 
