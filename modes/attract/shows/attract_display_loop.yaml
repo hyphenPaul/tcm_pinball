@@ -1,11 +1,11 @@
 #show_version=5
 
-#- duration: 200s
-#  slides:
-#    slide_1:
-#      widgets:
-#      - type: image
-#        image: final_massacre_intro_v2
+- duration: 200s
+  slides:
+    slide_1:
+      widgets:
+      - type: image
+        image: fb_sawyer_death_v1
 
 
 # ------------ attract mode start --------------

@@ -7,6 +7,7 @@ class Mystery(CustomCode):
         self.machine.events.add_handler('cmd_get_mystery', self.get_mystery)
         self.machine.events.add_handler('cmd_mystery_award_chainsaw_letter', self.on_award_chainsaw_letter)
         self.machine.events.add_handler('cmd_mystery_light_lock', self.on_light_lock)
+        self.machine.events.add_handler('cmd_mystery_franklin_letter', self.on_franklin_letter)
         #self.machine.events.add_handler('s_left_flipper_active', self.flipper_test)
 
     def get_mystery(self, **kwargs):
@@ -32,16 +33,16 @@ class Mystery(CustomCode):
         frequenies = {
 #            "small_points": 20, # done
 #            "add_bonus_multiplier": 20, # done
-#            "award_chain_saw_letter": 20, # function to determine qualifier
-            "light_lock": 20, # function to determine qualifier
-#            "award_franklin_letter": 20, # function to determine qualifier
+#            "award_chain_saw_letter": 20, # done
+#            "light_lock": 20, # done
+#            "award_franklin_letter": 20, # done
 #            "2_x_playfield": 10,
 #            "save_from_the_grave": 10,
 #            "30_second_ball_save": 10,
-#            "big_points": 10, # done score.yaml
-#            "jack_shit": 10,
+#            "big_points": 10, # done
+#            "jack_shit": 10, # done
 #            "award_tilt_warning": 5,
-#            "light_extra_ball": 5,
+#            "light_extra_ball": 1,
 #            "franklin_frenzy": 1
         }
 
@@ -135,7 +136,10 @@ class Mystery(CustomCode):
     # Chainsaw Letter
 
     def flipper_test(self, **kwargs):
-        self.info_log(self.is_mode_active('chainsaw'))
+        self.info_log(self.machine.shots['left_franklin_shot'].state)
+        self.info_log(self.machine.shots['left_franklin_shot'].state_name)
+        self.info_log(self.machine.shots['right_franklin_shot'].state)
+        self.info_log(self.machine.shots['right_franklin_shot'].state_name)
 
     def should_reject_saw_letter(self):
         if not self.is_mode_active("chainsaw"):
@@ -180,19 +184,37 @@ class Mystery(CustomCode):
     # escape lock
 
     def should_reject_light_lock(self):
-        return False
+        if not self.is_mode_active("escape"):
+            return True
 
-    def on_light_lock(self):
-        # need to stop the vuk and fire it with the escape mode
-        self.machine.events.post('cmd_remove_mystery_meat_vuk_event')
+        safe_states = ["start", "lock_1_locked", "lock_2_locked"]
+        current_state = self.machine.game.player["v_escape_state"]
 
-        # fire the next lock animation
-        # set the appropriate variables and shots in escape
+        for i in safe_states:
+            if(i == current_state) :
+                return False
+
+        return True
+
+    def on_light_lock(self, **kwargs):
+        self.machine.events.post('cmd_mystery_show_complete')
+        self.machine.events.post('cmd_mystery_meat_award_light_lock')
 
     # Franklin
 
     def should_reject_franklin_letter(self):
-        return False
+        if not self.is_mode_active("franklin"):
+            return True
+
+        (self.machine.shots['left_franklin_shot'].state + self.machine.shots['right_franklin_shot'].state) < 7
+
+    def on_franklin_letter(self, **kwargs):
+        if self.machine.shots['left_franklin_shot'].state < 4:
+            self.machine.shots['left_franklin_shot'].hit()
+        else:
+            self.machine.shots['right_franklin_shot'].hit()
+
+    # 2 x playfield
 
     def should_reject_2_x_playfield(self):
         return False
@@ -202,7 +224,6 @@ class Mystery(CustomCode):
 
     def should_reject_franklin_frenzy(self):
         return False
-
 
     def is_mode_active(self, mode_name):
         return self.machine.mode_controller.is_active(mode_name)

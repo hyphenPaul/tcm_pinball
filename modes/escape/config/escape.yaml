@@ -191,6 +191,9 @@ event_player:
   cmd_super_skill_shot_award_light_lock:
     cmd_escape_progress_state:
 
+  cmd_mystery_meat_award_light_lock:
+    cmd_escape_progress_state:
+
   cmd_escape_enable_lock_lit_light:
     cmd_flash_slaughterhouse:
 

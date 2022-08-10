@@ -39,12 +39,6 @@ event_player:
       wait_for: cmd_mystery_show_complete
       mode: pop_bumpers
       coil_direction: left
-  cmd_remove_mystery_meat_vuk_event:
-    cmd_custom_magna_vuk_remove_event:
-      post: cmd_get_mystery
-      wait_for: cmd_mystery_show_complete
-      mode: pop_bumpers
-      coil_direction: left
   cmd_mystery_choice{choice=="small_points"}:
     - cmd_play_mystery_show
     - cmd_play_mystery_show_small_points
@@ -89,6 +83,7 @@ event_player:
   cmd_mystery_show_complete:
     - cmd_main_music_volume_up
     - cmd_reset_mystery_meater
+    - cmd_stop_slaughter_house_fast_flash
 
 variable_player:
   cmd_increase_mystery_meater_count:
@@ -289,7 +284,7 @@ show_player:
       show_tokens:
         lights:
           slaughter_house
-  cmd_mystery_show_complete:
+  cmd_stop_slaughter_house_fast_flash:
     fast_flash:
       action: stop
       show_tokens:
@@ -312,7 +307,6 @@ show_player:
     family_show:
       action: stop
 
-
   cmd_play_mystery_show_small_points:
     mystery_show_small_points:
       action: play
@@ -334,55 +328,57 @@ show_player:
       loops: 0
 
   cmd_play_mystery_light_lock:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_light_lock:
       action: play
-      events_when_completed: cmd_mystery_show_complete
+      events_when_completed: cmd_mystery_light_lock
       loops: 0
 
   cmd_play_mystery_award_franklin_letter:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_award_franklin_letter:
       action: play
-      events_when_completed: cmd_mystery_show_complete
+      events_when_completed:
+        - cmd_mystery_show_complete
+        - cmd_mystery_franklin_letter
       loops: 0
 
   cmd_play_mystery_save_from_the_grave:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_save_from_the_grave:
       action: play
       events_when_completed: cmd_mystery_show_complete
       loops: 0
 
   cmd_play_mystery_big_points:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_big_points:
       action: play
       events_when_completed: cmd_mystery_show_complete
       loops: 0
 
   cmd_play_mystery_jack_shit:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_jack_shit:
       action: play
       events_when_completed: cmd_mystery_show_complete
       loops: 0
 
   cmd_play_mystery_award_tilt_warning:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_award_tilt_warning:
       action: play
       events_when_completed: cmd_mystery_show_complete
       loops: 0
 
   cmd_play_mystery_light_extra_ball:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_light_extra_ball:
       action: play
       events_when_completed: cmd_mystery_show_complete
       loops: 0
 
   cmd_play_mystery_franklin_frenzy:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_franklin_frenzy:
       action: play
       events_when_completed: cmd_mystery_show_complete
       loops: 0
 
   cmd_play_mystery_3_x_playfield:
-    mystery_show_add_bonus_multiplier:
+    mystery_show_3_x_playfield:
       action: play
       events_when_completed: cmd_mystery_show_complete
       loops: 0
