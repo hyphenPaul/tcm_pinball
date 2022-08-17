@@ -1,11 +1,11 @@
 #config_version=5
 
 ##################################################
-# 
+#
 #  A Mode to handle the universal management of
 #  the 2x playfield multiplier to easily pass it
 #  between modes
-# 
+#
 ##################################################
 
 mode:
@@ -23,7 +23,7 @@ event_player:
 
   cmd_clean_up_modes:
     - cmd_reset_tt_playfield
- 
+
   cmd_reset_tt_playfield:
     - cmd_ttp_disable
     - cmd_set_tt_playfield_counter_0

@@ -19,17 +19,17 @@ show_player:
   ball_save_player_start_enabled:
     on:
       show_tokens:
-        lights: shoot_again
+        lights: l_shoot_again
 
   ball_save_player_start_disabled:
     off:
       show_tokens:
-        lights: shoot_again
+        lights: l_shoot_again
 
   ball_save_player_start_grace_period:
     off:
       show_tokens:
-        lights: shoot_again
+        lights: l_shoot_again
 
   ball_save_player_start_extended_saving_ball:
     standard_ball_save:
@@ -38,17 +38,21 @@ show_player:
   ball_save_player_start_extended_enabled:
     on:
       show_tokens:
-        lights: shoot_again
+        lights: l_shoot_again
 
   ball_save_player_start_extended_disabled:
     off:
       show_tokens:
-        lights: shoot_again
+        lights: l_shoot_again
 
   ball_save_player_start_extended_grace_period:
     off:
       show_tokens:
-        lights: shoot_again
+        lights: l_shoot_again
+
+  ball_save_mystery_saving_ball:
+    standard_ball_save:
+      loops: 0
 
   cmd_flash_mode_light_grid_in_yer_face:
     fast_flash:
@@ -175,6 +179,13 @@ ball_saves:
     balls_to_save: 1
     grace_period: 5s
     eject_delay: 3.2s
+  mystery:
+    active_time: 30s
+    enable_events: cmd_mystery_start_30_second_ball_save
+    auto_launch: yes
+    balls_to_save: -1
+    grace_period: 5s
+    eject_delay: 3.2s
   multiball_start:
     active_time: 20s
     enable_events: mode_escape_multiball_started
@@ -183,6 +194,12 @@ ball_saves:
     grace_period: 5s
 
 slides:
+  tilt_warning_0:
+    widgets:
+      - type: image
+        image: warning_1v1
+    expire: 1.8s
+
   tilt_slide:
     - type: text
       text: "TILTING!!!"
@@ -196,6 +213,9 @@ slide_player:
     chainsaw_shoot_the_van_slide:
       priority: 500
       expire: 4.6s
+  tilt_warning_0:
+    tilt_warning_0:
+      priority: 100000
 #  s_plumb_bob_tilt_active:
 #    tilt_slide:
 #      priority: 500

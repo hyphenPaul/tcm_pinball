@@ -2,7 +2,7 @@
 
 - duration: .5
   lights:
-    shoot_again: off
+    l_shoot_again: off
     grid_in_yer_face: off
     grid_fire: off
     grid_space_jam: off
@@ -82,7 +82,7 @@
     ttp_save: off
 - duration: .5
   lights:
-    shoot_again: ff
+    l_shoot_again: ff
     grid_in_yer_face: ff
     grid_fire: ff
     grid_space_jam: ff

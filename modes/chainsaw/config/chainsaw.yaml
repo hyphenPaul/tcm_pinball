@@ -765,12 +765,12 @@ show_player:
     fast_flash:
       action: play
       show_tokens:
-        light: shoot_again
+        light: l_shoot_again
   cmd_stop_shoot_again_flash:
     fast_flash:
       action: stop
       show_tokens:
-        light: shoot_again
+        light: l_shoot_again
   cmd_stop_flash_super_jackpot_light:
     fast_flash:
       action: stop

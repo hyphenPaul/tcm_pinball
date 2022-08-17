@@ -75,9 +75,9 @@ event_player:
   cmd_mystery_choice{choice=="franklin_frenzy"}:
     - cmd_play_mystery_show
     - cmd_play_mystery_franklin_frenzy
-  cmd_mystery_choice{choice=="3_x_playfield"}:
+  cmd_mystery_choice{choice=="2_x_playfield"}:
     - cmd_play_mystery_show
-    - cmd_play_mystery_3_x_playfield
+    - cmd_play_mystery_2_x_playfield
   cmd_play_mystery_show:
     - cmd_main_music_volume_down
   cmd_mystery_show_complete:
@@ -125,6 +125,8 @@ variable_player:
     v_pop_bumper_show_old_man:
       int: -1
       action: set
+  cmd_mystery_add_tilt_warning:
+    tilt_warnings: -1
 
 animations:
   character_hit:
@@ -362,13 +364,17 @@ show_player:
   cmd_play_mystery_award_tilt_warning:
     mystery_show_award_tilt_warning:
       action: play
-      events_when_completed: cmd_mystery_show_complete
+      events_when_completed:
+        - cmd_mystery_show_complete
+        - cmd_mystery_add_tilt_warning
       loops: 0
 
   cmd_play_mystery_light_extra_ball:
     mystery_show_light_extra_ball:
       action: play
-      events_when_completed: cmd_mystery_show_complete
+      events_when_completed:
+       - cmd_mystery_show_complete
+       - cmd_light_extra_ball
       loops: 0
 
   cmd_play_mystery_franklin_frenzy:
@@ -377,11 +383,38 @@ show_player:
       events_when_completed: cmd_mystery_show_complete
       loops: 0
 
-  cmd_play_mystery_3_x_playfield:
-    mystery_show_3_x_playfield:
+  cmd_play_mystery_30_second_ball_save:
+    mystery_show_30_second_ball_save:
       action: play
-      events_when_completed: cmd_mystery_show_complete
+      events_when_completed:
+        - cmd_mystery_show_complete
+        - cmd_mystery_start_30_second_ball_save
       loops: 0
+
+  cmd_play_mystery_2_x_playfield:
+    mystery_show_2_x_playfield:
+      action: play
+      events_when_completed:
+        - cmd_mystery_show_complete
+        - cmd_mystery_start_2x_playfield
+      loops: 0
+
+  # doesn't work when in base
+
+  ball_save_mystery_enabled:
+    on:
+      show_tokens:
+        lights: l_shoot_again
+
+  ball_save_mystery_disabled:
+    off:
+      show_tokens:
+        lights: l_shoot_again
+
+  ball_save_mystery_grace_period:
+    off:
+      show_tokens:
+        lights: l_shoot_again
 
 
 sound_player:

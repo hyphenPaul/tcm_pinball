@@ -482,17 +482,17 @@ show_player:
   ball_save_multiball_start_enabled:
     on:
       show_tokens:
-        lights: shoot_again
+        lights: l_shoot_again
 
   ball_save_multiball_start_disabled:
     off:
       show_tokens:
-        lights: shoot_again
+        lights: l_shoot_again
 
   ball_save_multiball_start_grace_period:
     off:
       show_tokens:
-        lights: shoot_again
+        lights: l_shoot_again
 
 light_player:
 

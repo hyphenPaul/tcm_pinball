@@ -1,7 +1,7 @@
 #config_version=5
 
 lights:
-  shoot_again:
+  l_shoot_again:
     number: L01
   grid_in_yer_face:
     number: L02

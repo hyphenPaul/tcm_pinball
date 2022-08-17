@@ -27,6 +27,7 @@ event_player:
   player_v_tt_playfield_counter_count.10{value==4}:
     - cmd_start_tt_playfield
 
+
   # light control
   cmd_refresh_tt_playfield_lights{current_player.v_tt_playfield_counter_count==0}:
     - cmd_show_lights_ttp_stage_0
@@ -67,6 +68,11 @@ event_player:
     - cmd_ttp_enable
     - cmd_tt_playfield_start_timer
     - cmd_set_tt_playfield_variable
+
+  cmd_mystery_start_2x_playfield:
+    - cmd_set_tt_playfield_counter_4
+    - cmd_refresh_tt_playfield_lights
+    - cmd_start_tt_playfield
 
   # Don't show the animation if the extra ball animation is about to play
 #  ball_save_ttp_ball_save_saving_ball{current_player.v_extra_ball_animation_playing<1}:

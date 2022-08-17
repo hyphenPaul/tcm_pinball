@@ -195,3 +195,4 @@ sound_player:
   s_right_outlane_active: outer_flipper_lane
   s_left_outlane_active: outer_flipper_lane
   ball_save_player_start_saving_ball: keep_shooting_v3_audio
+  ball_save_mystery_saving_ball: keep_shooting_v3_audio

@@ -31,19 +31,19 @@ class Mystery(CustomCode):
     def fetch_choices(self):
         choices = []
         frequenies = {
-#            "small_points": 20, # done
-#            "add_bonus_multiplier": 20, # done
-#            "award_chain_saw_letter": 20, # done
-#            "light_lock": 20, # done
-#            "award_franklin_letter": 20, # done
-#            "2_x_playfield": 10,
-#            "save_from_the_grave": 10,
-#            "30_second_ball_save": 10,
-#            "big_points": 10, # done
-#            "jack_shit": 10, # done
-#            "award_tilt_warning": 5,
-#            "light_extra_ball": 1,
-#            "franklin_frenzy": 1
+            "small_points": 20,
+            "add_bonus_multiplier": 20,
+            "award_chain_saw_letter": 20,
+            "light_lock": 20,
+            "award_franklin_letter": 20,
+            "2_x_playfield": 10,
+            "30_second_ball_save": 10,
+            "big_points": 10,
+            "jack_shit": 10,
+            "award_tilt_warning": 5,
+            "light_extra_ball": 1
+#            "save_from_the_grave": 10, # on hold
+#            "collect_bonus": 10, # on hold
         }
 
         for choice, number in frequenies.items():
@@ -217,6 +217,15 @@ class Mystery(CustomCode):
     # 2 x playfield
 
     def should_reject_2_x_playfield(self):
+        if not self.is_mode_active("tt_playfield"):
+            return True
+
+        if self.machine.game.player["v_ttp_enabled"] == 1:
+            return True
+
+        if self.machine.game.player["v_tt_playfield_counter_count"] > 2:
+            return True
+
         return False
 
     def should_reject_light_extra_ball(self):
