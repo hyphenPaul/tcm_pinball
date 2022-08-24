@@ -1,0 +1,143 @@
+#config_version=5
+
+mode:
+  start_events:
+    - cmd_start_mode_combos
+  stop_events:
+    - cmd_stop_mode_combos
+  priority: 10000
+
+event_player:
+  timer_combo_timer_complete:
+    cmd_combo_stop_combos:
+
+  right_ramp_hit{current_player.v_combo_state=="idle"}:
+    cmd_combo_begin_right_shot:
+
+  right_orbit_hit{current_player.v_combo_state=="idle"}:
+    cmd_combo_begin_right_shot:
+
+  right_ramp_hit{current_player.v_combo_state=="right_shot"}:
+    cmd_combo_score_and_multiply:
+    cmd_combo_begin_right_shot:
+
+  right_orbit_hit{current_player.v_combo_state=="right_shot"}:
+    cmd_combo_score_and_multiply:
+    cmd_combo_begin_right_shot:
+
+  s_slaughter_house_target_active{current_player.v_combo_state=="right_shot"}:
+    cmd_combo_score_and_multiply:
+    cmd_combo_stop_combos:
+
+  left_orbit_hit{current_player.v_combo_state=="idle"}:
+    cmd_combo_begin_left_shot:
+
+  left_orbit_hit{current_player.v_combo_state=="left_shot"}:
+    cmd_combo_score_and_multiply:
+    cmd_combo_begin_left_shot:
+
+  left_ramp_hit{current_player.v_combo_state=="left_shot"}:
+    cmd_combo_score_and_multiply:
+    cmd_combo_stop_combos:
+
+  s_captive_ball_target_active{current_player.v_combo_state=="left_shot"}:
+    cmd_combo_score_and_multiply:
+    cmd_combo_stop_combos:
+
+  cmd_combo_score_and_multiply:
+    cmd_play_combo_sound:
+    cmd_combo_score:
+    cmd_add_combo_bonus:
+    cmd_inc_combo_multiplier:
+
+  cmd_combo_begin_right_shot:
+    cmd_restart_combo_timer:
+    cmd_set_combo_var_right_shot:
+
+  cmd_combo_begin_left_shot:
+    cmd_restart_combo_timer:
+    cmd_set_combo_var_left_shot:
+
+  cmd_combo_stop_combos:
+    cmd_set_combo_var_idle:
+    cmd_stop_combo_timer:
+    cmd_reset_combo_multiplier:
+
+  player_v_combo_state:
+    cmd_combo_refresh_lights:
+
+timers:
+  combo_timer:
+    start_value: 0
+    end_value: 5
+    tick_interval: 1s
+    direction: up
+    control_events:
+      - event: cmd_restart_combo_timer
+        action: restart
+      - event: cmd_stop_combo_timer
+        action: stop
+
+variable_player:
+  cmd_set_combo_var_right_shot:
+    v_combo_state:
+      action: set
+      string: "right_shot"
+
+  cmd_set_combo_var_left_shot:
+    v_combo_state:
+      action: set
+      string: "left_shot"
+
+  cmd_set_combo_var_idle:
+    v_combo_state:
+      action: set
+      string: "idle"
+
+  cmd_inc_combo_multiplier:
+    v_combo_multiplier: 1
+
+  cmd_reset_combo_multiplier:
+    v_combo_multiplier:
+      action: set
+      int: 1
+
+show_player:
+
+  ## Lights ##
+
+  cmd_combo_refresh_lights{current_player.v_combo_state=="idle"}:
+    med_flash:
+      action: stop
+      show_tokens:
+        lights:
+          - left_orbit_arrow
+          - captive_ball_arrow
+          - basket_ramp_arrow
+          - slaughter_house_arrow
+          - right_ramp_arrow
+          - right_orbit_arrow
+
+  cmd_combo_refresh_lights{current_player.v_combo_state=="left_shot"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          left_orbit_arrow,
+          basket_ramp_arrow,
+          captive_ball_arrow
+
+  cmd_combo_refresh_lights{current_player.v_combo_state=="right_shot"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          slaughter_house_arrow,
+          right_ramp_arrow,
+          right_orbit_arrow
+
+sound_player:
+  cmd_play_combo_sound:
+    woosh_1:
+      action: play
+      loops: 0

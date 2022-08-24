@@ -299,3 +299,27 @@ sounds:
     file: dinner_with_sally_music_v2_mid_tempo.wav
     volume: .5
 
+  # sawemall
+
+  sound_saw_em_all_intro_score:
+    mode_end_action: stop
+    file: saw_em_all_intro_score_v1.wav
+  sound_saw_em_all_music:
+    mode_end_action: stop
+    file: saw_em_all_music_v1.wav
+  sound_saw_em_all_karen_audio:
+    mode_end_action: stop
+    file: saw_em_all_karen_audio_v1.wav
+  sound_saw_em_all_douchebag_audio:
+    mode_end_action: stop
+    file: saw_em_all_douchebag_audio_v1.wav
+  sound_saw_em_all_dumbass_audio:
+    mode_end_action: stop
+    file: saw_em_all_dumbass_audio_v1.wav
+  sound_saw_em_all_boss_audio:
+    mode_end_action: stop
+    file: saw_em_all_boss_audio_v2.wav
+  sound_saw_em_all_chainsaw_running_audio:
+    mode_end_action: stop
+    file: saw_em_all_chainsaw_running_audio_v1.wav
+    volume: 0.2

@@ -558,47 +558,63 @@ slide_player:
 
 sound_player:
   cmd_sawemall_start_intro_slide_sound:
-    saw_em_all_intro_score_v1:
+    sound_saw_em_all_intro_score:
       action: play
       loops: 0
 
   cmd_play_sawemall_music:
-    saw_em_all_music_v1:
+    sound_saw_em_all_music:
       action: play
       loops: -1
 
   cmd_stop_sawemall_music:
-    saw_em_all_music_v1:
+    sound_saw_em_all_music:
       action: stop
 
   cmd_sawemall_play_person_chop_1_audio:
-    saw_em_all_karen_audio_v1:
+    sound_saw_em_all_karen_audio:
       action: play
       loops: 0
 
   cmd_sawemall_play_person_chop_2_audio:
-    saw_em_all_douchebag_audio_v1:
+    sound_saw_em_all_douchebag_audio:
       action: play
       loops: 0
 
   cmd_sawemall_play_person_chop_3_audio:
-    saw_em_all_dumbass_audio_v1:
+    sound_saw_em_all_dumbass_audio:
       action: play
       loops: 0
 
   cmd_sawemall_play_person_chop_4_audio:
-    saw_em_all_boss_audio_v2:
+    sound_saw_em_all_boss_audio:
       action: play
       loops: 0
 
   cmd_sawemall_play_running_chainsaw:
-    saw_em_all_chainsaw_running_audio_v1:
+    sound_saw_em_all_chainsaw_running_audio:
       action: play
-      loops: -1 
+      loops: -1
       volume: 0.2
 
   cmd_sawemall_stop_running_chainsaw:
-    saw_em_all_chainsaw_running_audio_v1:
+    sound_saw_em_all_chainsaw_running_audio:
+      action: stop
+
+  cmd_clean_up_modes:
+    sound_saw_em_all_intro_score:
+      action: stop
+    sound_saw_em_all_music:
+      action: stop
+    sound_saw_em_all_karen_audio:
+      action: stop
+    sound_saw_em_all_douchebag_audio:
+      action: stop
+    sound_saw_em_all_dumbass_audio:
+      action: stop
+    sound_saw_em_all_boss_audio:
+      action: stop
+    sound_saw_em_all_chainsaw_running_audio:
       action: stop
 
 ##################################################

@@ -3,6 +3,7 @@
 modes:
   - base
   - bonus
+  - combos
   - chainsaw
   - escape
   - escape_multiball

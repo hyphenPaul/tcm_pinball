@@ -41,13 +41,13 @@ machine_vars:
   franklin_bonus_value:
     initial_value: 100_000
   mode_bonus_value:
-    initial_value: 50000
+    initial_value: 20000
   mask_bonus_value:
-    initial_value: 100000
+    initial_value: 100_000
   meathook_bonus_value:
     initial_value: 25000
   combo_bonus_value:
-    initial_value: 100_000
+    initial_value: 5000
   memorabilia_bonus_value:
     initial_value: 500000
 
@@ -342,6 +342,17 @@ player_vars:
 
   v_initial_playfield_active_fired:
     initial_value: 0
+
+  #####################################
+  # Combos
+  #####################################
+
+  v_combo_state:
+    initial_value: "idle"
+    value_type: str
+
+  v_combo_multiplier:
+    initial_value: 1
 
   #####################################
   # Escape

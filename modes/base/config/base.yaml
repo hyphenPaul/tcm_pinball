@@ -256,7 +256,12 @@ variable_player:
   # Score
   ########################################
 
-  ## skill shot##
+  ## combo ##
+
+  cmd_combo_score:
+    score: 10000 * current_player.v_combo_combo_multiplier
+
+  ## skill shot ##
 
   cmd_skill_shot_score_lock:
     score: 15000 * current_player.v_playfield_multiplier

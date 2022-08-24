@@ -63,7 +63,7 @@ class Modes(CustomCode):
 
         self.stop_flash_lights()
 
-    # When it doubt refresh this thing. It should clean up
+    # When in doubt refresh this thing. It should clean up
     # Issues based on state at least listener and light wise
     def refresh(self):
         self.info_log('refresh')
@@ -127,6 +127,7 @@ class Modes(CustomCode):
         self.machine.events.remove_handler_by_event('ball_hold_bh_mode_van_full', self.on_van_vuk)
         self.machine.events.post('cmd_disable_bh_mode_van')
         self.machine.events.post('cmd_score_start_mode')
+        self.machine.events.post('cmd_add_mode_bonus')
         self.collect_current_mode()
         self.machine.events.post('cmd_start_' + self.modes[self.current_active_mode()]["mode_name"] + '_mode')
         self.set_mode_is_inactive()

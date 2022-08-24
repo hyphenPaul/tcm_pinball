@@ -138,14 +138,14 @@ class SkillShot(CustomCode):
 
     def set_choices(self):
         choices = {
-            "light_lock": "Light Lock", # written
-            "extra_ball": "Extra Ball", # written
-            "mystery_meat": "Light Mystery Meat", # written
-            "one_million": "One Million Points", # written
+            "light_lock": "Light Lock",
+            "extra_ball": "Extra Ball",
+            "mystery_meat": "Light Mystery Meat",
+            "one_million": "One Million Points",
             "ball_save": "+20 second Ballsave",
-            "add_help": "Add Help Letter", # written
-            "van": "Light Gas Station", # written
-            "two_hundred_fifty": "250,000 Points", # written
+            "add_help": "Add Help Letter",
+            "van": "Light Gas Station",
+            "two_hundred_fifty": "250,000 Points",
         }
 
         # Add some conditional choices here
