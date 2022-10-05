@@ -12,7 +12,8 @@ class Modes(CustomCode):
             "grandpa" :  { "light" : "grid_space_jam", "mode_name" : "grandpa" },
             "grave" :  { "light" : "grid_slam", "mode_name" : "grave" },
             "sally" :  { "light" : "grid_fastbreak", "mode_name" : "sally" },
-            "sawemall" :  { "light" : "grid_rebound", "mode_name" : "sawemall" }
+            "sawemall" :  { "light" : "grid_rebound", "mode_name" : "sawemall" },
+            "final_battle" : { "light" : "final_jam", "mode_name" : "finalbattle" }
         }
 
         self.machine.events.add_handler('mode_base_started', self.init_on_game_start)
@@ -29,6 +30,22 @@ class Modes(CustomCode):
 
     def enable(self):
         self.info_log('enable')
+
+        # final mode testing
+        current_player = self.current_player()
+
+        if not current_player['v_initial_test_fired']:
+            current_player['v_collected_modes'] = [
+                "hitchhiker",
+                "barbecue",
+                "grandpa",
+                "grave",
+                "sally",
+                "sawemall"
+            ]
+            current_player['v_initial_test_fired'] = True
+
+        # final mode testing end
 
         if self.enabled == False:
             self.enabled = True
@@ -168,6 +185,8 @@ class Modes(CustomCode):
         self.machine.events.post('cmd_flash_mode_light_' + self.current_player()['v_active_mode_light'])
 
     def on_drop_target(self, **kwargs):
+        # Sean - doesn't seem to be working
+        # with the modes manually set
         if not self.initiated:
             return
 
@@ -198,13 +217,22 @@ class Modes(CustomCode):
         return current_player['v_mode_is_active']
 
     def mode_list(self):
-        return self.modes.keys()
+        return list(set(self.modes.keys()) - set(['final_battle']))
 
     def remaining_modes(self):
-        return list(set(self.mode_list()) - set(self.current_collected_modes()))
+        remaining_modes = list(set(self.mode_list()) - set(self.current_collected_modes()))
+
+        if remaining_modes == []:
+            return ['final_battle']
+        else:
+            return remaining_modes
 
     def collect_current_mode(self):
         current_player = self.current_player()
+
+        if self.current_active_mode() == 'final_battle':
+            self.clear_current_collected_modes()
+            return
 
         if self.current_active_mode() not in self.current_collected_modes():
             current_player['v_collected_modes'].append(self.current_active_mode())

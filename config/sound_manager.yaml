@@ -68,6 +68,13 @@ event_player:
   mode_sawemall_stopping:
     - cmd_start_base_music
 
+  mode_finalbattle_started:
+    - cmd_stop_music
+
+  mode_finalbattle_stopping:
+    - cmd_stop_finalbattle_music
+    - cmd_start_base_music
+
   cmd_stop_music.1:
     - cmd_stop_escape_multiball_music
     - cmd_stop_grandpa_bg_music
@@ -77,6 +84,7 @@ event_player:
     - cmd_stop_barbecue_music
     - cmd_stop_sawemall_music
     - cmd_stop_mask_mania_music
+    - cmd_stop_finalbattle_music
 
 sound_player:
 

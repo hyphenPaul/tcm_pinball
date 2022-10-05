@@ -303,6 +303,35 @@ event_player:
     - cmd_stop_franklin_frenzy
 
   ##################################################
+  # Final Battle
+  ##################################################
+
+  cmd_start_finalbattle_mode:
+    - cmd_stop_mode_escape
+    - cmd_stop_mode_chainsaw
+    - cmd_stop_mode_franklin
+    - cmd_stop_mode_franklin_hurry_up
+    - cmd_stop_mode_franklin_frenzy
+    - cmd_stop_mode_mask
+    - cmd_stop_mode_combos
+    - cmd_stop_mode_tt_playfield
+    - cmd_stop_mode_meathook
+    - cmd_stop_mode_pop_bumpers
+    - cmd_start_mode_finalbattle
+
+  cmd_stop_finalbattle_mode:
+    - cmd_stop_mode_finalbattle
+    - cmd_start_mode_chainsaw
+    - cmd_start_mode_franklin
+    - cmd_start_mode_mask
+    - cmd_start_mode_combos
+    - cmd_start_mode_tt_playfield
+    - cmd_start_mode_meathook
+    - cmd_start_mode_pop_bumpers
+    - cmd_start_mode_escape
+    - cmd_enable_mode_switcher_and_message
+
+  ##################################################
   # Testing
   ##################################################
 

@@ -4,8 +4,10 @@ flippers:
   left_flipper:
     main_coil: c_flipper_left
     activation_switch: s_left_flipper
-    #enable_events: machine_reset_phase_3 # enable to turn on automatically
+    disable_events: ball_will_end, service_mode_entered, cmd_disable_flippers
+    enable_events: ball_started, cmd_enable_flippers
   right_flipper:
     main_coil: c_flipper_right
     activation_switch: s_right_flipper
-    #enable_events: machine_reset_phase_3 # enable to turn on automatically
+    disable_events: ball_will_end, service_mode_entered, cmd_disable_flippers
+    enable_events: ball_started, cmd_enable_flippers

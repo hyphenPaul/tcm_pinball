@@ -1,0 +1,102 @@
+#config_version=5
+
+mode:
+  start_events:
+    - cmd_start_mode_finalbattle
+  stop_events:
+    - cmd_stop_mode_finalbattle
+  priority: 10000
+
+##################################################
+# Events
+##################################################
+
+event_player:
+
+  mode_finalbattle_started:
+    cmd_mode_intro_started:
+    cmd_disable_bh_mode_van:
+    cmd_finalbattle_set_state_starting:
+    cmd_finalbattle_start_intro_slide:
+    cmd_finalbattle_start_intro_slide_sound:
+
+  slide_finalbattle_intro_slide_removed:
+    cmd_finalbattle_after_intro_complete:
+
+  cmd_finalbattle_after_intro_complete:
+    cmd_finalbattle_phase_1_timer_start:
+    cmd_play_finalbattle_bg_music:
+
+  timer_finalbattle_phase_1_timer_complete:
+    cmd_finalbattle_enable_phase_1_ball_save:
+    cmd_disable_flippers:
+    #cmd_stop_finalbattle_mode:
+
+  ball_save_finalbattle_phase_1_saving_ball:
+    cmd_enable_flippers:
+
+##################################################
+# Logic
+##################################################
+
+timers:
+  finalbattle_phase_1_timer:
+    start_value: 0
+    end_value: 15
+    tick_interval: 1s
+    direction: up
+    start_running: False
+    control_events:
+      - event: cmd_finalbattle_phase_1_timer_stop
+        action: stop
+      - event: cmd_finalbattle_phase_1_timer_start
+        action: start
+
+ball_saves:
+  finalbattle_phase_1:
+    enable_events: cmd_finalbattle_enable_phase_1_ball_save
+    auto_launch: yes
+    eject_delay: 5s
+
+##################################################
+# Variables
+##################################################
+
+variable_player:
+  cmd_finalbattle_set_state_starting:
+    v_finalbattle_state:
+      action: set
+      string: "starting"
+
+##################################################
+# Sites and Sounds
+##################################################
+
+slides:
+  finalbattle_intro_slide:
+    widgets:
+      - type: image
+        image: final_massacre_intro_v3
+
+slide_player:
+  cmd_finalbattle_start_intro_slide:
+    finalbattle_intro_slide:
+      priority: 300
+      expire: 35.3s
+
+sound_player:
+  cmd_finalbattle_start_intro_slide_sound:
+    final_massacre_intro_v3_score:
+      action: play
+      loops: 0
+      events_when_about_to_finish: cmd_eject_van_vuk_with_audio
+      about_to_finish_time: 2s
+
+  cmd_play_finalbattle_bg_music:
+    finalbattle_bg_music:
+      action: play
+      loops: -1
+
+  cmd_stop_finalbattle_music:
+    finalbattle_bg_music:
+      action: stop

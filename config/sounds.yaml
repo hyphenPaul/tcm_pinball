@@ -298,6 +298,10 @@ sounds:
     mode_end_action: stop
     file: dinner_with_sally_music_v2_mid_tempo.wav
     volume: .5
+  finalbattle_bg_music:
+    mode_end_action: stop
+    file: horde_inspired.wav
+    volume: 1
 
   # sawemall
 

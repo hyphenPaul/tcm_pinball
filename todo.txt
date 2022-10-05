@@ -1,35 +1,27 @@
 - mode sounds persists when draining
 
 - next up (general)
+  - fraklin letters should flash during franklin millions
   - mode music didn't turn off during tilt
   - When i swap the ball save for the extended ball save, the light isn't turning off (i think it's because of the grace period maybe)
   - need to add conditional for the van and mystery meater for the skill shot
   - the light lock light shouldn't be the mystery meater light (use the arrow maybe)
-  - save from the grave is now a mystery meater award
   - use the green arrow for the massacre million captive ball jackpot indicator
-  - franklin gives you franklin frenzy out of the gate (no hurry up)
-    - score increases for each one
-    - future state - the third could be a mini wizards
-  - change save from the grave to 2x playfield
-    - if you complete it and it's actually lit, you can hit it during any mode
-    - you cannot add to the 3 shots building up to it during modes
-    - resets for each ball
-  - Figure out the new mode
+  - franklin needs to make a sound after you collect all letters on that orbit
   - see if we can fix the right ramp arrow light
   - extend ball saver for chainsaw multiball
+  - finish hook counter
+  - mystery meater gets harder
+  - mode mystery meaters should give you extra time
+  - mystery during multiball should be an add a ball
 - next up (sean)
   - make the shot lights strobe fast right before changing on the bbq mode
-- next up (dem)
-  - grandpa - background music
-  - grandpa - better "get her grandpa"
 
 ----------------------------------------------------------------------------------------------------
 
 bugs
 
-
-- the van has double listeners on the next ball when it's lit and you drain (was after getting it through skill shot)
-  - i don't think it's cycling through it's state correctly
+- a modes started during kids multiball
 - 2 x playfield not turning off (maybe when active and drain)
 - mask mania dead skin mask not turning off
 - make the van message switch more fool proof - it shouldn't be active for a mode and kick out right away (try lighting van and draining)
@@ -38,40 +30,14 @@ bugs
 
 todo:
   - We should cut background music out when the mystery meater goes
-  - "your bonus got more help" audio
-  - add 2x playfield to mystery meat
-  - make sure mystery starts over
-  - make sure mask values persist
-  - disable franklin shots during hurry up
   - add value to back to hurry up when you hit the orbits
   - make sure the hurry turns off end of ball (everything should)
   - Base level bonus (10000)
-
-
-- skill shot
-  - sound design
-    - left ramp made
-    - basket made
-    - fail
-  - wire up remaining awards
-  - extra ball only on 3rd ball etc
-  - lock only when applicable
-  - it's not working on later balls - probably in a weird state
-
-- finish hook counter
-- finish the mystery activating bonuses
-- mystery meater gets harder
-- if you're in a multiball, mystery should be add a ball (50%)
-- Help Multiplier lights
+  - Help Multiplier lights
 
 Nice to have
-- Make a nice intro on first ball "Welcome to Texas" with the TCM logo
-- 4 orbit combo is a franklin combo
-- Franklin audio pitch shifts higher and higher
 - funny bonuses
 -- awesome light show
--- tits
--- drunk flippers (30s reverse flippers but double playfield)
 -- one shot one kill (a single chance to shoot a basket)
 
 ----------------------------------------------------------------------------------------
@@ -113,7 +79,6 @@ Script:
 - Captive ball target hit sound
 - Sounds effect for "safe" hit
 - Multiball
-- 
 
 ----------------------------------------------------------------------------------------
 Docker
