@@ -169,6 +169,24 @@ player_vars:
     initial_value: "starting"
     value_type: str
 
+  v_finalbattle_knife_collected:
+    initial_value: 0
+
+  v_finalbattle_axe_collected:
+    initial_value: 0
+
+  v_finalbattle_nunchucks_collected:
+    initial_value: 0
+
+  v_finalbattle_shotgun_collected:
+    initial_value: 0
+
+  v_finalbattle_flamethrower_collected:
+    initial_value: 0
+
+  v_finalbattle_chainsaw_collected:
+    initial_value: 0
+
   #####################################
   # Magnavuk
   #####################################

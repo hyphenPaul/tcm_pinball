@@ -300,7 +300,7 @@ sounds:
     volume: .5
   finalbattle_bg_music:
     mode_end_action: stop
-    file: horde_inspired.wav
+    file: final_massacre_music_v2.wav
     volume: 1
 
   # sawemall

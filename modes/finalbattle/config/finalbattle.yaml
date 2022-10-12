@@ -21,11 +21,17 @@ event_player:
     cmd_finalbattle_start_intro_slide_sound:
 
   slide_finalbattle_intro_slide_removed:
+    # sean - remove this
+    #cmd_eject_van_vuk_with_audio:
     cmd_finalbattle_after_intro_complete:
 
   cmd_finalbattle_after_intro_complete:
+    cmd_finalbattle_set_state_phase_1:
     cmd_finalbattle_phase_1_timer_start:
+    cmd_finalbattle_enable_phase_1_gimme_ball_save:
     cmd_play_finalbattle_bg_music:
+    cmd_finalbattle_start_collect_weapons_slide:
+    cmd_finalbattle_refresh_lights:
 
   timer_finalbattle_phase_1_timer_complete:
     cmd_finalbattle_enable_phase_1_ball_save:
@@ -35,14 +41,54 @@ event_player:
   ball_save_finalbattle_phase_1_saving_ball:
     cmd_enable_flippers:
 
+  ## shot events phase 1 ##
+
+  # knife
+  left_orbit_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_knife_collected==0}:
+    cmd_finalbattle_set_knife_collected:
+    cmd_finalbattle_start_knife_collect_slide:
+    cmd_finalbattle_refresh_lights:
+
+  # nunchucks
+  s_captive_ball_target_active{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_nunchucks_collected==0}:
+    cmd_finalbattle_set_nunchucks_collected:
+    cmd_finalbattle_start_nunchucks_collect_slide:
+    cmd_finalbattle_refresh_lights:
+
+  # axe
+  left_ramp_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_axe_collected==0}:
+    cmd_finalbattle_set_axe_collected:
+    cmd_finalbattle_start_axe_collect_slide:
+    cmd_finalbattle_refresh_lights:
+
+  # shotgun
+  s_slaughter_house_target_active{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_shotgun_collected==0}:
+    cmd_finalbattle_set_shotgun_collected:
+    cmd_finalbattle_start_shotgun_collect_slide:
+    cmd_finalbattle_refresh_lights:
+
+  # flamethrower
+  right_ramp_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_flamethrower_collected==0}:
+    cmd_finalbattle_set_flamethrower_collected:
+    cmd_finalbattle_start_flamethrower_collect_slide:
+    cmd_finalbattle_refresh_lights:
+
+  # chainsaw
+  right_orbit_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_chainsaw_collected==0}:
+    cmd_finalbattle_set_chainsaw_collected:
+    cmd_finalbattle_start_chainsaw_collect_slide:
+    cmd_finalbattle_refresh_lights:
+
+
 ##################################################
 # Logic
 ##################################################
 
 timers:
+
   finalbattle_phase_1_timer:
     start_value: 0
-    end_value: 15
+    end_value: 600 # should be 60
     tick_interval: 1s
     direction: up
     start_running: False
@@ -53,6 +99,13 @@ timers:
         action: start
 
 ball_saves:
+
+  finalbattle_phase_1_gimme:
+    enable_events: cmd_finalbattle_enable_phase_1_gimme_ball_save
+    disable_events: cmd_finalbattle_enable_phase_1_ball_save
+    balls_to_save: -1
+    auto_launch: yes
+
   finalbattle_phase_1:
     enable_events: cmd_finalbattle_enable_phase_1_ball_save
     auto_launch: yes
@@ -63,30 +116,140 @@ ball_saves:
 ##################################################
 
 variable_player:
+
   cmd_finalbattle_set_state_starting:
     v_finalbattle_state:
       action: set
       string: "starting"
+
+  cmd_finalbattle_set_state_phase_1:
+    v_finalbattle_state:
+      action: set
+      string: "phase_1"
+
+  ## shot variables ##
+
+  cmd_finalbattle_set_knife_collected: 
+    v_finalbattle_knife_collected:
+      action: set
+      int: 1
+
+  cmd_finalbattle_set_nunchucks_collected: 
+    v_finalbattle_nunchucks_collected:
+      action: set
+      int: 1
+
+  cmd_finalbattle_set_axe_collected: 
+    v_finalbattle_axe_collected:
+      action: set
+      int: 1
+
+  cmd_finalbattle_set_shotgun_collected: 
+    v_finalbattle_shotgun_collected:
+      action: set
+      int: 1
+
+  cmd_finalbattle_set_flamethrower_collected: 
+    v_finalbattle_flamethrower_collected:
+      action: set
+      int: 1
+
+  cmd_finalbattle_set_chainsaw_collected: 
+    v_finalbattle_chainsaw_collected:
+      action: set
+      int: 1
 
 ##################################################
 # Sites and Sounds
 ##################################################
 
 slides:
+
   finalbattle_intro_slide:
     widgets:
       - type: image
-        image: final_massacre_intro_v3
+        image: final_massacre_intro_v4
+
+  finalbattle_collect_weapons_slide:
+    widgets:
+      - type: image
+        image: fb_gather_weapons_v1
+
+  finalbattle_collect_axe_slide:
+    widgets:
+      - type: image
+        image: fb_axe_v1
+
+  finalbattle_collect_shotgun_slide:
+    widgets:
+      - type: image
+        image: fb_shotgun_v1
+
+  finalbattle_collect_nunchucks_slide:
+    widgets:
+      - type: image
+        image: fb_nunchucks_v1
+
+  finalbattle_collect_flamethrower_slide:
+    widgets:
+      - type: image
+        image: fb_flamethrower_v1
+
+  finalbattle_collect_chainsaw_slide:
+    widgets:
+      - type: image
+        image: fb_chainsaw_v1
+
+  finalbattle_collect_knife_slide:
+    widgets:
+      - type: image
+        image: fb_knife_v1
 
 slide_player:
+
   cmd_finalbattle_start_intro_slide:
     finalbattle_intro_slide:
       priority: 300
-      expire: 35.3s
+      expire: 33.7s
+
+  cmd_finalbattle_start_collect_weapons_slide:
+    finalbattle_collect_weapons_slide:
+      priority: 300
+
+  cmd_finalbattle_start_axe_collect_slide:
+    finalbattle_collect_axe_slide:
+      priority: 1000
+      expire: 3s
+
+  cmd_finalbattle_start_knife_collect_slide:
+    finalbattle_collect_knife_slide:
+      priority: 1000
+      expire: 3s
+
+  cmd_finalbattle_start_chainsaw_collect_slide:
+    finalbattle_collect_chainsaw_slide:
+      priority: 1000
+      expire: 3s
+
+  cmd_finalbattle_start_flamethrower_collect_slide:
+    finalbattle_collect_flamethrower_slide:
+      priority: 1000
+      expire: 3s
+
+  cmd_finalbattle_start_nunchucks_collect_slide:
+    finalbattle_collect_nunchucks_slide:
+      priority: 1000
+      expire: 3s
+
+  cmd_finalbattle_start_shotgun_collect_slide:
+    finalbattle_collect_shotgun_slide:
+      priority: 1000
+      expire: 3s
 
 sound_player:
+
   cmd_finalbattle_start_intro_slide_sound:
-    final_massacre_intro_v3_score:
+    final_massacre_intro_v4_score:
       action: play
       loops: 0
       events_when_about_to_finish: cmd_eject_van_vuk_with_audio
@@ -100,3 +263,228 @@ sound_player:
   cmd_stop_finalbattle_music:
     finalbattle_bg_music:
       action: stop
+
+show_player:
+
+  ### ball save ###
+
+  ball_save_finalbattle_phase_1_gimme_enabled:
+    med_flash:
+      action: play
+      show_tokens:
+        light: l_shoot_again
+
+  ball_save_finalbattle_phase_1_disabled:
+    med_flash:
+      action: stop
+      show_tokens:
+        light: l_shoot_again
+
+  ### phase 1 lights ###
+
+  cmd_finalbattle_refresh_lights.1{current_player.v_finalbattle_knife_collected==0}:
+    med_flash_knife:
+      action: play
+      show_tokens:
+        lights: left_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.2{current_player.v_finalbattle_knife_collected==1}:
+    med_flash_knife:
+      action: stop
+      show_tokens:
+        lights: left_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.3{current_player.v_finalbattle_nunchucks_collected==0}:
+    med_flash_nunchucks:
+      action: play
+      show_tokens:
+        lights: captive_ball_arrow
+
+  cmd_finalbattle_refresh_lights.4{current_player.v_finalbattle_nunchucks_collected==1}:
+    med_flash_nunchucks:
+      action: stop
+      show_tokens:
+        lights: captive_ball_arrow
+
+  cmd_finalbattle_refresh_lights.5{current_player.v_finalbattle_axe_collected==0}:
+    med_flash_axe:
+      action: play
+      show_tokens:
+        lights: basket_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.6{current_player.v_finalbattle_axe_collected==1}:
+    med_flash_axe:
+      action: stop
+      show_tokens:
+        lights: basket_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.7{current_player.v_finalbattle_shotgun_collected==0}:
+    med_flash_shotgun:
+      action: play
+      show_tokens:
+        lights: slaughter_house_arrow
+
+  cmd_finalbattle_refresh_lights.8{current_player.v_finalbattle_shotgun_collected==1}:
+    med_flash_shotgun:
+      action: stop
+      show_tokens:
+        lights: slaughter_house_arrow
+
+  cmd_finalbattle_refresh_lights.9{current_player.v_finalbattle_flamethrower_collected==0}:
+    med_flash_flamethrower:
+      action: play
+      show_tokens:
+        lights: right_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.10{current_player.v_finalbattle_flamethrower_collected==1}:
+    med_flash_flamethrower:
+      action: stop
+      show_tokens:
+        lights: right_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.11{current_player.v_finalbattle_chainsaw_collected==0}:
+    med_flash_chainsaw:
+      action: play
+      show_tokens:
+        lights: right_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.12{current_player.v_finalbattle_chainsaw_collected==1}:
+    med_flash_chainsaw:
+      action: stop
+      show_tokens:
+        lights: right_orbit_arrow
+
+
+shows:
+  med_flash_knife:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_nunchucks:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_axe:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_shotgun:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_flamethrower:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_chainsaw:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
