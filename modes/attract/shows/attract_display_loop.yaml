@@ -1,11 +1,77 @@
 #show_version=5
 
-- duration: 200s
+- duration: 2s
   slides:
-    slide_1:
+    finalbattle_collection_bonus_slide:
       widgets:
       - type: image
-        image: fb_sawyer_death_v1
+        image: fb_collected_intro_v1
+
+- duration: 2s
+  slides:
+    finalbattle_bonus_flamethrower_slide:
+      widgets:
+      - type: image
+        image: fb_weapon_flamethrower_v1
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+- duration: 2s
+  slides:
+    finalbattle_bonus_axe_slide:
+      widgets:
+      - type: image
+        image: fb_collected_axe_v1
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+- duration: 2s
+  slides:
+    finalbattle_bonus_chainsaw_slide:
+      widgets:
+      - type: image
+        image: fb_collected_chainsaw_v1
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+- duration: 2s
+  slides:
+    finalbattle_bonus_knife_slide:
+      widgets:
+      - type: image
+        image: fb_collected_knife_v1
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+- duration: 2s
+  slides:
+    finalbattle_bonus_fully_loaded_slide:
+      widgets:
+      - type: image
+        image: fb_collected_fully_loaded_v1
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+- duration: 2s
+  slides:
+    finalbattle_bonus_nothing_slide:
+      widgets:
+      - type: image
+        image: fb_collected_nothing_v1
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
 
 
 # ------------ attract mode start --------------

@@ -18,11 +18,12 @@ event_player:
     cmd_disable_bh_mode_van:
     cmd_finalbattle_set_state_starting:
     cmd_finalbattle_start_intro_slide:
-    cmd_finalbattle_start_intro_slide_sound:
+    # sean - add this
+    #cmd_finalbattle_start_intro_slide_sound:
 
   slide_finalbattle_intro_slide_removed:
     # sean - remove this
-    #cmd_eject_van_vuk_with_audio:
+    cmd_eject_van_vuk_with_audio:
     cmd_finalbattle_after_intro_complete:
 
   cmd_finalbattle_after_intro_complete:
@@ -47,35 +48,41 @@ event_player:
   left_orbit_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_knife_collected==0}:
     cmd_finalbattle_set_knife_collected:
     cmd_finalbattle_start_knife_collect_slide:
+    cmd_finalbattle_play_knife_collect_sound:
     cmd_finalbattle_refresh_lights:
 
   # nunchucks
   s_captive_ball_target_active{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_nunchucks_collected==0}:
     cmd_finalbattle_set_nunchucks_collected:
+    cmd_finalbattle_play_nunchucks_collect_sound:
     cmd_finalbattle_start_nunchucks_collect_slide:
     cmd_finalbattle_refresh_lights:
 
   # axe
   left_ramp_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_axe_collected==0}:
     cmd_finalbattle_set_axe_collected:
+    cmd_finalbattle_play_axe_collect_sound:
     cmd_finalbattle_start_axe_collect_slide:
     cmd_finalbattle_refresh_lights:
 
   # shotgun
   s_slaughter_house_target_active{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_shotgun_collected==0}:
     cmd_finalbattle_set_shotgun_collected:
+    cmd_finalbattle_play_shotgun_collect_sound:
     cmd_finalbattle_start_shotgun_collect_slide:
     cmd_finalbattle_refresh_lights:
 
   # flamethrower
   right_ramp_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_flamethrower_collected==0}:
     cmd_finalbattle_set_flamethrower_collected:
+    cmd_finalbattle_play_flamethrower_collect_sound:
     cmd_finalbattle_start_flamethrower_collect_slide:
     cmd_finalbattle_refresh_lights:
 
   # chainsaw
   right_orbit_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_chainsaw_collected==0}:
     cmd_finalbattle_set_chainsaw_collected:
+    cmd_finalbattle_play_chainsaw_collect_sound:
     cmd_finalbattle_start_chainsaw_collect_slide:
     cmd_finalbattle_refresh_lights:
 
@@ -129,32 +136,32 @@ variable_player:
 
   ## shot variables ##
 
-  cmd_finalbattle_set_knife_collected: 
+  cmd_finalbattle_set_knife_collected:
     v_finalbattle_knife_collected:
       action: set
       int: 1
 
-  cmd_finalbattle_set_nunchucks_collected: 
+  cmd_finalbattle_set_nunchucks_collected:
     v_finalbattle_nunchucks_collected:
       action: set
       int: 1
 
-  cmd_finalbattle_set_axe_collected: 
+  cmd_finalbattle_set_axe_collected:
     v_finalbattle_axe_collected:
       action: set
       int: 1
 
-  cmd_finalbattle_set_shotgun_collected: 
+  cmd_finalbattle_set_shotgun_collected:
     v_finalbattle_shotgun_collected:
       action: set
       int: 1
 
-  cmd_finalbattle_set_flamethrower_collected: 
+  cmd_finalbattle_set_flamethrower_collected:
     v_finalbattle_flamethrower_collected:
       action: set
       int: 1
 
-  cmd_finalbattle_set_chainsaw_collected: 
+  cmd_finalbattle_set_chainsaw_collected:
     v_finalbattle_chainsaw_collected:
       action: set
       int: 1
@@ -172,8 +179,17 @@ slides:
 
   finalbattle_collect_weapons_slide:
     widgets:
+      - type: text
+        text: (player|score)
+        number_grouping: true
+        style: small
+        round_anchor_x: left
+        anchor_x: middle
+        anchor_y: bottom
+        x: 50%
+        y: 2
       - type: image
-        image: fb_gather_weapons_v1
+        image: fb_gather_weapons_v2
 
   finalbattle_collect_axe_slide:
     widgets:
@@ -205,12 +221,57 @@ slides:
       - type: image
         image: fb_knife_v1
 
+
+  ## collection bonus slide ##
+
+  finalbattle_collection_bonus_slide:
+    widgets:
+    - type: image
+      image: fb_collected_intro_v1
+
+  finalbattle_bonus_flamethrower_slide:
+    widgets:
+    - type: image
+      image: fb_weapon_flamethrower_v1
+
+  finalbattle_bonus_axe_slide:
+    widgets:
+    - type: image
+      image: fb_collected_axe_v1
+
+  finalbattle_bonus_chainsaw_slide:
+    widgets:
+    - type: image
+      image: fb_collected_chainsaw_v1
+
+  finalbattle_bonus_knife_slide:
+    widgets:
+    - type: image
+      image: fb_collected_knife_v1
+
+  finalbattle_bonus_shotgun_slide:
+    widgets:
+    - type: image
+      image: fb_collected_shotgun_v1
+
+  finalbattle_bonus_fully_loaded_slide:
+    widgets:
+    - type: image
+      image: fb_collected_fully_loaded_v1
+
+  finalbattle_bonus_nothing_slide:
+    widgets:
+    - type: image
+      image: fb_collected_nothing_v1
+
 slide_player:
 
   cmd_finalbattle_start_intro_slide:
     finalbattle_intro_slide:
       priority: 300
-      expire: 33.7s
+      # Sean : re-add this
+      #expire: 33.7s
+      expire: 2s
 
   cmd_finalbattle_start_collect_weapons_slide:
     finalbattle_collect_weapons_slide:
@@ -263,6 +324,36 @@ sound_player:
   cmd_stop_finalbattle_music:
     finalbattle_bg_music:
       action: stop
+
+  cmd_finalbattle_play_knife_collect_sound:
+    fb_knife_v1_SFX:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_nunchucks_collect_sound:
+    fb_nunchucks_v1_SFX:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_axe_collect_sound:
+    fb_axe_v1_SFX:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_shotgun_collect_sound:
+    fb_shotgun_v1_SFX:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_flamethrower_collect_sound:
+    fb_flamethrower_v1_SFX:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_chainsaw_collect_sound:
+    fb_chainsaw_v1_SFX:
+      action: play
+      loops: 0
 
 show_player:
 
