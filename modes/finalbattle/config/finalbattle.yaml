@@ -36,7 +36,12 @@ event_player:
 
   timer_finalbattle_phase_1_timer_complete:
     cmd_finalbattle_enable_phase_1_ball_save:
+    cmd_finalbattle_set_state_phase_2:
+    cmd_finalbattle_refresh_lights:
     cmd_disable_flippers:
+    cmd_finalbattle_play_completion_slides:
+    cmd_remove_finalbattle_start_collect_weapons_slide:
+    cmd_finalbattle_show_bonus_slides:
     #cmd_stop_finalbattle_mode:
 
   ball_save_finalbattle_phase_1_saving_ball:
@@ -95,7 +100,7 @@ timers:
 
   finalbattle_phase_1_timer:
     start_value: 0
-    end_value: 600 # should be 60
+    end_value: 30
     tick_interval: 1s
     direction: up
     start_running: False
@@ -104,6 +109,18 @@ timers:
         action: stop
       - event: cmd_finalbattle_phase_1_timer_start
         action: start
+
+  finalbattle_bonus_timer:
+    start_value: 0
+    end_value: 1000
+    tick_interval: 3s
+    direction: up
+    start_running: False
+    control_events:
+      - event: cmd_finalbattle_bonus_timer_stop
+        action: stop
+      - event: cmd_finalbattle_bonus_timer_restart
+        action: restart
 
 ball_saves:
 
@@ -115,8 +132,8 @@ ball_saves:
 
   finalbattle_phase_1:
     enable_events: cmd_finalbattle_enable_phase_1_ball_save
-    auto_launch: yes
-    eject_delay: 5s
+    auto_launch: false
+    delayed_eject_events: cmd_finalbattle_eject_ball_save
 
 ##################################################
 # Variables
@@ -133,6 +150,11 @@ variable_player:
     v_finalbattle_state:
       action: set
       string: "phase_1"
+
+  cmd_finalbattle_set_state_phase_2:
+    v_finalbattle_state:
+      action: set
+      string: "phase_2"
 
   ## shot variables ##
 
@@ -224,7 +246,7 @@ slides:
 
   ## collection bonus slide ##
 
-  finalbattle_collection_bonus_slide:
+  finalbattle_bonus_intro_slide:
     widgets:
     - type: image
       image: fb_collected_intro_v1
@@ -254,6 +276,11 @@ slides:
     - type: image
       image: fb_collected_shotgun_v1
 
+  finalbattle_bonus_nunchucks_slide:
+    widgets:
+    - type: image
+      image: fb_collected_nunchucks_v1
+
   finalbattle_bonus_fully_loaded_slide:
     widgets:
     - type: image
@@ -273,9 +300,15 @@ slide_player:
       #expire: 33.7s
       expire: 2s
 
+  # weapon collection slides
+
   cmd_finalbattle_start_collect_weapons_slide:
     finalbattle_collect_weapons_slide:
       priority: 300
+
+  cmd_remove_finalbattle_start_collect_weapons_slide:
+    finalbattle_collect_weapons_slide:
+      action: remove
 
   cmd_finalbattle_start_axe_collect_slide:
     finalbattle_collect_axe_slide:
@@ -306,6 +339,89 @@ slide_player:
     finalbattle_collect_shotgun_slide:
       priority: 1000
       expire: 3s
+
+  # bonus slides
+
+  cmd_finalbattle_bonus_intro_slide:
+    finalbattle_bonus_intro_slide:
+      priority: 100000
+      expire: 4s
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+  cmd_finalbattle_bonus_flamethrower_slide:
+    finalbattle_bonus_flamethrower_slide:
+      priority: 100000
+      expire: 3s
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+  cmd_finalbattle_bonus_axe_slide:
+    finalbattle_bonus_axe_slide:
+      priority: 100000
+      expire: 3s
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+  cmd_finalbattle_bonus_nunchucks_slide:
+    finalbattle_bonus_nunchucks_slide:
+      priority: 100000
+      expire: 3s
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+  cmd_finalbattle_bonus_chainsaw_slide:
+    finalbattle_bonus_chainsaw_slide:
+      priority: 100000
+      expire: 3s
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+  cmd_finalbattle_bonus_knife_slide:
+    finalbattle_bonus_knife_slide:
+      priority: 100000
+      expire: 3s
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+  cmd_finalbattle_bonus_shotgun_slide:
+    finalbattle_bonus_shotgun_slide:
+      priority: 100000
+      expire: 3s
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+  cmd_finalbattle_bonus_fully_loaded_slide:
+    finalbattle_bonus_fully_loaded_slide:
+      priority: 100000
+      expire: 3s
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
+
+  cmd_finalbattle_bonus_nothing_slide:
+    finalbattle_bonus_nothing_slide:
+      priority: 100000
+      expire: 3s
+      transition:
+        type: push
+        duration: 0.3s
+        direction: left
 
 sound_player:
 
@@ -373,78 +489,119 @@ show_player:
 
   ### phase 1 lights ###
 
-  cmd_finalbattle_refresh_lights.1{current_player.v_finalbattle_knife_collected==0}:
+  cmd_finalbattle_refresh_lights.1{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_knife_collected==0}:
     med_flash_knife:
       action: play
       show_tokens:
         lights: left_orbit_arrow
 
-  cmd_finalbattle_refresh_lights.2{current_player.v_finalbattle_knife_collected==1}:
+  cmd_finalbattle_refresh_lights.2{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_knife_collected==1}:
     med_flash_knife:
       action: stop
       show_tokens:
         lights: left_orbit_arrow
 
-  cmd_finalbattle_refresh_lights.3{current_player.v_finalbattle_nunchucks_collected==0}:
+  cmd_finalbattle_refresh_lights.3{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_nunchucks_collected==0}:
     med_flash_nunchucks:
       action: play
       show_tokens:
         lights: captive_ball_arrow
 
-  cmd_finalbattle_refresh_lights.4{current_player.v_finalbattle_nunchucks_collected==1}:
+  cmd_finalbattle_refresh_lights.4{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_nunchucks_collected==1}:
     med_flash_nunchucks:
       action: stop
       show_tokens:
         lights: captive_ball_arrow
 
-  cmd_finalbattle_refresh_lights.5{current_player.v_finalbattle_axe_collected==0}:
+  cmd_finalbattle_refresh_lights.5{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_axe_collected==0}:
     med_flash_axe:
       action: play
       show_tokens:
         lights: basket_ramp_arrow
 
-  cmd_finalbattle_refresh_lights.6{current_player.v_finalbattle_axe_collected==1}:
+  cmd_finalbattle_refresh_lights.6{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_axe_collected==1}:
     med_flash_axe:
       action: stop
       show_tokens:
         lights: basket_ramp_arrow
 
-  cmd_finalbattle_refresh_lights.7{current_player.v_finalbattle_shotgun_collected==0}:
+  cmd_finalbattle_refresh_lights.7{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_shotgun_collected==0}:
     med_flash_shotgun:
       action: play
       show_tokens:
         lights: slaughter_house_arrow
 
-  cmd_finalbattle_refresh_lights.8{current_player.v_finalbattle_shotgun_collected==1}:
+  cmd_finalbattle_refresh_lights.8{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_shotgun_collected==1}:
     med_flash_shotgun:
       action: stop
       show_tokens:
         lights: slaughter_house_arrow
 
-  cmd_finalbattle_refresh_lights.9{current_player.v_finalbattle_flamethrower_collected==0}:
+  cmd_finalbattle_refresh_lights.9{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_flamethrower_collected==0}:
     med_flash_flamethrower:
       action: play
       show_tokens:
         lights: right_ramp_arrow
 
-  cmd_finalbattle_refresh_lights.10{current_player.v_finalbattle_flamethrower_collected==1}:
+  cmd_finalbattle_refresh_lights.10{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_flamethrower_collected==1}:
     med_flash_flamethrower:
       action: stop
       show_tokens:
         lights: right_ramp_arrow
 
-  cmd_finalbattle_refresh_lights.11{current_player.v_finalbattle_chainsaw_collected==0}:
+  cmd_finalbattle_refresh_lights.11{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_chainsaw_collected==0}:
     med_flash_chainsaw:
       action: play
       show_tokens:
         lights: right_orbit_arrow
 
-  cmd_finalbattle_refresh_lights.12{current_player.v_finalbattle_chainsaw_collected==1}:
+  cmd_finalbattle_refresh_lights.12{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_chainsaw_collected==1}:
     med_flash_chainsaw:
       action: stop
       show_tokens:
         lights: right_orbit_arrow
 
+  cmd_finalbattle_refresh_lights.13{current_player.v_finalbattle_state=="phase_2"}:
+    med_flash_axe:
+      action: stop
+      show_tokens:
+        lights: basket_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.15{current_player.v_finalbattle_state=="phase_2"}:
+    med_flash_shotgun:
+      action: stop
+      show_tokens:
+        lights: slaughter_house_arrow
+
+  cmd_finalbattle_refresh_lights.17{current_player.v_finalbattle_state=="phase_2"}:
+    med_flash_flamethrower:
+      action: stop
+      show_tokens:
+        lights: right_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.19{current_player.v_finalbattle_state=="phase_2"}:
+    med_flash_chainsaw:
+      action: stop
+      show_tokens:
+        lights: right_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.16{current_player.v_finalbattle_state=="phase_2"}:
+    med_flash_flamethrower:
+      action: play
+      show_tokens:
+        lights: left_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.14{current_player.v_finalbattle_state=="phase_2"}:
+    med_flash_shotgun:
+      action: play
+      show_tokens:
+        lights: captive_ball_arrow
+
+  cmd_finalbattle_refresh_lights.18{current_player.v_finalbattle_state=="phase_2"}:
+    med_flash_chainsaw:
+      action: play
+      show_tokens:
+        lights: basket_ramp_arrow
 
 shows:
   med_flash_knife:

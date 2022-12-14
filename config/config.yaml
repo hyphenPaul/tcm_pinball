@@ -51,3 +51,4 @@ custom_code:
   - scriptlets.skill_shot.SkillShot
   - scriptlets.test.Test
   - scriptlets.modes.Modes
+  - scriptlets.weapon_slides.WeaponSlides

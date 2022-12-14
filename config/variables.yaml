@@ -53,6 +53,9 @@ machine_vars:
 
 player_vars:
 
+  v_foobar:
+    initial_value: 1
+
   #####################################
   # Diverter
   #####################################

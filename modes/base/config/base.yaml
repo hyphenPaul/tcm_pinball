@@ -208,6 +208,51 @@ slides:
       anchor_y: bottom
       y: 21
 
+
+# test start
+
+  finalbattle_collection_bonus_slide:
+    widgets:
+    - type: image
+      image: fb_collected_intro_v1
+
+  finalbattle_bonus_flamethrower_slide:
+    widgets:
+    - type: image
+      image: fb_weapon_flamethrower_v1
+
+  finalbattle_bonus_axe_slide:
+    widgets:
+    - type: image
+      image: fb_collected_axe_v1
+
+  finalbattle_bonus_chainsaw_slide:
+    widgets:
+    - type: image
+      image: fb_collected_chainsaw_v1
+
+  finalbattle_bonus_knife_slide:
+    widgets:
+    - type: image
+      image: fb_collected_knife_v1
+
+  finalbattle_bonus_shotgun_slide:
+    widgets:
+    - type: image
+      image: fb_collected_shotgun_v1
+
+  finalbattle_bonus_fully_loaded_slide:
+    widgets:
+    - type: image
+      image: fb_collected_fully_loaded_v1
+
+  finalbattle_bonus_nothing_slide:
+    widgets:
+    - type: image
+      image: fb_collected_nothing_v1
+
+# test end
+
 slide_player:
   cmd_start_shoot_the_van:
     chainsaw_shoot_the_van_slide:
@@ -216,6 +261,48 @@ slide_player:
   tilt_warning_0:
     tilt_warning_0:
       priority: 100000
+
+## test start
+#
+#  s_left_flipper_active.1:
+#    t1:
+#      priority: 40000
+#  s_left_flipper_active.2:
+#    t2:
+#      priority: 30000
+#  s_left_flipper_active.3:
+#    t3:
+#      priority: 20000
+#  s_left_flipper_active.4:
+#    t4:
+#      priority: 10000
+#
+#  timers_my_test_timer_tick{value == 1}:
+#    t1:
+#      action: remove
+#  timers_my_test_timer_tick{value == 2}:
+#    t2:
+#      action: remove
+#  timers_my_test_timer_tick{value == 3}:
+#    t3:
+#      action: remove
+#  timers_my_test_timer_tick{value == 4}:
+#    t4:
+#      action: remove
+#
+#timers:
+#  my_test_timer:
+#    start_value: 0
+#    end_value: 20
+#    tick_interval: 2s
+#    direction: up
+#    start_running: False
+#    control_events:
+#      - event: s_left_flipper_active
+#        action: start
+
+# test end
+
 #  s_plumb_bob_tilt_active:
 #    tilt_slide:
 #      priority: 500
