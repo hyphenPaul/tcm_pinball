@@ -30,22 +30,26 @@ event_player:
     cmd_finalbattle_set_state_phase_1:
     cmd_finalbattle_phase_1_timer_start:
     cmd_finalbattle_enable_phase_1_gimme_ball_save:
-    cmd_play_finalbattle_bg_music:
+    cmd_play_finalbattle_bg_music_phase_1:
     cmd_finalbattle_start_collect_weapons_slide:
     cmd_finalbattle_refresh_lights:
 
   timer_finalbattle_phase_1_timer_complete:
+    cmd_stop_finalbattle_music_phase_1:
+    cmd_finalbattle_play_bass_hit:
+    cmd_finalbattle_play_bonus_bg:
     cmd_finalbattle_enable_phase_1_ball_save:
     cmd_finalbattle_set_state_phase_2:
     cmd_finalbattle_refresh_lights:
     cmd_disable_flippers:
     cmd_finalbattle_play_completion_slides:
     cmd_remove_finalbattle_start_collect_weapons_slide:
-    cmd_finalbattle_show_bonus_slides:
+    cmd_finalbattle_show_initial_bonus_slide:
     #cmd_stop_finalbattle_mode:
 
-  ball_save_finalbattle_phase_1_saving_ball:
+  cmd_finalbattle_bonus_slides_complete:
     cmd_enable_flippers:
+    cmd_finalbattle_eject_ball_save:
 
   ## shot events phase 1 ##
 
@@ -99,10 +103,10 @@ event_player:
 timers:
 
   finalbattle_phase_1_timer:
-    start_value: 0
-    end_value: 30
+    start_value: 40
+    end_value: 0
     tick_interval: 1s
-    direction: up
+    direction: down 
     start_running: False
     control_events:
       - event: cmd_finalbattle_phase_1_timer_stop
@@ -113,7 +117,7 @@ timers:
   finalbattle_bonus_timer:
     start_value: 0
     end_value: 1000
-    tick_interval: 3s
+    tick_interval: 2.5s
     direction: up
     start_running: False
     control_events:
@@ -345,11 +349,14 @@ slide_player:
   cmd_finalbattle_bonus_intro_slide:
     finalbattle_bonus_intro_slide:
       priority: 100000
-      expire: 4s
       transition:
         type: push
-        duration: 0.3s
-        direction: left
+        duration: 0.5s
+        direction: up
+
+  cmd_remove_finalbattle_bonus_intro_slide:
+    finalbattle_bonus_intro_slide:
+      action: remove
 
   cmd_finalbattle_bonus_flamethrower_slide:
     finalbattle_bonus_flamethrower_slide:
@@ -357,8 +364,8 @@ slide_player:
       expire: 3s
       transition:
         type: push
-        duration: 0.3s
-        direction: left
+        duration: 0.5s
+        direction: up
 
   cmd_finalbattle_bonus_axe_slide:
     finalbattle_bonus_axe_slide:
@@ -366,8 +373,8 @@ slide_player:
       expire: 3s
       transition:
         type: push
-        duration: 0.3s
-        direction: left
+        duration: 0.5s
+        direction: up
 
   cmd_finalbattle_bonus_nunchucks_slide:
     finalbattle_bonus_nunchucks_slide:
@@ -375,8 +382,8 @@ slide_player:
       expire: 3s
       transition:
         type: push
-        duration: 0.3s
-        direction: left
+        duration: 0.5s
+        direction: up
 
   cmd_finalbattle_bonus_chainsaw_slide:
     finalbattle_bonus_chainsaw_slide:
@@ -384,8 +391,8 @@ slide_player:
       expire: 3s
       transition:
         type: push
-        duration: 0.3s
-        direction: left
+        duration: 0.5s
+        direction: up
 
   cmd_finalbattle_bonus_knife_slide:
     finalbattle_bonus_knife_slide:
@@ -393,8 +400,8 @@ slide_player:
       expire: 3s
       transition:
         type: push
-        duration: 0.3s
-        direction: left
+        duration: 0.5s
+        direction: up
 
   cmd_finalbattle_bonus_shotgun_slide:
     finalbattle_bonus_shotgun_slide:
@@ -402,8 +409,8 @@ slide_player:
       expire: 3s
       transition:
         type: push
-        duration: 0.3s
-        direction: left
+        duration: 0.5s
+        direction: up
 
   cmd_finalbattle_bonus_fully_loaded_slide:
     finalbattle_bonus_fully_loaded_slide:
@@ -411,8 +418,8 @@ slide_player:
       expire: 3s
       transition:
         type: push
-        duration: 0.3s
-        direction: left
+        duration: 0.5s
+        direction: up
 
   cmd_finalbattle_bonus_nothing_slide:
     finalbattle_bonus_nothing_slide:
@@ -420,8 +427,8 @@ slide_player:
       expire: 3s
       transition:
         type: push
-        duration: 0.3s
-        direction: left
+        duration: 0.5s
+        direction: up
 
 sound_player:
 
@@ -432,12 +439,12 @@ sound_player:
       events_when_about_to_finish: cmd_eject_van_vuk_with_audio
       about_to_finish_time: 2s
 
-  cmd_play_finalbattle_bg_music:
+  cmd_play_finalbattle_bg_music_phase_1:
     finalbattle_bg_music:
       action: play
       loops: -1
 
-  cmd_stop_finalbattle_music:
+  cmd_stop_finalbattle_music_phase_1:
     finalbattle_bg_music:
       action: stop
 
@@ -468,6 +475,21 @@ sound_player:
 
   cmd_finalbattle_play_chainsaw_collect_sound:
     fb_chainsaw_v1_SFX:
+      action: play
+      loops: 0
+
+  player_finalbattle_finalbattle_phase_1_timer_tick{value == 3}:
+    FB_dramatic_swell:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_bass_hit:
+    FB_bass_hit:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_bonus_bg:
+    FB_weapons_count_music_v1:
       action: play
       loops: 0
 

@@ -16,8 +16,10 @@ class WeaponSlides(CustomCode):
         ]
         self.bonus_slides = []
 
-        self.machine.events.add_handler("cmd_finalbattle_show_bonus_slides", self.show_bonus_slides)
+        self.machine.events.add_handler("cmd_finalbattle_show_initial_bonus_slide", self.show_initial_bonus_slide)
+        self.machine.events.add_handler("ball_save_finalbattle_phase_1_saving_ball", self.show_bonus_slides)
         self.machine.events.add_handler("timer_finalbattle_bonus_timer_tick", self.show_slides)
+        self.machine.events.add_handler("cmd_finalbattle_bonus_slides_completed", self.on_slides_complete)
 
     def collected_slides(self):
         collected = []
@@ -28,6 +30,9 @@ class WeaponSlides(CustomCode):
                 collected.append(slide_name)
 
         return collected
+
+    def show_initial_bonus_slide(self, **kwargs):
+        self.machine.events.post("cmd_finalbattle_bonus_intro_slide")
 
     def show_bonus_slides(self, **kwargs):
         self.bonus_slides = self.all_slides()
@@ -40,8 +45,12 @@ class WeaponSlides(CustomCode):
             self.machine.events.post("cmd_finalbattle_bonus_timer_stop")
         else:
             slide = self.bonus_slides.pop()
-            self.machine.events.post("cmd_" + slide)
+            self.machine.events.post("cmd_finalbattle_play_" + slide + "_collect_sound")
+            self.machine.events.post("cmd_finalbattle_bonus_" + slide + "_slide")
 
+    def on_slides_complete(self, **kwargs):
+        self.machine.events.post("cmd_remove_finalbattle_bonus_intro_slide")
+        self.machine.events.post("cmd_finalbattle_bonus_slides_complete")
 
     def all_slides(self):
         collected = self.collected_slides()
@@ -52,14 +61,7 @@ class WeaponSlides(CustomCode):
         if collected == []:
             collected.append("nothing")
 
-        collected = ["intro"] + collected
-
-        final = []
-
-        for name in collected:
-            final.append("finalbattle_bonus_" + name + "_slide")
-
-        return final
+        return collected
 
 
     def current_player(self):
