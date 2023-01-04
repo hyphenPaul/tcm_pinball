@@ -48,8 +48,17 @@ event_player:
     #cmd_stop_finalbattle_mode:
 
   cmd_finalbattle_bonus_slides_complete:
+    cmd_finalbattle_start_multiball_intro_slide:
+
+  slide_finalbattle_multiball_intro_slide_removed:
     cmd_enable_flippers:
     cmd_finalbattle_eject_ball_save:
+    cmd_finalbattle_start_multiball:
+
+  cmd_finalbattle_start_multiball:
+    cmd_finalbattle_set_state_multiball:
+    cmd_finalbattle_start_final_multiball:
+    cmd_finalbattle_refresh_lights:
 
   ## shot events phase 1 ##
 
@@ -160,6 +169,11 @@ variable_player:
       action: set
       string: "phase_2"
 
+  cmd_finalbattle_set_state_multiball:
+    v_finalbattle_state:
+      action: set
+      string: "multiball_hitchhiker"
+
   ## shot variables ##
 
   cmd_finalbattle_set_knife_collected:
@@ -191,6 +205,17 @@ variable_player:
     v_finalbattle_chainsaw_collected:
       action: set
       int: 1
+
+##################################################
+# Devices
+##################################################
+
+multiballs:
+  final_multiball:
+    ball_count: 5
+    ball_count_type: add
+    shoot_again: 30s
+    start_events: cmd_finalbattle_start_final_multiball
 
 ##################################################
 # Sites and Sounds
@@ -294,6 +319,11 @@ slides:
     widgets:
     - type: image
       image: fb_collected_nothing_v1
+
+  finalbattle_multiball_intro_slide:
+    widgets:
+    - type: text
+      text: Intro Placeholder
 
 slide_player:
 
@@ -429,6 +459,13 @@ slide_player:
         type: push
         duration: 0.5s
         direction: up
+
+  cmd_finalbattle_start_multiball_intro_slide:
+    finalbattle_multiball_intro_slide:
+      priority: 100000
+      # Sean : re-add this
+      #expire: 33.7s
+      expire: 2s
 
 sound_player:
 
@@ -609,17 +646,61 @@ show_player:
 
   cmd_finalbattle_refresh_lights.16{current_player.v_finalbattle_state=="phase_2"}:
     med_flash_flamethrower:
-      action: play
+      action: stop
       show_tokens:
         lights: left_orbit_arrow
 
   cmd_finalbattle_refresh_lights.14{current_player.v_finalbattle_state=="phase_2"}:
     med_flash_shotgun:
-      action: play
+      action: stop
       show_tokens:
         lights: captive_ball_arrow
 
   cmd_finalbattle_refresh_lights.18{current_player.v_finalbattle_state=="phase_2"}:
+    med_flash_chainsaw:
+      action: stop
+      show_tokens:
+        lights: basket_ramp_arrow
+
+  ## Multiball Lights ##
+
+  cmd_finalbattle_refresh_lights.19{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_axe:
+      action: play
+      show_tokens:
+        lights: basket_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.20{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_shotgun:
+      action: play
+      show_tokens:
+        lights: slaughter_house_arrow
+
+  cmd_finalbattle_refresh_lights.21{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_flamethrower:
+      action: play
+      show_tokens:
+        lights: right_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.22{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_chainsaw:
+      action: stop
+      show_tokens:
+        lights: right_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.23{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_flamethrower:
+      action: play
+      show_tokens:
+        lights: left_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.24{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_shotgun:
+      action: play
+      show_tokens:
+        lights: captive_ball_arrow
+
+  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
     med_flash_chainsaw:
       action: play
       show_tokens:
