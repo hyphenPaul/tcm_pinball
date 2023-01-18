@@ -211,45 +211,6 @@ slides:
 
 # test start
 
-  finalbattle_collection_bonus_slide:
-    widgets:
-    - type: image
-      image: fb_collected_intro_v1
-
-  finalbattle_bonus_flamethrower_slide:
-    widgets:
-    - type: image
-      image: fb_weapon_flamethrower_v1
-
-  finalbattle_bonus_axe_slide:
-    widgets:
-    - type: image
-      image: fb_collected_axe_v1
-
-  finalbattle_bonus_chainsaw_slide:
-    widgets:
-    - type: image
-      image: fb_collected_chainsaw_v1
-
-  finalbattle_bonus_knife_slide:
-    widgets:
-    - type: image
-      image: fb_collected_knife_v1
-
-  finalbattle_bonus_shotgun_slide:
-    widgets:
-    - type: image
-      image: fb_collected_shotgun_v1
-
-  finalbattle_bonus_fully_loaded_slide:
-    widgets:
-    - type: image
-      image: fb_collected_fully_loaded_v1
-
-  finalbattle_bonus_nothing_slide:
-    widgets:
-    - type: image
-      image: fb_collected_nothing_v1
 
 # test end
 
@@ -263,50 +224,13 @@ slide_player:
       priority: 100000
 
 ## test start
-#
-#  s_left_flipper_active.1:
-#    t1:
+
+#  s_right_flipper_active:
+#    finalbattle_hitchhiker_fight:
 #      priority: 40000
-#  s_left_flipper_active.2:
-#    t2:
-#      priority: 30000
-#  s_left_flipper_active.3:
-#    t3:
-#      priority: 20000
-#  s_left_flipper_active.4:
-#    t4:
-#      priority: 10000
-#
-#  timers_my_test_timer_tick{value == 1}:
-#    t1:
-#      action: remove
-#  timers_my_test_timer_tick{value == 2}:
-#    t2:
-#      action: remove
-#  timers_my_test_timer_tick{value == 3}:
-#    t3:
-#      action: remove
-#  timers_my_test_timer_tick{value == 4}:
-#    t4:
-#      action: remove
-#
-#timers:
-#  my_test_timer:
-#    start_value: 0
-#    end_value: 20
-#    tick_interval: 2s
-#    direction: up
-#    start_running: False
-#    control_events:
-#      - event: s_left_flipper_active
-#        action: start
 
 # test end
 
-#  s_plumb_bob_tilt_active:
-#    tilt_slide:
-#      priority: 500
-#      expire: 2.5s
 
 ##################################################
 # Shots
@@ -672,14 +596,18 @@ variable_player:
   # Testing
   ########################################
 
-      #  s_left_flipper_active:
-      #    v_diverter_is_active:
-      #      action: set
-      #      int: 0
-      #  s_right_flipper_active:
-      #    v_diverter_is_active:
-      #      action: set
-      #      int: 1
+#  s_left_flipper_active:
+#    v_finalbattle_hitchhiker_damage: current_player.v_finalbattle_damage
+#
+#  player_v_finalbattle_hitchhiker_damage:
+#    v_finalbattle_hitchhiker_width:
+#      action: set
+#      float: current_player.v_finalbattle_hitchhiker_damage / current_player.v_finalbattle_hitchhiker_damage_total * 128.0
+
+#  s_right_flipper_active:
+#    v_diverter_is_active:
+#      action: set
+#      int: 1
 
 event_player:
 
@@ -856,10 +784,10 @@ event_player:
   # Testing
   ########################################
 
-  s_right_flipper_active:
-    - cmd_test_flipper_right
-  s_left_flipper_active:
-    - cmd_test_flipper_left
+#  s_right_flipper_active:
+#    - cmd_test_flipper_right
+#  s_left_flipper_active:
+#    - cmd_test_flipper_left
 
 #timers:
 #
@@ -867,3 +795,4 @@ event_player:
 #    start_value: 0
 #    end_value: 1
 #    start_running: true
+

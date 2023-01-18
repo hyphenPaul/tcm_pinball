@@ -190,6 +190,18 @@ player_vars:
   v_finalbattle_chainsaw_collected:
     initial_value: 0
 
+  v_finalbattle_hitchhiker_width:
+    value_type: float
+    initial_value: 0.0
+
+  v_finalbattle_hitchhiker_damage_total:
+    value_type: float
+    initial_value: 100
+
+  v_finalbattle_damage:
+    value_type: float
+    initial_value: 7.0
+
   #####################################
   # Magnavuk
   #####################################

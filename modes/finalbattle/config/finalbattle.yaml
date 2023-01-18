@@ -56,9 +56,13 @@ event_player:
     cmd_finalbattle_start_multiball:
 
   cmd_finalbattle_start_multiball:
-    cmd_finalbattle_set_state_multiball:
     cmd_finalbattle_start_final_multiball:
+    cmd_start_hitchhiker:
+
+  cmd_start_hitchhiker:
+    cmd_finalbattle_set_state_multiball_hitchhiker:
     cmd_finalbattle_refresh_lights:
+    cmd_show_hitchhiker_slide:
 
   ## shot events phase 1 ##
 
@@ -103,6 +107,25 @@ event_player:
     cmd_finalbattle_play_chainsaw_collect_sound:
     cmd_finalbattle_start_chainsaw_collect_slide:
     cmd_finalbattle_refresh_lights:
+
+  # Sean
+  left_orbit_hit{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    cmd_damage_hitchhiker:
+
+  s_captive_ball_target_active{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    cmd_damage_hitchhiker:
+
+  left_ramp_hit{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    cmd_damage_hitchhiker:
+
+  s_slaughter_house_target_active{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    cmd_damage_hitchhiker:
+
+  right_ramp_hit{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    cmd_damage_hitchhiker:
+
+  right_orbit_hit{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    cmd_damage_hitchhiker:
 
 
 ##################################################
@@ -169,7 +192,7 @@ variable_player:
       action: set
       string: "phase_2"
 
-  cmd_finalbattle_set_state_multiball:
+  cmd_finalbattle_set_state_multiball_hitchhiker:
     v_finalbattle_state:
       action: set
       string: "multiball_hitchhiker"
@@ -205,6 +228,16 @@ variable_player:
     v_finalbattle_chainsaw_collected:
       action: set
       int: 1
+
+  ## fight variables ##
+
+  cmd_damage_hitchhiker:
+    v_finalbattle_hitchhiker_damage: current_player.v_finalbattle_damage
+
+  player_v_finalbattle_hitchhiker_damage:
+    v_finalbattle_hitchhiker_width:
+      action: set
+      float: current_player.v_finalbattle_hitchhiker_damage / current_player.v_finalbattle_hitchhiker_damage_total * 128.0
 
 ##################################################
 # Devices
@@ -324,6 +357,48 @@ slides:
     widgets:
     - type: text
       text: Intro Placeholder
+
+  ## finalbattle slides ##
+
+  finalbattle_hitchhiker_fight:
+    widgets:
+    - type: text
+      text: hitchhiker placeholder
+      style: small
+      anchor_x: 0
+      anchor_y: 0
+      x: 2
+      y: 25
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 5
+      y: 15
+      width: 5
+      height: 5
+      animations:
+        player_v_finalbattle_hitchhiker_width:
+          - property: x
+            value: 1
+            duration: 0s
+          - property: x
+            value: 5
+            duration: 0.3s
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 0
+      y: 0
+      z: 500
+      width: 0
+      height: 3
+      animations:
+        player_v_finalbattle_hitchhiker_width:
+          - property: width
+            value: (value)
+            duration: 0.2s
 
 slide_player:
 
@@ -466,6 +541,10 @@ slide_player:
       # Sean : re-add this
       #expire: 33.7s
       expire: 2s
+
+  cmd_show_hitchhiker_slide:
+    finalbattle_hitchhiker_fight:
+      priority: 40000
 
 sound_player:
 
@@ -664,6 +743,48 @@ show_player:
 
   ## Multiball Lights ##
 
+  cmd_finalbattle_refresh_lights.9999999{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_axe:
+      action: stop
+      show_tokens:
+        lights: basket_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.99999995{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_shotgun:
+      action: stop
+      show_tokens:
+        lights: slaughter_house_arrow
+
+  cmd_finalbattle_refresh_lights.99999990{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_flamethrower:
+      action: stop
+      show_tokens:
+        lights: right_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.99999991{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_chainsaw:
+      action: stop
+      show_tokens:
+        lights: right_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.99999992{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_flamethrower:
+      action: stop
+      show_tokens:
+        lights: left_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.99999993{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_shotgun:
+      action: stop
+      show_tokens:
+        lights: captive_ball_arrow
+
+  cmd_finalbattle_refresh_lights.99999994{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    med_flash_chainsaw:
+      action: stop
+      show_tokens:
+        lights: basket_ramp_arrow
+
   cmd_finalbattle_refresh_lights.19{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
     med_flash_axe:
       action: play
@@ -684,7 +805,7 @@ show_player:
 
   cmd_finalbattle_refresh_lights.22{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
     med_flash_chainsaw:
-      action: stop
+      action: play
       show_tokens:
         lights: right_orbit_arrow
 
@@ -838,4 +959,3 @@ shows:
           color: off
         (leds):
           color: off
-
