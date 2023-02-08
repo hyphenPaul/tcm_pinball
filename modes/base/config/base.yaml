@@ -212,104 +212,104 @@ slides:
 # test start
 
   # Sean
-  finalbattle_hitchhiker_fight_x:
-    widgets:
-    - type: rectangle
-      color: white
-      anchor_x: 0
-      anchor_y: 0
-      x: 0
-      y: 0
-      width: 128
-      height: 32
-      opacity: 0
-      animations:
-        player_v_finalbattle_hitchhiker_width:
-          - property: opacity
-            value: 1
-            duration: 0
-          - property: opacity
-            value: 0
-            duration: 0.4s
-    - type: text
-      text: KILL SAWYER
-      style: small
-      round_anchor_x: left
-      anchor_x: middle
-      anchor_y: top
-      y: 31
-      x: 50%
-      animations:
-        show_slide:
-          - property: opacity
-            value: 1
-            duration: 0.4s
-          - property: opacity
-            value: 0
-            duration: 0.4s
-            repeat: true
-    - type: text
-      text: 123456789
-      number_grouping: true
-      style: small
-      round_anchor_x: left
-      round_anchor_y: top
-      anchor_x: middle
-      anchor_y: bottom
-      y: 2
-      x: 50%
-    - type: image
-      image: fb_fight_sally_v1
-      anchor_x: 0
-      anchor_y: 0
-      x: 88
-      y: 0
-    - type: image
-      image: fb_fight_sawyer_v1
-      anchor_x: 0
-      anchor_y: 0
-      x: -10
-      y: 0
-      animations:
-        player_v_finalbattle_hitchhiker_width:
-          - property: x
-            value: -50
-            duration: 0s
-          - property: x
-            value: -10
-            duration: 0.3s
-    - type: rectangle
-      color: white
-      anchor_x: 0
-      anchor_y: 0
-      x: 39
-      y: 14
-      z: 500
-      width: 0
-      height: 5
-      animations:
-        player_v_finalbattle_hitchhiker_width:
-          - property: width
-            value: (value)
-            duration: 0.2s
-    - type: rectangle
-      color: black
-      anchor_x: 0
-      anchor_y: 0
-      #x: 128 / 2 - 20
-      x: 41
-      y: 15
-      width: 46
-      height: 3
-    - type: rectangle
-      color: white
-      anchor_x: 0
-      anchor_y: 0
-      #x: 128 / 2 - 20
-      x: 39
-      y: 14
-      width: 50
-      height: 5
+#  finalbattle_hitchhiker_fight_x:
+#    widgets:
+#    - type: text
+#      text: KILL SAWYER
+#      style: small
+#      round_anchor_x: left
+#      anchor_x: middle
+#      anchor_y: top
+#      y: 31
+#      x: 50%
+#      animations:
+#        show_slide:
+#          - property: opacity
+#            value: 1
+#            duration: 0.4s
+#          - property: opacity
+#            value: 0
+#            duration: 0.4s
+#            repeat: true
+#    - type: text
+#      text: 123456789
+#      number_grouping: true
+#      style: small
+#      round_anchor_x: left
+#      round_anchor_y: top
+#      anchor_x: middle
+#      anchor_y: bottom
+#      y: 2
+#      x: 50%
+#    - type: image
+#      image: fb_fight_sally_v1
+#      anchor_x: 0
+#      anchor_y: 0
+#      x: 88
+#      y: 0
+#    - type: image
+#      image: fb_fight_sawyer_v1
+#      anchor_x: 0
+#      anchor_y: 0
+#      x: -10
+#      y: 0
+#      animations:
+#        player_v_finalbattle_hitchhiker_width:
+#          - property: opacity
+#            value: 0
+#            duration: 0s
+#          - property: opacity
+#            value: 0
+#            duration: 0.4s
+#          - property: opacity
+#            value: 1
+#            duration: 0s
+#    - type: image
+#      image: fb_fight_sawyer_wince_v1
+#      anchor_x: 0
+#      anchor_y: 0
+#      x: -10
+#      y: 0
+#      animations:
+#        player_v_finalbattle_hitchhiker_width:
+#          - property: x
+#            value: -30
+#            duration: 0s
+#          - property: x
+#            value: -10
+#            duration: 0.4s
+#    - type: rectangle
+#      color: white
+#      anchor_x: 0
+#      anchor_y: 0
+#      x: 39
+#      y: 14
+#      z: 500
+#      width: 0
+#      height: 5
+#      animations:
+#        player_v_finalbattle_hitchhiker_width:
+#          - property: width
+#            value: (value)
+#            duration: 0.2s
+#    - type: rectangle
+#      color: black
+#      anchor_x: 0
+#      anchor_y: 0
+#      #x: 128 / 2 - 20
+#      x: 41
+#      y: 15
+#      width: 46
+#      height: 3
+#    - type: rectangle
+#      color: white
+#      anchor_x: 0
+#      anchor_y: 0
+#      #x: 128 / 2 - 20
+#      x: 39
+#      y: 14
+#      width: 50
+#      height: 5
 
 # test end
 
@@ -325,9 +325,9 @@ slide_player:
 ## test start
 
   # Sean
-  s_right_flipper_active:
-    finalbattle_hitchhiker_fight_x:
-      priority: 40000000000
+#  s_right_flipper_active:
+#    finalbattle_hitchhiker_fight_x:
+#      priority: 40000000000
 
 # test end
 
@@ -697,13 +697,13 @@ variable_player:
   ########################################
 
   # Sean
-  s_left_flipper_active:
-    v_finalbattle_hitchhiker_damage: current_player.v_finalbattle_damage
-
-  player_v_finalbattle_hitchhiker_damage:
-    v_finalbattle_hitchhiker_width:
-      action: set
-      float: current_player.v_finalbattle_hitchhiker_damage / current_player.v_finalbattle_hitchhiker_damage_total * 50.0
+#  s_left_flipper_active:
+#    v_finalbattle_hitchhiker_damage: current_player.v_finalbattle_damage
+#
+#  player_v_finalbattle_hitchhiker_damage:
+#    v_finalbattle_hitchhiker_width:
+#      action: set
+#      float: current_player.v_finalbattle_hitchhiker_damage / current_player.v_finalbattle_hitchhiker_damage_total * 50.0
 
 #  s_right_flipper_active:
 #    v_diverter_is_active:

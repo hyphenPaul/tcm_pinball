@@ -57,12 +57,22 @@ event_player:
 
   cmd_finalbattle_start_multiball:
     cmd_finalbattle_start_final_multiball:
-    cmd_start_hitchhiker:
+    cmd_start_sawyer:
 
-  cmd_start_hitchhiker:
-    cmd_finalbattle_set_state_multiball_hitchhiker:
+  cmd_start_sawyer:
+    cmd_finalbattle_set_state_multiball_sawyer:
     cmd_finalbattle_refresh_lights:
-    cmd_show_hitchhiker_slide:
+    cmd_show_sawyer_slide:
+
+  player_v_finalbattle_sawyer_damage{current_player.v_finalbattle_sawyer_damage>=current_player.v_finalbattle_sawyer_damage_total}:
+    cmd_finalbattle_set_state_sawyer_final_blow:
+    cmd_finalbattle_refresh_lights:
+    cmd_remove_sawyer_slide:
+    cmd_show_final_blow_slide:
+
+  cmd_finalbattle_kill_sawyer:
+    cmd_remove_final_blow_slide:
+    cmd_show_sawyer_death_slide:
 
   ## shot events phase 1 ##
 
@@ -108,24 +118,28 @@ event_player:
     cmd_finalbattle_start_chainsaw_collect_slide:
     cmd_finalbattle_refresh_lights:
 
-  # Sean
-  left_orbit_hit{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    cmd_damage_hitchhiker:
+  # shot events sawyer fight
 
-  s_captive_ball_target_active{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    cmd_damage_hitchhiker:
+  left_orbit_hit{current_player.v_finalbattle_state=="multiball_sawyer"}:
+    cmd_damage_sawyer:
 
-  left_ramp_hit{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    cmd_damage_hitchhiker:
+  s_captive_ball_target_active{current_player.v_finalbattle_state=="multiball_sawyer"}:
+    cmd_damage_sawyer:
 
-  s_slaughter_house_target_active{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    cmd_damage_hitchhiker:
+  left_ramp_hit{current_player.v_finalbattle_state=="multiball_sawyer"}:
+    cmd_damage_sawyer:
 
-  right_ramp_hit{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    cmd_damage_hitchhiker:
+  s_slaughter_house_target_active{current_player.v_finalbattle_state=="multiball_sawyer"}:
+    cmd_damage_sawyer:
 
-  right_orbit_hit{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    cmd_damage_hitchhiker:
+  right_ramp_hit{current_player.v_finalbattle_state=="multiball_sawyer"}:
+    cmd_damage_sawyer:
+
+  right_orbit_hit{current_player.v_finalbattle_state=="multiball_sawyer"}:
+    cmd_damage_sawyer:
+
+  s_super_duper_jackpot_active{current_player.v_finalbattle_state=="sawyer_final_blow"}:
+    cmd_finalbattle_kill_sawyer:
 
 
 ##################################################
@@ -192,10 +206,15 @@ variable_player:
       action: set
       string: "phase_2"
 
-  cmd_finalbattle_set_state_multiball_hitchhiker:
+  cmd_finalbattle_set_state_multiball_sawyer:
     v_finalbattle_state:
       action: set
-      string: "multiball_hitchhiker"
+      string: "multiball_sawyer"
+
+  cmd_finalbattle_set_state_sawyer_final_blow:
+    v_finalbattle_state:
+      action: set
+      string: "sawyer_final_blow"
 
   ## shot variables ##
 
@@ -231,13 +250,13 @@ variable_player:
 
   ## fight variables ##
 
-  cmd_damage_hitchhiker:
-    v_finalbattle_hitchhiker_damage: current_player.v_finalbattle_damage
+  cmd_damage_sawyer:
+    v_finalbattle_sawyer_damage: current_player.v_finalbattle_damage
 
-  player_v_finalbattle_hitchhiker_damage:
-    v_finalbattle_hitchhiker_width:
+  player_v_finalbattle_sawyer_damage:
+    v_finalbattle_sawyer_width:
       action: set
-      float: current_player.v_finalbattle_hitchhiker_damage / current_player.v_finalbattle_hitchhiker_damage_total * 128.0
+      float: current_player.v_finalbattle_sawyer_damage / current_player.v_finalbattle_sawyer_damage_total * 50.0
 
 ##################################################
 # Devices
@@ -355,50 +374,117 @@ slides:
 
   finalbattle_multiball_intro_slide:
     widgets:
-    - type: text
-      text: Intro Placeholder
+    - type: image
+      image: fb_fight_intro_v1
 
   ## finalbattle slides ##
 
-  finalbattle_hitchhiker_fight:
+  finalbattle_final_blow:
+    widgets:
+    - type: image
+      image: fb_sawyer_shoot_to_kill_v1
+
+  finallbattle_sawyer_fight:
     widgets:
     - type: text
-      text: hitchhiker placeholder
+      text: KILL SAWYER
       style: small
-      anchor_x: 0
-      anchor_y: 0
-      x: 2
-      y: 25
-    - type: rectangle
-      color: white
-      anchor_x: 0
-      anchor_y: 0
-      x: 5
-      y: 15
-      width: 5
-      height: 5
+      round_anchor_x: left
+      anchor_x: middle
+      anchor_y: top
+      y: 31
+      x: 50%
       animations:
-        player_v_finalbattle_hitchhiker_width:
-          - property: x
+        show_slide:
+          - property: opacity
+            value: 1
+            duration: 0.4s
+          - property: opacity
+            value: 0
+            duration: 0.4s
+            repeat: true
+    - type: text
+      text: (player|score)
+      number_grouping: true
+      style: small
+      round_anchor_x: left
+      round_anchor_y: top
+      anchor_x: middle
+      anchor_y: bottom
+      y: 2
+      x: 50%
+    - type: image
+      image: fb_fight_sally_v1
+      anchor_x: 0
+      anchor_y: 0
+      x: 88
+      y: 0
+    - type: image
+      image: fb_fight_sawyer_v1
+      anchor_x: 0
+      anchor_y: 0
+      x: -10
+      y: 0
+      animations:
+        player_v_finalbattle_sawyer_width:
+          - property: opacity
+            value: 0
+            duration: 0s
+          - property: opacity
+            value: 0
+            duration: 0.4s
+          - property: opacity
             value: 1
             duration: 0s
+    - type: image
+      image: fb_fight_sawyer_wince_v1
+      anchor_x: 0
+      anchor_y: 0
+      x: -10
+      y: 0
+      animations:
+        player_v_finalbattle_sawyer_width:
           - property: x
-            value: 5
-            duration: 0.3s
+            value: -30
+            duration: 0s
+          - property: x
+            value: -10
+            duration: 0.4s
     - type: rectangle
       color: white
       anchor_x: 0
       anchor_y: 0
-      x: 0
-      y: 0
+      x: 39
+      y: 14
       z: 500
       width: 0
-      height: 3
+      height: 5
       animations:
-        player_v_finalbattle_hitchhiker_width:
+        player_v_finalbattle_sawyer_width:
           - property: width
             value: (value)
             duration: 0.2s
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 41
+      y: 15
+      width: 46
+      height: 3
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 39
+      y: 14
+      width: 50
+      height: 5
+
+  finalbattle_sawyer_death:
+    widgets:
+    - type: image
+      image: fb_sawyer_death_knife_v2
 
 slide_player:
 
@@ -538,13 +624,28 @@ slide_player:
   cmd_finalbattle_start_multiball_intro_slide:
     finalbattle_multiball_intro_slide:
       priority: 100000
-      # Sean : re-add this
-      #expire: 33.7s
-      expire: 2s
+      expire: 10.2s
 
-  cmd_show_hitchhiker_slide:
-    finalbattle_hitchhiker_fight:
+  cmd_show_sawyer_slide:
+    finallbattle_sawyer_fight:
       priority: 40000
+
+  cmd_remove_sawyer_slide:
+    finallbattle_sawyer_fight:
+      action: remove
+
+  cmd_show_final_blow_slide:
+    finalbattle_final_blow:
+      priority: 40000
+
+  cmd_remove_final_blow_slide:
+    finalbattle_final_blow:
+      action: remove
+
+  cmd_show_sawyer_death_slide:
+    finalbattle_sawyer_death:
+      priority: 40000
+      expire: 5s
 
 sound_player:
 
@@ -625,17 +726,73 @@ show_player:
       show_tokens:
         light: l_shoot_again
 
-  ### phase 1 lights ###
+  ###################################################
+  # Lights
+  ###################################################
+
+  # Lights
+  # left_orbit_arrow: knife
+  # captive_ball_arrow: nunchucks
+  # basket_ramp_arrow: axe
+  # slaughter_house_arrow: shotgun
+  # right_ramp_arrow: flamethrower
+  # right_orbit_arrow: chainsaw
+
+  # Lights off
+
+  cmd_finalbattle_refresh_lights.999999991:
+    med_flash_knife:
+      action: stop
+      show_tokens:
+        lights: left_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.999999992:
+    med_flash_nunchucks:
+      action: stop
+      show_tokens:
+        lights: captive_ball_arrow
+
+  cmd_finalbattle_refresh_lights.999999993:
+    med_flash_axe:
+      action: stop
+      show_tokens:
+        lights: basket_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.999999994:
+    med_flash_shotgun:
+      action: stop
+      show_tokens:
+        lights: slaughter_house_arrow
+
+  cmd_finalbattle_refresh_lights.999999995:
+    med_flash_flamethrower:
+      action: stop
+      show_tokens:
+        lights: right_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.999999996:
+    med_flash_chainsaw:
+      action: stop
+      show_tokens:
+        lights: right_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.999999997:
+    med_flash_chainsaw:
+      action: stop
+      show_tokens:
+        lights: basket_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.999999998:
+    med_flash_final_blow:
+      action: stop
+      show_tokens:
+        lights: super_duper_jackpot
+
+  # phase 1
 
   cmd_finalbattle_refresh_lights.1{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_knife_collected==0}:
     med_flash_knife:
       action: play
-      show_tokens:
-        lights: left_orbit_arrow
-
-  cmd_finalbattle_refresh_lights.2{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_knife_collected==1}:
-    med_flash_knife:
-      action: stop
       show_tokens:
         lights: left_orbit_arrow
 
@@ -645,21 +802,9 @@ show_player:
       show_tokens:
         lights: captive_ball_arrow
 
-  cmd_finalbattle_refresh_lights.4{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_nunchucks_collected==1}:
-    med_flash_nunchucks:
-      action: stop
-      show_tokens:
-        lights: captive_ball_arrow
-
   cmd_finalbattle_refresh_lights.5{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_axe_collected==0}:
     med_flash_axe:
       action: play
-      show_tokens:
-        lights: basket_ramp_arrow
-
-  cmd_finalbattle_refresh_lights.6{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_axe_collected==1}:
-    med_flash_axe:
-      action: stop
       show_tokens:
         lights: basket_ramp_arrow
 
@@ -669,21 +814,9 @@ show_player:
       show_tokens:
         lights: slaughter_house_arrow
 
-  cmd_finalbattle_refresh_lights.8{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_shotgun_collected==1}:
-    med_flash_shotgun:
-      action: stop
-      show_tokens:
-        lights: slaughter_house_arrow
-
   cmd_finalbattle_refresh_lights.9{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_flamethrower_collected==0}:
     med_flash_flamethrower:
       action: play
-      show_tokens:
-        lights: right_ramp_arrow
-
-  cmd_finalbattle_refresh_lights.10{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_flamethrower_collected==1}:
-    med_flash_flamethrower:
-      action: stop
       show_tokens:
         lights: right_ramp_arrow
 
@@ -693,139 +826,58 @@ show_player:
       show_tokens:
         lights: right_orbit_arrow
 
-  cmd_finalbattle_refresh_lights.12{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_chainsaw_collected==1}:
-    med_flash_chainsaw:
-      action: stop
-      show_tokens:
-        lights: right_orbit_arrow
 
-  cmd_finalbattle_refresh_lights.13{current_player.v_finalbattle_state=="phase_2"}:
-    med_flash_axe:
-      action: stop
-      show_tokens:
-        lights: basket_ramp_arrow
+  ## Sawyer fight
 
-  cmd_finalbattle_refresh_lights.15{current_player.v_finalbattle_state=="phase_2"}:
-    med_flash_shotgun:
-      action: stop
-      show_tokens:
-        lights: slaughter_house_arrow
-
-  cmd_finalbattle_refresh_lights.17{current_player.v_finalbattle_state=="phase_2"}:
-    med_flash_flamethrower:
-      action: stop
-      show_tokens:
-        lights: right_ramp_arrow
-
-  cmd_finalbattle_refresh_lights.19{current_player.v_finalbattle_state=="phase_2"}:
-    med_flash_chainsaw:
-      action: stop
-      show_tokens:
-        lights: right_orbit_arrow
-
-  cmd_finalbattle_refresh_lights.16{current_player.v_finalbattle_state=="phase_2"}:
-    med_flash_flamethrower:
-      action: stop
+  cmd_finalbattle_refresh_lights.23{current_player.v_finalbattle_state=="multiball_sawyer"}:
+    med_flash_knife:
+      action: play
       show_tokens:
         lights: left_orbit_arrow
 
-  cmd_finalbattle_refresh_lights.14{current_player.v_finalbattle_state=="phase_2"}:
-    med_flash_shotgun:
-      action: stop
+  cmd_finalbattle_refresh_lights.24{current_player.v_finalbattle_state=="multiball_sawyer"}:
+    med_flash_nunchucks:
+      action: play
       show_tokens:
         lights: captive_ball_arrow
 
-  cmd_finalbattle_refresh_lights.18{current_player.v_finalbattle_state=="phase_2"}:
-    med_flash_chainsaw:
-      action: stop
-      show_tokens:
-        lights: basket_ramp_arrow
-
-  ## Multiball Lights ##
-
-  cmd_finalbattle_refresh_lights.9999999{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_axe:
-      action: stop
-      show_tokens:
-        lights: basket_ramp_arrow
-
-  cmd_finalbattle_refresh_lights.99999995{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_shotgun:
-      action: stop
-      show_tokens:
-        lights: slaughter_house_arrow
-
-  cmd_finalbattle_refresh_lights.99999990{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_flamethrower:
-      action: stop
-      show_tokens:
-        lights: right_ramp_arrow
-
-  cmd_finalbattle_refresh_lights.99999991{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_chainsaw:
-      action: stop
-      show_tokens:
-        lights: right_orbit_arrow
-
-  cmd_finalbattle_refresh_lights.99999992{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_flamethrower:
-      action: stop
-      show_tokens:
-        lights: left_orbit_arrow
-
-  cmd_finalbattle_refresh_lights.99999993{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_shotgun:
-      action: stop
-      show_tokens:
-        lights: captive_ball_arrow
-
-  cmd_finalbattle_refresh_lights.99999994{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_chainsaw:
-      action: stop
-      show_tokens:
-        lights: basket_ramp_arrow
-
-  cmd_finalbattle_refresh_lights.19{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+  cmd_finalbattle_refresh_lights.19{current_player.v_finalbattle_state=="multiball_sawyer"}:
     med_flash_axe:
       action: play
       show_tokens:
         lights: basket_ramp_arrow
 
-  cmd_finalbattle_refresh_lights.20{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+  cmd_finalbattle_refresh_lights.20{current_player.v_finalbattle_state=="multiball_sawyer"}:
     med_flash_shotgun:
       action: play
       show_tokens:
         lights: slaughter_house_arrow
 
-  cmd_finalbattle_refresh_lights.21{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+  cmd_finalbattle_refresh_lights.21{current_player.v_finalbattle_state=="multiball_sawyer"}:
     med_flash_flamethrower:
       action: play
       show_tokens:
         lights: right_ramp_arrow
 
-  cmd_finalbattle_refresh_lights.22{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+  cmd_finalbattle_refresh_lights.22{current_player.v_finalbattle_state=="multiball_sawyer"}:
     med_flash_chainsaw:
       action: play
       show_tokens:
         lights: right_orbit_arrow
 
-  cmd_finalbattle_refresh_lights.23{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_flamethrower:
-      action: play
-      show_tokens:
-        lights: left_orbit_arrow
-
-  cmd_finalbattle_refresh_lights.24{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_shotgun:
-      action: play
-      show_tokens:
-        lights: captive_ball_arrow
-
-  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="multiball_sawyer"}:
     med_flash_chainsaw:
       action: play
       show_tokens:
         lights: basket_ramp_arrow
+
+  # Sawyer final blow
+
+  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="sawyer_final_blow"}:
+    med_flash_final_blow:
+      action: play
+      show_tokens:
+        lights: super_duper_jackpot
 
 shows:
   med_flash_knife:
@@ -939,6 +991,28 @@ shows:
           color: off
 
   med_flash_chainsaw:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_final_blow:
     - duration: 0.5
       lights:
         (light):
