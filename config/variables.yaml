@@ -190,6 +190,31 @@ player_vars:
   v_finalbattle_chainsaw_collected:
     initial_value: 0
 
+  v_finalbattle_combo_multiplier:
+    initial_value: 1
+
+  v_finalbattle_combo_left_orbit:
+    initial_value: 0
+
+  v_finalbattle_combo_captive:
+    initial_value: 0
+
+  v_finalbattle_combo_left_ramp:
+    initial_value: 0
+
+  v_finalbattle_combo_slaughter:
+    initial_value: 0
+
+  v_finalbattle_combo_right_ramp:
+    initial_value: 0
+
+  v_finalbattle_combo_right_orbit:
+    initial_value: 0
+
+  v_finalbattle_damage:
+    value_type: float
+    initial_value: 15
+
   v_finalbattle_sawyer_width:
     value_type: float
     initial_value: 0
@@ -202,9 +227,29 @@ player_vars:
     value_type: float
     initial_value: 100
 
-  v_finalbattle_damage:
+  v_finalbattle_grandpa_width:
     value_type: float
-    initial_value: 15
+    initial_value: 0
+
+  v_finalbattle_grandpa_damage:
+    value_type: float
+    initial_value: 0
+
+  v_finalbattle_grandpa_damage_total:
+    value_type: float
+    initial_value: 100
+
+  v_finalbattle_hitchhiker_width:
+    value_type: float
+    initial_value: 0
+
+  v_finalbattle_hitchhiker_damage:
+    value_type: float
+    initial_value: 0
+
+  v_finalbattle_hitchhiker_damage_total:
+    value_type: float
+    initial_value: 100
 
   #####################################
   # Magnavuk
