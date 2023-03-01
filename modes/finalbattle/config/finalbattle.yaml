@@ -7,6 +7,36 @@ mode:
     - cmd_stop_mode_finalbattle
   priority: 10000
 
+
+##################################################
+##################################################
+##################################################
+##################################################
+##################################################
+##################################################
+##################################################
+# Sean - The roaming timer is resetting but doing something weird
+# 2023-02-28 22:28:10,153 : INFO : EventManager : Event: ======'player_finalbattle_finalbattle_roaming_timer_tick'====== Args={'value': 4, 'prev_value': 3, 'change': 1, 'player_num': 1}
+# 2023-02-28 22:28:10,154 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_tick'====== Args={'ticks': 4, 'ticks_remaining': 1}
+# 2023-02-28 22:28:13,154 : INFO : EventManager : Event: ======'player_finalbattle_finalbattle_roaming_timer_tick'====== Args={'value': 5, 'prev_value': 4, 'change': 1, 'player_num': 1}
+# 2023-02-28 22:28:13,156 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_stopped'====== Args={'ticks': 5, 'ticks_remaining': 1}
+# 2023-02-28 22:28:13,156 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_complete'====== Args={'ticks': 5, 'ticks_remaining': 1}
+# 2023-02-28 22:28:13,156 : INFO : EventManager : Event: ======'player_finalbattle_finalbattle_roaming_timer_tick'====== Args={'value': 0, 'prev_value': 5, 'change': -5, 'player_num': 1}
+# 2023-02-28 22:28:13,158 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_started'====== Args={'ticks': 0, 'ticks_remaining': 5}
+# 2023-02-28 22:28:13,158 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_tick'====== Args={'ticks': 0, 'ticks_remaining': 5}
+# 2023-02-28 22:28:15,600 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_stopped'====== Args={'ticks': 0, 'ticks_remaining': 5}
+# 2023-02-28 22:28:18,492 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_stopped'====== Args={'ticks': 0, 'ticks_remaining': 5}
+# 2023-02-28 22:28:34,576 : INFO : EventManager : Event: ======'player_tt_playfield_base_tt_playfield_timer_tick'====== Args={'value': 0, 'prev_value': 0, 'change': 0, 'player_num': 1}
+##################################################
+##################################################
+##################################################
+##################################################
+##################################################
+##################################################
+##################################################
+##################################################
+
+
 ##################################################
 # Events
 ##################################################
@@ -57,7 +87,9 @@ event_player:
 
   cmd_finalbattle_start_multiball:
     cmd_finalbattle_start_final_multiball:
-    cmd_start_sawyer:
+    # Sean - remove this
+    #cmd_start_sawyer:
+    slide_finalbattle_hitchhiker_death_removed:
 
   cmd_start_sawyer:
     cmd_finalbattle_set_state_multiball_sawyer:
@@ -105,11 +137,34 @@ event_player:
     cmd_remove_sawyer_final_blow_slide:
     cmd_show_hitchhiker_death_slide:
 
+  slide_finalbattle_hitchhiker_death_removed:
+    cmd_finalbattle_reset_combo_values:
+    cmd_finalbattle_set_state_multiball_leatherface:
+    cmd_finalbattle_refresh_lights:
+    cmd_show_leatherface_slide:
+
+  cmd_finalbattle_check_leatherface_combo_phase{current_player.v_finalbattle_combo_left_orbit==1 and current_player.v_finalbattle_combo_captive==1 and current_player.v_finalbattle_combo_left_ramp==1 and current_player.v_finalbattle_combo_slaughter==1 and current_player.v_finalbattle_combo_right_ramp==1 and current_player.v_finalbattle_combo_right_orbit==1}:
+    cmd_finalbattle_set_state_leatherface_roaming:
+    cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_roaming_timer_restart:
+    cmd_remove_leatherface_slide:
+    cmd_show_leatherface_roaming:
+
+  player_v_finalbattle_leatherface_roaming_shot:
+    cmd_finalbattle_refresh_lights:
+
+  cmd_finalbattle_leatherface_roaming_hit:
+    cmd_finalbattle_roaming_timer_stop:
+
+  cmd_finalbattle_kill_leatherface:
+    cmd_remove_sawyer_final_blow_slide:
+    cmd_show_leatherface_death_slide:
+
   ############
   ############
   ############
   ############
-  # Sean - TODO - give a big bonus if the
+  # Sean - TODO - give a big bonus if all combo shots are cleared
   ############
   ############
   ############
@@ -264,6 +319,66 @@ event_player:
   s_super_duper_jackpot_active{current_player.v_finalbattle_state=="hitchhiker_final_blow"}:
     cmd_finalbattle_kill_hitchhiker:
 
+  # shot events leatherface fight
+
+  left_orbit_hit{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_left_orbit!=1}:
+    cmd_damage_leatherface:
+    cmd_finalbattle_set_combo_left_orbit:
+    cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_leatherface_combo_phase:
+
+  s_captive_ball_target_active{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_captive!=1}:
+    cmd_damage_leatherface:
+    cmd_finalbattle_set_combo_captive:
+    cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_leatherface_combo_phase:
+
+  left_ramp_hit{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_left_ramp!=1}:
+    cmd_damage_leatherface:
+    cmd_finalbattle_set_combo_left_ramp:
+    cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_leatherface_combo_phase:
+
+  s_slaughter_house_target_active{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_slaughter!=1}:
+    cmd_damage_leatherface:
+    cmd_finalbattle_set_combo_slaughter:
+    cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_leatherface_combo_phase:
+
+  right_ramp_hit{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_right_ramp!=1}:
+    cmd_damage_leatherface:
+    cmd_finalbattle_set_combo_right_ramp:
+    cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_leatherface_combo_phase:
+
+  right_orbit_hit{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_right_orbit!=1}:
+    cmd_damage_leatherface:
+    cmd_finalbattle_set_combo_right_orbit:
+    cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_leatherface_combo_phase:
+
+  left_orbit_hit{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="left_orbit"}:
+    cmd_finalbattle_leatherface_roaming_hit:
+
+  s_captive_ball_target_active{current_player.v_finalbattle_state=="leatherface_roaming" and v_finalbattle_leatherface_roaming_shot=="captive"}:
+    cmd_finalbattle_leatherface_roaming_hit:
+
+  left_ramp_hit{current_player.v_finalbattle_state=="leatherface_roaming" and v_finalbattle_leatherface_roaming_shot=="left_ramp"}:
+    cmd_finalbattle_leatherface_roaming_hit:
+
+  s_slaughter_house_target_active{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="slaughter"}:
+    cmd_finalbattle_leatherface_roaming_hit:
+
+  right_ramp_hit{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="right_ramp"}:
+    cmd_finalbattle_leatherface_roaming_hit:
+
+  right_orbit_hit{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="right_orbit"}:
+    cmd_finalbattle_leatherface_roaming_hit:
+
+  # Sean - this gets changed
+  s_super_duper_jackpot_active{current_player.v_finalbattle_state=="leatherface_final_blow"}:
+    cmd_finalbattle_kill_leatherface:
+
 
   # combo events
 
@@ -299,6 +414,19 @@ timers:
       - event: cmd_finalbattle_bonus_timer_stop
         action: stop
       - event: cmd_finalbattle_bonus_timer_restart
+        action: restart
+
+  finalbattle_roaming_timer:
+    start_value: 0
+    end_value: 6
+    tick_interval: 3s
+    direction: up
+    start_running: False
+    restart_on_complete: True
+    control_events:
+      - event: cmd_finalbattle_roaming_timer_stop
+        action: stop
+      - event: cmd_finalbattle_roaming_timer_restart
         action: restart
 
   # grandpa timer
@@ -376,6 +504,50 @@ variable_player:
     v_finalbattle_state:
       action: set
       string: "hitchhiker_final_blow"
+
+  cmd_finalbattle_set_state_multiball_leatherface:
+    v_finalbattle_state:
+      action: set
+      string: "multiball_leatherface"
+
+  cmd_finalbattle_set_state_leatherface_roaming:
+    v_finalbattle_state:
+      action: set
+      string: "leatherface_roaming"
+
+  cmd_finalbattle_set_state_leatherface_final_blow:
+    v_finalbattle_state:
+      string: "leatherface_final_blow"
+
+  timer_finalbattle_roaming_timer_tick{ticks==0}:
+    v_finalbattle_leatherface_roaming_shot:
+      action: set
+      string: "left_orbit"
+
+  timer_finalbattle_roaming_timer_tick{ticks==1}:
+    v_finalbattle_leatherface_roaming_shot:
+      action: set
+      string: "captive"
+
+  timer_finalbattle_roaming_timer_tick{ticks==2}:
+    v_finalbattle_leatherface_roaming_shot:
+      action: set
+      string: "left_ramp"
+
+  timer_finalbattle_roaming_timer_tick{ticks==3}:
+    v_finalbattle_leatherface_roaming_shot:
+      action: set
+      string: "slaughter"
+
+  timer_finalbattle_roaming_timer_tick{ticks==4}:
+    v_finalbattle_leatherface_roaming_shot:
+      action: set
+      string: "right_ramp"
+
+  timer_finalbattle_roaming_timer_tick{ticks==5}:
+    v_finalbattle_leatherface_roaming_shot:
+      action: set
+      string: "right_orbit"
 
   ## shot variables ##
 
@@ -504,6 +676,14 @@ variable_player:
     v_finalbattle_hitchhiker_width:
       action: set
       float: current_player.v_finalbattle_hitchhiker_damage / current_player.v_finalbattle_hitchhiker_damage_total * 50.0
+
+  cmd_damage_leatherface:
+    v_finalbattle_leatherface_damage: 15
+
+  player_v_finalbattle_leatherface_damage:
+    v_finalbattle_leatherface_width:
+      action: set
+      float: current_player.v_finalbattle_leatherface_damage / current_player.v_finalbattle_leatherface_damage_total * 50.0
 
 ##################################################
 # Devices
@@ -953,6 +1133,120 @@ slides:
     - type: image
       image: fb_hitchhiker_dead_v2
 
+  # leatherface Slides
+
+  finalbattle_leatherface_final_blow:
+    widgets:
+    - type: image
+      image: fb_leatherface_shoot_to_kill_v1
+
+  finallbattle_leatherface_fight:
+    widgets:
+    - type: text
+      text: KILL leatherface
+      style: small
+      round_anchor_x: left
+      anchor_x: middle
+      anchor_y: top
+      y: 31
+      x: 50%
+      animations:
+        show_slide:
+          - property: opacity
+            value: 1
+            duration: 0.4s
+          - property: opacity
+            value: 0
+            duration: 0.4s
+            repeat: true
+    - type: text
+      text: (player|score)
+      number_grouping: true
+      style: small
+      round_anchor_x: left
+      round_anchor_y: top
+      anchor_x: middle
+      anchor_y: bottom
+      y: 2
+      x: 50%
+    - type: image
+      image: fb_fight_sally_v1
+      anchor_x: 0
+      anchor_y: 0
+      x: 88
+      y: 0
+    - type: image
+      image: fb_fight_leatherface_v1
+      anchor_x: 0
+      anchor_y: 0
+      x: -10
+      y: 0
+      animations:
+        player_v_finalbattle_leatherface_width:
+          - property: opacity
+            value: 0
+            duration: 0s
+          - property: opacity
+            value: 0
+            duration: 0.4s
+          - property: opacity
+            value: 1
+            duration: 0s
+    - type: image
+      image: fb_wince_leatherface_v1
+      anchor_x: 0
+      anchor_y: 0
+      x: -10
+      y: 0
+      animations:
+        player_v_finalbattle_leatherface_width:
+          - property: x
+            value: -30
+            duration: 0s
+          - property: x
+            value: -10
+            duration: 0.4s
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 39
+      y: 14
+      z: 500
+      width: 0
+      height: 5
+      animations:
+        player_v_finalbattle_leatherface_width:
+          - property: width
+            value: (value)
+            duration: 0.2s
+    - type: rectangle
+      color: black
+      anchor_x: 0
+      anchor_y: 0
+      x: 41
+      y: 15
+      width: 46
+      height: 3
+    - type: rectangle
+      color: white
+      anchor_x: 0
+      anchor_y: 0
+      x: 39
+      y: 14
+      width: 50
+      height: 5
+
+  finalbattle_leatherface_roaming:
+    widgets:
+      - type: text
+        text: roaming placeholder
+
+  finalbattle_leatherface_death:
+    widgets:
+    - type: image
+      image: fb_leatherface_dead_v1
+
 
 slide_player:
 
@@ -1161,7 +1455,38 @@ slide_player:
   cmd_show_hitchhiker_death_slide:
     finalbattle_hitchhiker_death:
       priority: 40000
-      expire: 5s
+      expire: 4.5s
+
+  # leatherface slide player
+
+  cmd_show_leatherface_slide:
+    finallbattle_leatherface_fight:
+      priority: 40000
+
+  cmd_remove_leatherface_slide:
+    finallbattle_leatherface_fight:
+      action: remove
+
+  cmd_show_leatherface_roaming:
+    finalbattle_leatherface_roaming:
+      priority: 40000
+
+  cmd_remove_leatherface_roaming:
+    finalbattle_leatherface_roaming:
+      action: remove
+
+  cmd_show_leatherface_final_blow_slide:
+    finalbattle_leatherface_final_blow:
+      priority: 40000
+
+  cmd_remove_leatherface_final_blow_slide:
+    finalbattle_leatherface_final_blow:
+      action: remove
+
+  cmd_show_leatherface_death_slide:
+    finalbattle_leatherface_death:
+      priority: 40000
+      expire: 13.4s
 
 sound_player:
 
@@ -1381,12 +1706,6 @@ show_player:
       show_tokens:
         lights: right_orbit_arrow
 
-  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="multiball_sawyer"}:
-    med_flash_chainsaw:
-      action: play
-      show_tokens:
-        lights: basket_ramp_arrow
-
   # Sawyer final blow
 
   cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="sawyer_final_blow"}:
@@ -1432,12 +1751,6 @@ show_player:
       action: play
       show_tokens:
         lights: right_orbit_arrow
-
-  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="multiball_grandpa"}:
-    med_flash_chainsaw:
-      action: play
-      show_tokens:
-        lights: basket_ramp_arrow
 
   # grandpa final blow
 
@@ -1485,15 +1798,93 @@ show_player:
       show_tokens:
         lights: right_orbit_arrow
 
-  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
-    med_flash_chainsaw:
+  # hitchhiker final blow
+
+  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="hitchhiker_final_blow"}:
+    med_flash_final_blow:
+      action: play
+      show_tokens:
+        lights: super_duper_jackpot
+
+  ## leatherface fight
+
+  cmd_finalbattle_refresh_lights.23{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_left_orbit!=1}:
+    med_flash_knife:
+      action: play
+      show_tokens:
+        lights: left_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.24{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_captive!=1}:
+    med_flash_nunchucks:
+      action: play
+      show_tokens:
+        lights: captive_ball_arrow
+
+  cmd_finalbattle_refresh_lights.19{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_left_ramp!=1}:
+    med_flash_axe:
       action: play
       show_tokens:
         lights: basket_ramp_arrow
 
-  # hitchhiker final blow
+  cmd_finalbattle_refresh_lights.20{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_slaughter!=1}:
+    med_flash_shotgun:
+      action: play
+      show_tokens:
+        lights: slaughter_house_arrow
 
-  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="hitchhiker_final_blow"}:
+  cmd_finalbattle_refresh_lights.21{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_right_ramp!=1}:
+    med_flash_flamethrower:
+      action: play
+      show_tokens:
+        lights: right_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.22{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_right_orbit!=1}:
+    med_flash_chainsaw:
+      action: play
+      show_tokens:
+        lights: right_orbit_arrow
+
+  # leatherface roaming
+
+  cmd_finalbattle_refresh_lights.23{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="left_orbit"}:
+    med_flash_knife:
+      action: play
+      show_tokens:
+        lights: left_orbit_arrow
+
+  cmd_finalbattle_refresh_lights.24{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="captive"}:
+    med_flash_nunchucks:
+      action: play
+      show_tokens:
+        lights: captive_ball_arrow
+
+  cmd_finalbattle_refresh_lights.19{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="left_ramp"}:
+    med_flash_axe:
+      action: play
+      show_tokens:
+        lights: basket_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.20{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="slaughter"}:
+    med_flash_shotgun:
+      action: play
+      show_tokens:
+        lights: slaughter_house_arrow
+
+  cmd_finalbattle_refresh_lights.21{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="right_ramp"}:
+    med_flash_flamethrower:
+      action: play
+      show_tokens:
+        lights: right_ramp_arrow
+
+  cmd_finalbattle_refresh_lights.22{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="right_orbit"}:
+    med_flash_chainsaw:
+      action: play
+      show_tokens:
+        lights: right_orbit_arrow
+
+  # leatherface final blow
+
+  cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="leatherface_final_blow"}:
     med_flash_final_blow:
       action: play
       show_tokens:
