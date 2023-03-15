@@ -87,9 +87,9 @@ event_player:
 
   cmd_finalbattle_start_multiball:
     cmd_finalbattle_start_final_multiball:
-    # Sean - remove this
-    #cmd_start_sawyer:
-    slide_finalbattle_hitchhiker_death_removed:
+    cmd_start_sawyer:
+    # Sean - comment out above and uncomment out below to start leatherface
+    #slide_finalbattle_hitchhiker_death_removed:
 
   cmd_start_sawyer:
     cmd_finalbattle_set_state_multiball_sawyer:
@@ -104,6 +104,7 @@ event_player:
 
   cmd_finalbattle_kill_sawyer:
     cmd_remove_sawyer_final_blow_slide:
+    cmd_finalbattle_play_death_sound_sawyer:
     cmd_show_sawyer_death_slide:
 
   slide_finalbattle_sawyer_death_removed:
@@ -119,6 +120,7 @@ event_player:
 
   cmd_finalbattle_kill_grandpa:
     cmd_remove_sawyer_final_blow_slide:
+    cmd_finalbattle_play_death_sound_grandpa:
     cmd_show_grandpa_death_slide:
 
   slide_finalbattle_grandpa_death_removed:
@@ -135,6 +137,7 @@ event_player:
 
   cmd_finalbattle_kill_hitchhiker:
     cmd_remove_sawyer_final_blow_slide:
+    cmd_finalbattle_play_death_sound_hitchhiker:
     cmd_show_hitchhiker_death_slide:
 
   slide_finalbattle_hitchhiker_death_removed:
@@ -158,6 +161,7 @@ event_player:
 
   cmd_finalbattle_kill_leatherface:
     cmd_remove_sawyer_final_blow_slide:
+    cmd_finalbattle_play_death_sound_leatherface:
     cmd_show_leatherface_death_slide:
 
   ############
@@ -218,21 +222,27 @@ event_player:
 
   left_orbit_hit{current_player.v_finalbattle_state=="multiball_sawyer"}:
     cmd_damage_sawyer:
+    cmd_finalbattle_play_hit_sound_sawyer:
 
   s_captive_ball_target_active{current_player.v_finalbattle_state=="multiball_sawyer"}:
     cmd_damage_sawyer:
+    cmd_finalbattle_play_hit_sound_sawyer:
 
   left_ramp_hit{current_player.v_finalbattle_state=="multiball_sawyer"}:
     cmd_damage_sawyer:
+    cmd_finalbattle_play_hit_sound_sawyer:
 
   s_slaughter_house_target_active{current_player.v_finalbattle_state=="multiball_sawyer"}:
     cmd_damage_sawyer:
+    cmd_finalbattle_play_hit_sound_sawyer:
 
   right_ramp_hit{current_player.v_finalbattle_state=="multiball_sawyer"}:
     cmd_damage_sawyer:
+    cmd_finalbattle_play_hit_sound_sawyer:
 
   right_orbit_hit{current_player.v_finalbattle_state=="multiball_sawyer"}:
     cmd_damage_sawyer:
+    cmd_finalbattle_play_hit_sound_sawyer:
 
   s_super_duper_jackpot_active{current_player.v_finalbattle_state=="sawyer_final_blow"}:
     cmd_finalbattle_kill_sawyer:
@@ -241,36 +251,42 @@ event_player:
 
   left_orbit_hit{current_player.v_finalbattle_state=="multiball_grandpa" and current_player.v_finalbattle_combo_left_orbit!=1}:
     cmd_damage_grandpa:
+    cmd_finalbattle_play_hit_sound_grandpa:
     cmd_finalbattle_set_combo_left_orbit:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   s_captive_ball_target_active{current_player.v_finalbattle_state=="multiball_grandpa" and current_player.v_finalbattle_combo_captive!=1}:
     cmd_damage_grandpa:
+    cmd_finalbattle_play_hit_sound_grandpa:
     cmd_finalbattle_set_combo_captive:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   left_ramp_hit{current_player.v_finalbattle_state=="multiball_grandpa" and current_player.v_finalbattle_combo_left_ramp!=1}:
     cmd_damage_grandpa:
+    cmd_finalbattle_play_hit_sound_grandpa:
     cmd_finalbattle_set_combo_left_ramp:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   s_slaughter_house_target_active{current_player.v_finalbattle_state=="multiball_grandpa" and current_player.v_finalbattle_combo_slaughter!=1}:
     cmd_damage_grandpa:
+    cmd_finalbattle_play_hit_sound_grandpa:
     cmd_finalbattle_set_combo_slaughter:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   right_ramp_hit{current_player.v_finalbattle_state=="multiball_grandpa" and current_player.v_finalbattle_combo_right_ramp!=1}:
     cmd_damage_grandpa:
+    cmd_finalbattle_play_hit_sound_grandpa:
     cmd_finalbattle_set_combo_right_ramp:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   right_orbit_hit{current_player.v_finalbattle_state=="multiball_grandpa" and current_player.v_finalbattle_combo_right_orbit!=1}:
     cmd_damage_grandpa:
+    cmd_finalbattle_play_hit_sound_grandpa:
     cmd_finalbattle_set_combo_right_orbit:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
@@ -282,36 +298,42 @@ event_player:
 
   left_orbit_hit{current_player.v_finalbattle_state=="multiball_hitchhiker" and current_player.v_finalbattle_combo_left_orbit!=1}:
     cmd_damage_hitchhiker:
+    cmd_finalbattle_play_hit_sound_hitchhiker:
     cmd_finalbattle_set_combo_left_orbit:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   s_captive_ball_target_active{current_player.v_finalbattle_state=="multiball_hitchhiker" and current_player.v_finalbattle_combo_captive!=1}:
     cmd_damage_hitchhiker:
+    cmd_finalbattle_play_hit_sound_hitchhiker:
     cmd_finalbattle_set_combo_captive:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   left_ramp_hit{current_player.v_finalbattle_state=="multiball_hitchhiker" and current_player.v_finalbattle_combo_left_ramp!=1}:
     cmd_damage_hitchhiker:
+    cmd_finalbattle_play_hit_sound_hitchhiker:
     cmd_finalbattle_set_combo_left_ramp:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   s_slaughter_house_target_active{current_player.v_finalbattle_state=="multiball_hitchhiker" and current_player.v_finalbattle_combo_slaughter!=1}:
     cmd_damage_hitchhiker:
+    cmd_finalbattle_play_hit_sound_hitchhiker:
     cmd_finalbattle_set_combo_slaughter:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   right_ramp_hit{current_player.v_finalbattle_state=="multiball_hitchhiker" and current_player.v_finalbattle_combo_right_ramp!=1}:
     cmd_damage_hitchhiker:
+    cmd_finalbattle_play_hit_sound_hitchhiker:
     cmd_finalbattle_set_combo_right_ramp:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
 
   right_orbit_hit{current_player.v_finalbattle_state=="multiball_hitchhiker" and current_player.v_finalbattle_combo_right_orbit!=1}:
     cmd_damage_hitchhiker:
+    cmd_finalbattle_play_hit_sound_hitchhiker:
     cmd_finalbattle_set_combo_right_orbit:
     cmd_finalbattle_combo_timer_restart:
     cmd_finalbattle_refresh_lights:
@@ -323,36 +345,42 @@ event_player:
 
   left_orbit_hit{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_left_orbit!=1}:
     cmd_damage_leatherface:
+    cmd_finalbattle_play_hit_sound_leatherface:
     cmd_finalbattle_set_combo_left_orbit:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_leatherface_combo_phase:
 
   s_captive_ball_target_active{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_captive!=1}:
     cmd_damage_leatherface:
+    cmd_finalbattle_play_hit_sound_leatherface:
     cmd_finalbattle_set_combo_captive:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_leatherface_combo_phase:
 
   left_ramp_hit{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_left_ramp!=1}:
     cmd_damage_leatherface:
+    cmd_finalbattle_play_hit_sound_leatherface:
     cmd_finalbattle_set_combo_left_ramp:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_leatherface_combo_phase:
 
   s_slaughter_house_target_active{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_slaughter!=1}:
     cmd_damage_leatherface:
+    cmd_finalbattle_play_hit_sound_leatherface:
     cmd_finalbattle_set_combo_slaughter:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_leatherface_combo_phase:
 
   right_ramp_hit{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_right_ramp!=1}:
     cmd_damage_leatherface:
+    cmd_finalbattle_play_hit_sound_leatherface:
     cmd_finalbattle_set_combo_right_ramp:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_leatherface_combo_phase:
 
   right_orbit_hit{current_player.v_finalbattle_state=="multiball_leatherface" and current_player.v_finalbattle_combo_right_orbit!=1}:
     cmd_damage_leatherface:
+    cmd_finalbattle_play_hit_sound_leatherface:
     cmd_finalbattle_set_combo_right_orbit:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_leatherface_combo_phase:
@@ -1548,6 +1576,50 @@ sound_player:
 
   cmd_finalbattle_play_bonus_bg:
     FB_weapons_count_music_v1:
+      action: play
+      loops: 0
+
+  # Hit sounds
+
+  cmd_finalbattle_play_hit_sound_sawyer:
+    fb_hit_sound_sawyer:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_hit_sound_hitchhiker:
+    fb_hit_sound_hitchhiker:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_hit_sound_grandpa:
+    fb_hit_sound_grandpa:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_hit_sound_leatherface:
+    fb_hit_sound_leatherface:
+      action: play
+      loops: 0
+
+  # Death sounds
+
+  cmd_finalbattle_play_death_sound_sawyer:
+    sawyer_death_v2_sfx:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_death_sound_hitchhiker:
+    hitchhiker_death_v2_sfx:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_death_sound_grandpa:
+    hitchhiker_death_v2_sfx:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_death_sound_leatherface:
+    hitchhiker_death_v2_sfx:
       action: play
       loops: 0
 
