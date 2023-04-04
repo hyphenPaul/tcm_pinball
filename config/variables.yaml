@@ -215,6 +215,13 @@ player_vars:
     initial_value: "left_orbit"
     value_type: str
 
+  v_finalbattle_damage_bonus:
+    value_type: float
+    initial_value: 0
+
+  v_finalbattle_ball_save_extention:
+    initial_value: 0
+
   v_finalbattle_damage:
     value_type: float
     initial_value: 15

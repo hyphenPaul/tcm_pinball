@@ -19,6 +19,16 @@
 
 ----------------------------------------------------------------------------------------------------
 
+Final battle
+
+- finish weapon perk
+  - add a ball becomes death ball save
+- score final mode
+- Final Jam lit beforehand
+- add special bonus and instant death if you clear all shots in time
+
+----------------------------------------------------------------------------------------------------
+
 bugs
 
 - a modes started during kids multiball

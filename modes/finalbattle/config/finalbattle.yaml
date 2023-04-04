@@ -7,36 +7,6 @@ mode:
     - cmd_stop_mode_finalbattle
   priority: 10000
 
-
-##################################################
-##################################################
-##################################################
-##################################################
-##################################################
-##################################################
-##################################################
-# Sean - The roaming timer is resetting but doing something weird
-# 2023-02-28 22:28:10,153 : INFO : EventManager : Event: ======'player_finalbattle_finalbattle_roaming_timer_tick'====== Args={'value': 4, 'prev_value': 3, 'change': 1, 'player_num': 1}
-# 2023-02-28 22:28:10,154 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_tick'====== Args={'ticks': 4, 'ticks_remaining': 1}
-# 2023-02-28 22:28:13,154 : INFO : EventManager : Event: ======'player_finalbattle_finalbattle_roaming_timer_tick'====== Args={'value': 5, 'prev_value': 4, 'change': 1, 'player_num': 1}
-# 2023-02-28 22:28:13,156 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_stopped'====== Args={'ticks': 5, 'ticks_remaining': 1}
-# 2023-02-28 22:28:13,156 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_complete'====== Args={'ticks': 5, 'ticks_remaining': 1}
-# 2023-02-28 22:28:13,156 : INFO : EventManager : Event: ======'player_finalbattle_finalbattle_roaming_timer_tick'====== Args={'value': 0, 'prev_value': 5, 'change': -5, 'player_num': 1}
-# 2023-02-28 22:28:13,158 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_started'====== Args={'ticks': 0, 'ticks_remaining': 5}
-# 2023-02-28 22:28:13,158 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_tick'====== Args={'ticks': 0, 'ticks_remaining': 5}
-# 2023-02-28 22:28:15,600 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_stopped'====== Args={'ticks': 0, 'ticks_remaining': 5}
-# 2023-02-28 22:28:18,492 : INFO : EventManager : Event: ======'timer_finalbattle_roaming_timer_stopped'====== Args={'ticks': 0, 'ticks_remaining': 5}
-# 2023-02-28 22:28:34,576 : INFO : EventManager : Event: ======'player_tt_playfield_base_tt_playfield_timer_tick'====== Args={'value': 0, 'prev_value': 0, 'change': 0, 'player_num': 1}
-##################################################
-##################################################
-##################################################
-##################################################
-##################################################
-##################################################
-##################################################
-##################################################
-
-
 ##################################################
 # Events
 ##################################################
@@ -108,6 +78,7 @@ event_player:
     cmd_show_sawyer_death_slide:
 
   slide_finalbattle_sawyer_death_removed:
+    cmd_finalbattle_maybe_add_ball:
     cmd_finalbattle_set_state_multiball_grandpa:
     cmd_finalbattle_refresh_lights:
     cmd_show_grandpa_slide:
@@ -124,6 +95,7 @@ event_player:
     cmd_show_grandpa_death_slide:
 
   slide_finalbattle_grandpa_death_removed:
+    cmd_finalbattle_maybe_add_ball:
     cmd_finalbattle_reset_combo_values:
     cmd_finalbattle_set_state_multiball_hitchhiker:
     cmd_finalbattle_refresh_lights:
@@ -141,6 +113,7 @@ event_player:
     cmd_show_hitchhiker_death_slide:
 
   slide_finalbattle_hitchhiker_death_removed:
+    cmd_finalbattle_maybe_add_ball:
     cmd_finalbattle_reset_combo_values:
     cmd_finalbattle_set_state_multiball_leatherface:
     cmd_finalbattle_refresh_lights:
@@ -158,25 +131,41 @@ event_player:
 
   cmd_finalbattle_leatherface_roaming_hit:
     cmd_finalbattle_roaming_timer_stop:
+    cmd_finalbattle_set_state_leatherface_final_blow:
+    cmd_show_leatherface_final_blow_slide:
+    cmd_remove_leatherface_roaming:
+    cmd_enable_bh_mode_van:
+    cmd_finalbattle_refresh_lights:
+
+  ball_hold_bh_mode_van_full{current_player.v_finalbattle_state=="leatherface_final_blow"}:
+    cmd_finalbattle_kill_leatherface:
 
   cmd_finalbattle_kill_leatherface:
-    cmd_remove_sawyer_final_blow_slide:
+    cmd_finalbattle_set_state_leatherface_dead:
+    cmd_disable_flippers:
+    cmd_disable_bh_mode_van:
+    cmd_finalbattle_refresh_lights:
+    cmd_remove_leatherface_final_blow_slide:
     cmd_finalbattle_play_death_sound_leatherface:
     cmd_show_leatherface_death_slide:
 
-  ############
-  ############
-  ############
-  ############
-  # Sean - TODO - give a big bonus if all combo shots are cleared
-  ############
-  ############
-  ############
-  ############
+  slide_finalbattle_leatherface_death_removed:
+    cmd_enable_flippers:
+    cmd_eject_van_vuk_with_audio:
+    cmd_stop_finalbattle_mode:
+
+  ## add a ball ##
+
+  # Sean - manually calculate the ball count
+  # Sean - This isn't going to work. Ball save on kill
+  #cmd_finalbattle_maybe_add_ball{current_player.v_finalbattle_nunchucks_collected>0 and device.multiballs.final_multiball.balls_live_target<5}:
+  cmd_finalbattle_maybe_add_ball{current_player.v_finalbattle_nunchucks_collected>0}:
+    cmd_finalbattle_add_a_ball:
 
   ## shot events phase 1 ##
 
   # knife
+  # extra damage points - tbd
   left_orbit_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_knife_collected==0}:
     cmd_finalbattle_set_knife_collected:
     cmd_finalbattle_start_knife_collect_slide:
@@ -184,6 +173,7 @@ event_player:
     cmd_finalbattle_refresh_lights:
 
   # nunchucks
+  # add a ball on kills
   s_captive_ball_target_active{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_nunchucks_collected==0}:
     cmd_finalbattle_set_nunchucks_collected:
     cmd_finalbattle_play_nunchucks_collect_sound:
@@ -191,6 +181,7 @@ event_player:
     cmd_finalbattle_refresh_lights:
 
   # axe
+  # 2 x kill jackpot - tbd
   left_ramp_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_axe_collected==0}:
     cmd_finalbattle_set_axe_collected:
     cmd_finalbattle_play_axe_collect_sound:
@@ -198,20 +189,25 @@ event_player:
     cmd_finalbattle_refresh_lights:
 
   # shotgun
+  # extended ball save
   s_slaughter_house_target_active{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_shotgun_collected==0}:
     cmd_finalbattle_set_shotgun_collected:
+    cmd_finalbattle_extend_ball_save:
     cmd_finalbattle_play_shotgun_collect_sound:
     cmd_finalbattle_start_shotgun_collect_slide:
     cmd_finalbattle_refresh_lights:
 
   # flamethrower
+  # double damage
   right_ramp_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_flamethrower_collected==0}:
     cmd_finalbattle_set_flamethrower_collected:
+    cmd_finalbattle_set_damage_bonus: 
     cmd_finalbattle_play_flamethrower_collect_sound:
     cmd_finalbattle_start_flamethrower_collect_slide:
     cmd_finalbattle_refresh_lights:
 
   # chainsaw
+  # chainsaw attack - tbd
   right_orbit_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_chainsaw_collected==0}:
     cmd_finalbattle_set_chainsaw_collected:
     cmd_finalbattle_play_chainsaw_collect_sound:
@@ -403,10 +399,6 @@ event_player:
   right_orbit_hit{current_player.v_finalbattle_state=="leatherface_roaming" and current_player.v_finalbattle_leatherface_roaming_shot=="right_orbit"}:
     cmd_finalbattle_leatherface_roaming_hit:
 
-  # Sean - this gets changed
-  s_super_duper_jackpot_active{current_player.v_finalbattle_state=="leatherface_final_blow"}:
-    cmd_finalbattle_kill_leatherface:
-
 
   # combo events
 
@@ -421,7 +413,9 @@ event_player:
 timers:
 
   finalbattle_phase_1_timer:
+    # Sean - reset this to 40
     start_value: 40
+    #start_value: 10
     end_value: 0
     tick_interval: 1s
     direction: down
@@ -545,7 +539,13 @@ variable_player:
 
   cmd_finalbattle_set_state_leatherface_final_blow:
     v_finalbattle_state:
+      action: set
       string: "leatherface_final_blow"
+
+  cmd_finalbattle_set_state_leatherface_dead:
+    v_finalbattle_state:
+      action: set
+      string: "leatherface_dead"
 
   timer_finalbattle_roaming_timer_tick{ticks==0}:
     v_finalbattle_leatherface_roaming_shot:
@@ -584,6 +584,11 @@ variable_player:
       action: set
       int: 1
 
+  cmd_finalbattle_set_damage_bonus:
+    v_finalbattle_damage_bonus:
+      action: set
+      float: 15
+
   cmd_finalbattle_set_nunchucks_collected:
     v_finalbattle_nunchucks_collected:
       action: set
@@ -598,6 +603,11 @@ variable_player:
     v_finalbattle_shotgun_collected:
       action: set
       int: 1
+
+  cmd_finalbattle_extend_ball_save:
+    v_finalbattle_ball_save_extention:
+      action: set
+      int: 15000
 
   cmd_finalbattle_set_flamethrower_collected:
     v_finalbattle_flamethrower_collected:
@@ -682,7 +692,7 @@ variable_player:
   ## fight variables ##
 
   cmd_damage_sawyer:
-    v_finalbattle_sawyer_damage: current_player.v_finalbattle_damage
+    v_finalbattle_sawyer_damage: current_player.v_finalbattle_damage + current_player.v_finalbattle_damage_bonus
 
   player_v_finalbattle_sawyer_damage:
     v_finalbattle_sawyer_width:
@@ -690,7 +700,7 @@ variable_player:
       float: current_player.v_finalbattle_sawyer_damage / current_player.v_finalbattle_sawyer_damage_total * 50.0
 
   cmd_damage_grandpa:
-    v_finalbattle_grandpa_damage: current_player.v_finalbattle_damage
+    v_finalbattle_grandpa_damage: current_player.v_finalbattle_damage + current_player.v_finalbattle_damage_bonus
 
   player_v_finalbattle_grandpa_damage:
     v_finalbattle_grandpa_width:
@@ -698,13 +708,14 @@ variable_player:
       float: current_player.v_finalbattle_grandpa_damage / current_player.v_finalbattle_grandpa_damage_total * 50.0
 
   cmd_damage_hitchhiker:
-    v_finalbattle_hitchhiker_damage: current_player.v_finalbattle_damage
+    v_finalbattle_hitchhiker_damage: current_player.v_finalbattle_damage + current_player.v_finalbattle_damage_bonus
 
   player_v_finalbattle_hitchhiker_damage:
     v_finalbattle_hitchhiker_width:
       action: set
       float: current_player.v_finalbattle_hitchhiker_damage / current_player.v_finalbattle_hitchhiker_damage_total * 50.0
 
+  # Hardcode to 15 to make sure the width is complete when all shots are shot
   cmd_damage_leatherface:
     v_finalbattle_leatherface_damage: 15
 
@@ -720,9 +731,10 @@ variable_player:
 multiballs:
   final_multiball:
     ball_count: 5
-    ball_count_type: add
-    shoot_again: 30s
+    ball_count_type: total
+    shoot_again: 30000 + current_player.v_finalbattle_ball_save_extention
     start_events: cmd_finalbattle_start_final_multiball
+    add_a_ball_events: cmd_finalbattle_add_a_ball
 
 ##################################################
 # Sites and Sounds
@@ -1224,7 +1236,7 @@ slides:
       image: fb_wince_leatherface_v1
       anchor_x: 0
       anchor_y: 0
-      x: -10
+      x: -5
       y: 0
       animations:
         player_v_finalbattle_leatherface_width:
@@ -1267,8 +1279,8 @@ slides:
 
   finalbattle_leatherface_roaming:
     widgets:
-      - type: text
-        text: roaming placeholder
+      - type: image
+        image: fb_sally_chasing_leatherface_v1
 
   finalbattle_leatherface_death:
     widgets:
@@ -1701,6 +1713,12 @@ show_player:
       show_tokens:
         lights: super_duper_jackpot
 
+  cmd_finalbattle_refresh_lights.999999999:
+    med_flash_final_blow:
+      action: stop
+      show_tokens:
+        lights: van
+
   # phase 1
 
   cmd_finalbattle_refresh_lights.1{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_knife_collected==0}:
@@ -1954,13 +1972,14 @@ show_player:
       show_tokens:
         lights: right_orbit_arrow
 
+
   # leatherface final blow
 
   cmd_finalbattle_refresh_lights.25{current_player.v_finalbattle_state=="leatherface_final_blow"}:
     med_flash_final_blow:
       action: play
       show_tokens:
-        lights: super_duper_jackpot
+        lights: van
 
 shows:
   med_flash_knife:
