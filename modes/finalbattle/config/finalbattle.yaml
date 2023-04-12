@@ -49,8 +49,10 @@ event_player:
 
   cmd_finalbattle_bonus_slides_complete:
     cmd_finalbattle_start_multiball_intro_slide:
+    cmd_finalbattle_play_sally_intro:
 
   slide_finalbattle_multiball_intro_slide_removed:
+    cmd_finalbattle_play_main_bg:
     cmd_enable_flippers:
     cmd_finalbattle_eject_ball_save:
     cmd_finalbattle_start_multiball:
@@ -63,11 +65,14 @@ event_player:
 
   cmd_start_sawyer:
     cmd_finalbattle_set_state_multiball_sawyer:
+    cmd_finalbattle_maybe_light_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_show_sawyer_slide:
-
+    
+  
   player_v_finalbattle_sawyer_damage{current_player.v_finalbattle_sawyer_damage>=current_player.v_finalbattle_sawyer_damage_total}:
     cmd_finalbattle_set_state_sawyer_final_blow:
+    cmd_finalbattle_unlight_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_remove_sawyer_slide:
     cmd_show_sawyer_final_blow_slide:
@@ -78,13 +83,15 @@ event_player:
     cmd_show_sawyer_death_slide:
 
   slide_finalbattle_sawyer_death_removed:
-    cmd_finalbattle_maybe_add_ball:
+    cmd_finalbattle_maybe_add_ball_save:
     cmd_finalbattle_set_state_multiball_grandpa:
+    cmd_finalbattle_maybe_light_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_show_grandpa_slide:
 
   player_v_finalbattle_grandpa_damage{current_player.v_finalbattle_grandpa_damage>=current_player.v_finalbattle_grandpa_damage_total}:
     cmd_finalbattle_set_state_grandpa_final_blow:
+    cmd_finalbattle_unlight_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_remove_grandpa_slide:
     cmd_show_grandpa_final_blow_slide:
@@ -95,14 +102,16 @@ event_player:
     cmd_show_grandpa_death_slide:
 
   slide_finalbattle_grandpa_death_removed:
-    cmd_finalbattle_maybe_add_ball:
+    cmd_finalbattle_maybe_add_ball_save:
     cmd_finalbattle_reset_combo_values:
     cmd_finalbattle_set_state_multiball_hitchhiker:
+    cmd_finalbattle_maybe_light_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_show_hitchhiker_slide:
 
   player_v_finalbattle_hitchhiker_damage{current_player.v_finalbattle_hitchhiker_damage>=current_player.v_finalbattle_hitchhiker_damage_total}:
     cmd_finalbattle_set_state_hitchhiker_final_blow:
+    cmd_finalbattle_unlight_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_remove_hitchhiker_slide:
     cmd_show_hitchhiker_final_blow_slide:
@@ -113,9 +122,10 @@ event_player:
     cmd_show_hitchhiker_death_slide:
 
   slide_finalbattle_hitchhiker_death_removed:
-    cmd_finalbattle_maybe_add_ball:
+    cmd_finalbattle_maybe_add_ball_save:
     cmd_finalbattle_reset_combo_values:
     cmd_finalbattle_set_state_multiball_leatherface:
+    cmd_finalbattle_maybe_light_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_show_leatherface_slide:
 
@@ -132,6 +142,7 @@ event_player:
   cmd_finalbattle_leatherface_roaming_hit:
     cmd_finalbattle_roaming_timer_stop:
     cmd_finalbattle_set_state_leatherface_final_blow:
+    cmd_finalbattle_unlight_chainsaw:
     cmd_show_leatherface_final_blow_slide:
     cmd_remove_leatherface_roaming:
     cmd_enable_bh_mode_van:
@@ -154,13 +165,64 @@ event_player:
     cmd_eject_van_vuk_with_audio:
     cmd_stop_finalbattle_mode:
 
-  ## add a ball ##
+  ## chainsaw attack ##
 
-  # Sean - manually calculate the ball count
-  # Sean - This isn't going to work. Ball save on kill
-  #cmd_finalbattle_maybe_add_ball{current_player.v_finalbattle_nunchucks_collected>0 and device.multiballs.final_multiball.balls_live_target<5}:
-  cmd_finalbattle_maybe_add_ball{current_player.v_finalbattle_nunchucks_collected>0}:
-    cmd_finalbattle_add_a_ball:
+  cmd_finalbattle_maybe_light_chainsaw{current_player.v_finalbattle_chainsaw_collected==1}:
+    cmd_finalbattle_set_chainsaw_shot_enabled:
+    cmd_finalbattle_chainsaw_lights_on:
+
+  cmd_finalbattle_maybe_chainsaw_hit{current_player.v_finalbattle_chainsaw_shot_enabled==1}:
+    cmd_finalbattle_damage_character:
+    cmd_finalbattle_unlight_chainsaw:
+
+  cmd_finalbattle_damage_character{current_player.v_finalbattle_state=="multiball_sawyer"}:
+    cmd_damage_sawyer:
+    cmd_finalbattle_play_hit_sound_sawyer:
+
+  cmd_finalbattle_damage_character{current_player.v_finalbattle_state=="multiball_grandpa"}:
+    cmd_damage_grandpa:
+    cmd_finalbattle_play_hit_sound_grandpa:
+
+  cmd_finalbattle_damage_character{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
+    cmd_damage_hitchhiker:
+    cmd_finalbattle_play_hit_sound_hitchhiker:
+
+  cmd_finalbattle_damage_character{current_player.v_finalbattle_state=="multiball_leatherface"}:
+    cmd_damage_leatherface:
+    cmd_finalbattle_play_hit_sound_leatherface:
+
+  cmd_finalbattle_unlight_chainsaw:
+    cmd_finalbattle_set_chainsaw_shot_disabled:
+    cmd_finalbattle_chainsaw_lights_off:
+
+  s_chain_target_c_active:
+    - cmd_finalbattle_maybe_chainsaw_hit
+
+  s_chain_target_h_active:
+    - cmd_finalbattle_maybe_chainsaw_hit
+
+  s_chain_target_a_active:
+    - cmd_finalbattle_maybe_chainsaw_hit
+
+  s_chain_target_i_active:
+    - cmd_finalbattle_maybe_chainsaw_hit
+
+  s_chain_target_n_active:
+    - cmd_finalbattle_maybe_chainsaw_hit
+
+  s_saw_target_s_active:
+    - cmd_finalbattle_maybe_chainsaw_hit
+
+  s_saw_target_a_active:
+    - cmd_finalbattle_maybe_chainsaw_hit
+
+  s_saw_target_w_active:
+    - cmd_finalbattle_maybe_chainsaw_hit
+
+  ## ball save ##
+
+  cmd_finalbattle_maybe_add_ball_save{current_player.v_finalbattle_nunchucks_collected>0}:
+    cmd_finalbattle_add_kill_ball_save:
 
   ## shot events phase 1 ##
 
@@ -173,7 +235,7 @@ event_player:
     cmd_finalbattle_refresh_lights:
 
   # nunchucks
-  # add a ball on kills
+  # ball save on kill
   s_captive_ball_target_active{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_nunchucks_collected==0}:
     cmd_finalbattle_set_nunchucks_collected:
     cmd_finalbattle_play_nunchucks_collect_sound:
@@ -476,6 +538,13 @@ ball_saves:
     auto_launch: false
     delayed_eject_events: cmd_finalbattle_eject_ball_save
 
+  finalbattle_kill:
+    enable_events: cmd_finalbattle_add_kill_ball_save
+    active_time: 10s
+    balls_to_save: -1
+    auto_launch: yes
+     
+
 ##################################################
 # Variables
 ##################################################
@@ -689,6 +758,18 @@ variable_player:
       action: set
       int: 1
 
+  ## chainsaw shot ##
+
+  cmd_finalbattle_set_chainsaw_shot_enabled:
+    v_finalbattle_chainsaw_shot_enabled:
+      action: set
+      int: 1
+
+  cmd_finalbattle_set_chainsaw_shot_disabled:
+    v_finalbattle_chainsaw_shot_enabled:
+      action: set
+      int: 0
+
   ## fight variables ##
 
   cmd_damage_sawyer:
@@ -734,7 +815,6 @@ multiballs:
     ball_count_type: total
     shoot_again: 30000 + current_player.v_finalbattle_ball_save_extention
     start_events: cmd_finalbattle_start_final_multiball
-    add_a_ball_events: cmd_finalbattle_add_a_ball
 
 ##################################################
 # Sites and Sounds
@@ -827,7 +907,7 @@ slides:
   finalbattle_bonus_nunchucks_slide:
     widgets:
     - type: image
-      image: fb_collected_nunchucks_v1
+      image: fb_collected_nunchucks_v2
 
   finalbattle_bonus_fully_loaded_slide:
     widgets:
@@ -1591,6 +1671,20 @@ sound_player:
       action: play
       loops: 0
 
+  cmd_finalbattle_play_main_bg:
+    finalbattle_main_bg_music:
+      action: play
+      loops: -1
+
+  cmd_finalbattle_play_sally_intro:
+    FB_sally_returns_v1:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_stop_main_bg:
+    finalbattle_main_bg_music:
+      action: stop
+
   # Hit sounds
 
   cmd_finalbattle_play_hit_sound_sawyer:
@@ -1662,6 +1756,7 @@ show_player:
   # slaughter_house_arrow: shotgun
   # right_ramp_arrow: flamethrower
   # right_orbit_arrow: chainsaw
+
 
   # Lights off
 
@@ -1981,6 +2076,36 @@ show_player:
       show_tokens:
         lights: van
 
+  # chainsaw attack
+
+  cmd_finalbattle_chainsaw_lights_on:
+    med_flash_chainsaw_targets:
+      action: play
+      show_tokens:
+        lights: 
+          chain_target_c,
+          chain_target_h,
+          chain_target_a,
+          chain_target_i,
+          chain_target_n,
+          saw_target_s,
+          saw_target_a,
+          saw_target_w
+
+  cmd_finalbattle_chainsaw_lights_off:
+    med_flash_chainsaw_targets:
+      action: stop
+      show_tokens:
+        lights: 
+          - chain_target_c
+          - chain_target_h
+          - chain_target_a
+          - chain_target_i
+          - chain_target_n
+          - saw_target_s
+          - saw_target_a
+          - saw_target_w
+
 shows:
   med_flash_knife:
     - duration: 0.5
@@ -2115,6 +2240,28 @@ shows:
           color: off
 
   med_flash_final_blow:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_chainsaw_targets:
     - duration: 0.5
       lights:
         (light):

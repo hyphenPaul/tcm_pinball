@@ -22,10 +22,16 @@
 Final battle
 
 - finish weapon perk
-  - add a ball becomes death ball save
 - score final mode
 - Final Jam lit beforehand
 - add special bonus and instant death if you clear all shots in time
+- bg music stops when dead
+- 10 Milling for fully loaded
+- Grandpa death new sound effect
+- leatherface damage box is a little messed up
+- update leatherface death shot to say "shoot van" not "shoot target"
+- change music when chasing leatherface at the end
+  - Dem add leatherface wimper her laughing and chainsaw 
 
 ----------------------------------------------------------------------------------------------------
 

@@ -274,6 +274,9 @@ player_vars:
     value_type: float
     initial_value: 90
 
+  v_finalbattle_chainsaw_shot_enabled:
+    initial_value: 0
+
   #####################################
   # Magnavuk
   #####################################

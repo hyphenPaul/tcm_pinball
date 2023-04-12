@@ -302,6 +302,10 @@ sounds:
     mode_end_action: stop
     file: final_massacre_music_v3.wav
     volume: 1
+  finalbattle_main_bg_music:
+    mode_end_action: stop
+    file: FB_final_battle_music_v6.wav
+    volume: .7
 
   # sawemall
 
