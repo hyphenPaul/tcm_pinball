@@ -56,6 +56,7 @@ class WeaponSlides(CustomCode):
         collected = self.collected_slides()
 
         if len(collected) == len(self.slide_names):
+            self.machine.events.post("cmd_finalbattle_score_collect_all_weapons")
             collected.append("fully_loaded")
 
         if collected == []:

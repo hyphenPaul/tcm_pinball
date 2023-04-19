@@ -68,7 +68,6 @@ event_player:
     cmd_finalbattle_maybe_light_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_show_sawyer_slide:
-    
   
   player_v_finalbattle_sawyer_damage{current_player.v_finalbattle_sawyer_damage>=current_player.v_finalbattle_sawyer_damage_total}:
     cmd_finalbattle_set_state_sawyer_final_blow:
@@ -79,6 +78,7 @@ event_player:
 
   cmd_finalbattle_kill_sawyer:
     cmd_remove_sawyer_final_blow_slide:
+    cmd_finalbattle_score_kill_sawyer:
     cmd_finalbattle_play_death_sound_sawyer:
     cmd_show_sawyer_death_slide:
 
@@ -98,6 +98,7 @@ event_player:
 
   cmd_finalbattle_kill_grandpa:
     cmd_remove_sawyer_final_blow_slide:
+    cmd_finalbattle_score_kill_grandpa:
     cmd_finalbattle_play_death_sound_grandpa:
     cmd_show_grandpa_death_slide:
 
@@ -118,6 +119,7 @@ event_player:
 
   cmd_finalbattle_kill_hitchhiker:
     cmd_remove_sawyer_final_blow_slide:
+    cmd_finalbattle_score_kill_hitchhiker:
     cmd_finalbattle_play_death_sound_hitchhiker:
     cmd_show_hitchhiker_death_slide:
 
@@ -135,28 +137,35 @@ event_player:
     cmd_finalbattle_roaming_timer_restart:
     cmd_remove_leatherface_slide:
     cmd_show_leatherface_roaming:
+    cmd_finalbattle_stop_main_bg:
+    cmd_finalbattle_play_chase_music:
 
   player_v_finalbattle_leatherface_roaming_shot:
     cmd_finalbattle_refresh_lights:
 
   cmd_finalbattle_leatherface_roaming_hit:
     cmd_finalbattle_roaming_timer_stop:
+    cmd_finalbattle_score_chase_leatherface:
     cmd_finalbattle_set_state_leatherface_final_blow:
     cmd_finalbattle_unlight_chainsaw:
     cmd_show_leatherface_final_blow_slide:
     cmd_remove_leatherface_roaming:
     cmd_enable_bh_mode_van:
     cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_stop_chase_music:
+    cmd_finalbattle_play_final_music:
 
   ball_hold_bh_mode_van_full{current_player.v_finalbattle_state=="leatherface_final_blow"}:
     cmd_finalbattle_kill_leatherface:
 
   cmd_finalbattle_kill_leatherface:
     cmd_finalbattle_set_state_leatherface_dead:
+    cmd_finalbattle_score_kill_leatherface:
     cmd_disable_flippers:
     cmd_disable_bh_mode_van:
     cmd_finalbattle_refresh_lights:
     cmd_remove_leatherface_final_blow_slide:
+    cmd_finalbattle_stop_final_music:
     cmd_finalbattle_play_death_sound_leatherface:
     cmd_show_leatherface_death_slide:
 
@@ -177,18 +186,22 @@ event_player:
 
   cmd_finalbattle_damage_character{current_player.v_finalbattle_state=="multiball_sawyer"}:
     cmd_damage_sawyer:
+    cmd_finalbattle_score_damage_sawyer:
     cmd_finalbattle_play_hit_sound_sawyer:
 
   cmd_finalbattle_damage_character{current_player.v_finalbattle_state=="multiball_grandpa"}:
     cmd_damage_grandpa:
+    cmd_finalbattle_score_damage_grandpa:
     cmd_finalbattle_play_hit_sound_grandpa:
 
   cmd_finalbattle_damage_character{current_player.v_finalbattle_state=="multiball_hitchhiker"}:
     cmd_damage_hitchhiker:
+    cmd_finalbattle_score_damage_hitchhiker:
     cmd_finalbattle_play_hit_sound_hitchhiker:
 
   cmd_finalbattle_damage_character{current_player.v_finalbattle_state=="multiball_leatherface"}:
     cmd_damage_leatherface:
+    cmd_finalbattle_score_damage_leatherface:
     cmd_finalbattle_play_hit_sound_leatherface:
 
   cmd_finalbattle_unlight_chainsaw:
@@ -227,9 +240,10 @@ event_player:
   ## shot events phase 1 ##
 
   # knife
-  # extra damage points - tbd
+  # extra damage points
   left_orbit_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_knife_collected==0}:
     cmd_finalbattle_set_knife_collected:
+    cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_start_knife_collect_slide:
     cmd_finalbattle_play_knife_collect_sound:
     cmd_finalbattle_refresh_lights:
@@ -238,14 +252,16 @@ event_player:
   # ball save on kill
   s_captive_ball_target_active{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_nunchucks_collected==0}:
     cmd_finalbattle_set_nunchucks_collected:
+    cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_play_nunchucks_collect_sound:
     cmd_finalbattle_start_nunchucks_collect_slide:
     cmd_finalbattle_refresh_lights:
 
   # axe
-  # 2 x kill jackpot - tbd
+  # 2 x kill jackpot
   left_ramp_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_axe_collected==0}:
     cmd_finalbattle_set_axe_collected:
+    cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_play_axe_collect_sound:
     cmd_finalbattle_start_axe_collect_slide:
     cmd_finalbattle_refresh_lights:
@@ -254,6 +270,7 @@ event_player:
   # extended ball save
   s_slaughter_house_target_active{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_shotgun_collected==0}:
     cmd_finalbattle_set_shotgun_collected:
+    cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_extend_ball_save:
     cmd_finalbattle_play_shotgun_collect_sound:
     cmd_finalbattle_start_shotgun_collect_slide:
@@ -263,15 +280,17 @@ event_player:
   # double damage
   right_ramp_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_flamethrower_collected==0}:
     cmd_finalbattle_set_flamethrower_collected:
+    cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_set_damage_bonus: 
     cmd_finalbattle_play_flamethrower_collect_sound:
     cmd_finalbattle_start_flamethrower_collect_slide:
     cmd_finalbattle_refresh_lights:
 
   # chainsaw
-  # chainsaw attack - tbd
+  # chainsaw attack
   right_orbit_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_chainsaw_collected==0}:
     cmd_finalbattle_set_chainsaw_collected:
+    cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_play_chainsaw_collect_sound:
     cmd_finalbattle_start_chainsaw_collect_slide:
     cmd_finalbattle_refresh_lights:
@@ -912,7 +931,7 @@ slides:
   finalbattle_bonus_fully_loaded_slide:
     widgets:
     - type: image
-      image: fb_collected_fully_loaded_v1
+      image: fb_collected_fully_loaded_v2
 
   finalbattle_bonus_nothing_slide:
     widgets:
@@ -1258,7 +1277,7 @@ slides:
   finalbattle_leatherface_final_blow:
     widgets:
     - type: image
-      image: fb_leatherface_shoot_to_kill_v1
+      image: fb_leatherface_shoot_to_kill_v2
 
   finallbattle_leatherface_fight:
     widgets:
@@ -1316,7 +1335,7 @@ slides:
       image: fb_wince_leatherface_v1
       anchor_x: 0
       anchor_y: 0
-      x: -5
+      x: -10
       y: 0
       animations:
         player_v_finalbattle_leatherface_width:
@@ -1656,6 +1675,16 @@ sound_player:
       action: play
       loops: 0
 
+  cmd_finalbattle_play_fully_loaded_collect_sound:
+    fb_collected_fully_loaded_sfx_v1:
+      action: play
+      loops: 0
+
+  cmd_finalbattle_play_nothing_collect_sound:
+    fb_collected_nothing_sfx_v1:
+      action: play
+      loops: 0
+
   player_finalbattle_finalbattle_phase_1_timer_tick{value == 3}:
     FB_dramatic_swell:
       action: play
@@ -1676,13 +1705,31 @@ sound_player:
       action: play
       loops: -1
 
+  cmd_finalbattle_stop_main_bg:
+    finalbattle_main_bg_music:
+      action: stop
+
   cmd_finalbattle_play_sally_intro:
     FB_sally_returns_v1:
       action: play
       loops: 0
 
-  cmd_finalbattle_stop_main_bg:
-    finalbattle_main_bg_music:
+  cmd_finalbattle_play_chase_music:
+    finalbattle_chase_leatherface:
+      action: play
+      loops: -1
+
+  cmd_finalbattle_stop_chase_music:
+    finalbattle_chase_leatherface:
+      action: stop
+
+  cmd_finalbattle_play_final_music:
+    finalbattle_last_shot:
+      action: play
+      loops: -1
+
+  cmd_finalbattle_stop_final_music:
+    finalbattle_last_shot:
       action: stop
 
   # Hit sounds
@@ -1720,12 +1767,12 @@ sound_player:
       loops: 0
 
   cmd_finalbattle_play_death_sound_grandpa:
-    hitchhiker_death_v2_sfx:
+    grandpa_death_v3_sfx:
       action: play
       loops: 0
 
   cmd_finalbattle_play_death_sound_leatherface:
-    hitchhiker_death_v2_sfx:
+    leatherface_death_v1_sfx:
       action: play
       loops: 0
 

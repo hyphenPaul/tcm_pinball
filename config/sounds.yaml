@@ -306,6 +306,14 @@ sounds:
     mode_end_action: stop
     file: FB_final_battle_music_v6.wav
     volume: .7
+  finalbattle_chase_leatherface:
+    mode_end_action: stop
+    file: fb_sally_chases_leatherface_sfx_v1.wav
+    volume: .7
+  finalbattle_last_shot:
+    mode_end_action: stop
+    file: FB_final_battle_music_v4.wav
+    volume: .7
 
   # sawemall
 

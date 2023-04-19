@@ -21,17 +21,14 @@
 
 Final battle
 
-- finish weapon perk
-- score final mode
+- bg music is playing over bonus after drain
+- disable chainsaw shot for leatherface
+- disable flippers if you collect all weapons
 - Final Jam lit beforehand
-- add special bonus and instant death if you clear all shots in time
-- bg music stops when dead
-- 10 Milling for fully loaded
-- Grandpa death new sound effect
-- leatherface damage box is a little messed up
-- update leatherface death shot to say "shoot van" not "shoot target"
+
+- Dem
 - change music when chasing leatherface at the end
-  - Dem add leatherface wimper her laughing and chainsaw 
+  - Dem add leatherface wimper her laughing and chainsaw
 
 ----------------------------------------------------------------------------------------------------
 

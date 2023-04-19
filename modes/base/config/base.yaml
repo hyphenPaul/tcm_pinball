@@ -624,6 +624,66 @@ variable_player:
   cmd_sawemall_score_van_4:
     score: 1000000 * current_player.v_playfield_multiplier
 
+  ## final battle ##
+
+  cmd_finalbattle_score_collect_weapon:
+    score: 500000
+
+  cmd_finalbattle_score_collect_all_weapons:
+    score: 10000000
+
+  cmd_finalbattle_score_damage_sawyer:
+    score: 1000000
+
+  cmd_finalbattle_score_damage_sawyer.1{current_player.v_finalbattle_knife_collected==1}:
+    score: 250000
+
+  cmd_finalbattle_score_kill_sawyer{current_player.v_finalbattle_axe_collected==0}:
+    score: 2000000
+
+  cmd_finalbattle_score_kill_sawyer{current_player.v_finalbattle_axe_collected==1}:
+    score: 4000000
+
+  cmd_finalbattle_score_damage_grandpa:
+    score: 2000000
+
+  cmd_finalbattle_score_damage_grandpa.1{current_player.v_finalbattle_knife_collected==1}:
+    score: 500000
+
+  cmd_finalbattle_score_kill_grandpa{current_player.v_finalbattle_axe_collected==0}:
+    score: 3000000
+
+  cmd_finalbattle_score_kill_grandpa{current_player.v_finalbattle_axe_collected==1}:
+    score: 6000000
+
+  cmd_finalbattle_score_damage_hitchhiker:
+    score: 3000000
+
+  cmd_finalbattle_score_damage_hitchhiker.1{current_player.v_finalbattle_knife_collected==1}:
+    score: 750000
+
+  cmd_finalbattle_score_kill_hitchhiker{current_player.v_finalbattle_axe_collected==0}:
+    score: 4000000
+
+  cmd_finalbattle_score_kill_hitchhiker{current_player.v_finalbattle_axe_collected==1}:
+    score: 8000000
+
+  cmd_finalbattle_score_damage_leatherface:
+    score: 5000000
+
+  cmd_finalbattle_score_damage_leatherface.1{current_player.v_finalbattle_knife_collected==1}:
+    score: 1000000
+
+  cmd_finalbattle_score_chase_leatherface:
+    score: 10000000
+
+  cmd_finalbattle_score_kill_leatherface{current_player.v_finalbattle_axe_collected==0}:
+    score: 25000000
+
+  cmd_finalbattle_score_kill_leatherface{current_player.v_finalbattle_axe_collected==1}:
+    score: 50000000
+
+
   ########################################
   # Van Vuk
   ########################################
