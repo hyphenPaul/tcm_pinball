@@ -301,10 +301,6 @@ sound_player:
       loops: -1
       volume: 0.2
 
-  cmd_stop_grandpa_bg_music:
-    grandpa_bg_music:
-      action: stop
-
   cmd_grandpa_hit_sally_sound_1:
     grandpa_hit_1_sound_v1:
       action: play

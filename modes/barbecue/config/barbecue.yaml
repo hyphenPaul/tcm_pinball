@@ -527,7 +527,3 @@ sound_player:
     barbecue_bg_music:
       action: play
       loops: -1
-
-  cmd_stop_barbecue_music:
-    barbecue_bg_music:
-      action: stop

@@ -371,10 +371,6 @@ sound_player:
       action: play
       loops: -1
 
-  cmd_stop_hitchhiker_music:
-    hitchhiker_bg_music:
-      action: stop
-
 show_player:
   cmd_hitchhiker_clear_playfield_lights:
     med_flash:

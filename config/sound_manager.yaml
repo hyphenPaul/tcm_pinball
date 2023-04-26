@@ -86,6 +86,16 @@ event_player:
     - cmd_stop_mask_mania_music
     - cmd_stop_finalbattle_music
 
+  cmd_stop_sally_bg_music:
+    cmd_stop_sally_bg_music_phase_1:
+    cmd_stop_sally_bg_music_phase_2:
+
+  cmd_stop_finalbattle_music:
+    cmd_stop_finalbattle_music_phase_1:
+    cmd_finalbattle_stop_main_bg:
+    cmd_finalbattle_stop_chase_music:
+    cmd_finalbattle_stop_final_music:
+
 sound_player:
 
   ##################################################
@@ -183,6 +193,52 @@ sound_player:
   cmd_main_music_volume_up:
     base_bg_music:
       volume: 0.65
+
+  cmd_stop_grandpa_bg_music:
+    grandpa_bg_music:
+      action: stop
+
+  cmd_stop_grave_bg_music:
+    grave_bg_music:
+      action: stop
+
+  cmd_stop_sally_bg_music_phase_1:
+    sally_bg_music_phase_1:
+      action: stop
+
+  cmd_stop_sally_bg_music_phase_2:
+    sally_bg_music_phase_2:
+      action: stop
+
+  cmd_stop_hitchhiker_music:
+    hitchhiker_bg_music:
+      action: stop
+
+  cmd_stop_barbecue_music:
+    barbecue_bg_music:
+      action: stop
+
+  cmd_stop_sawemall_music:
+    sound_saw_em_all_music:
+      action: stop
+
+  # Finalbattle
+
+  cmd_stop_finalbattle_music_phase_1:
+    finalbattle_bg_music:
+      action: stop
+
+  cmd_finalbattle_stop_main_bg:
+    finalbattle_main_bg_music:
+      action: stop
+
+  cmd_finalbattle_stop_chase_music:
+    finalbattle_chase_leatherface:
+      action: stop
+
+  cmd_finalbattle_stop_final_music:
+    finalbattle_last_shot:
+      action: stop
 
   ##################################################
   # Switch sounds

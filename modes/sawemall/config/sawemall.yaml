@@ -567,10 +567,6 @@ sound_player:
       action: play
       loops: -1
 
-  cmd_stop_sawemall_music:
-    sound_saw_em_all_music:
-      action: stop
-
   cmd_sawemall_play_person_chop_1_audio:
     sound_saw_em_all_karen_audio:
       action: play

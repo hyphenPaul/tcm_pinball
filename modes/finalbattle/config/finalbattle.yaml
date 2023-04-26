@@ -18,11 +18,9 @@ event_player:
     cmd_disable_bh_mode_van:
     cmd_finalbattle_set_state_starting:
     cmd_finalbattle_start_intro_slide:
-    # sean - add this
-    #cmd_finalbattle_start_intro_slide_sound:
+    cmd_finalbattle_start_intro_slide_sound:
 
   slide_finalbattle_intro_slide_removed:
-    # sean - remove this
     cmd_eject_van_vuk_with_audio:
     cmd_finalbattle_after_intro_complete:
 
@@ -35,6 +33,9 @@ event_player:
     cmd_finalbattle_refresh_lights:
 
   timer_finalbattle_phase_1_timer_complete:
+    cmd_finalbattle_complete_weapon_collection:
+
+  cmd_finalbattle_complete_weapon_collection:
     cmd_stop_finalbattle_music_phase_1:
     cmd_finalbattle_play_bass_hit:
     cmd_finalbattle_play_bonus_bg:
@@ -45,7 +46,6 @@ event_player:
     cmd_finalbattle_play_completion_slides:
     cmd_remove_finalbattle_start_collect_weapons_slide:
     cmd_finalbattle_show_initial_bonus_slide:
-    #cmd_stop_finalbattle_mode:
 
   cmd_finalbattle_bonus_slides_complete:
     cmd_finalbattle_start_multiball_intro_slide:
@@ -127,7 +127,6 @@ event_player:
     cmd_finalbattle_maybe_add_ball_save:
     cmd_finalbattle_reset_combo_values:
     cmd_finalbattle_set_state_multiball_leatherface:
-    cmd_finalbattle_maybe_light_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_show_leatherface_slide:
 
@@ -247,6 +246,7 @@ event_player:
     cmd_finalbattle_start_knife_collect_slide:
     cmd_finalbattle_play_knife_collect_sound:
     cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_all_collected:
 
   # nunchucks
   # ball save on kill
@@ -256,6 +256,7 @@ event_player:
     cmd_finalbattle_play_nunchucks_collect_sound:
     cmd_finalbattle_start_nunchucks_collect_slide:
     cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_all_collected:
 
   # axe
   # 2 x kill jackpot
@@ -265,6 +266,7 @@ event_player:
     cmd_finalbattle_play_axe_collect_sound:
     cmd_finalbattle_start_axe_collect_slide:
     cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_all_collected:
 
   # shotgun
   # extended ball save
@@ -275,6 +277,7 @@ event_player:
     cmd_finalbattle_play_shotgun_collect_sound:
     cmd_finalbattle_start_shotgun_collect_slide:
     cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_all_collected:
 
   # flamethrower
   # double damage
@@ -285,6 +288,7 @@ event_player:
     cmd_finalbattle_play_flamethrower_collect_sound:
     cmd_finalbattle_start_flamethrower_collect_slide:
     cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_all_collected:
 
   # chainsaw
   # chainsaw attack
@@ -294,6 +298,13 @@ event_player:
     cmd_finalbattle_play_chainsaw_collect_sound:
     cmd_finalbattle_start_chainsaw_collect_slide:
     cmd_finalbattle_refresh_lights:
+    cmd_finalbattle_check_all_collected:
+
+
+  cmd_finalbattle_check_all_collected{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_chainsaw_collected==1 and current_player.v_finalbattle_nunchucks_collected==1 and current_player.v_finalbattle_axe_collected==1 and current_player.v_finalbattle_shotgun_collected==1 and current_player.v_finalbattle_flamethrower_collected==1 and current_player.v_finalbattle_knife_collected==1}:
+    cmd_finalbattle_phase_1_timer_stop:
+    cmd_finalbattle_phase_1_timer_reset:
+    cmd_finalbattle_complete_weapon_collection:
 
   # shot events sawyer fight
 
@@ -494,9 +505,7 @@ event_player:
 timers:
 
   finalbattle_phase_1_timer:
-    # Sean - reset this to 40
     start_value: 40
-    #start_value: 10
     end_value: 0
     tick_interval: 1s
     direction: down
@@ -504,6 +513,8 @@ timers:
     control_events:
       - event: cmd_finalbattle_phase_1_timer_stop
         action: stop
+      - event: cmd_finalbattle_phase_1_timer_reset
+        action: reset
       - event: cmd_finalbattle_phase_1_timer_start
         action: start
 
@@ -1392,9 +1403,7 @@ slide_player:
   cmd_finalbattle_start_intro_slide:
     finalbattle_intro_slide:
       priority: 300
-      # Sean : re-add this
-      #expire: 33.7s
-      expire: 2s
+      expire: 33.7s
 
   # weapon collection slides
 
@@ -1641,10 +1650,6 @@ sound_player:
       action: play
       loops: -1
 
-  cmd_stop_finalbattle_music_phase_1:
-    finalbattle_bg_music:
-      action: stop
-
   cmd_finalbattle_play_knife_collect_sound:
     fb_knife_v1_SFX:
       action: play
@@ -1705,10 +1710,6 @@ sound_player:
       action: play
       loops: -1
 
-  cmd_finalbattle_stop_main_bg:
-    finalbattle_main_bg_music:
-      action: stop
-
   cmd_finalbattle_play_sally_intro:
     FB_sally_returns_v1:
       action: play
@@ -1719,18 +1720,10 @@ sound_player:
       action: play
       loops: -1
 
-  cmd_finalbattle_stop_chase_music:
-    finalbattle_chase_leatherface:
-      action: stop
-
   cmd_finalbattle_play_final_music:
     finalbattle_last_shot:
       action: play
       loops: -1
-
-  cmd_finalbattle_stop_final_music:
-    finalbattle_last_shot:
-      action: stop
 
   # Hit sounds
 

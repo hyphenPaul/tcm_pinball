@@ -23,7 +23,6 @@ Final battle
 
 - bg music is playing over bonus after drain
 - disable chainsaw shot for leatherface
-- disable flippers if you collect all weapons
 - Final Jam lit beforehand
 
 - Dem
