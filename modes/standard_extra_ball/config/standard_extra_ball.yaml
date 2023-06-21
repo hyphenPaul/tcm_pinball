@@ -65,6 +65,7 @@ show_player:
     light_extra_ball_show:
       action: play
       loops: 0
+      priority: 1000
   cmd_play_extra_ball_award_show:
     award_extra_ball_show:
       action: play

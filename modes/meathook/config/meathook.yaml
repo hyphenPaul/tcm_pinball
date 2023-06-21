@@ -1,5 +1,10 @@
 #config_version=5
 
+# TODO
+# Refresh the lights
+# Fix the diverter
+# The timing seems a little off for 10x out of the gate
+
 mode:
   start_events:
     - cmd_start_mode_meathook
@@ -8,23 +13,69 @@ mode:
   priority: 500
 
 event_player:
+  cmd_clean_up_modes:
+    - cmd_meathook_set_state_idle
+    - cmd_meathook_stop_mayhem_music
+    - cmd_meathook_mayhem_timer_stop
+    - cmd_meathook_mayhem_10_x_timer_stop
   left_ramp_hit:
-    - cmd_play_meathook_hang_audio
-    - cmd_add_meathook_bonus
+    - cmd_meathook_add_show
     - cmd_add_meathook_total
     - cmd_give_player_award
     - cmd_score_meathook
     - cmd_update_meathook_message
+    - cmd_meathook_reduce_and_check_hits
+    - cmd_meathook_check_for_10x
+  cmd_meathook_add_show{current_player.v_meathook_state=="idle"}:
+    - cmd_play_meathook_hang_audio
     - cmd_show_meathook_hang
-    - cmd_check_extra_ball
-  cmd_give_player_award{current_player.v_meathook_total==machine.meathook_total_for_reward_1}:
+  cmd_meathook_add_show{current_player.v_meathook_state=="3x"}:
+    # TODO: new sound
+    - cmd_show_meathook_hang_x_3
+  cmd_meathook_add_show{current_player.v_meathook_state=="10x"}:
+    # TODO: new sound
+    - cmd_show_meathook_hang_x_10
+  cmd_meathook_reduce_and_check_hits{current_player.v_meathook_state=="idle"}:
+    - cmd_meathook_reduce_hits
+    - cmd_meathook_check_for_mayhem
+  cmd_meathook_check_for_10x{current_player.v_meathook_state!="idle"}:
+    - cmd_meathook_start_10x
+  cmd_meathook_start_10x:
+    - cmd_meathook_set_state_10x
+    - cmd_meathook_mayhem_10x_timer_restart
+    - cmd_meathook_refresh_lights
+  timer_meathook_mayhem_10x_complete{current_player.v_meathook_state=="10x"}:
+    - cmd_meathook_set_state_3x
+    - cmd_meathook_refresh_lights
+  # mayhem is over
+  timer_meathook_mayhem_complete:
+    - cmd_meathook_set_state_idle
+    - cmd_increase_mayhem_count
+    - cmd_meathook_refresh_lights
+    - cmd_set_hits_before_mayhem
+    - cmd_disable_diverter
+    # TODO
+    - cmd_meathook_stop_mayhem_music
+  cmd_meathook_check_for_mayhem{current_player.v_meathook_total_hits_before_mayhem<=0}:
+    - cmd_meathook_start_mayhem
+  cmd_meathook_start_mayhem:
+    - cmd_meathook_mayhem_timer_restart
+    - cmd_meathook_set_state_3x
+    - cmd_meathook_refresh_lights
+    - cmd_enable_diverter
+    # TODO
+    - cmd_meathook_start_mayhem_music
+  cmd_give_player_award{current_player.v_meathook_total>=machine.meathook_total_for_reward_1 and current_player.v_meathook_reward_1_received==0}:
+    - cmd_meathook_set_reward_1
     - cmd_light_extra_ball
-  cmd_give_player_award{current_player.v_meathook_total==machine.meathook_total_for_reward_2}:
-    - cmd_something_else_cool
-  cmd_give_player_award{current_player.v_meathook_total==machine.meathook_total_for_reward_3}:
-    - cmd_another_thing_cool
-  slide_girl_on_a_hook_slide_removed{current_player.v_meathook_total==machine.meathook_total_for_reward_1}:
+    - cmd_meathook_set_recent_extra_ball
+  cmd_give_player_award{current_player.v_meathook_total>=machine.meathook_total_for_reward_2 and current_player.v_meathook_reward_1_received==0}:
+    - cmd_meathook_set_reward_2
+    - cmd_light_extra_ball
+    - cmd_meathook_set_recent_extra_ball
+  slide_girl_on_a_hook_slide_removed{current_player.v_meathook_recent_light_extra_ball==1}:
     - cmd_play_light_extra_ball_show
+    - cmd_meathook_unset_recent_extra_ball
 
 sound_player:
   cmd_play_meathook_hang_audio:
@@ -40,13 +91,61 @@ show_player:
       show_tokens:
         hook_count: (current_player.v_meathook_total)
         message: (current_player.v_meathook_message)
+  cmd_show_meathook_hang_x_3:
+    girl_on_a_hook_x_3:
+      action: play
+      loops: 0
+  cmd_show_meathook_hang_x_10:
+    girl_on_a_hook_x_10:
+      action: play
+      loops: 0
+
+timers:
+  meathook_mayhem:
+    start_value: 45
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: False
+    control_events:
+      - event: cmd_meathook_mayhem_timer_restart
+        action: restart
+      - event: cmd_meathook_mayhem_timer_stop
+        action: stop
+  meathook_mayhem_10x:
+    start_value: 6
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: False
+    control_events:
+      - event: cmd_meathook_mayhem_10x_timer_restart
+        action: restart
+      - event: cmd_meathook_mayhem_10_x_timer_stop
+        action: stop
 
 variable_player:
-  cmd_add_meathook_total:
+  cmd_add_meathook_total{current_player.v_meathook_state=="idle"}:
     v_meathook_total: 1
+  cmd_add_meathook_total{current_player.v_meathook_state=="3x"}:
+    v_meathook_total: 3
+  cmd_add_meathook_total{current_player.v_meathook_state=="10x"}:
+    v_meathook_total: 10
+  cmd_increase_mayhem_count:
+    v_mayhem_count: 1
+  cmd_meathook_reduce_hits:
+    v_meathook_total_hits_before_mayhem: -1
+  cmd_set_hits_before_mayhem{current_player.v_mayhem_count==1}:
+    v_meathook_total_hits_before_mayhem:
+      int: 5
+      action: set
+  cmd_set_hits_before_mayhem{current_player.v_mayhem_count>1}:
+    v_meathook_total_hits_before_mayhem:
+      int: 7
+      action: set
   cmd_update_meathook_message{current_player.v_meathook_total<machine.meathook_total_for_reward_1}:
     v_meathook_message:
-      string: 7 LIGHTS EXTRA BALL
+      string: 10 LIGHTS EXTRA BALL
       action: set
   cmd_update_meathook_message{current_player.v_meathook_total==machine.meathook_total_for_reward_1}:
     v_meathook_message:
@@ -54,17 +153,37 @@ variable_player:
       action: set
   cmd_update_meathook_message{current_player.v_meathook_total>machine.meathook_total_for_reward_1 and current_player.v_meathook_total<machine.meathook_total_for_reward_2}:
     v_meathook_message:
-      string: 14 DOES SOMETHING ELSE
+      string: 69 LIGHTS EXTRA BALL
       action: set
   cmd_update_meathook_message{current_player.v_meathook_total==machine.meathook_total_for_reward_2}:
     v_meathook_message:
-      string: SOMETHING ELSE!!
+      string: EXTRA BALL IS LIT!!
       action: set
-  cmd_update_meathook_message{current_player.v_meathook_total>machine.meathook_total_for_reward_2 and current_player.v_meathook_total<machine.meathook_total_for_reward_3}:
-    v_meathook_message:
-      string: 25 DOES ANOTHER THING
+  cmd_meathook_set_reward_1:
+    v_meathook_reward_1_received:
+      int: 1
       action: set
-  cmd_update_meathook_message{current_player.v_meathook_total==machine.meathook_total_for_reward_3}:
-    v_meathook_message:
-      string: ANOTHER THING!!
+  cmd_meathook_set_reward_2:
+    v_meathook_reward_2_received:
+      int: 1
+      action: set
+  cmd_meathook_set_recent_extra_ball:
+    v_meathook_recent_light_extra_ball:
+      int: 1
+      action: set
+  cmd_meathook_unset_recent_extra_ball:
+    v_meathook_recent_light_extra_ball:
+      int: 0
+      action: set
+  cmd_meathook_set_state_3x:
+    v_meathook_state:
+      string: 3x
+      action: set
+  cmd_meathook_set_state_10x:
+    v_meathook_state:
+      string: 10x
+      action: set
+  cmd_meathook_set_state_idle:
+    v_meathook_state:
+      string: idle
       action: set

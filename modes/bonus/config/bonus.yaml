@@ -15,7 +15,7 @@ mode_settings:
     - event: cmd_meathook_bonus
       score: machine.meathook_bonus_value
       skip_if_zero: True
-      player_score_entry: meathook_bonus
+      player_score_entry: v_meathook_total
     - event: cmd_combo_bonus
       score: machine.combo_bonus_value
       skip_if_zero: True
@@ -124,7 +124,7 @@ slides:
             easing: out_quad
             duration: 0.5s
     - type: text
-      text: "MEATHOOKS: (player|meathook_bonus)"
+      text: "MEATHOOKS: (player|v_meathook_total)"
       style: big
       round_anchor_x: left
       anchor_y: bottom

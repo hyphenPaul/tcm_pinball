@@ -1,107 +1,29 @@
-- mode sounds persists when draining
-
-- next up (general)
-  - fraklin letters should flash during franklin millions
-  - mode music didn't turn off during tilt
-  - When i swap the ball save for the extended ball save, the light isn't turning off (i think it's because of the grace period maybe)
-  - need to add conditional for the van and mystery meater for the skill shot
-  - the light lock light shouldn't be the mystery meater light (use the arrow maybe)
-  - use the green arrow for the massacre million captive ball jackpot indicator
-  - franklin needs to make a sound after you collect all letters on that orbit
-  - see if we can fix the right ramp arrow light
-  - extend ball saver for chainsaw multiball
-  - finish hook counter
-  - mystery meater gets harder
-  - mode mystery meaters should give you extra time
-  - mystery during multiball should be an add a ball
-- next up (sean)
-  - make the shot lights strobe fast right before changing on the bbq mode
-
-----------------------------------------------------------------------------------------------------
-
-Final battle
-
-- bg music is playing over bonus after drain
-- disable chainsaw shot for leatherface
-- Final Jam lit beforehand
-
-- Dem
-- change music when chasing leatherface at the end
-  - Dem add leatherface wimper her laughing and chainsaw
-
-----------------------------------------------------------------------------------------------------
 
 bugs
 
-- a modes started during kids multiball
 - 2 x playfield not turning off (maybe when active and drain)
 - mask mania dead skin mask not turning off
-- make the van message switch more fool proof - it shouldn't be active for a mode and kick out right away (try lighting van and draining)
+- mask millions isn't turning off
+- general QA mask mania
 
 ----------------------------------------------------------------------------------------------------
 
-todo:
-  - We should cut background music out when the mystery meater goes
-  - add value to back to hurry up when you hit the orbits
-  - make sure the hurry turns off end of ball (everything should)
-  - Base level bonus (10000)
-  - Help Multiplier lights
+Todo
 
-Nice to have
-- funny bonuses
--- awesome light show
--- one shot one kill (a single chance to shoot a basket)
 
-----------------------------------------------------------------------------------------
-Media list:
-----------------------------------------------------------------------------------------
-
-Video
-
-- Mystery Meat Text Pages for awards
-- Fix ghosting around multiball girl face
-
---------------------------------------------------
-
-Audio
-
-- scratch voiceover
-- Escape Multiball Begin Animation Audio
-- Bumper sounds
-- Franklin Hurry up award music
-- Flipper inlane sound effects
-
-----------------------------------------------------------------------------------------
-Script:
-----------------------------------------------------------------------------------------
-
-- Shoot for the captive ball
-- Hit the captive ball
-- Save the kids
-- We gotta get outta here
-- He's coming for us
-- She's Safe
-- He's Safe
-- He got away
-- She got away
-- chainsaw sounds with ground walking
-- Shoot for super jackpot
-- Shoot for the lit arrows
-- Shoot the lit shots
-- Captive ball target hit sound
-- Sounds effect for "safe" hit
-- Multiball
-
-----------------------------------------------------------------------------------------
-Docker
-----------------------------------------------------------------------------------------
-
-- Failures happening here
-	- https://github.com/missionpinball/mpf/blob/545eb5ae78d7d94aca68c7070fbb76e8c4820b8b/mpf/platforms/p_roc_common.py#L76
-  - message: 2021-01-02 22:42:46,166 : WARNING : P-Roc : Failed to instantiate pinproc.PinPROC(5): Unable to open ftdi device: -3: device not found. Is your P/P3-Roc connected and powered up?
-
-build image:
-docker build . -t sfenton/tcm-pinball
-
-run docker (the privileged flag isn't working):
-docker run -t -i --privileged -v /dev/bus/usb/001/022:/dev/bus/usb/001/022 sfenton/tcm-pinball
+- Modes
+  - Each mode needs an instructional slide after intro
+- general
+  - What do we do with super jackpot light?
+  - music gets more dynamic as you complete modes
+- mystery meat
+  - add hold multiplier
+  - maybe (meathook bonus cashout)
+- sawemall
+  - Additional outro for saw em all
+- sally escape
+  - revisit sally escape graphic
+- Mask
+  - Revise to use only the two green arrows (jackpot, light super jackpot)
+- Left ramp (meathook)
+  - What do we do with left ramp lights (double, 3, 10)

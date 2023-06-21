@@ -21,11 +21,9 @@ machine_vars:
   #####################################
 
   meathook_total_for_reward_1:
-    initial_value: 7
+    initial_value: 10
   meathook_total_for_reward_2:
-    initial_value: 14
-  meathook_total_for_reward_3:
-    initial_value: 25
+    initial_value: 69
 
   #####################################
   # Pop Bumpers
@@ -433,6 +431,21 @@ player_vars:
 
   v_meathook_total:
     initial_value: 0
+  v_meathook_reward_1_received:
+    initial_value: 0
+  v_meathook_reward_2_received:
+    initial_value: 0
+  v_meathook_total_hits_before_mayhem:
+    initial_value: 3
+  v_meathook_recent_light_extra_ball:
+    initial_value: 0
+  v_meathook_multiplier:
+    initial_value: 1
+  v_mayhem_count:
+    initial_value: 0
+  v_meathook_state:
+    initial_value: "idle"
+    value_type: str
   v_meathook_message:
     initial_value: "10 LIGHTS EXTRA BALL"
     value_type: str
@@ -444,8 +457,6 @@ player_vars:
   bonus_multiplier:
     initial_value: 1
   franklin_bonus:
-    initial_value: 0
-  meathook_bonus:
     initial_value: 0
   combo_bonus:
     initial_value: 0

@@ -477,9 +477,9 @@ variable_player:
   ## meathook ##
 
   cmd_score_meathook{current_player.v_meathook_total<machine.meathook_total_for_reward_1}:
-    score: 15000 * current_player.v_playfield_multiplier
+    score: 15000 * current_player.v_playfield_multiplier * current_player.v_meathook_multiplier
   cmd_score_meathook{current_player.v_meathook_total>=machine.meathook_total_for_reward_1}:
-    score: 25000 * current_player.v_playfield_multiplier
+    score: 25000 * current_player.v_playfield_multiplier * current_player.v_meathook_multiplier
 
   ## Escape ##
 
@@ -702,8 +702,6 @@ variable_player:
   # Bonus
   ########################################
 
-  cmd_add_meathook_bonus:
-    meathook_bonus: 1
   cmd_add_franklin_bonus:
     franklin_bonus: 1
   cmd_add_combo_bonus:
@@ -727,7 +725,7 @@ variable_player:
   ########################################
   # Ball Save
   ########################################
-  
+
   mode_base_started:
     v_initial_playfield_active_fired:
       action: set

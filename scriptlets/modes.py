@@ -31,21 +31,22 @@ class Modes(CustomCode):
     def enable(self):
         self.info_log('enable')
 
-        # final mode testing
-        current_player = self.current_player()
+        # enable final mode testing
 
-        if not current_player['v_initial_test_fired']:
-            current_player['v_collected_modes'] = [
-                "hitchhiker",
-                "barbecue",
-                "grandpa",
-                "grave",
-                "sally",
-                "sawemall"
-            ]
-            current_player['v_initial_test_fired'] = True
+#        current_player = self.current_player()
+#
+#        if not current_player['v_initial_test_fired']:
+#            current_player['v_collected_modes'] = [
+#                "hitchhiker",
+#                "barbecue",
+#                "grandpa",
+#                "grave",
+#                "sally",
+#                "sawemall"
+#            ]
+#            current_player['v_initial_test_fired'] = True
 
-        # final mode testing end
+        # enable final mode testing end
 
         if self.enabled == False:
             self.enabled = True
