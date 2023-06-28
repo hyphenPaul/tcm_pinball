@@ -216,6 +216,7 @@ class Mystery(CustomCode):
 
     # 2 x playfield
 
+    # TODO: This needs to be updated
     def should_reject_2_x_playfield(self):
         if not self.is_mode_active("tt_playfield"):
             return True

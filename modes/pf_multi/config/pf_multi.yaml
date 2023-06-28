@@ -1,0 +1,14 @@
+#config_version=5
+
+#TODO: Need to update mystery
+
+mode:
+  start_events:
+    - cmd_start_mode_pf_multi
+  stop_events:
+    - cmd_stop_mode_pf_multi
+  priority: 500
+
+##################################################
+# Events and Variables
+##################################################

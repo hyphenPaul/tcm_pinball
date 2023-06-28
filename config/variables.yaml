@@ -422,11 +422,16 @@ player_vars:
     initial_value: 0
   v_tt_playfield_counter_count:
     initial_value: 0
+
+  #####################################
+  # Playfield Multiplier
+  #####################################
+
   v_playfield_multiplier:
     initial_value: 1
 
   #####################################
-  # Methook
+  # Meathook
   #####################################
 
   v_meathook_total:

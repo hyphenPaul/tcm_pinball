@@ -1,21 +1,12 @@
 #show_version=5
 
-- duration: 3.5s
+- duration: 4.1s
   slides:
-    girl_on_a_hook_slide:
+    base_slide:
       widgets:
-      - type: text
-        text: 3 ON A HOOK!!
-        style: small
-        round_anchor_x: left
-        anchor_y: 0
-        y: 1
-        opacity: 0
-        animations:
-          show_slide:
-          - property: opacity
-            value: 0
-            duration: 2.1s
-          - property: opacity
-            value: 1
-            duration: .3s
+      - type: image
+        image: 3x_meathooks_v2
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0

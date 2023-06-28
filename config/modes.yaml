@@ -15,8 +15,8 @@ modes:
   - mask
   - meathook
   - pop_bumpers
-  - tt_playfield
-  - tt_playfield_base
+#  - tt_playfield
+#  - tt_playfield_base
   - skill_shot
   - standard_extra_ball
   - hitchhiker
@@ -27,3 +27,4 @@ modes:
   - sawemall
   - finalbattle
   - tilt
+  - pf_multi

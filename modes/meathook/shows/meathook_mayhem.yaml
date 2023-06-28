@@ -1,11 +1,11 @@
 #show_version=5
 
-- duration: 4.1s
+- duration: 3.6s
   slides:
     base_slide:
       widgets:
       - type: image
-        image: 10x_meathooks_v2
+        image: meathook_mayhem_intro_v2
         anchor_x: left
         anchor_y: bottom
         x: 0
