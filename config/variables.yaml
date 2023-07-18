@@ -286,16 +286,21 @@ player_vars:
   # Mask Making
   #####################################
 
-  v_enable_mask_making:
+#  v_enable_mask_making:
+#    initial_value: 0
+#  v_enable_mask_mania:
+#    initial_value: 0
+#  v_mask_mania_countdown:
+#    initial_value: 30
+#  v_mask_mania_value:
+#    initial_value: 250000
+#  v_mask_mania_level:
+#    initial_value: 1
+  v_mask_state:
+    initial_value: "idle"
+    value_type: str
+  v_mask_shot_state:
     initial_value: 0
-  v_enable_mask_mania:
-    initial_value: 0
-  v_mask_mania_countdown:
-    initial_value: 30
-  v_mask_mania_value:
-    initial_value: 250000
-  v_mask_mania_level:
-    initial_value: 1
 
   #####################################
   # Extra Balls
@@ -429,6 +434,9 @@ player_vars:
 
   v_playfield_multiplier:
     initial_value: 1
+  v_pf_multi_state:
+    initial_value: 1x_idle
+    value_type: str
 
   #####################################
   # Meathook

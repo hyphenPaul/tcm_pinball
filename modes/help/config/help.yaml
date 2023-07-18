@@ -34,6 +34,7 @@ sound_player:
 
 event_player:
   help_lit_complete:
+    - cmd_on_help_lit_complete
     - cmd_add_multiplier
     - cmd_play_help_show
     - cmd_play_help_background_sound

@@ -17,8 +17,9 @@ event_player:
     - cmd_start_mode_mask
     - cmd_start_mode_combos
     - cmd_start_mode_pop_bumpers
-    - cmd_start_mode_tt_playfield_base
-    - cmd_start_mode_tt_playfield
+    # - cmd_start_mode_tt_playfield_base
+    # - cmd_start_mode_tt_playfield
+    - cmd_start_mode_pf_multi
     - cmd_start_mode_skill_shot
     - cmd_start_mode_standard_extra_ball
 

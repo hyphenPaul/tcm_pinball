@@ -27,3 +27,4 @@ Todo
   - Revise to use only the two green arrows (jackpot, light super jackpot)
 - Left ramp (meathook)
   - What do we do with left ramp lights (double, 3, 10)
+- Need to update mystery to remove any reference to the old 2x playfield

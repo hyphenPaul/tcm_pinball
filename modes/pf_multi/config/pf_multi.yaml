@@ -10,5 +10,291 @@ mode:
   priority: 500
 
 ##################################################
-# Events and Variables
+# Events
 ##################################################
+
+# 1x_idle - nothing lit
+# 2x_idle - 2x inactive
+# 2x_active - 2x active
+# 3x_idle - 3x inactive
+# 3x_active - 3x active
+# 4x_idle - 4x inactive
+# 4x_active - 4x active
+
+event_player:
+  cmd_clean_up_modes:
+    cmd_pf_multi_restart
+
+  # HELP completion
+
+  cmd_on_help_lit_complete{current_player.v_pf_multi_state=="1x_idle"}:
+    - cmd_pf_multi_set_state_2x_idle
+    - cmd_pf_multi_refresh_lights
+
+  cmd_on_help_lit_complete{current_player.v_pf_multi_state=="2x_idle"}:
+    - cmd_pf_multi_set_state_3x_idle
+    - cmd_pf_multi_refresh_lights
+
+  cmd_on_help_lit_complete{current_player.v_pf_multi_state=="3x_idle"}:
+    - cmd_pf_multi_set_state_4x_idle
+    - cmd_pf_multi_refresh_lights
+
+  # Captive ball hit
+
+  s_captive_ball_target_active{current_player.v_pf_multi_state=="2x_idle"}:
+    - cmd_pf_multi_set_state_2x_active
+    - cmd_pf_multi_set_multi_2x
+    - cmd_pf_multi_play_2x_all
+    - cmd_pf_multi_start_multiplier
+
+  s_captive_ball_target_active{current_player.v_pf_multi_state=="3x_idle"}:
+    - cmd_pf_multi_set_state_3x_active
+    - cmd_pf_multi_set_multi_3x
+    - cmd_pf_multi_play_3x_all
+    - cmd_pf_multi_start_multiplier
+
+  s_captive_ball_target_active{current_player.v_pf_multi_state=="4x_idle"}:
+    - cmd_pf_multi_set_state_4x_active
+    - cmd_pf_multi_set_multi_4x
+    - cmd_pf_multi_play_4x_all
+    - cmd_pf_multi_start_multiplier
+
+  cmd_pf_multi_start_multiplier:
+    - cmd_pf_multi_start_multiplier_timer
+    - cmd_pf_multi_refresh_lights
+
+  cmd_pf_multi_refresh_timer:
+    - cmd_pf_multi_stop_multiplier_timer
+    - cmd_pf_multi_reset_multiplier_timer
+
+  timer_v_pf_multiplier_timer_complete:
+    - cmd_pf_multi_restart
+
+  cmd_pf_multi_restart:
+    - cmd_pf_multi_refresh_timer
+    - cmd_pf_multi_set_state_1x_idle
+    - cmd_pf_multi_set_multi_1x
+    - cmd_pf_multi_refresh_lights
+
+  # Lights
+
+  cmd_pf_multi_refresh_lights:
+    cmd_pf_multi_clear_lights:
+    cmd_pf_multi_turn_on_lights:
+
+  # Shows
+
+  cmd_pf_multi_play_2x_all:
+    - cmd_pf_multi_play_2x
+    - cmd_pf_multi_play_multi_sound
+
+  cmd_pf_multi_play_3x_all:
+    - cmd_pf_multi_play_3x
+    - cmd_pf_multi_play_multi_sound
+
+  cmd_pf_multi_play_4x_all:
+    - cmd_pf_multi_play_4x
+    - cmd_pf_multi_play_multi_sound
+
+##################################################
+# Variables
+##################################################
+
+variable_player:
+
+  # Idle state
+
+  cmd_pf_multi_set_state_1x_idle:
+    v_pf_multi_state:
+      action: set
+      string: "1x_idle"
+
+  cmd_pf_multi_set_state_2x_idle:
+    v_pf_multi_state:
+      action: set
+      string: "2x_idle"
+
+  cmd_pf_multi_set_state_3x_idle:
+    v_pf_multi_state:
+      action: set
+      string: "3x_idle"
+
+  cmd_pf_multi_set_state_4x_idle:
+    v_pf_multi_state:
+      action: set
+      string: "4x_idle"
+
+  # Active state
+
+  cmd_pf_multi_set_state_2x_active:
+    v_pf_multi_state:
+      action: set
+      string: "2x_active"
+
+  cmd_pf_multi_set_state_3x_active:
+    v_pf_multi_state:
+      action: set
+      string: "3x_active"
+
+  cmd_pf_multi_set_state_4x_active:
+    v_pf_multi_state:
+      action: set
+      string: "4x_active"
+
+  # Multiplier
+
+  cmd_pf_multi_set_multi_1x:
+    v_playfield_multiplier:
+      action: set
+      int: 1
+
+  cmd_pf_multi_set_multi_2x:
+    v_playfield_multiplier:
+      action: set
+      int: 2
+
+  cmd_pf_multi_set_multi_3x:
+    v_playfield_multiplier:
+      action: set
+      int: 3
+
+  cmd_pf_multi_set_multi_4x:
+    v_playfield_multiplier:
+      action: set
+      int: 4
+
+##################################################
+# Timers
+##################################################
+
+timers:
+  v_pf_multiplier_timer:
+    start_value: 0
+    end_value: 40
+    tick_interval: 1s
+    control_events:
+      - action: start
+        event: cmd_pf_multi_start_multiplier_timer
+      - action: stop 
+        event: cmd_pf_multi_stop_multiplier_timer
+      - action: reset
+        event: cmd_pf_multi_reset_multiplier_timer
+
+##################################################
+# Lights
+##################################################
+
+light_player:
+  cmd_pf_multi_clear_lights:
+    ttp_save: 0
+    ttp_for_the: 0
+    ttp_grave: 0
+    l_ttp_enabled: 0
+
+  cmd_pf_multi_turn_on_lights{current_player.v_pf_multi_state=="2x_idle"}:
+    ttp_grave: ff
+    l_ttp_enabled: ff
+
+  cmd_pf_multi_turn_on_lights{current_player.v_pf_multi_state=="3x_idle"}:
+    ttp_for_the: ff
+    l_ttp_enabled: ff
+
+  cmd_pf_multi_turn_on_lights{current_player.v_pf_multi_state=="4x_idle"}:
+    ttp_save: ff
+    l_ttp_enabled: ff
+
+show_player:
+  cmd_pf_multi_clear_lights:
+    med_flash:
+      action: stop
+      show_tokens:
+        lights:
+          - ttp_save
+          - ttp_for_the
+          - ttp_grave
+          - l_ttp_enabled
+
+  cmd_pf_multi_turn_on_lights{current_player.v_pf_multi_state=="2x_active"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          ttp_grave,
+          l_ttp_enabled
+
+  cmd_pf_multi_turn_on_lights{current_player.v_pf_multi_state=="3x_active"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          ttp_for_the,
+          l_ttp_enabled
+
+  cmd_pf_multi_turn_on_lights{current_player.v_pf_multi_state=="4x_active"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          ttp_save,
+          l_ttp_enabled
+
+##################################################
+# Graphics
+##################################################
+
+
+slides:
+
+  pf_multi_2x_playfield:
+    widgets:
+      - type: image
+        image: grave_multiply_2x_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  pf_multi_3x_playfield:
+    widgets:
+      - type: image
+        image: grave_multiply_3x_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+  pf_multi_4x_playfield:
+    widgets:
+      - type: image
+        image: grave_multiply_4x_v1
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+
+slide_player:
+
+  cmd_pf_multi_play_2x:
+    pf_multi_2x_playfield:
+      priority: 300
+      expire: 1.6s
+
+  cmd_pf_multi_play_3x:
+    pf_multi_3x_playfield:
+      priority: 300
+      expire: 1.6s
+
+  cmd_pf_multi_play_4x:
+    pf_multi_4x_playfield:
+      priority: 300
+      expire: 1.6s
+
+##################################################
+# Sounds
+##################################################
+
+sound_player:
+  cmd_pf_multi_play_multi_sound:
+    grave_multiply_sfx_v1:
+      action: play
+      loops: 0
