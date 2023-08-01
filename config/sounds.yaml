@@ -33,6 +33,36 @@ sounds:
   mask_show_3:
     file: face_time_v3_score.wav
     volume: 1.0
+
+
+  dsm_100:
+    file: dead_skin_mask_100.wav
+    mode_end_action: stop
+  dsm_105:
+    file: dead_skin_mask_105.wav
+    mode_end_action: stop
+  dsm_110:
+    file: dead_skin_mask_110.wav
+    mode_end_action: stop
+  dsm_115:
+    file: dead_skin_mask_115.wav
+    mode_end_action: stop
+  dsm_120:
+    file: dead_skin_mask_120.wav
+    mode_end_action: stop
+  dsm_125:
+    file: dead_skin_mask_125.wav
+    mode_end_action: stop
+  dsm_130:
+    file: dead_skin_mask_130.wav
+    mode_end_action: stop
+  dsm_140:
+    file: dead_skin_mask_140.wav
+    mode_end_action: stop
+  dsm_150:
+    file: dead_skin_mask_150.wav
+    mode_end_action: stop
+
   franklin_hurry_up:
     file: franklin_hurry_up_v1.wav
     mode_end_action: stop

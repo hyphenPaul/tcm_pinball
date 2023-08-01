@@ -286,21 +286,25 @@ player_vars:
   # Mask Making
   #####################################
 
-#  v_enable_mask_making:
-#    initial_value: 0
-#  v_enable_mask_mania:
-#    initial_value: 0
 #  v_mask_mania_countdown:
 #    initial_value: 30
-#  v_mask_mania_value:
-#    initial_value: 250000
-#  v_mask_mania_level:
-#    initial_value: 1
+#  mask_making_countdown_value:
+#    initial_value: 10
+
+  v_mask_mania_level:
+    initial_value: 1
+  v_mask_mania_value:
+    initial_value: 250000
   v_mask_state:
-    initial_value: "idle"
+    initial_value: "round_1"
     value_type: str
   v_mask_shot_state:
     initial_value: 0
+  v_mask_letter_score:
+    initial_value: 15000 
+  v_mask_complete_score:
+    initial_value: 60000 
+
 
   #####################################
   # Extra Balls
@@ -310,19 +314,6 @@ player_vars:
     initial_value: 0
   v_extra_ball_animation_playing:
     initial_value: 0
-
-  #####################################
-  # Mask Making
-  #####################################
-
-  mask_completion_total:
-    initial_value: 0
-  mask_making_countdown_value:
-    initial_value: 10
-  v_mask_letter_score:
-    initial_value: 15000 
-  v_mask_complete_score:
-    initial_value: 60000 
 
   #####################################
   # Franklin

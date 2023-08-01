@@ -1,6 +1,6 @@
 #show_version=5
 
-- duration: 45s
+- duration: 100s
   slides:
     mask_mania_bg:
       widgets:

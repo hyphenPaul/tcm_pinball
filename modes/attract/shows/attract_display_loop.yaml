@@ -1,11 +1,11 @@
 #show_version=5
 
-#- duration: 200s
-#  slides:
-#    finalbattle_collection_bonus_slide:
-#      widgets:
-#      - type: image
-#        image: fb_leatherface_dead_v1
+- duration: 200s
+  slides:
+    xxx:
+      widgets:
+      - type: image
+        image: dinner_with_sally_intro_v6
 
 #- duration: 2s
 #  slides:

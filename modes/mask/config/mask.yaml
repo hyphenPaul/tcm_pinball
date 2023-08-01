@@ -11,42 +11,253 @@ mode:
 # Events
 ##################################################
 
-# v_mask_state
-#
-# round_1 - initial shot round
-# round_2 - 2nd shot round
-# round_3 - 3nd shot round
-# mask_mania_ready
-# mask_mania - mask mania
-#
-# v_mask_shot_state
-# 1 = M
-# 2 = MA
-# 3 = MAS
-# 4 = MASK
-# 5 = Mask Building
-
-
 event_player:
 
-  right_ramp_hit{current_player.v_mask_state=="mask_mania_ready"}:
-    # start mask mania
+  mode_mask_started:
+    - cmd_mask_refresh_lights
+
+  # Mask Making
 
   right_ramp_hit{current_player.v_mask_state!="mask_mania_ready" and current_player.v_mask_state!="mask_mania" and current_player.v_mask_shot_state<4}:
-    - cmd_mask_increase_round
+    - cmd_mask_inc_round
+
+  cmd_mask_inc_round:
+    - cmd_mask_inc_shot_state
+    - cmd_mask_show_spell
+    - cmd_mask_play_spell
+    - cmd_mask_score_spell
+    - cmd_mask_refresh_lights
 
   right_ramp_hit{current_player.v_mask_state!="mask_mania_ready" and current_player.v_mask_state!="mask_mania" and current_player.v_mask_shot_state>=4}:
-    - cmd_mask_finish_round
+    - cmd_mask_building
 
-  cmd_mask_increase_round:
-    
+  cmd_mask_building:
+    - cmd_mask_reset_shot_state
+    - cmd_mask_show_building
+    - cmd_mask_play_building
+    - cmd_mask_score_building 
+    - cmd_mask_inc_round_state
+    - cmd_mask_refresh_lights
 
+  cmd_mask_inc_round_state{current_player.v_mask_state=="round_1"}:
+    - cmd_mask_set_state_round_2
+
+  cmd_mask_inc_round_state{current_player.v_mask_state=="round_2"}:
+    - cmd_mask_set_state_round_3
+
+  cmd_mask_inc_round_state{current_player.v_mask_state=="round_3"}:
+    - cmd_mask_mania_ready
+
+  ## Mask Mania
+
+  right_ramp_hit{current_player.v_mask_state=="mask_mania_ready"}:
+    - cmd_mask_start_mania
+  
+  right_ramp_hit{current_player.v_mask_state=="mask_mania"}:
+    - cmd_mask_mania_hit
+
+  s_right_ramp_s_u_right_active{current_player.v_mask_state=="mask_mania"}:
+    - cmd_increase_mask_mania_value
+
+  s_right_ramp_s_u_left_active{current_player.v_mask_state=="mask_mania"}:
+    - cmd_increase_mask_mania_value
+
+  cmd_mask_mania_ready:
+    - cmd_mask_set_state_mask_mania_ready
+    - cmd_mask_refresh_lights
+
+  cmd_mask_start_mania:
+    - cmd_mask_set_state_mask_mania
+    - cmd_stop_music
+    - cmd_play_mask_mania_music
+    - cmd_play_mask_mania
+    - cmd_start_mask_mania_timer
+    - cmd_mask_refresh_lights
+
+  cmd_mask_mania_hit:
+    - cmd_add_mask_mania_score
+    - cmd_show_mask_mania_value
+
+  cmd_increase_mask_mania_value{current_player.v_mask_mania_level<10}:
+    - cmd_increase_mask_mania_level
+    - cmd_set_mask_mania_value
+    - cmd_speed_up_mask_mania_music
+    - cmd_add_mask_mania_time
+
+  cmd_speed_up_mask_mania_music{current_player.v_mask_mania_level<8}:
+    - cmd_stop_mask_mania_music
+    - cmd_update_mask_mania_music
+
+  timer_mask_mania_complete:
+    - cmd_end_mask_mania
+
+  cmd_end_mask_mania:
+    - cmd_stop_mask_mania
+    - cmd_stop_mask_mania_music
+    - cmd_start_base_music
+    - cmd_mask_reset_all
+
+  cmd_mask_reset_all:
+    - cmd_reset_mask_mania_level
+    - cmd_mask_set_state_round_1
+    - cmd_mask_reset_shot_state
+    - cmd_mask_refresh_lights
+
+
+  # clean up
+
+  cmd_clean_up_modes{current_player.v_mask_state=="mask_mania"}:
+    - cmd_stop_mask_mania_timer
+    - cmd_mask_reset_all
+
+  # Scoring
+
+  cmd_mask_score_spell:
+    - cmd_mask_set_letter_score
+    - cmd_mask_score_letter_hit
+
+  cmd_mask_score_building:
+    - cmd_mask_set_complete_score
+    - cmd_mask_score_complete_hit
 
   # Lights
 
   cmd_mask_refresh_lights:
-    cmd_mask_clear_lights:
-    cmd_mask_turn_on_lights:
+    - cmd_mask_clear_lights
+    - cmd_mask_turn_on_lights
+
+##################################################
+# Variables
+##################################################
+
+# v_mask_state
+#
+#   round_1 - initial shot round
+#   round_2 - 2nd shot round
+#   round_3 - 3nd shot round
+#   mask_mania_ready
+#   mask_mania - mask mania
+#
+# v_mask_shot_state
+#
+#   1 = M
+#   2 = MA
+#   3 = MAS
+#   4 = MASK
+#   5 = Mask Building
+
+variable_player:
+  cmd_mask_inc_shot_state:
+    v_mask_shot_state: 1
+
+  cmd_mask_reset_shot_state:
+    v_mask_shot_state:
+      action: set
+      int: 0
+
+  cmd_mask_set_state_round_1:
+    v_mask_state:
+      action: set
+      string: "round_1"
+
+  cmd_mask_set_state_round_2:
+    v_mask_state:
+      action: set
+      string: "round_2"
+
+  cmd_mask_set_state_round_3:
+    v_mask_state:
+      action: set
+      string: "round_3"
+
+  cmd_mask_set_state_mask_mania_ready:
+    v_mask_state:
+      action: set
+      string: "mask_mania_ready"
+
+  cmd_mask_set_state_mask_mania:
+    v_mask_state:
+      action: set
+      string: "mask_mania"
+
+  ## Mask Mania
+
+  cmd_reset_mask_mania_level:
+    v_mask_mania_level:
+      action: set
+      int: 1
+
+  cmd_increase_mask_mania_level:
+    v_mask_mania_level: 1
+
+  cmd_set_mask_mania_value:
+    v_mask_mania_value:
+      action: set
+      int: 250000 * current_player.v_mask_mania_level
+  
+  ## Scoring
+
+  # letter score
+
+  cmd_mask_set_letter_score{current_player.v_mask_shot_state==1}:
+    v_mask_letter_score:
+      action: set
+      int: 15000
+
+  cmd_mask_set_letter_score{current_player.v_mask_shot_state==2}:
+    v_mask_letter_score:
+      action: set
+      int: 20000 
+
+  cmd_mask_set_letter_score{current_player.v_mask_shot_state==3}:
+    v_mask_letter_score:
+      action: set
+      int: 35000 
+
+  cmd_mask_set_letter_score{current_player.v_mask_shot_state==4}:
+    v_mask_letter_score:
+      action: set
+      int: 50000 
+
+  # completion score
+
+  cmd_mask_set_complete_score{current_player.v_mask_state=="round_1"}:
+    v_mask_complete_score:
+      action: set
+      int: 60000 
+
+  cmd_mask_set_complete_score{current_player.v_mask_state=="round_2"}:
+    v_mask_complete_score:
+      action: set
+      int: 100000 
+
+  cmd_mask_set_complete_score{current_player.v_mask_state=="round_3"}:
+    v_mask_complete_score:
+      action: set
+      int: 150000 
+
+  cmd_add_mask_mania_score:
+    score: current_player.v_mask_mania_value
+
+
+##################################################
+# Timers
+##################################################
+
+timers:
+  mask_mania:
+    start_value: 45
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    control_events:
+      - action: start
+        event: cmd_start_mask_mania_timer
+      - action: add
+        value: 2
+        event: cmd_add_mask_mania_time
+      - action: stop
+        event: cmd_stop_mask_mania_timer
 
 ##################################################
 # Lights
@@ -71,7 +282,14 @@ light_player:
     fire_i: ff
     fire_r: ff
 
+##################################################
+# Shows
+##################################################
+
 show_player:
+
+  ## Lights
+
   cmd_mask_clear_lights:
     med_flash:
       action: stop
@@ -94,3 +312,186 @@ show_player:
           fire_r,
           fire_e,
           jackpot
+
+  cmd_mask_turn_on_lights{current_player.v_mask_state=="mask_mania_ready"}:
+    med_flash:
+      action: play
+      show_tokens:
+        lights:
+          fire_f,
+          fire_i,
+          fire_r,
+          fire_e,
+          lite_super_duper_jackpot
+
+  ## Mask Making
+
+  cmd_mask_show_spell{current_player.v_mask_shot_state==1}:
+    mask1:
+      loops: 0
+      show_tokens:
+        mask_image: mask_m_v1_1
+
+  cmd_mask_show_spell{current_player.v_mask_shot_state==2}:
+    mask1:
+      loops: 0
+      show_tokens:
+        mask_image: mask_a_v1_1
+
+  cmd_mask_show_spell{current_player.v_mask_shot_state==3}:
+    mask1:
+      loops: 0
+      show_tokens:
+        mask_image: mask_s_v1_1
+
+  cmd_mask_show_spell{current_player.v_mask_shot_state==4}:
+    mask1:
+      loops: 0
+      show_tokens:
+        mask_image: mask_k_v1_1
+
+  cmd_mask_show_building{current_player.v_mask_state=="round_1"}:
+    mask_making:
+      loops: 0
+      show_tokens:
+        mask_image: get_a_head_v6
+
+  cmd_mask_show_building{current_player.v_mask_state=="round_2"}:
+    mask_making:
+      loops: 0
+      show_tokens:
+        mask_image: boil_it_up_v6
+
+  cmd_mask_show_building{current_player.v_mask_state=="round_3"}:
+    mask_making_2:
+      loops: 0
+      show_tokens:
+        mask_image: face_time_v3
+
+  # gethead - 4.3s
+  # boil it up - 4.3s
+  # face time - 3.8s
+
+  ## Mask Mania
+
+  cmd_play_mask_mania:
+    mask_mania:
+      loops: 0
+
+  cmd_stop_mask_mania:
+    mask_mania:
+      action: stop
+
+  cmd_show_mask_mania_value:
+    mask_mania_score:
+      loops: 0
+      priority: 100
+
+
+##################################################
+# Sound Player
+##################################################
+
+sound_player:
+  cmd_mask_play_spell:
+    mask_slice:
+      action: play
+      loops: 0
+
+  cmd_mask_play_building{current_player.v_mask_state=="round_1"}:
+    mask_show_1:
+      action: play
+      loops: 0
+
+  cmd_mask_play_building{current_player.v_mask_state=="round_2"}:
+    mask_show_2:
+      action: play
+      loops: 0
+
+  cmd_mask_play_building{current_player.v_mask_state=="round_3"}:
+    mask_show_3:
+      action: play
+      loops: 0
+
+  ## Mask Mania!!!
+
+  cmd_stop_mask_mania_music.1:
+    dsm_100:
+      action: stop
+
+  cmd_stop_mask_mania_music.2:
+    dsm:
+      action: stop
+
+  cmd_stop_mask_mania_music.3:
+    dsm_110:
+      action: stop
+
+  cmd_stop_mask_mania_music.4:
+    dsm_115:
+      action: stop
+
+  cmd_stop_mask_mania_music.5:
+    dsm_120:
+      action: stop
+
+  cmd_stop_mask_mania_music.6:
+    dsm_125:
+      action: stop
+
+  cmd_stop_mask_mania_music.7:
+    dsm_130:
+      action: stop
+
+  cmd_stop_mask_mania_music.8:
+    dsm_140:
+      action: stop
+
+  cmd_stop_mask_mania_music.9:
+    dsm_150:
+      action: stop
+
+  cmd_play_mask_mania_music:
+    dsm_100:
+      action: play
+      loops: -1
+
+  cmd_update_mask_mania_music{current_player.v_mask_mania_level==1}:
+    dsm_105:
+      action: play
+      loops: -1
+
+  cmd_update_mask_mania_music{current_player.v_mask_mania_level==2}:
+    dsm_110:
+      action: play
+      loops: -1
+
+  cmd_update_mask_mania_music{current_player.v_mask_mania_level==3}:
+    dsm_115:
+      action: play
+      loops: -1
+
+  cmd_update_mask_mania_music{current_player.v_mask_mania_level==4}:
+    dsm_120:
+      action: play
+      loops: -1
+
+  cmd_update_mask_mania_music{current_player.v_mask_mania_level==5}:
+    dsm_125:
+      action: play
+      loops: -1
+
+  cmd_update_mask_mania_music{current_player.v_mask_mania_level==6}:
+    dsm_130:
+      action: play
+      loops: -1
+
+  cmd_update_mask_mania_music{current_player.v_mask_mania_level==7}:
+    dsm_140:
+      action: play
+      loops: -1
+
+  cmd_update_mask_mania_music{current_player.v_mask_mania_level==8}:
+    dsm_150:
+      action: play
+      loops: -1

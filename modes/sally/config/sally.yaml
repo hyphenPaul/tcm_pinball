@@ -340,7 +340,8 @@ slides:
   sally_intro_slide:
     widgets:
       - type: image
-        image: dinner_with_sally_intro_v4
+        #image: dinner_with_sally_intro_v4
+        image: dinner_with_sally_intro_v6
         anchor_x: left
         anchor_y: bottom
         x: 0

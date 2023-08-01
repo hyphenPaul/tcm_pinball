@@ -11,12 +11,9 @@ modes:
   - franklin_frenzy
   - franklin_hurry_up
   - help
-    #  - test
   - mask
   - meathook
   - pop_bumpers
-#  - tt_playfield
-#  - tt_playfield_base
   - skill_shot
   - standard_extra_ball
   - hitchhiker
@@ -28,3 +25,6 @@ modes:
   - finalbattle
   - tilt
   - pf_multi
+#  - test
+#  - tt_playfield
+#  - tt_playfield_base
