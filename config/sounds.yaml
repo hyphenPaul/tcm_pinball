@@ -63,6 +63,11 @@ sounds:
     file: dead_skin_mask_150.wav
     mode_end_action: stop
 
+  triple_boom:
+    file: mask_mania_jackpot_v3.wav
+    mode_end_action: stop
+    volume: 1.5
+
   franklin_hurry_up:
     file: franklin_hurry_up_v1.wav
     mode_end_action: stop
@@ -369,3 +374,8 @@ sounds:
     mode_end_action: stop
     file: saw_em_all_chainsaw_running_audio_v1.wav
     volume: 0.2
+
+  # meathook mayhem
+  meathhook_bg:
+    mode_end_action: stop
+    file: meathook_mayhem_v1.wav

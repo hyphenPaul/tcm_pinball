@@ -341,7 +341,7 @@ slides:
     widgets:
       - type: image
         #image: dinner_with_sally_intro_v4
-        image: dinner_with_sally_intro_v6
+        image: dinner_with_sally_intro_v7
         anchor_x: left
         anchor_y: bottom
         x: 0

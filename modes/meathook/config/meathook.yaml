@@ -8,12 +8,14 @@ mode:
   priority: 500
 
 event_player:
+
   cmd_clean_up_modes:
     - cmd_meathook_set_state_idle
-    - cmd_meathook_stop_mayhem_music
+    - cmd_meathook_stop_bg
     - cmd_meathook_mayhem_timer_stop
     - cmd_meathook_mayhem_10_x_timer_stop
     - cmd_meathook_refresh_lights
+
   left_ramp_hit:
     - cmd_add_meathook_total
     - cmd_meathook_maybe_reduce_hits
@@ -72,7 +74,6 @@ event_player:
     - cmd_meathook_refresh_lights
     - cmd_set_hits_before_mayhem
     - cmd_disable_diverter
-    # TODO
     - cmd_meathook_stop_mayhem_music
 
   cmd_meathook_start_mayhem:
@@ -81,6 +82,14 @@ event_player:
     - cmd_meathook_refresh_lights
     - cmd_enable_diverter
     - cmd_meathook_start_mayhem_music
+
+  cmd_meathook_start_mayhem_music:
+    - cmd_stop_music
+    - cmd_meathook_start_bg
+
+  cmd_meathook_stop_mayhem_music:
+    - cmd_meathook_stop_bg
+    - cmd_start_base_music
 
   cmd_give_player_award{current_player.v_meathook_total>=machine.meathook_total_for_reward_1 and current_player.v_meathook_reward_1_received==0}:
     - cmd_meathook_set_reward_1
@@ -120,6 +129,15 @@ sound_player:
     10x_meathooks_v1_SFX:
       action: play
       loops: 0
+
+  cmd_meathook_start_bg:
+    meathhook_bg:
+      action: play
+      loops: -1
+
+  cmd_meathook_stop_bg:
+    meathhook_bg:
+      action: stop
 
 show_player:
   cmd_show_meathook_hang:

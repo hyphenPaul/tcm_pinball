@@ -77,6 +77,7 @@ event_player:
   cmd_mask_mania_hit:
     - cmd_add_mask_mania_score
     - cmd_show_mask_mania_value
+    - cmd_play_mask_mania_value
 
   cmd_increase_mask_mania_value{current_player.v_mask_mania_level<10}:
     - cmd_increase_mask_mania_level
@@ -368,10 +369,6 @@ show_player:
       show_tokens:
         mask_image: face_time_v3
 
-  # gethead - 4.3s
-  # boil it up - 4.3s
-  # face time - 3.8s
-
   ## Mask Mania
 
   cmd_play_mask_mania:
@@ -393,6 +390,7 @@ show_player:
 ##################################################
 
 sound_player:
+
   cmd_mask_play_spell:
     mask_slice:
       action: play
@@ -410,6 +408,11 @@ sound_player:
 
   cmd_mask_play_building{current_player.v_mask_state=="round_3"}:
     mask_show_3:
+      action: play
+      loops: 0
+
+  cmd_play_mask_mania_value:
+    triple_boom:
       action: play
       loops: 0
 

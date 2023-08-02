@@ -25,6 +25,7 @@ modes:
   - finalbattle
   - tilt
   - pf_multi
+  - high_score
 #  - test
 #  - tt_playfield
 #  - tt_playfield_base

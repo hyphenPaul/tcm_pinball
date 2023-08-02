@@ -24,7 +24,7 @@
               duration: 0.2s
               repeat: True
       - type: image 
-        image: leatherface_dance_v2
+        image: leatherface_dance_v3
         anchor_x: left
         anchor_y: bottom
         x: 0

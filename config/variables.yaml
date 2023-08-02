@@ -296,9 +296,11 @@ player_vars:
   v_mask_mania_value:
     initial_value: 250000
   v_mask_state:
+    #initial_value: "round_3"
     initial_value: "round_1"
     value_type: str
   v_mask_shot_state:
+    #initial_value: 4
     initial_value: 0
   v_mask_letter_score:
     initial_value: 15000 

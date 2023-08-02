@@ -165,13 +165,13 @@ sound_player:
       about_to_finish_time: 1.5s
 
 ball_saves:
-  player_start:
-    active_time: 10s
-    enable_events: cmd_playfield_initiated
-    auto_launch: yes
-    balls_to_save: 1
-    grace_period: 5s
-    eject_delay: 3.2s
+#  player_start:
+#    active_time: 10s
+#    enable_events: cmd_playfield_initiated
+#    auto_launch: yes
+#    balls_to_save: 1
+#    grace_period: 5s
+#    eject_delay: 3.2s
   player_start_extended:
     active_time: 25s
     enable_events: cmd_enable_player_start_extended_ball_save
