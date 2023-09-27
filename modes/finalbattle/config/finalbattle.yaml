@@ -1639,7 +1639,7 @@ slide_player:
 sound_player:
 
   cmd_finalbattle_start_intro_slide_sound:
-    final_massacre_intro_v4_score:
+    final_massacre_intro_score_v2:
       action: play
       loops: 0
       events_when_about_to_finish: cmd_eject_van_vuk_with_audio

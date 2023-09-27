@@ -539,7 +539,7 @@ sound_player:
       action: stop
 
   cmd_sally_start_intro_slide_sound:
-    dinner_with_sally_v1_score:
+    dinner_with_sally_intro_score_v2:
       action: play
       loops: 0
 

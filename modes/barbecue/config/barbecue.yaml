@@ -504,7 +504,7 @@ slide_player:
 
 sound_player:
   cmd_barbecue_start_intro_slide_sound:
-    barbecue_intro_score_v4:
+    barbecue_intro_score_v5:
       action: play
       loops: 0
       volume: 1.0

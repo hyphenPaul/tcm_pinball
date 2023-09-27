@@ -260,3 +260,15 @@ sound_player:
   s_left_outlane_active: outer_flipper_lane
   ball_save_player_start_saving_ball: keep_shooting_v3_audio
   ball_save_mystery_saving_ball: keep_shooting_v3_audio
+
+
+  ##################################################
+  # Intro sounds
+  ##################################################
+
+
+  ball_started{player==1 and ball==1 and is_extra_ball==False}:
+    leave_texas_brad_vo_v1:
+      action: play
+      loops: 0
+      delay: 2s

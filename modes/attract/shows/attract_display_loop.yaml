@@ -1,254 +1,140 @@
 #show_version=5
 
-- duration: 200s
+- duration: 20s
   slides:
-    xxx:
-    - type: text
-      style: small
-      text: PLAYER 1 - ENTER INITIALS
-      color: white
-      y: 31
-      anchor_y: top
-      round_anchor_x: left
+    show_high_scores:
+      widgets:
+      - type: Text
+        text: HIGH SCORES
+        style: big
+        anchor_y: top
+        round_anchor_x: left
+        round_anchor_y: top
+        x: center
+        y: 31
 
-    - type: text
-      style: medium
-      text: GRAND CHAMPION
-      color: white
-      y: 25
-      anchor_y: top
-      round_anchor_x: left
-
-    - type: text
-      text: ABC
-      #dynamic_x: false
-      #key: high_score
-      #max_chars: 3
-      #shift_left_event: s_left_flipper_active
-      #shift_right_event: s_right_flipper_active
-      #select_event: sw_start
-      style: big
-      color: white
-      y: 6
-      anchor_y: bottom
-      round_anchor_x: left
-
-    - type: text
-      style: big
-      text: '>'
-      color: white
-      x: 47
-      y: 8
-      anchor_y: bottom
-      round_anchor_x: left
-
-    - type: text
-      style: big
-      text: A
-      color: white
-      x: 36
-      y: 6
-      anchor_y: bottom
-      round_anchor_x: left
-
-- duration: 200s
-  slides:
-    xxx:
-    - type: text
-      style: small
-      text: GRAND CHAMPION
-      color: white
-      y: 31
-      anchor_y: top
-      round_anchor_x: left
-    - type: text
-      style: big
-      text: ABC
-      color: white
-      font_size: 14
-      y: 24
-      anchor_y: top
-      round_anchor_x: left
-      animations:
-        show_slide:
+      - type: Text
+        text: (machine|score1_label)
+        style: small
+        anchor_y: top
+        y: 19
+        round_anchor_x: left
+        animations:
+          show_slide:
           - property: opacity
             value: 1
-            duration: 0.5s
+            duration: 3
           - property: opacity
             value: 0
-            duration: 0.5s
-            repeat: true
-    - type: text
-      text: 12345678
-      number_grouping: true
-      min_digits: 2
-      style: medium
-      round_anchor_x: left
-      anchor_x: middle
-      anchor_y: top
-      y: 7
-      x: 50%
-
-- duration: 200s
-  slides:
-    xxx:
-      widgets:
-      - type: image
-        image: dinner_with_sally_intro_v7
-
-- duration: 200s
-  slides:
-    #_overwrite: true
-    high_score_enter_initials:
-
-      - type: text
-        style: small
-        text: PLAYER 1-ENTER INITIALS
-        color: white
-        y: 30
+            duration: .5
+      - type: Text
+        text: (machine|score1_name)
+        style: big
         anchor_y: top
-        round_anchor_x: left
-      - type: text
-        style: small
-        text: GRAND CHAMPION
-        color: white
-        y: 23
+        y: 12
+        x: center-30
+        anchor_x: right
+        round_anchor_x: right
+        round_anchor_y: top
+        animations:
+          show_slide:
+          - property: opacity
+            value: 1
+            duration: 3
+          - property: opacity
+            value: 0
+            duration: .5
+      - type: Text
+        text: (machine|score1_value)
+        style: big
         anchor_y: top
-        round_anchor_x: left
-      - type: text
-        style: small
-        text: ABC
-        color: white
-        y: 15
-        anchor_y: top
-        round_anchor_x: left
-      - type: text
-        style: small
-        text: DEF
-        color: white
-        y: 7
-        anchor_y: top
-        round_anchor_x: left
+        y: 12
+        x: center+50
+        anchor_x: right
+        round_anchor_x: right
+        round_anchor_y: top
+        number_grouping: true
+        min_digits: 1
+        animations:
+          show_slide:
+          - property: opacity
+            value: 1
+            duration: 3
+          - property: opacity
+            value: 0
+            duration: .5
 
-#      - type: text
-#        style: small
-#        font_size: 18
-#        text: PLAYER (player_num)
-#        color: white
-#        x: 5
-#        y: 20
-#      - type: text
-#        style: small
-#        font_size: 18
-#        text: (award)
-#        color: white
-#        x: 5
-#        y: 40
-#      - type: text_input
-#        initial_char: A
-#        dynamic_x: false
-#        key: high_score
-#        style: small
-#        font_size: 18
-#        max_chars: 3
-#        x: 5 
-#        y: 20
-#        shift_left_event: sw_lower_left_flipper
-#        shift_right_event: sw_lower_right_flipper
-#        select_event: sw_start
-#        color: white
-#      - type: text
-#        style: small
-#        text: '<       >'
-#        font_size: 18
-#        x: 105
-#        y: 20
-#        color: white
-#      - type: text
-#        text: ''
-#        key: high_score
-#        font_size: 18
-#        style: small
-#        x: 105
-#        y: 50
-#        color: white
-#        animations:
-#          show_slide:
-#            - property: opacity
-#              value: 1
-#              duration: 0.3s
-#              easing: in_out_quint
-#            - property: opacity
-#              value: 0
-#              duration: 0.3s
-#              repeat: true
-#              easing: in_out_quint
-
-#- duration: 2s
-#  slides:
-#    finalbattle_bonus_flamethrower_slide:
-#      widgets:
-#      - type: image
-#        image: fb_weapon_flamethrower_v1
-#      transition:
-#        type: push
-#        duration: 0.3s
-#        direction: left
-#
-#- duration: 2s
-#  slides:
-#    finalbattle_bonus_axe_slide:
-#      widgets:
-#      - type: image
-#        image: fb_collected_axe_v1
-#      transition:
-#        type: push
-#        duration: 0.3s
-#        direction: left
-#
-#- duration: 2s
-#  slides:
-#    finalbattle_bonus_chainsaw_slide:
-#      widgets:
-#      - type: image
-#        image: fb_collected_chainsaw_v1
-#      transition:
-#        type: push
-#        duration: 0.3s
-#        direction: left
-#
-#- duration: 2s
-#  slides:
-#    finalbattle_bonus_knife_slide:
-#      widgets:
-#      - type: image
-#        image: fb_collected_knife_v1
-#      transition:
-#        type: push
-#        duration: 0.3s
-#        direction: left
-#
-#- duration: 2s
-#  slides:
-#    finalbattle_bonus_fully_loaded_slide:
-#      widgets:
-#      - type: image
-#        image: fb_collected_fully_loaded_v1
-#      transition:
-#        type: push
-#        duration: 0.3s
-#        direction: left
-#
-#- duration: 2s
-#  slides:
-#    finalbattle_bonus_nothing_slide:
-#      widgets:
-#      - type: image
-#        image: fb_collected_nothing_v1
-#      transition:
-#        type: push
-#        duration: 0.3s
-#        direction: left
+      - type: Text
+        text: (machine|score2_label)
+        style: small
+        anchor_y: top
+        y: 19
+        round_anchor_x: left
+        opacity: 0
+        animations:
+          show_slide:
+          - property: opacity
+            value: 0
+            duration: 3.5
+          - property: opacity
+            value: 1
+            duration: .5
+          - property: opacity
+            value: 1
+            duration: 3
+          - property: opacity
+            value: 0
+            duration: .5
+      - type: Text
+        text: (machine|score2_name)
+        style: big
+        anchor_y: top
+        y: 12
+        x: center-30
+        anchor_x: right
+        round_anchor_x: right
+        round_anchor_y: top
+        opacity: 0
+        animations:
+          show_slide:
+          - property: opacity
+            value: 0
+            duration: 3.5
+          - property: opacity
+            value: 1
+            duration: .5
+          - property: opacity
+            value: 1
+            duration: 3
+          - property: opacity
+            value: 0
+            duration: .5
+      - type: Text
+        text: (machine|score2_value)
+        style: big
+        anchor_y: top
+        y: 12
+        x: center+50
+        anchor_x: right
+        round_anchor_x: right
+        round_anchor_y: top
+        number_grouping: true
+        min_digits: 1
+        opacity: 0
+        animations:
+          show_slide:
+          - property: opacity
+            value: 0
+            duration: 3.5
+          - property: opacity
+            value: 1
+            duration: .5
+          - property: opacity
+            value: 1
+            duration: 3
+          - property: opacity
+            value: 0
+            duration: .5
 
 
 # ------------ attract mode start --------------

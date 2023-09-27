@@ -148,11 +148,21 @@ show_player:
       action: stop
 
 sound_player:
-  cmd_start_shoot_the_van:
+
+  cmd_start_shoot_the_van.1:
     shoot_the_van:
       action: play
       loops: 0
       volume: 0.8
+
+
+  cmd_start_shoot_the_van.2:
+    shoot_for_the_van_brad_vo_v4:
+      action: play
+      loops: 0
+      delay: 3s
+      volume: 1.0
+
   cmd_play_van_eject_vuk_sound:
     van_vuk_out_long:
       action: play
@@ -954,4 +964,3 @@ event_player:
 #    start_value: 0
 #    end_value: 1
 #    start_running: true
-

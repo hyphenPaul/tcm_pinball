@@ -340,7 +340,7 @@ slide_player:
 
 sound_player:
   cmd_hitchhiker_start_intro_slide_sound:
-    hitchhiker_intro_score_v5:
+    hitchhiker_intro_score_v7:
       action: play
       loops: 0
       events_when_about_to_finish: cmd_eject_van_vuk_with_audio

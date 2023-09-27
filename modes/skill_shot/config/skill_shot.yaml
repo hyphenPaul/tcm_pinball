@@ -122,6 +122,16 @@ sound_player:
     super_skill_shot_reward_sound:
       action: play
       loops: 0
+  cmd_play_skill_shot_vo:
+    skillshot_brad_vo_v2:
+      action: play
+      loops: 0
+      delay: 0.5s
+  cmd_play_super_skill_shot_vo:
+    super_skillshot_brad_vo_v1:
+      action: play
+      loops: 0
+      delay: 0.5s
   cmd_play_film_reel_stop_sound:
     film_stop_quick:
       action: play

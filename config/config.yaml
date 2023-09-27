@@ -21,6 +21,7 @@ playfields:
     default_source_device: bd_plunger
 
 config:
+ - animations.yaml
  - variables.yaml
  - settings.yaml
  - sound_system.yaml

@@ -291,7 +291,7 @@ slide_player:
 
 sound_player:
   cmd_grandpa_start_intro_slide_sound:
-    hammer_time_intro_score_v3:
+    hammer_time_intro_score_v1:
       action: play
       loops: 0
 

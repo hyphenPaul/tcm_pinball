@@ -1,0 +1,7 @@
+#config_version=5
+
+animations:
+  scroll_score:
+    - property: y
+      value: +50
+      duration: 20s

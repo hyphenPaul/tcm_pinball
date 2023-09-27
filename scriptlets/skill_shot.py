@@ -98,12 +98,14 @@ class SkillShot(CustomCode):
             self.machine.events.post('cmd_skill_shot_show_award_' + self.current_choice)
             self.machine.events.post('cmd_super_skill_shot_award_' + self.current_choice)
             self.machine.events.post('cmd_play_super_skill_shot_slide_background_sound')
+            self.machine.events.post('cmd_play_skill_shot_vo')
             self.machine.events.post('cmd_enable_diverter')
             self.begin_deactivation_timer()
         elif self.state == self.SUPER_SKILL_SHOT_AWARDED:
             self.deactivation_timer.stop()
             self.machine.events.post('cmd_unlight_super_skill_shot')
             self.machine.events.post('cmd_skill_shot_play_super_skill_shot')
+            self.machine.events.post('cmd_play_super_skill_shot_vo')
             self.machine.events.post('cmd_super_skill_shot_award_one_million')
 
     def reset(self):

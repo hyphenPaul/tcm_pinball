@@ -313,7 +313,7 @@ slide_player:
 
 sound_player:
   cmd_grave_start_intro_slide_sound:
-    grave_robber_intro_score_v1:
+    grave_robber_intro_score_v2:
       action: play
       loops: 0
 

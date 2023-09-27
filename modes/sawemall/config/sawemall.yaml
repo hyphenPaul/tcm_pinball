@@ -558,7 +558,7 @@ slide_player:
 
 sound_player:
   cmd_sawemall_start_intro_slide_sound:
-    sound_saw_em_all_intro_score:
+    saw_em_all_intro_score_v2:
       action: play
       loops: 0
 
