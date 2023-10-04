@@ -37,6 +37,7 @@ event_player:
     cmd_eject_van_vuk_with_audio:
     cmd_sally_refresh_lights:
     cmd_sally_play_pop_bumper_slide:
+    cmd_sally_play_shoot_pops:
 
   player_v_sally_pop_bumper_counter{current_player.v_sally_pop_bumper_counter<=0}:
     cmd_sally_start_shot_phase:
@@ -51,6 +52,7 @@ event_player:
     cmd_sally_refresh_lights:
     cmd_sally_remove_pop_bumper_slide:
     cmd_sally_add_shots_slide:
+    cmd_sally_play_shoot_flashing_shots:
 
   logicblock_sally_shot_accrual_complete:
     cmd_sally_start_final_phase:
@@ -60,6 +62,7 @@ event_player:
     cmd_sally_set_state_final:
     cmd_sally_refresh_lights:
     cmd_sally_add_final_slide:
+    cmd_sally_play_shoot_slaughterhouse:
     # this gets removed in mode_manager - any changes here have to happen there
     cmd_custom_magna_vuk_queue_event:
       post: cmd_sally_final_shot
@@ -88,15 +91,19 @@ event_player:
 
   cmd_sally_turn_on_playfield_lights.1{current_player.v_sally_state=="shots" and current_player.v_sally_left_orbit_hit!=1}:
     cmd_sally_light_left_orbit:
+      priority: 1
 
   cmd_sally_turn_on_playfield_lights.3{current_player.v_sally_state=="shots" and current_player.v_sally_left_ramp_hit!=1}:
     cmd_sally_light_basket_ramp:
+      priority: 2
 
   cmd_sally_turn_on_playfield_lights.5{current_player.v_sally_state=="shots" and current_player.v_sally_right_ramp_hit!=1}:
     cmd_sally_light_right_ramp:
+      priority: 3
 
   cmd_sally_turn_on_playfield_lights.6{current_player.v_sally_state=="shots" and current_player.v_sally_right_orbit_hit!=1}:
     cmd_sally_light_right_orbit:
+      priority: 4
 
   cmd_sally_turn_on_playfield_lights.4{current_player.v_sally_state=="final"}:
     cmd_sally_light_slaughter_house:
@@ -340,7 +347,6 @@ slides:
   sally_intro_slide:
     widgets:
       - type: image
-        #image: dinner_with_sally_intro_v4
         image: dinner_with_sally_intro_v7
         anchor_x: left
         anchor_y: bottom
@@ -472,6 +478,41 @@ show_player:
           - left_turbo_bumper
           - right_turbo_bumper
 
+  cmd_sally_clear_playfield_lights.1:
+    med_flash_sally_left_orbit:
+      action: stop
+      show_tokens:
+        lights:
+          - left_orbit_arrow
+
+  cmd_sally_clear_playfield_lights.2:
+    med_flash_sally_basket_ramp:
+      action: stop
+      show_tokens:
+        lights:
+          - basket_ramp_arrow
+
+  cmd_sally_clear_playfield_lights.3:
+    med_flash_sally_right_ramp:
+      action: stop
+      show_tokens:
+        lights:
+          - right_ramp_arrow
+
+  cmd_sally_clear_playfield_lights.4:
+    med_flash_sally_right_orbit:
+      action: stop
+      show_tokens:
+        lights:
+          - right_orbit_arrow
+
+  cmd_sally_clear_playfield_lights.5:
+    med_flash_sally_slaughterhouse:
+      action: stop
+      show_tokens:
+        lights:
+          - slaughter_house_arrow
+
   cmd_sally_flash_pop_bumpers:
     med_flash:
       action: play
@@ -481,31 +522,151 @@ show_player:
           left_turbo_bumper,
           right_turbo_bumper
 
-##################################################
-# Light Player
-##################################################
-
-light_player:
-  cmd_sally_clear_playfield_lights:
-    left_orbit_arrow: 0
-    basket_ramp_arrow: 0
-    right_ramp_arrow: 0
-    right_orbit_arrow: 0
-
   cmd_sally_light_left_orbit:
-    left_orbit_arrow: ff
+    med_flash_sally_left_orbit:
+      action: play
+      show_tokens:
+        lights:
+          left_orbit_arrow
 
   cmd_sally_light_basket_ramp:
-    basket_ramp_arrow: ff
+    med_flash_sally_basket_ramp:
+      action: play
+      show_tokens:
+        lights:
+          basket_ramp_arrow
 
   cmd_sally_light_right_ramp:
-    right_ramp_arrow: ff
+    med_flash_sally_right_ramp:
+      action: play
+      show_tokens:
+        lights:
+          right_ramp_arrow
 
   cmd_sally_light_right_orbit:
-    right_orbit_arrow: ff
+    med_flash_sally_right_orbit:
+      action: play
+      show_tokens:
+        lights:
+          right_orbit_arrow
 
   cmd_sally_light_slaughter_house:
-    slaughter_house_arrow: ff
+    med_flash_sally_slaughterhouse:
+      action: play
+      show_tokens:
+        lights:
+          slaughter_house_arrow
+
+shows:
+  med_flash_sally_left_orbit:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_sally_basket_ramp:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_sally_right_ramp:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_sally_right_orbit:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
+
+  med_flash_sally_slaughterhouse:
+    - duration: 0.5
+      lights:
+        (light):
+          color: on
+        (lights):
+          color: on
+        (led):
+          color: on
+        (leds):
+          color: on
+    - duration: 0.5
+      lights:
+        (light):
+          color: off
+        (lights):
+          color: off
+        (led):
+          color: off
+        (leds):
+          color: off
 
 
 ##################################################
@@ -577,3 +738,74 @@ sound_player:
     sally_right_hand_free_score_v1:
       action: play
       loops: 0
+
+  cmd_sally_play_shoot_pops:
+    shoot_the_pop_bumpers_brad_vo_v1:
+      action: play
+      loops: 0
+      delay: 2.5s
+
+  cmd_sally_play_shoot_flashing_shots_1:
+    shoot_flashing_shots_brad_vo_v1:
+      action: play
+      loops: 0
+      delay: 4.5s
+
+  cmd_sally_play_shoot_flashing_shots_2:
+    shoot_flashing_shots_brad_vo_v2:
+      action: play
+      loops: 0
+      delay: 4.5s
+
+  cmd_sally_play_shoot_flashing_shots_3:
+    shoot_flashing_shots_brad_vo_v3:
+      action: play
+      loops: 0
+      delay: 4.5s
+
+  cmd_sally_play_shoot_flashing_shots_4:
+    shoot_flashing_shots_brad_vo_v4:
+      action: play
+      loops: 0
+      delay: 4.5s
+
+  cmd_sally_play_shoot_slaughterhouse_1:
+    shoot_the_slaughterhouse_brad_vo_v1:
+      action: play
+      loops: 0
+      delay: 3s
+
+  cmd_sally_play_shoot_slaughterhouse_2:
+    shoot_the_slaughterhouse_brad_vo_v2:
+      action: play
+      loops: 0
+      delay: 3s
+
+  cmd_sally_play_shoot_slaughterhouse_3:
+    shoot_the_slaughterhouse_brad_vo_v3:
+      action: play
+      loops: 0
+      delay: 3s
+
+  cmd_sally_play_shoot_slaughterhouse_4:
+    shoot_the_slaughterhouse_brad_vo_v4:
+      action: play
+      loops: 0
+      delay: 3s
+
+random_event_player:
+  cmd_sally_play_shoot_flashing_shots:
+    scope: player
+    events:
+      #- cmd_sally_play_shoot_flashing_shots_1
+      - cmd_sally_play_shoot_flashing_shots_2
+      #- cmd_sally_play_shoot_flashing_shots_3
+      #- cmd_sally_play_shoot_flashing_shots_4
+
+  cmd_sally_play_shoot_slaughterhouse:
+    scope: player
+    events:
+      - cmd_sally_play_shoot_slaughterhouse_1
+      #- cmd_sally_play_shoot_slaughterhouse_2
+      - cmd_sally_play_shoot_slaughterhouse_3
+      - cmd_sally_play_shoot_slaughterhouse_4

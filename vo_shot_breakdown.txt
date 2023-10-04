@@ -1,0 +1,50 @@
+- Grave Robber (Sound added)
+  - All shots create multiplier
+  - "Jackpot"
+  - "Super Jackpot"
+
+- Sally (Sound added)
+  - pop bumper shots (Added)
+  - each of the ramps and orbits
+  - slaughterhouse
+
+- Hitchhiker
+  - orbit shots
+  - van shot
+  - ramp shots
+  - van shot
+  - chainsaw target shot
+  - van shot
+
+- Grandpa
+  - right ramp left ramp combo
+
+- BBQ
+  - Any arrow shot
+  - Roaming shot 3 up
+  - Roaming shot 2 up
+  - Roaming shot 1 up
+  - Van shot
+
+- Saw em All
+  - Chain and saw targets
+  - Van shot
+  - Chain targets
+  - Van shot
+  - Saw targets
+  - Van shot
+  - Chain and saw targets interchange
+  - Van shot
+
+
+Audio Added -
+
+- Mess with texas on start
+- Shoot for the van after spell van (Should happen once per play maybe?)
+- All mode intros
+  - Hitchhiker
+  - Sally
+  - Saw em all
+  - BBQ
+  - Grave Robber
+  - Grandpa

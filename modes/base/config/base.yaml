@@ -160,7 +160,7 @@ sound_player:
     shoot_for_the_van_brad_vo_v4:
       action: play
       loops: 0
-      delay: 3s
+      delay: 2.5s
       volume: 1.0
 
   cmd_play_van_eject_vuk_sound:
