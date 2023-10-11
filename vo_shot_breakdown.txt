@@ -8,7 +8,7 @@
   - each of the ramps and orbits
   - slaughterhouse
 
-- Hitchhiker
+- Hitchhiker (Sound added) - Just a timed reference to the orbit in the beginning
   - orbit shots
   - van shot
   - ramp shots
@@ -16,17 +16,17 @@
   - chainsaw target shot
   - van shot
 
-- Grandpa
+- Grandpa (Instructional Intro on a timer)
   - right ramp left ramp combo
 
-- BBQ
+- BBQ (Instructional Intro on a timer)
   - Any arrow shot
   - Roaming shot 3 up
   - Roaming shot 2 up
   - Roaming shot 1 up
   - Van shot
 
-- Saw em All
+- Saw em All (First 3 chainsaw targets and the van shot are on a timer)
   - Chain and saw targets
   - Van shot
   - Chain targets
@@ -48,3 +48,7 @@ Audio Added -
   - BBQ
   - Grave Robber
   - Grandpa
+- All modes v1
+
+Audio Needed:
+- Random game intros

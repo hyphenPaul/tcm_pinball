@@ -30,12 +30,14 @@ event_player:
     cmd_mode_intro_complete:
     cmd_barbecue_after_intro_complete:
     cmd_play_barbecue_music:
+    cmd_barbecue_start_instruction_timer:
 
   cmd_barbecue_after_intro_complete:
     cmd_barbecue_set_state_all_shots:
     cmd_barbecue_refresh_lights:
 
   cmd_barbecue_all_shots_hit:
+    cmd_barbecue_stop_instruction_timer:
     cmd_barbecue_score_1:
     cmd_barbecue_set_state_roaming_half:
     cmd_barbecue_refresh_lights:
@@ -187,6 +189,11 @@ event_player:
   ball_hold_bh_mode_van_full{current_player.v_barbecue_state=="final_shot"}:
     cmd_barbecue_final_shot_hit:
 
+  # Audio queue
+
+  timer_barbecue_instruction_complete:
+    cmd_play_shoot_flashing_shots:
+
   # clean up
 
   cmd_barbecue_clean_up:
@@ -249,6 +256,17 @@ timers:
         action: stop
       - event: cmd_barbecue_roaming_single_timer_start
         action: start
+
+  barbecue_instruction:
+    start_value: 0
+    end_value: 6
+    tick_interval: 1s
+    start_running: False
+    control_events:
+      - event:  cmd_barbecue_start_instruction_timer
+        action: start
+      - event:  cmd_barbecue_stop_instruction_timer
+        action: stop
 
 ##################################################
 # Variables

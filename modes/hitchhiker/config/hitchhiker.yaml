@@ -29,6 +29,7 @@ event_player:
     cmd_hitchhiker_set_state_orbits:
     cmd_hitchhiker_start_orbits_slide:
     cmd_hitchhiker_refresh_lights:
+    cmd_hitchhiker_start_shoot_franklin_timer:
 
   cmd_hitchhiker_refresh_lights:
     cmd_hitchhiker_clear_playfield_lights:
@@ -50,6 +51,8 @@ event_player:
     cmd_hitchhiker_refresh_lights:
     cmd_enable_bh_mode_van:
     cmd_hitchhiker_start_shoot_van_slide:
+    cmd_hitchhiker_stop_shoot_franklin:
+    cmd_hitchhiker_stop_shoot_franklin_timer:
 
   ball_hold_bh_mode_van_full{current_player.v_hitchhiker_state=="van_1"}:
     cmd_hitchhiker_score_van_1:
@@ -190,6 +193,17 @@ timers:
         action: stop
       - event: cmd_hitchhiker_mode_timer_start
         action: start
+
+  hitchhiker_franklin_audio:
+    start_value: 0
+    end_value: 6
+    tick_interval: 1s
+    start_running: False
+    control_events:
+      - event:  cmd_hitchhiker_start_shoot_franklin_timer
+        action: start
+      - event:  cmd_hitchhiker_stop_shoot_franklin_timer
+        action: stop
 
 ##################################################
 # Sites and Sounds
@@ -370,6 +384,16 @@ sound_player:
     hitchhiker_bg_music:
       action: play
       loops: -1
+
+  timer_hitchhiker_franklin_audio_complete:
+    shoot_the_franklin_orbit_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_hitchhiker_stop_shoot_franklin:
+    shoot_the_franklin_orbit_brad_vo_v1:
+      action: stop
+      
 
 show_player:
   cmd_hitchhiker_clear_playfield_lights:

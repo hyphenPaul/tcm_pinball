@@ -174,6 +174,86 @@ sound_player:
         - cmd_stop_flash_van_for_eject
       about_to_finish_time: 1.5s
 
+  cmd_play_shoot_right_ramp_1:
+    shoot_the_right_ramp_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_right_ramp_2:
+    shoot_the_right_ramp_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_right_ramp_3:
+    shoot_the_right_ramp_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_flashing_shots:
+    shoot_flashing_shots_brad_vo_v2:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_saw_targets_1:
+    shoot_the_saw_targets_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_saw_targets_2:
+    shoot_the_saw_targets_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_saw_targets_3:
+    shoot_the_saw_targets_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_chain_targets_1:
+    shoot_the_chain_targets_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_chain_targets_2:
+    shoot_the_chain_targets_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_chain_targets_3:
+    shoot_the_chain_targets_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_van_1:
+    shoot_for_the_van_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_van_2:
+    shoot_for_the_van_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_van_3:
+    shoot_for_the_van_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_van_4:
+    shoot_for_the_van_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_chainsaw_targets_1:
+    shoot_the_chainsaw_targets_brad_vo_v1:
+      action: play
+      loops: 0
+
+  cmd_play_shoot_chainsaw_targets_2:
+    shoot_the_chainsaw_targets_brad_vo_v1:
+      action: play
+      loops: 0
+
 ball_saves:
 #  player_start:
 #    active_time: 10s
@@ -964,3 +1044,43 @@ event_player:
 #    start_value: 0
 #    end_value: 1
 #    start_running: true
+
+########################################
+# Random Events
+########################################
+
+random_event_player:
+  cmd_play_random_right_ramp:
+    scope: player
+    events:
+      - cmd_play_shoot_right_ramp_1
+      - cmd_play_shoot_right_ramp_2
+      - cmd_play_shoot_right_ramp_3
+
+  cmd_play_ramdom_saw_targets:
+    scope: player
+    events:
+      - cmd_play_shoot_saw_targets_1
+      - cmd_play_shoot_saw_targets_2
+      - cmd_play_shoot_saw_targets_3
+
+  cmd_play_ramdom_chain_targets:
+    scope: player
+    events:
+      - cmd_play_shoot_chain_targets_1
+      - cmd_play_shoot_chain_targets_2
+      - cmd_play_shoot_chain_targets_3
+
+  cmd_play_ramdom_van:
+    scope: player
+    events:
+      - cmd_play_shoot_van_1
+      - cmd_play_shoot_van_2
+      - cmd_play_shoot_van_3
+      - cmd_play_shoot_van_4
+
+  cmd_play_ramdom_chainsaw_targets:
+    scope: player
+    events:
+      - cmd_play_shoot_chainsaw_targets_1
+      - cmd_play_shoot_chainsaw_targets_2

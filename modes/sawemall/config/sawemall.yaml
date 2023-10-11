@@ -57,6 +57,9 @@ event_player:
     cmd_sawemall_start_chainsaw_idle_slide_4:
 
   cmd_sawemall_set_up_van_phase:
+    cmd_sawemall_stop_vo_chainsaw:
+    cmd_sawemall_stop_vo_chain:
+    cmd_sawemall_stop_vo_saw:
     cmd_sawemall_score_targets:
     cmd_sawemall_set_state_van:
     cmd_enable_bh_mode_van:
@@ -72,11 +75,17 @@ event_player:
     cmd_start_sawemall_timer:
     cmd_sawemall_set_round_1:
     cmd_sawemall_set_up_targets_phase:
+    cmd_sawemall_start_vo_chainsaw:
+
+
+  cmd_sawemall_target_hit.1{current_player.v_sawemall_state=="targets" and current_player.v_sawemall_round==1}:
+    cmd_sawemall_start_vo_van:
 
   cmd_sawemall_target_hit:
     cmd_sawemall_set_up_van_phase:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==1}:
+    cmd_sawemall_stop_vo_van:
     cmd_sawemall_score_van_1:
     cmd_pause_sawemall_timer:
     cmd_sawemall_stop_running_chainsaw:
@@ -87,6 +96,7 @@ event_player:
     cmd_start_sawemall_timer:
     cmd_sawemall_set_round_2:
     cmd_sawemall_set_up_targets_phase:
+    cmd_sawemall_start_vo_chain:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==2}:
     cmd_sawemall_score_van_2:
@@ -99,6 +109,7 @@ event_player:
     cmd_start_sawemall_timer:
     cmd_sawemall_set_round_3:
     cmd_sawemall_set_up_targets_phase:
+    cmd_sawemall_start_vo_saw:
 
   ball_hold_bh_mode_van_full{current_player.v_sawemall_state=="van" and current_player.v_sawemall_round==3}:
     cmd_sawemall_score_van_3:
@@ -210,6 +221,22 @@ event_player:
   s_saw_target_w_active{current_player.v_sawemall_state=="targets" and current_player.v_sawemall_round==4 and current_player.v_sawemall_light_swap_timer_counter!=0}:
     cmd_sawemall_target_hit:
 
+  ##################################################
+  # Audio Queues
+  ##################################################
+
+  timer_sawemall_vo_chainsaw_complete:
+     cmd_play_ramdom_chainsaw_targets:
+
+  timer_sawemall_vo_chain_complete:
+     cmd_play_ramdom_chain_targets:
+
+  timer_sawemall_vo_saw_complete:
+     cmd_play_ramdom_saw_targets:
+
+  timer_sawemall_vo_van_complete:
+     cmd_play_ramdom_van:
+
 ##################################################
 # Timer
 ##################################################
@@ -238,6 +265,50 @@ timers:
         event: cmd_start_light_swap_timer
       - action: stop
         event: cmd_stop_light_swap_timer
+
+  sawemall_vo_chainsaw:
+    start_value: 0
+    end_value: 6
+    tick_interval: 1s
+    start_running: False
+    control_events:
+      - event:  cmd_sawemall_start_vo_chainsaw
+        action: start
+      - event:  cmd_sawemall_stop_vo_chainsaw
+        action: stop
+
+  sawemall_vo_chain:
+    start_value: 0
+    end_value: 6
+    tick_interval: 1s
+    start_running: False
+    control_events:
+      - event:  cmd_sawemall_start_vo_chain
+        action: start
+      - event:  cmd_sawemall_stop_vo_chain
+        action: stop
+
+  sawemall_vo_saw:
+    start_value: 0
+    end_value: 6
+    tick_interval: 1s
+    start_running: False
+    control_events:
+      - event:  cmd_sawemall_start_vo_saw
+        action: start
+      - event:  cmd_sawemall_stop_vo_saw
+        action: stop
+
+  sawemall_vo_van:
+    start_value: 0
+    end_value: 6
+    tick_interval: 1s
+    start_running: False
+    control_events:
+      - event:  cmd_sawemall_start_vo_van
+        action: start
+      - event:  cmd_sawemall_stop_vo_van
+        action: stop
 
 ##################################################
 # Variables

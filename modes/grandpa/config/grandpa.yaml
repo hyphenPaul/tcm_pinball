@@ -34,6 +34,7 @@ event_player:
     cmd_play_grandpa_bg_music:
     cmd_eject_van_vuk_with_audio:
     cmd_grandpa_refresh_lights:
+    cmd_grandpa_start_instruction_timer:
 
   cmd_grandpa_right_ramp_hit:
     cmd_activate_diverter:
@@ -41,6 +42,7 @@ event_player:
     cmd_grandpa_refresh_lights:
     cmd_grandpa_start_lift_hammer_slide:
     cmd_add_grandpa_rando_sound_counter:
+    cmd_grandpa_stop_instruction_timer:
 
   cmd_grandpa_combo_missed:
     cmd_grandpa_refresh_lights:
@@ -130,6 +132,11 @@ event_player:
     cmd_grandpa_set_state_winning:
     cmd_grandpa_combo_completed:
 
+  ## Audio Event
+
+  timer_grandpa_instruction_complete:
+    cmd_play_random_right_ramp:
+
 
 ##################################################
 # Logic
@@ -158,6 +165,17 @@ timers:
         action: stop
       - event: cmd_grandpa_combo_timer_restart
         action: restart
+
+  grandpa_instruction:
+    start_value: 0
+    end_value: 6
+    tick_interval: 1s
+    start_running: False
+    control_events:
+      - event:  cmd_grandpa_start_instruction_timer
+        action: start
+      - event:  cmd_grandpa_stop_instruction_timer
+        action: stop
 
 ##################################################
 # Variables
