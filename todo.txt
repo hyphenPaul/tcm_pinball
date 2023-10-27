@@ -1,30 +1,8 @@
-
-bugs
-
-- 2 x playfield not turning off (maybe when active and drain)
-- mask mania dead skin mask not turning off
-- mask millions isn't turning off
-- general QA mask mania
-
-----------------------------------------------------------------------------------------------------
-
-Todo
-
-
-- Modes
-  - Each mode needs an instructional slide after intro
-- general
-  - What do we do with super jackpot light?
-  - music gets more dynamic as you complete modes
-- mystery meat
-  - add hold multiplier
-  - maybe (meathook bonus cashout)
-- sawemall
-  - Additional outro for saw em all
-- sally escape
-  - revisit sally escape graphic
-- Mask
-  - Revise to use only the two green arrows (jackpot, light super jackpot)
-- Left ramp (meathook)
-  - What do we do with left ramp lights (double, 3, 10)
-- Need to update mystery to remove any reference to the old 2x playfield
+TODO
+  - new writing
+   - Talk shit when you do poorly in a mode
+  - general
+   - Make sure callouts are removed when a mode ends - this might mean using timers - example - Sally "Shoot the slaughterhouse"
+ - final mode
+   - add VO
+   - The intro audio for the final mode is out of sync
