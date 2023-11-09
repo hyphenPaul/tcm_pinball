@@ -192,7 +192,7 @@ event_player:
   ## sounds ##
 
   timer_escape_multiball_shoot_captive_ball_vo_timer_complete{current_player.v_escape_multiball_state=="captive_shot" and current_player.v_escape_shoot_captive_ball_vo_fired==0}:
-    cmd_escape_multiball_play_shoot_captive_ball_vo:
+    cmd_escape_multiball_rand_shoot_captive:
     cmd_escape_shoot_captive_ball_vo_fired_on:
 
   timer_escape_multiball_hes_safe_vo_timer_complete:
@@ -337,6 +337,18 @@ event_player:
     cmd_escape_multiball_refresh:
     cmd_escape_play_super_jackpot_hit_show:
     cmd_escape_play_super_jackpot_hit_sound:
+
+##################################################
+# Random Player
+##################################################
+
+random_event_player:
+  cmd_escape_multiball_rand_shoot_captive:
+    scope: player
+    events:
+      - cmd_escape_multiball_play_shoot_captive_ball_vo_1
+      - cmd_escape_multiball_play_shoot_captive_ball_vo_2
+      - cmd_escape_multiball_play_shoot_captive_ball_vo_3
 
 ##################################################
 # Logicblocks
@@ -541,8 +553,14 @@ sound_player:
   cmd_escape_multiball_play_safe_sound:
     safe_sound:
       volume: 1.0
-  cmd_escape_multiball_play_shoot_captive_ball_vo:
-    vo_kid_captive_ball:
+  cmd_escape_multiball_play_shoot_captive_ball_vo_1:
+    shoot_the_captive_ball_brad_vo_v1:
+      volume: 1.0
+  cmd_escape_multiball_play_shoot_captive_ball_vo_2:
+    shoot_the_captive_ball_brad_vo_v2:
+      volume: 1.0
+  cmd_escape_multiball_play_shoot_captive_ball_vo_3:
+    shoot_the_captive_ball_brad_vo_v3:
       volume: 1.0
   cmd_escape_multiball_play_hes_safe_vo:
     vo_hes_safe:

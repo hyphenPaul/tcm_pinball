@@ -264,14 +264,32 @@ event_player:
   gas_station_shot{advancing==True}:
     cmd_turn_off_light__gas_station:
 
+  chainsaw_shot_group_hit{current_player.v_chainsaw_played_instructions==0}:
+    cmd_chainsaw_set_played_instructions:
+    cmd_chainsaw_play_instructions:
+
+random_event_player:
+  cmd_chainsaw_play_instructions:
+    scope: player
+    events:
+      - cmd_chainsaw_play_instructions_1
+      - cmd_chainsaw_play_instructions_2
+      - cmd_chainsaw_play_instructions_3
+
 variable_player:
 
   cmd_set_chainsaw_variable_off:
     v_chainsaw_multiball_active:
       action: set
       int: 0
+
   cmd_set_chainsaw_variable_on:
     v_chainsaw_multiball_active:
+      action: set
+      int: 1
+
+  cmd_chainsaw_set_played_instructions:
+    v_chainsaw_played_instructions:
       action: set
       int: 1
 
@@ -703,6 +721,21 @@ sound_player:
       action: stop
     frenzy_bg_music:
       action: stop
+  cmd_chainsaw_play_instructions_1:
+    collect_chainsaw_letters_for_mulitball_brad_vo_v1:
+      action: play
+      volume: 1
+      delay: 1s
+  cmd_chainsaw_play_instructions_2:
+    collect_chainsaw_letters_for_mulitball_brad_vo_v2:
+      action: play
+      volume: 1
+      delay: 1s
+  cmd_chainsaw_play_instructions_3:
+    collect_chainsaw_letters_for_mulitball_brad_vo_v3:
+      action: play
+      volume: 1
+      delay: 1s
 
 light_player:
   cmd_turn_on_jackpot_lights:

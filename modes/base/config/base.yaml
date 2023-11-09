@@ -254,6 +254,67 @@ sound_player:
       action: play
       loops: 0
 
+  cmd_play_jackpot_1:
+    jackpot_brad_vo_v1:
+      action: play
+      loops: 0
+      delay: 3.5s
+
+  cmd_play_jackpot_2:
+    jackpot_brad_vo_v2:
+      action: play
+      loops: 0
+      delay: 3.5s
+
+  cmd_play_jackpot_3:
+    jackpot_brad_vo_v3:
+      action: play
+      loops: 0
+      delay: 3.5s
+
+  cmd_play_jackpot_4:
+    jackpot_brad_vo_v4:
+      action: play
+      loops: 0
+      delay: 3.5s
+
+  cmd_play_super_jackpot_1:
+    super_jackpot_brad_vo_v1:
+      action: play
+      loops: 0
+      delay: 3.5s
+
+  cmd_play_super_jackpot_2:
+    super_jackpot_brad_vo_v2:
+      action: play
+      loops: 0
+      delay: 3.5s
+
+  cmd_play_super_jackpot_3:
+    super_jackpot_brad_vo_v3:
+      action: play
+      loops: 0
+      delay: 3.5s
+
+  cmd_play_super_jackpot_4:
+    super_jackpot_brad_vo_v4:
+      action: play
+      loops: 0
+      delay: 3.5s
+
+  cmd_play_super_jackpot_5:
+    super_jackpot_brad_vo_v5:
+      action: play
+      loops: 0
+      delay: 3.5s
+
+  cmd_van_play_instructions:
+    shoot_the_drop_targets_spell_van_brad_vo_v2:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 0.5s
+
 ball_saves:
 #  player_start:
 #    active_time: 10s
@@ -788,6 +849,11 @@ variable_player:
       action: set
       int: 0
 
+  cmd_set_van_played_instructions:
+    v_van_played_instructions:
+      action: set
+      int: 1
+
   ########################################
   # Bonus
   ########################################
@@ -1030,6 +1096,21 @@ event_player:
     - cmd_flash_van_for_eject
 
   ########################################
+  # Van Messaging
+  ########################################
+
+  
+  drop_target_v_down:
+    - cmd_play_van_instructions
+  drop_target_a_down:
+    - cmd_play_van_instructions
+  drop_target_n_down:
+    - cmd_play_van_instructions
+  cmd_play_van_instructions{current_player.v_van_played_instructions==0}:
+    - cmd_set_van_played_instructions
+    - cmd_van_play_instructions
+
+  ########################################
   # Testing
   ########################################
 
@@ -1084,3 +1165,21 @@ random_event_player:
     events:
       - cmd_play_shoot_chainsaw_targets_1
       - cmd_play_shoot_chainsaw_targets_2
+
+  cmd_play_jackpot:
+    scope: player
+    events:
+      - cmd_play_jackpot_1
+      - cmd_play_jackpot_2
+      - cmd_play_jackpot_3
+      - cmd_play_jackpot_4
+
+  cmd_play_super_jackpot:
+    scope: player
+    events:
+      - cmd_play_super_jackpot_1
+      - cmd_play_super_jackpot_2
+      - cmd_play_super_jackpot_3
+      - cmd_play_super_jackpot_4
+      - cmd_play_super_jackpot_5
+

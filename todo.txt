@@ -6,3 +6,13 @@ TODO
  - final mode
    - add VO
    - The intro audio for the final mode is out of sync
+
+
+Audio that needs to be split:
+
+extra_ball_is_lit_score_v1
+extra_ball_score_v1
+leatherface_hammer_v4_score
+escape_mb_super_jackpot_v1_score
+escape_mb_jackpot_v2_score
+countdown_brad_vo_v0 (need this split into each number)

@@ -26,6 +26,7 @@ event_player:
     - cmd_mask_show_spell
     - cmd_mask_play_spell
     - cmd_mask_score_spell
+    - cmd_mask_play_instructions
     - cmd_mask_refresh_lights
 
   right_ramp_hit{current_player.v_mask_state!="mask_mania_ready" and current_player.v_mask_state!="mask_mania" and current_player.v_mask_shot_state>=4}:
@@ -410,6 +411,13 @@ sound_player:
     mask_show_3:
       action: play
       loops: 0
+
+  cmd_mask_play_instructions{current_player.v_mask_state=="round_1" and current_player.v_mask_shot_state==1}:
+    shoot_the_right_ramp_brad_spell_mask_vo_v1:
+      action: play
+      loops: 0
+      delay: 2s
+      volume: 1
 
   cmd_play_mask_mania_value:
     triple_boom:

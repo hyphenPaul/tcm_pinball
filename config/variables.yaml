@@ -67,6 +67,8 @@ player_vars:
 
   v_enable_van_messaging:
     initial_value: 0
+  v_van_played_instructions:
+    initial_value: 0
 
   #####################################
   # Hitchhiker
@@ -340,6 +342,13 @@ player_vars:
 
   v_franklin_millions_score:
     initial_value: 300000
+
+  #####################################
+  # Chainsaw
+  #####################################
+
+  v_chainsaw_played_instructions:
+    initial_value: 0
 
   #####################################
   # Chainsaw Multiball

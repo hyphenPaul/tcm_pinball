@@ -266,9 +266,9 @@ sound_player:
   # Intro sounds
   ##################################################
 
-
   ball_started{player==1 and ball==1 and is_extra_ball==False}:
     leave_texas_brad_vo_v1:
       action: play
+      volume: 1
       loops: 0
       delay: 2s

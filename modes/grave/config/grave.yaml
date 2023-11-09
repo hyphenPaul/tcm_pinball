@@ -91,14 +91,14 @@ event_player:
     cmd_grave_refresh_lights:
     cmd_grave_play_jackpot_slide:
     cmd_grave_play_jackpot_slide_audio:
-    cmd_grave_play_jackpot:
+    cmd_play_jackpot:
 
   cmd_grave_double_jackpot_hit:
     cmd_grave_reset_values:
     cmd_grave_refresh_lights:
     cmd_grave_play_jackpot_slide:
     cmd_grave_play_jackpot_slide_audio:
-    cmd_grave_play_super_jackpot:
+    cmd_play_super_jackpot:
 
   cmd_grave_reset_values:
     cmd_grave_set_state_base:
@@ -334,78 +334,6 @@ sound_player:
     grave_robber_jackpot_v2_score:
       action: play
       loops: 0
-
-  cmd_grave_play_jackpot_1:
-    jackpot_brad_vo_v1:
-      action: play
-      loops: 0
-      delay: 3.5s
-
-  cmd_grave_play_jackpot_2:
-    jackpot_brad_vo_v2:
-      action: play
-      loops: 0
-      delay: 3.5s
-
-  cmd_grave_play_jackpot_3:
-    jackpot_brad_vo_v3:
-      action: play
-      loops: 0
-      delay: 3.5s
-
-  cmd_grave_play_jackpot_4:
-    jackpot_brad_vo_v4:
-      action: play
-      loops: 0
-      delay: 3.5s
-
-  cmd_grave_play_super_jackpot_1:
-    super_jackpot_brad_vo_v1:
-      action: play
-      loops: 0
-      delay: 3.5s
-
-  cmd_grave_play_super_jackpot_2:
-    super_jackpot_brad_vo_v2:
-      action: play
-      loops: 0
-      delay: 3.5s
-
-  cmd_grave_play_super_jackpot_3:
-    super_jackpot_brad_vo_v3:
-      action: play
-      loops: 0
-      delay: 3.5s
-
-  cmd_grave_play_super_jackpot_4:
-    super_jackpot_brad_vo_v4:
-      action: play
-      loops: 0
-      delay: 3.5s
-
-  cmd_grave_play_super_jackpot_5:
-    super_jackpot_brad_vo_v5:
-      action: play
-      loops: 0
-      delay: 3.5s
-
-random_event_player:
-  cmd_grave_play_jackpot:
-    scope: player
-    events:
-      - cmd_grave_play_jackpot_1
-      - cmd_grave_play_jackpot_2
-      - cmd_grave_play_jackpot_3
-      - cmd_grave_play_jackpot_4
-
-  cmd_grave_play_super_jackpot:
-    scope: player
-    events:
-      - cmd_grave_play_super_jackpot_1
-      - cmd_grave_play_super_jackpot_2
-      - cmd_grave_play_super_jackpot_3
-      - cmd_grave_play_super_jackpot_4
-      - cmd_grave_play_super_jackpot_5
 
 show_player:
 
