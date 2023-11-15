@@ -46,6 +46,7 @@ class WeaponSlides(CustomCode):
         else:
             slide = self.bonus_slides.pop()
             self.machine.events.post("cmd_finalbattle_play_" + slide + "_collect_sound")
+            self.machine.events.post("cmd_finalbattle_play_" + slide + "_brad_sound")
             self.machine.events.post("cmd_finalbattle_bonus_" + slide + "_slide")
 
     def on_slides_complete(self, **kwargs):

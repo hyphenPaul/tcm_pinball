@@ -167,6 +167,7 @@ event_player:
     cmd_show_super_jackpot_lit_slide:
     cmd_set_super_jackpot_variable_on:
     cmd_flash_super_jackpot_light:
+    cmd_chainsaw_play_shoot_top_target:
 
   # animation shots
   chain_c_shot_hit{advancing==True}:
@@ -736,6 +737,11 @@ sound_player:
       action: play
       volume: 1
       delay: 1s
+  cmd_chainsaw_play_shoot_top_target:
+    shoot_the_top_target_brad_vo_v1:
+      action: play
+      volume: 1
+      delay: 2s
 
 light_player:
   cmd_turn_on_jackpot_lights:

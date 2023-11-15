@@ -50,6 +50,7 @@ event_player:
   cmd_finalbattle_bonus_slides_complete:
     cmd_finalbattle_start_multiball_intro_slide:
     cmd_finalbattle_play_sally_intro:
+    cmd_finalbattle_play_invalid:
 
   slide_finalbattle_multiball_intro_slide_removed:
     cmd_finalbattle_play_main_bg:
@@ -68,7 +69,7 @@ event_player:
     cmd_finalbattle_maybe_light_chainsaw:
     cmd_finalbattle_refresh_lights:
     cmd_show_sawyer_slide:
-  
+
   player_v_finalbattle_sawyer_damage{current_player.v_finalbattle_sawyer_damage>=current_player.v_finalbattle_sawyer_damage_total}:
     cmd_finalbattle_set_state_sawyer_final_blow:
     cmd_finalbattle_unlight_chainsaw:
@@ -245,6 +246,7 @@ event_player:
     cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_start_knife_collect_slide:
     cmd_finalbattle_play_knife_collect_sound:
+    cmd_finalbattle_play_knife_collect_brad_sound:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_all_collected:
 
@@ -254,6 +256,7 @@ event_player:
     cmd_finalbattle_set_nunchucks_collected:
     cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_play_nunchucks_collect_sound:
+    cmd_finalbattle_play_nunchucks_collect_brad_sound:
     cmd_finalbattle_start_nunchucks_collect_slide:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_all_collected:
@@ -264,6 +267,7 @@ event_player:
     cmd_finalbattle_set_axe_collected:
     cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_play_axe_collect_sound:
+    cmd_finalbattle_play_axe_collect_brad_sound:
     cmd_finalbattle_start_axe_collect_slide:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_all_collected:
@@ -275,6 +279,7 @@ event_player:
     cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_extend_ball_save:
     cmd_finalbattle_play_shotgun_collect_sound:
+    cmd_finalbattle_play_shotgun_collect_brad_sound:
     cmd_finalbattle_start_shotgun_collect_slide:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_all_collected:
@@ -284,8 +289,9 @@ event_player:
   right_ramp_hit{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_flamethrower_collected==0}:
     cmd_finalbattle_set_flamethrower_collected:
     cmd_finalbattle_score_collect_weapon:
-    cmd_finalbattle_set_damage_bonus: 
+    cmd_finalbattle_set_damage_bonus:
     cmd_finalbattle_play_flamethrower_collect_sound:
+    cmd_finalbattle_play_flamethrower_collect_brad_sound:
     cmd_finalbattle_start_flamethrower_collect_slide:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_all_collected:
@@ -296,6 +302,7 @@ event_player:
     cmd_finalbattle_set_chainsaw_collected:
     cmd_finalbattle_score_collect_weapon:
     cmd_finalbattle_play_chainsaw_collect_sound:
+    cmd_finalbattle_play_chainsaw_collect_brad_sound:
     cmd_finalbattle_start_chainsaw_collect_slide:
     cmd_finalbattle_refresh_lights:
     cmd_finalbattle_check_all_collected:
@@ -304,6 +311,9 @@ event_player:
   cmd_finalbattle_check_all_collected{current_player.v_finalbattle_state=="phase_1" and current_player.v_finalbattle_chainsaw_collected==1 and current_player.v_finalbattle_nunchucks_collected==1 and current_player.v_finalbattle_axe_collected==1 and current_player.v_finalbattle_shotgun_collected==1 and current_player.v_finalbattle_flamethrower_collected==1 and current_player.v_finalbattle_knife_collected==1}:
     cmd_finalbattle_phase_1_timer_stop:
     cmd_finalbattle_phase_1_timer_reset:
+    cmd_finalbattle_weapon_collection_delay_start:
+
+  timer_finalbattle_weapon_collection_delay_complete:
     cmd_finalbattle_complete_weapon_collection:
 
   # shot events sawyer fight
@@ -516,6 +526,15 @@ timers:
       - event: cmd_finalbattle_phase_1_timer_reset
         action: reset
       - event: cmd_finalbattle_phase_1_timer_start
+        action: start
+
+  finalbattle_weapon_collection_delay:
+    start_value: 0
+    end_value: 2
+    tick_interval: 1s
+    start_running: False
+    control_events:
+      - event: cmd_finalbattle_weapon_collection_delay_start
         action: start
 
   finalbattle_bonus_timer:
@@ -1639,7 +1658,7 @@ slide_player:
 sound_player:
 
   cmd_finalbattle_start_intro_slide_sound:
-    final_massacre_intro_score_v2:
+    final_massacre_intro_v4_score:
       action: play
       loops: 0
       events_when_about_to_finish: cmd_eject_van_vuk_with_audio
@@ -1655,30 +1674,114 @@ sound_player:
       action: play
       loops: 0
 
+  cmd_finalbattle_play_knife_collect_brad_sound:
+    knife_collected_brad_vo_2:
+      action: play
+      volume: 1
+      loops: 0
+      delay: 1s
+
+  cmd_finalbattle_play_knife_brad_sound:
+    knife_brad_vo_2:
+      action: play
+      volume: 1
+      loops: 0
+      delay: 1s
+
   cmd_finalbattle_play_nunchucks_collect_sound:
     fb_nunchucks_v1_SFX:
       action: play
       loops: 0
+
+  cmd_finalbattle_play_nunchucks_collect_brad_sound:
+    nunchucks_collected_brad_vo_1:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
+
+  cmd_finalbattle_play_nunchucks_brad_sound:
+    nunchucks_brad_vo_2:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
 
   cmd_finalbattle_play_axe_collect_sound:
     fb_axe_v1_SFX:
       action: play
       loops: 0
 
+  cmd_finalbattle_play_axe_collect_brad_sound:
+    axe_collected_brad_vo_2:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
+
+  cmd_finalbattle_play_axe_brad_sound:
+    axe_brad_vo_2:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
+
   cmd_finalbattle_play_shotgun_collect_sound:
     fb_shotgun_v1_SFX:
       action: play
       loops: 0
+
+  cmd_finalbattle_play_shotgun_collect_brad_sound:
+    shotgun_collected_brad_vo_2:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
+
+  cmd_finalbattle_play_shotgun_brad_sound:
+    shotgun_brad_vo_2:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
 
   cmd_finalbattle_play_flamethrower_collect_sound:
     fb_flamethrower_v1_SFX:
       action: play
       loops: 0
 
+  cmd_finalbattle_play_flamethrower_collect_brad_sound:
+    flamethrower_collected_brad_vo_2:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
+
+  cmd_finalbattle_play_flamethrower_brad_sound:
+    flamethrower_brad_vo_2:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
+
   cmd_finalbattle_play_chainsaw_collect_sound:
     fb_chainsaw_v1_SFX:
       action: play
       loops: 0
+
+  cmd_finalbattle_play_chainsaw_collect_brad_sound:
+    chainsaw_collected_brad_vo_2:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
+
+  cmd_finalbattle_play_chainsaw_brad_sound:
+    chainsaw_brad_vo_3:
+      action: play
+      loops: 0
+      volume: 1
+      delay: 1s
 
   cmd_finalbattle_play_fully_loaded_collect_sound:
     fb_collected_fully_loaded_sfx_v1:
@@ -1714,6 +1817,12 @@ sound_player:
     FB_sally_returns_v1:
       action: play
       loops: 0
+
+  cmd_finalbattle_play_invalid:
+    the_fam_never_invalid_brad_vo_2:
+      action: play
+      volume: 1
+      delay: 3s
 
   cmd_finalbattle_play_chase_music:
     finalbattle_chase_leatherface:
@@ -2122,7 +2231,7 @@ show_player:
     med_flash_chainsaw_targets:
       action: play
       show_tokens:
-        lights: 
+        lights:
           chain_target_c,
           chain_target_h,
           chain_target_a,
@@ -2136,7 +2245,7 @@ show_player:
     med_flash_chainsaw_targets:
       action: stop
       show_tokens:
-        lights: 
+        lights:
           - chain_target_c
           - chain_target_h
           - chain_target_a

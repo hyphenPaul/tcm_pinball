@@ -33,18 +33,18 @@ class Modes(CustomCode):
 
         # enable final mode testing
 
-#        current_player = self.current_player()
-#
-#        if not current_player['v_initial_test_fired']:
-#            current_player['v_collected_modes'] = [
-#                "hitchhiker",
-#                "barbecue",
-#                "grandpa",
-#                "grave",
-#                "sally",
-#                "sawemall"
-#            ]
-#            current_player['v_initial_test_fired'] = True
+        current_player = self.current_player()
+
+        if not current_player['v_initial_test_fired']:
+            current_player['v_collected_modes'] = [
+                "hitchhiker",
+                "barbecue",
+                "grandpa",
+                "grave",
+                "sally",
+                "sawemall"
+            ]
+            current_player['v_initial_test_fired'] = True
 
         # enable final mode testing end
 
