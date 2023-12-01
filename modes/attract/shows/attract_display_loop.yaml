@@ -1,140 +1,140 @@
 #show_version=5
 
-- duration: 20s
-  slides:
-    show_high_scores:
-      widgets:
-      - type: Text
-        text: HIGH SCORES
-        style: big
-        anchor_y: top
-        round_anchor_x: left
-        round_anchor_y: top
-        x: center
-        y: 31
-
-      - type: Text
-        text: (machine|score1_label)
-        style: small
-        anchor_y: top
-        y: 19
-        round_anchor_x: left
-        animations:
-          show_slide:
-          - property: opacity
-            value: 1
-            duration: 3
-          - property: opacity
-            value: 0
-            duration: .5
-      - type: Text
-        text: (machine|score1_name)
-        style: big
-        anchor_y: top
-        y: 12
-        x: center-30
-        anchor_x: right
-        round_anchor_x: right
-        round_anchor_y: top
-        animations:
-          show_slide:
-          - property: opacity
-            value: 1
-            duration: 3
-          - property: opacity
-            value: 0
-            duration: .5
-      - type: Text
-        text: (machine|score1_value)
-        style: big
-        anchor_y: top
-        y: 12
-        x: center+50
-        anchor_x: right
-        round_anchor_x: right
-        round_anchor_y: top
-        number_grouping: true
-        min_digits: 1
-        animations:
-          show_slide:
-          - property: opacity
-            value: 1
-            duration: 3
-          - property: opacity
-            value: 0
-            duration: .5
-
-      - type: Text
-        text: (machine|score2_label)
-        style: small
-        anchor_y: top
-        y: 19
-        round_anchor_x: left
-        opacity: 0
-        animations:
-          show_slide:
-          - property: opacity
-            value: 0
-            duration: 3.5
-          - property: opacity
-            value: 1
-            duration: .5
-          - property: opacity
-            value: 1
-            duration: 3
-          - property: opacity
-            value: 0
-            duration: .5
-      - type: Text
-        text: (machine|score2_name)
-        style: big
-        anchor_y: top
-        y: 12
-        x: center-30
-        anchor_x: right
-        round_anchor_x: right
-        round_anchor_y: top
-        opacity: 0
-        animations:
-          show_slide:
-          - property: opacity
-            value: 0
-            duration: 3.5
-          - property: opacity
-            value: 1
-            duration: .5
-          - property: opacity
-            value: 1
-            duration: 3
-          - property: opacity
-            value: 0
-            duration: .5
-      - type: Text
-        text: (machine|score2_value)
-        style: big
-        anchor_y: top
-        y: 12
-        x: center+50
-        anchor_x: right
-        round_anchor_x: right
-        round_anchor_y: top
-        number_grouping: true
-        min_digits: 1
-        opacity: 0
-        animations:
-          show_slide:
-          - property: opacity
-            value: 0
-            duration: 3.5
-          - property: opacity
-            value: 1
-            duration: .5
-          - property: opacity
-            value: 1
-            duration: 3
-          - property: opacity
-            value: 0
-            duration: .5
+#- duration: 20s
+#  slides:
+#    show_high_scores:
+#      widgets:
+#      - type: Text
+#        text: HIGH SCORES
+#        style: big
+#        anchor_y: top
+#        round_anchor_x: left
+#        round_anchor_y: top
+#        x: center
+#        y: 31
+#
+#      - type: Text
+#        text: (machine|score1_label)
+#        style: small
+#        anchor_y: top
+#        y: 19
+#        round_anchor_x: left
+#        animations:
+#          show_slide:
+#          - property: opacity
+#            value: 1
+#            duration: 3
+#          - property: opacity
+#            value: 0
+#            duration: .5
+#      - type: Text
+#        text: (machine|score1_name)
+#        style: big
+#        anchor_y: top
+#        y: 12
+#        x: center-30
+#        anchor_x: right
+#        round_anchor_x: right
+#        round_anchor_y: top
+#        animations:
+#          show_slide:
+#          - property: opacity
+#            value: 1
+#            duration: 3
+#          - property: opacity
+#            value: 0
+#            duration: .5
+#      - type: Text
+#        text: (machine|score1_value)
+#        style: big
+#        anchor_y: top
+#        y: 12
+#        x: center+50
+#        anchor_x: right
+#        round_anchor_x: right
+#        round_anchor_y: top
+#        number_grouping: true
+#        min_digits: 1
+#        animations:
+#          show_slide:
+#          - property: opacity
+#            value: 1
+#            duration: 3
+#          - property: opacity
+#            value: 0
+#            duration: .5
+#
+#      - type: Text
+#        text: (machine|score2_label)
+#        style: small
+#        anchor_y: top
+#        y: 19
+#        round_anchor_x: left
+#        opacity: 0
+#        animations:
+#          show_slide:
+#          - property: opacity
+#            value: 0
+#            duration: 3.5
+#          - property: opacity
+#            value: 1
+#            duration: .5
+#          - property: opacity
+#            value: 1
+#            duration: 3
+#          - property: opacity
+#            value: 0
+#            duration: .5
+#      - type: Text
+#        text: (machine|score2_name)
+#        style: big
+#        anchor_y: top
+#        y: 12
+#        x: center-30
+#        anchor_x: right
+#        round_anchor_x: right
+#        round_anchor_y: top
+#        opacity: 0
+#        animations:
+#          show_slide:
+#          - property: opacity
+#            value: 0
+#            duration: 3.5
+#          - property: opacity
+#            value: 1
+#            duration: .5
+#          - property: opacity
+#            value: 1
+#            duration: 3
+#          - property: opacity
+#            value: 0
+#            duration: .5
+#      - type: Text
+#        text: (machine|score2_value)
+#        style: big
+#        anchor_y: top
+#        y: 12
+#        x: center+50
+#        anchor_x: right
+#        round_anchor_x: right
+#        round_anchor_y: top
+#        number_grouping: true
+#        min_digits: 1
+#        opacity: 0
+#        animations:
+#          show_slide:
+#          - property: opacity
+#            value: 0
+#            duration: 3.5
+#          - property: opacity
+#            value: 1
+#            duration: .5
+#          - property: opacity
+#            value: 1
+#            duration: 3
+#          - property: opacity
+#            value: 0
+#            duration: .5
 
 
 # ------------ attract mode start --------------

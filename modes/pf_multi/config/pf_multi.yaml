@@ -29,15 +29,44 @@ event_player:
 
   cmd_on_help_lit_complete{current_player.v_pf_multi_state=="1x_idle"}:
     - cmd_pf_multi_set_state_2x_idle
+    - cmd_pf_multi_start_2x_callout_timer
     - cmd_pf_multi_refresh_lights
 
   cmd_on_help_lit_complete{current_player.v_pf_multi_state=="2x_idle"}:
     - cmd_pf_multi_set_state_3x_idle
+    - cmd_pf_multi_start_3x_callout_timer
     - cmd_pf_multi_refresh_lights
 
   cmd_on_help_lit_complete{current_player.v_pf_multi_state=="3x_idle"}:
     - cmd_pf_multi_set_state_4x_idle
+    - cmd_pf_multi_start_4x_callout_timer
     - cmd_pf_multi_refresh_lights
+
+  timer_pf_multi_2x_complete:
+    - cmd_pf_multi_play_2x_lit
+
+  timer_pf_multi_3x_complete:
+    - cmd_pf_multi_play_3x_lit
+    
+  timer_pf_multi_4x_complete:
+    - cmd_pf_multi_play_4x_lit
+
+  cmd_pf_multi_play_2x:
+    - cmd_pf_multi_stop_all_callout_timers
+
+  cmd_pf_multi_play_3x:
+    - cmd_pf_multi_stop_all_callout_timers
+
+  cmd_pf_multi_play_4x:
+    - cmd_pf_multi_stop_all_callout_timers
+
+  ball_will_end:
+    - cmd_pf_multi_stop_all_callout_timers
+
+  cmd_pf_multi_stop_all_callout_timers:
+    - cmd_pf_multi_stop_2x_callout_timer
+    - cmd_pf_multi_stop_3x_callout_timer
+    - cmd_pf_multi_stop_4x_callout_timer
 
   # Captive ball hit
 
@@ -175,10 +204,40 @@ timers:
     control_events:
       - action: start
         event: cmd_pf_multi_start_multiplier_timer
-      - action: stop 
+      - action: stop
         event: cmd_pf_multi_stop_multiplier_timer
       - action: reset
         event: cmd_pf_multi_reset_multiplier_timer
+
+  pf_multi_2x:
+    start_value: 0
+    end_value: 3
+    tick_interval: 1s
+    control_events:
+      - action: restart
+        event: cmd_pf_multi_start_2x_callout_timer
+      - action: stop
+        event: cmd_pf_multi_stop_2x_callout_timer
+
+  pf_multi_3x:
+    start_value: 0
+    end_value: 3
+    tick_interval: 1s
+    control_events:
+      - action: restart
+        event: cmd_pf_multi_start_3x_callout_timer
+      - action: stop
+        event: cmd_pf_multi_stop_3x_callout_timer
+
+  pf_multi_4x:
+    start_value: 0
+    end_value: 3
+    tick_interval: 1s
+    control_events:
+      - action: restart
+        event: cmd_pf_multi_start_4x_callout_timer
+      - action: stop
+        event: cmd_pf_multi_stop_4x_callout_timer
 
 ##################################################
 # Lights
@@ -298,3 +357,42 @@ sound_player:
     grave_multiply_sfx_v1:
       action: play
       loops: 0
+
+  cmd_pf_multi_play_2x_lit:
+    2_times_pf_lit_brad_vo_1:
+      action: play
+      loops: 0
+      volume: 1
+
+  cmd_pf_multi_play_3x_lit:
+    3_times_pf_lit_brad_vo_1:
+      action: play
+      loops: 0
+      volume: 1
+
+  cmd_pf_multi_play_4x_lit:
+    4_times_pf_lit_brad_vo_1:
+      action: play
+      loops: 0
+      volume: 1
+
+  cmd_pf_multi_play_2x:
+    2_times_pf_brad_vo_1:
+      action: play
+      loops: 0
+      delay: 1s
+      volume: 1
+
+  cmd_pf_multi_play_3x:
+    3_times_pf_brad_vo_1:
+      action: play
+      loops: 0
+      delay: 1s
+      volume: 1
+
+  cmd_pf_multi_play_4x:
+    4_times_pf_brad_vo_1:
+      action: play
+      loops: 0
+      delay: 1s
+      volume: 1
